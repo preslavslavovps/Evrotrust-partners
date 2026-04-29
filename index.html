@@ -564,6 +564,86 @@ body.theme-midnight .modal-link svg{stroke:#F1F1F1}
 body.theme-midnight #m-share{color:#F1F1F1;background:#1A1A1A;border-color:#333}
 body.theme-midnight #m-share:hover{border-color:#E63946;background:#2A0000}
 
+
+/* FLIP COUNTER */
+.flip-counter{display:inline-flex;gap:2px;align-items:center}
+.flip-digit-wrap{position:relative;width:22px;height:34px;overflow:hidden;border-radius:4px;background:transparent}
+.flip-digit-wrap.narrow{width:14px}
+.flip-digit{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;color:#fff;line-height:1;transform:translateY(0);transition:transform 0.12s ease-in}
+.flip-digit.flip-out{transform:translateY(-100%)}
+.flip-digit.flip-in{transform:translateY(100%);transition:none}
+.flip-digit.flip-in.flip-settle{transform:translateY(0);transition:transform 0.12s ease-out}
+.flip-suffix{font-size:1.5rem;font-weight:800;color:#fff;line-height:1}
+.stat-num{font-size:1.7rem;font-weight:800;color:#fff;line-height:1}
+
+
+/* ANIMATED HERO GRADIENT */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50% }
+  50%  { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+.hero {
+  background: linear-gradient(-45deg, #061828, #0B2A4A, #0d3a65, #0a2255, #061828) !important;
+  background-size: 400% 400% !important;
+  animation: gradientShift 12s ease infinite !important;
+}
+
+/* PARTICLE CANVAS */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* HERO content above canvas */
+.hero-eyebrow, .hero h1, .hero p, .hero-stats {
+  position: relative;
+  z-index: 2;
+}
+
+/* TYPEWRITER */
+.typewriter-text {
+  overflow: hidden;
+  border-right: 2px solid rgba(255,255,255,0.5);
+  white-space: nowrap;
+  animation: typing 2.2s steps(80, end) forwards, blink .8s step-end 2.2s 4;
+  display: inline-block;
+  max-width: 100%;
+}
+@keyframes typing {
+  from { width: 0 }
+  to   { width: 100% }
+}
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+/* GLASSMORPHISM STATS */
+.hero-stats {
+  gap: 0 !important;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 1.25rem 2rem;
+  display: inline-flex !important;
+  margin: 0 auto;
+}
+.hero-stat { padding: 0 2rem; }
+.hero-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.2) !important;
+  align-self: center;
+}
+.hero-stat-num { font-size: 2rem !important; }
+
+body.theme-forest .hero{background:linear-gradient(-45deg,#081C15,#1B4332,#2D6A4F,#0a2a1a,#081C15)!important;background-size:400% 400%!important;animation:gradientShift 12s ease infinite!important}
+body.theme-sunset .hero{background:linear-gradient(-45deg,#3D0066,#7B2D8B,#E76F51,#9B2D8B,#3D0066)!important;background-size:400% 400%!important;animation:gradientShift 12s ease infinite!important}
+body.theme-midnight .hero{background:linear-gradient(-45deg,#000,#0D0D0D,#1A0000,#0D0000,#000)!important;background-size:400% 400%!important;animation:gradientShift 12s ease infinite!important}
 </style>
 </head>
 <body>
@@ -596,10 +676,10 @@ body.theme-midnight #m-share:hover{border-color:#E63946;background:#2A0000}
 </nav>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero"><canvas id="hero-canvas"></canvas>
   <div class="hero-eyebrow">Official Partner Network</div>
   <h1>Evrotrust <span>Partners</span></h1>
-  <p>A global ecosystem of technology and business partners building digital trust, identity, and signing solutions powered by Evrotrust.</p>
+  <p><span class="typewriter-text">A global ecosystem of technology and business partners building digital trust, identity, and signing solutions powered by Evrotrust.</span></p>
   <div class="hero-stats">
     <div class="hero-stat"><div class="hero-stat-num" id="total-count">51</div><div class="hero-stat-label">Total Partners</div></div>
     <div class="hero-divider"></div>
@@ -614,10 +694,10 @@ body.theme-midnight #m-share:hover{border-color:#E63946;background:#2A0000}
   <div class="stats-inner">
     <div class="stats-title">Trust the<br>numbers</div>
     <div class="stats-grid">
-      <div class="stat-item"><div class="stat-num">2M+</div><div class="stat-desc">users already trust Evrotrust</div></div>
-      <div class="stat-item"><div class="stat-num">36,000</div><div class="stat-desc">e-signatures daily via our app</div></div>
-      <div class="stat-item"><div class="stat-num">150+</div><div class="stat-desc">companies you can sign with</div></div>
-      <div class="stat-item"><div class="stat-num">320t</div><div class="stat-desc">CO2 reduced via e-signatures in 2024</div></div>
+      <div class="stat-item"><div class="flip-counter" id="flip-0" data-value="2000000" data-display="2M+"></div><div class="stat-desc">users already trust Evrotrust</div></div>
+      <div class="stat-item"><div class="flip-counter" id="flip-1" data-value="36000" data-display="36,000"></div><div class="stat-desc">e-signatures daily via our app</div></div>
+      <div class="stat-item"><div class="flip-counter" id="flip-2" data-value="150" data-display="150+"></div><div class="stat-desc">companies you can sign with</div></div>
+      <div class="stat-item"><div class="flip-counter" id="flip-3" data-value="320" data-display="320t"></div><div class="stat-desc">CO2 reduced via e-signatures in 2024</div></div>
     </div>
   </div>
 </div>
@@ -1543,6 +1623,173 @@ function showRelated(p){
         '<span class="related-chip-av" style="background:'+bg+';color:'+tc+'">'+lbl+'</span>'+r.name+'</button>';
     }).join('')+'</div>';
 }
+
+
+// ── FLIP COUNTER ──
+function buildFlipCounter(el, display) {
+  el.innerHTML = '';
+  for (var i = 0; i < display.length; i++) {
+    var ch = display[i];
+    if (ch === ',' || ch === '+' || ch === 't' || ch === 'M') {
+      var span = document.createElement('span');
+      span.className = 'flip-suffix';
+      span.textContent = ch;
+      el.appendChild(span);
+    } else {
+      var wrap = document.createElement('div');
+      wrap.className = 'flip-digit-wrap';
+      var digit = document.createElement('div');
+      digit.className = 'flip-digit';
+      digit.textContent = '0';
+      wrap.appendChild(digit);
+      el.appendChild(wrap);
+    }
+  }
+}
+
+function animateFlip(el, display, delay) {
+  setTimeout(function() {
+    var digits = el.querySelectorAll('.flip-digit');
+    var dIdx = 0;
+    for (var i = 0; i < display.length; i++) {
+      var ch = display[i];
+      if (ch === ',' || ch === '+' || ch === 't' || ch === 'M') continue;
+      (function(d, target, stagger) {
+        setTimeout(function() {
+          flipDigitTo(d, target);
+        }, stagger * 80);
+      })(digits[dIdx], ch, dIdx);
+      dIdx++;
+    }
+  }, delay);
+}
+
+function flipDigitTo(digitEl, target) {
+  var steps = [];
+  var cur = parseInt(digitEl.textContent) || 0;
+  var tgt = parseInt(target);
+  // Random scramble then settle
+  var scrambles = 4 + Math.floor(Math.random() * 3);
+  for (var i = 0; i < scrambles; i++) {
+    steps.push(String(Math.floor(Math.random() * 10)));
+  }
+  steps.push(target);
+
+  var idx = 0;
+  function doStep() {
+    if (idx >= steps.length) return;
+    var next = steps[idx++];
+    // Flip out
+    digitEl.classList.add('flip-out');
+    setTimeout(function() {
+      digitEl.textContent = next;
+      digitEl.classList.remove('flip-out');
+      digitEl.classList.add('flip-in');
+      setTimeout(function() {
+        digitEl.classList.add('flip-settle');
+        setTimeout(function() {
+          digitEl.classList.remove('flip-in', 'flip-settle');
+          doStep();
+        }, 120);
+      }, 20);
+    }, 120);
+  }
+  doStep();
+}
+
+function initFlipCounters() {
+  var counters = document.querySelectorAll('.flip-counter[data-display]');
+  counters.forEach(function(el) {
+    buildFlipCounter(el, el.dataset.display);
+  });
+}
+
+function runFlipCounters() {
+  var counters = document.querySelectorAll('.flip-counter[data-display]');
+  counters.forEach(function(el, i) {
+    animateFlip(el, el.dataset.display, i * 300);
+  });
+}
+
+// Trigger when stats section enters viewport
+(function(){
+  initFlipCounters();
+  var strip = document.querySelector('.stats-strip');
+  if (!strip) return;
+  var triggered = false;
+  var obs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !triggered) {
+      triggered = true;
+      runFlipCounters();
+      obs.disconnect();
+    }
+  }, {threshold: 0.4});
+  obs.observe(strip);
+})();
+
+
+// ── HERO PARTICLES ──
+(function(){
+  var canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var W, H;
+
+  function resize() {
+    var hero = canvas.parentElement;
+    W = canvas.width = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, {passive:true});
+
+  // Create particles
+  for (var i = 0; i < 55; i++) {
+    particles.push({
+      x: Math.random() * 1000,
+      y: Math.random() * 500,
+      r: Math.random() * 1.5 + 0.3,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      alpha: Math.random() * 0.5 + 0.1
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(function(p) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = W;
+      if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H;
+      if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,174,239,' + p.alpha + ')';
+      ctx.fill();
+    });
+    // Draw connecting lines between nearby particles
+    for (var i = 0; i < particles.length; i++) {
+      for (var j = i+1; j < particles.length; j++) {
+        var dx = particles[i].x - particles[j].x;
+        var dy = particles[i].y - particles[j].y;
+        var dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 90) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(0,174,239,' + (0.08 * (1 - dist/90)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
 buildPills();
 buildLegal();
