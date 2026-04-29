@@ -87,7 +87,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 @keyframes scrollCerts{0%{transform:translateX(0)}100%{transform:translateX(-25%)}}
 
 /* FACTSHEETS CAROUSEL */
-.factsheets-section{background:var(--navy);padding:1.5rem 0;overflow:hidden}
+.factsheets-section{background:var(--navy);padding:1.5rem 0;overflow:hidden;display:block}
 .factsheets-inner{padding:0 1.5rem;display:flex;align-items:center;gap:1.5rem}
 .factsheets-label{font-size:.65rem;font-weight:700;color:rgba(255,255,255,0.4);white-space:nowrap;letter-spacing:.12em;text-transform:uppercase;flex-shrink:0}
 .factsheets-carousel{flex:1;overflow:hidden;position:relative;mask-image:linear-gradient(to right,transparent,black 50px,black calc(100% - 50px),transparent);-webkit-mask-image:linear-gradient(to right,transparent,black 50px,black calc(100% - 50px),transparent)}
@@ -694,6 +694,123 @@ body.theme-midnight .guide-item-desc{color:#aaa}
 body.theme-midnight .info-guide-btn{background:#1A1A1A;border-color:#333;color:#aaa}
 body.theme-midnight .info-guide-btn:hover{border-color:#E63946;color:#E63946}
 
+
+/* EVROTRUST SERVICES MODAL */
+.et-services-btn{cursor:pointer;text-decoration:none;display:inline;border:none;background:none;padding:0;font:inherit}
+.et-services-btn:hover .nav-title-et{text-decoration:underline;text-underline-offset:3px}
+.services-modal{background:var(--white);border-radius:16px;width:min(860px,100%);max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popIn .5s cubic-bezier(.4,0,.2,1) both}
+.services-head{background:linear-gradient(-45deg,#061828,#0B2A4A,#0d3a65,#061828);background-size:400% 400%;animation:gradientShift 12s ease infinite;padding:2rem 2rem 1.75rem;border-radius:16px 16px 0 0}
+.services-head h2{font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:4px}
+.services-head p{font-size:.85rem;color:rgba(255,255,255,0.6)}
+.services-body{padding:1.5rem}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.service-card{background:var(--gray-bg);border:1.5px solid var(--border);border-radius:12px;padding:1.25rem;cursor:default;transition:all .2s;display:flex;flex-direction:column;gap:.75rem}
+.service-card:hover{border-color:var(--blue);background:#f0f9ff}
+.service-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.service-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}
+.service-name{font-size:.95rem;font-weight:700;color:var(--navy);line-height:1.25}
+.service-desc{font-size:.78rem;color:var(--text-muted);line-height:1.55;flex:1}
+.service-link{font-size:.72rem;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:3px;margin-top:auto}
+.service-link svg{width:11px;height:11px;stroke:var(--blue);fill:none}
+
+/* MIDNIGHT service cards */
+body.theme-midnight .service-card{background:#1A1A1A;border-color:#2A2A2A}
+body.theme-midnight .service-card:hover{border-color:#E63946;background:#1A0000}
+body.theme-midnight .service-name{color:#F1F1F1}
+body.theme-midnight .services-modal{background:#111}
+body.theme-midnight .services-body{background:#111}
+
+
+/* NAV CENTER + RIGHT */
+.nav-center{display:flex;align-items:center;gap:4px;flex:1;justify-content:center;overflow-x:auto;scrollbar-width:none}
+.nav-center::-webkit-scrollbar{display:none}
+.nav-pill-btn{height:30px;padding:0 12px;border:1.5px solid rgba(11,42,74,0.15);border-radius:20px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.75rem;font-weight:600;color:#2d3748;background:transparent;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.nav-pill-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:auto}
+.nav-icon-btn{width:34px;height:34px;border:1.5px solid rgba(11,42,74,0.15);border-radius:8px;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#2d3748;transition:all .15s;flex-shrink:0}
+.nav-icon-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.nav-icon-btn svg{width:16px;height:16px}
+
+/* MIDNIGHT nav center */
+body.theme-midnight .nav-center{background:transparent}
+body.theme-midnight .nav-pill-btn{color:#aaa;border-color:#333}
+body.theme-midnight .nav-pill-btn:hover{background:#E63946;border-color:#E63946;color:#fff}
+body.theme-midnight .nav-icon-btn{color:#aaa;border-color:#333}
+body.theme-midnight .nav-icon-btn:hover{background:#E63946;border-color:#E63946;color:#fff}
+
+/* SLIDES MODAL */
+.slides-modal{background:var(--white);border-radius:16px;width:min(820px,100%);max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popIn .5s cubic-bezier(.4,0,.2,1) both}
+.slides-head{background:linear-gradient(-45deg,#061828,#0B2A4A,#0d3a65,#061828);background-size:400% 400%;animation:gradientShift 12s ease infinite;padding:1.5rem 1.75rem;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:space-between}
+.slides-head h2{font-size:1.2rem;font-weight:700;color:#fff}
+.slides-head p{font-size:.8rem;color:rgba(255,255,255,0.6);margin-top:2px}
+.slides-body{padding:1.5rem}
+.slides-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.slide-card{background:var(--gray-bg);border:1.5px solid var(--border);border-radius:10px;padding:1rem;cursor:default;transition:border-color .2s}
+.slide-card:hover{border-color:var(--blue)}
+.slide-card-num{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:.4rem}
+.slide-card-title{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;line-height:1.3}
+.slide-card-desc{font-size:.75rem;color:var(--text-muted);line-height:1.5}
+body.theme-midnight .slides-modal{background:#1A1A1A}
+body.theme-midnight .slides-body{background:#1A1A1A}
+body.theme-midnight .slide-card{background:#0D0D0D;border-color:#2A2A2A}
+body.theme-midnight .slide-card-title{color:#F1F1F1}
+
+@media(max-width:640px){
+  .nav-center{display:none}
+  .nav-right{gap:4px}
+}
+
+
+/* SLIDES CHAT */
+.slides-modal{background:var(--white);border-radius:16px;width:min(640px,100%);max-height:90vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg);animation:popIn .5s cubic-bezier(.4,0,.2,1) both;overflow:hidden}
+.slides-head{background:linear-gradient(135deg,#061828,#0B2A4A,#0d3a65);padding:14px 18px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.slides-head-icon{width:36px;height:36px;border-radius:9px;background:rgba(0,174,239,0.18);border:0.5px solid rgba(0,174,239,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.slides-head-icon svg{width:17px;height:17px;stroke:#00AEEF;fill:none;stroke-width:2}
+.slides-head-text h3{font-size:13px;font-weight:600;color:#fff}
+.slides-head-text p{font-size:10px;color:rgba(255,255,255,0.4);margin-top:1px}
+.slides-head-badge{margin-left:auto;font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;background:rgba(0,174,239,0.15);border:0.5px solid rgba(0,174,239,0.3);color:#00AEEF;flex-shrink:0}
+.slides-body{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.slides-chat{flex:1;overflow-y:auto;padding:0;display:flex;flex-direction:column}
+.chat-welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 20px;gap:14px}
+.chat-welcome-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#0B2A4A,#0d3a65);display:flex;align-items:center;justify-content:center;border:0.5px solid rgba(0,174,239,0.2)}
+.chat-welcome-icon svg{width:24px;height:24px;stroke:#00AEEF;fill:none;stroke-width:2}
+.chat-welcome-title{font-size:15px;font-weight:700;color:var(--text);text-align:center}
+.chat-welcome-sub{font-size:.8rem;color:var(--text-muted);text-align:center;line-height:1.65;max-width:340px}
+.chat-sugg-label{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+.chat-suggestions{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.chat-sugg{font-family:'Plus Jakarta Sans',sans-serif;font-size:.72rem;font-weight:500;padding:5px 11px;border:1.5px solid var(--border);border-radius:20px;background:var(--white);color:var(--text-muted);cursor:pointer;transition:all .12s;display:flex;align-items:center;gap:5px}
+.chat-sugg:hover{border-color:var(--blue);background:#f0f9ff;color:var(--blue)}
+#chat-messages{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin}
+.chat-msg{display:flex;gap:8px;align-items:flex-end}
+.chat-msg.user{flex-direction:row-reverse}
+.chat-avatar{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;flex-shrink:0}
+.chat-msg.ai .chat-avatar{background:linear-gradient(135deg,#0B2A4A,#0d3a65);color:#00AEEF}
+.chat-msg.user .chat-avatar{background:var(--gray-bg);color:var(--text-muted)}
+.chat-bubble{max-width:78%;padding:9px 13px;font-size:.8rem;line-height:1.65;border-radius:14px}
+.chat-msg.ai .chat-bubble{background:var(--gray-bg);color:var(--text);border:1px solid var(--border);border-bottom-left-radius:4px}
+.chat-msg.user .chat-bubble{background:var(--navy);color:#fff;border-bottom-right-radius:4px}
+.chat-typing{display:flex;gap:4px;padding:2px 0}
+.chat-typing span{width:5px;height:5px;border-radius:50%;background:var(--text-muted);animation:typingDot 1.2s ease-in-out infinite;display:block}
+.chat-typing span:nth-child(2){animation-delay:.2s}
+.chat-typing span:nth-child(3){animation-delay:.4s}
+@keyframes typingDot{0%,80%,100%{transform:scale(0.6);opacity:.3}40%{transform:scale(1);opacity:1}}
+.slides-input-wrap{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--border);flex-shrink:0;background:var(--white);align-items:center}
+.slides-input-inner{flex:1;display:flex;align-items:center;gap:8px;background:var(--gray-bg);border:1.5px solid var(--border);border-radius:24px;padding:0 14px;transition:border-color .15s,background .15s}
+.slides-input-inner:focus-within{border-color:var(--blue);background:#fff}
+.slides-input-inner svg{width:13px;height:13px;stroke:var(--text-muted);fill:none;flex-shrink:0}
+.slides-input{flex:1;height:38px;border:none;background:transparent;font-family:'Plus Jakarta Sans',sans-serif;font-size:.83rem;color:var(--text);outline:none}
+.slides-input::placeholder{color:var(--text-muted)}
+.slides-send-btn{width:38px;height:38px;border:none;background:var(--navy);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
+.slides-send-btn:hover{background:var(--blue)}
+.slides-send-btn svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5}
+body.theme-midnight .slides-modal{background:#1A1A1A}
+body.theme-midnight .slides-input-wrap{background:#1A1A1A;border-color:#333}
+body.theme-midnight .slides-input-inner{background:#0D0D0D;border-color:#333}
+body.theme-midnight .slides-input{color:#F1F1F1}
+body.theme-midnight .chat-msg.ai .chat-bubble{background:#0D0D0D;border-color:#333;color:#F1F1F1}
+body.theme-midnight .chat-welcome-title{color:#F1F1F1}
+body.theme-midnight .chat-sugg{background:#1A1A1A;border-color:#333;color:#aaa}
+
 </style>
 </head>
 <body>
@@ -713,17 +830,23 @@ body.theme-midnight .info-guide-btn:hover{border-color:#E63946;color:#E63946}
 
 <!-- NAV -->
 <nav class="nav">
-  <span class="nav-title">Evrotrust <span style="color:var(--blue);font-weight:800">Partners</span></span>
-  <div class="theme-switcher">
-    <button class="theme-btn active" id="theme-blue" onclick="setTheme('blue')" title="Ocean Blue"><span class="theme-dot" style="background:#0B2A4A"></span><span class="theme-dot" style="background:#00AEEF"></span></button>
-    <button class="theme-btn" id="theme-forest" onclick="setTheme('forest')" title="Forest"><span class="theme-dot" style="background:#1B4332"></span><span class="theme-dot" style="background:#40916C"></span></button>
-    <button class="theme-btn" id="theme-sunset" onclick="setTheme('sunset')" title="Sunset"><span class="theme-dot" style="background:#7B2D8B"></span><span class="theme-dot" style="background:#F4A261"></span></button>
-    <button class="theme-btn" id="theme-midnight" onclick="setTheme('midnight')" title="Midnight"><span class="theme-dot" style="background:#0D0D0D"></span><span class="theme-dot" style="background:#E63946"></span></button>
+  <button class="et-services-btn" onclick="openServices()" title="Evrotrust Services"><span class="nav-title">Evrotrust <span style="color:var(--blue);font-weight:800">Partners</span></span></button>
+
+  <div class="nav-right">
+    <button class="nav-icon-btn" onclick="openSlides()" title="Onboarding Presentation">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8l5 3 5-3"/></svg>
+    </button>
+    <div class="theme-switcher">
+      <button class="theme-btn active" id="theme-blue" onclick="setTheme('blue')" title="Ocean Blue"><span class="theme-dot" style="background:#0B2A4A"></span><span class="theme-dot" style="background:#00AEEF"></span></button>
+      <button class="theme-btn" id="theme-forest" onclick="setTheme('forest')" title="Forest"><span class="theme-dot" style="background:#1B4332"></span><span class="theme-dot" style="background:#40916C"></span></button>
+      <button class="theme-btn" id="theme-sunset" onclick="setTheme('sunset')" title="Sunset"><span class="theme-dot" style="background:#7B2D8B"></span><span class="theme-dot" style="background:#F4A261"></span></button>
+      <button class="theme-btn" id="theme-midnight" onclick="setTheme('midnight')" title="Midnight"><span class="theme-dot" style="background:#0D0D0D"></span><span class="theme-dot" style="background:#E63946"></span></button>
+    </div>
+    <button class="nav-program-btn" onclick="openProg()">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span class="btn-label">Partner Program</span>
+    </button>
   </div>
-  <button class="nav-program-btn" onclick="openProg()">
-    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-    <span class="btn-label">Partner Program</span>
-  </button>
 </nav>
 
 <!-- HERO -->
@@ -958,6 +1081,126 @@ body.theme-midnight .info-guide-btn:hover{border-color:#E63946;color:#E63946}
       <div class="guide-item">
         <div class="guide-icon" style="background:#f9fafb;color:#374151"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
         <div><div class="guide-item-title">🎨 Themes</div><div class="guide-item-desc">Use the color dots in the top navigation to switch between Ocean Blue, Forest, Sunset and Midnight themes.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- EVROTRUST SERVICES MODAL -->
+<div class="overlay" id="services-ov" onclick="ovClick(event,'services-ov')">
+  <div class="services-modal">
+    <div class="services-head">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <h2>Evrotrust Services</h2>
+          <p>Qualified Trust Service Provider (QTSP) — fully eIDAS compliant across the EU</p>
+        </div>
+        <button class="modal-close" onclick="closeOv('services-ov')" style="background:rgba(255,255,255,0.15);color:#fff;flex-shrink:0">✕</button>
+      </div>
+    </div>
+    <div class="services-body">
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon" style="background:#e0f7ff;color:#0090C8"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M7 15h2M13 15h4"/></svg></div>
+          <div class="service-name">eID — Electronic Identification</div>
+          <div class="service-desc">Remote identity verification via mobile app. Basic ID, Enhanced ID (Web SDK), and Full eID with KYC. No physical presence needed. Active users from 62 nationalities.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:#e8f5e9;color:#15803d"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+          <div class="service-name">eSign — Electronic Signature</div>
+          <div class="service-desc">SES, AES and QES — legally equivalent to handwritten signature across all EU. Signing documents remotely via mobile with same legal effect as paper. Remove paper, stay effective.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:#fff3e0;color:#b45309"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg></div>
+          <div class="service-name">eDelivery — Registered E-mail</div>
+          <div class="service-desc">Securely send and receive documents from anywhere via mobile. Full legal proof of sending, delivery and opening — qualified timestamp receipts, just like registered post.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:#eef2ff;color:#3730a3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div class="service-name">eTimestamp — Qualified Timestamp</div>
+          <div class="service-desc">Proves a document existed at a specific point in time. Tamper-proof, legally binding under eIDAS. 0.02 TU per timestamp. Essential for audit trails and legal certainty.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:#fce7f3;color:#9d174d"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="service-name">eSeal — Electronic Seal</div>
+          <div class="service-desc">Qualified electronic seals for organizations — ensures authenticity and integrity of documents issued by legal entities. eIDAS Art. 35 compliant.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:#f1f5f9;color:#334155"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div class="service-name">White-label SDK</div>
+          <div class="service-desc">Embed Evrotrust services directly into your platform. Mobile SDK (iOS, Android, React) and Web SDK. Plug-and-play, fully customizable UX. No redirect from your app.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:#fef9c3;color:#854d0e"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <div class="service-name">Trust Units (TU)</div>
+          <div class="service-desc">Prepaid service packages valid 12 months. 1 TU = QES document · 0.7 TU = QES hash · 3 TU = eID · 1 TU = eDelivery · 0.02 TU = timestamp. Certificates issued free.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:#dcfce7;color:#15803d"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+          <div class="service-name">AML / KYC Compliance</div>
+          <div class="service-desc">Full eIDAS, GDPR and AML-compliant remote identification. KYC onboarding for banks, insurance, telecom and financial services. Supports 62 nationalities.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:#ede9fe;color:#6d28d9"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+          <div class="service-name">Mobile SDK</div>
+          <div class="service-desc">Native iOS, Android and React SDK. Most secure option — private key stored in device HSM, never leaves device. Full KYC video flow, biometric authentication, plug-and-play integration. Customizable UX.</div>
+        </div>
+      </div>
+      <div style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:gap">
+        <div style="font-size:.8rem;color:var(--text-muted)">Trusted by <strong>200+ clients</strong> including 15 major EU banks · <strong>2M+ users</strong> · <strong>62 nationalities</strong></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+<a href="https://evrotrust.com/en/services/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:.8rem;font-weight:600;color:var(--blue);text-decoration:none">All services ↗</a>
+<a href="https://evrotrust.com/business/other-trust-services/" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:.8rem;font-weight:600;color:var(--blue);text-decoration:none">Other trust services ↗</a>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDES / ONBOARDING MODAL -->
+<div class="overlay" id="slides-ov" onclick="ovClick(event,'slides-ov')">
+  <div class="slides-modal">
+    <div class="slides-head">
+      <div class="slides-head-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="slides-head-text">
+        <h3>Evrotrust Knowledge Assistant</h3>
+        <p>eID · eSign · eDelivery · SDK · API · Pricing · Legal framework</p>
+      </div>
+      <span class="slides-head-badge">AI</span>
+      <button class="modal-close" onclick="closeOv('slides-ov')" style="background:rgba(255,255,255,0.12);color:#fff;margin-left:8px">✕</button>
+    </div>
+    <div class="slides-body">
+      <div class="slides-chat" id="slides-chat">
+        <div class="chat-welcome" id="chat-welcome">
+          <div class="chat-welcome-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="chat-welcome-title">Ask me anything about Evrotrust</div>
+          <div class="chat-welcome-sub">Get instant answers on eID, eSign, eDelivery, SDK, API, pricing, legal framework and the partner program — based on internal learning materials.</div>
+          <div class="chat-sugg-label">Quick questions</div>
+          <div class="chat-suggestions">
+            <button class="chat-sugg" onclick="askQuestion('What is the difference between QES and AES?')">✍️ QES vs AES</button>
+            <button class="chat-sugg" onclick="askQuestion('How does Mobile SDK differ from Web SDK?')">📱 Mobile vs Web SDK</button>
+            <button class="chat-sugg" onclick="askQuestion('How are Trust Units priced?')">💰 TU pricing</button>
+            <button class="chat-sugg" onclick="askQuestion('What is the referral commission structure?')">🤝 Commissions</button>
+            <button class="chat-sugg" onclick="askQuestion('How does eDelivery work legally?')">📬 eDelivery proof</button>
+            <button class="chat-sugg" onclick="askQuestion('What does QTSP mean and why does it matter?')">🏛️ What is QTSP?</button>
+          </div>
+        </div>
+        <div id="chat-messages" style="display:none"></div>
+      </div>
+      <div class="slides-input-wrap">
+        <div class="slides-input-inner">
+          <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="slides-input" id="slides-input" type="text" placeholder="Ask me anything about Evrotrust…" onkeydown="if(event.key==='Enter')sendSlideQuestion()">
+        </div>
+        <button class="slides-send-btn" onclick="sendSlideQuestion()">
+          <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
       </div>
     </div>
   </div>
@@ -1211,6 +1454,9 @@ function setCat(c){
   activeCat=c==='All'?'':c;
   document.querySelectorAll('.pill').forEach(p=>p.classList.toggle('active',p.textContent.trim().startsWith(c)));
   render();
+  // Scroll to grid
+  var mainEl=document.querySelector('.main');
+  if(mainEl) setTimeout(function(){mainEl.scrollIntoView({behavior:'smooth',block:'start'});},100);
 }
 function getFiltered(){
   const q=document.getElementById('search').value.toLowerCase();
@@ -1250,7 +1496,7 @@ function render(){
       <div class="card-hover-ring"><svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3.5"/></svg></div>
       <div class="card-top">
         <div class="card-header">
-          <div class="card-avatar" style="background:${svgLogo?'#f8f9fa':avatarBg};color:${avatarText}">
+          <div class="card-avatar" style="background:${svgLogo?'#fff':avatarBg};color:${avatarText}">
           ${svgLogo
             ? `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:3px;overflow:hidden">${svgLogo}</div>`
             : `<span style="position:relative;z-index:1;font-size:.8rem;font-weight:800;letter-spacing:-.02em;text-align:center;line-height:1">${avatarLabel}</span>`
@@ -1363,11 +1609,27 @@ function openAdd(){
   document.getElementById('add-ov').classList.add('open');document.body.style.overflow='hidden';
   setTimeout(()=>document.getElementById('np-name').focus(),60);
 }
+function openSlides(){document.getElementById('slides-ov').classList.add('open');document.body.style.overflow='hidden';}
+function openServices(){document.getElementById('services-ov').classList.add('open');document.body.style.overflow='hidden';}
 function openGuide(){document.getElementById('guide-ov').classList.add('open');document.body.style.overflow='hidden';}
 function openProg(){document.getElementById('prog-ov').classList.add('open');document.body.style.overflow='hidden';}
-function closeOv(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+function closeOv(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+  if(id==='slides-ov'){
+    chatHistory=[];
+    var msgs=document.getElementById('chat-messages');
+    if(msgs)msgs.innerHTML='';
+    var welcome=document.getElementById('chat-welcome');
+    if(welcome)welcome.style.display='flex';
+    var msgs=document.getElementById('chat-messages');
+    if(msgs)msgs.style.display='none';
+    var inp=document.getElementById('slides-input');
+    if(inp)inp.value='';
+  }
+}
 function ovClick(e,id){if(e.target.id===id)closeOv(id);}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){['detail-ov','add-ov','prog-ov'].forEach(closeOv);}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){['detail-ov','add-ov','prog-ov','slides-ov','services-ov','guide-ov','compare-ov'].forEach(closeOv);}});
 function addPartner(){
   const name=document.getElementById('np-name').value.trim();const short=document.getElementById('np-short').value.trim();
   if(!name){document.getElementById('np-name').style.borderColor='#cc2b2b';return;}
@@ -1768,14 +2030,21 @@ function runFlipCounters() {
   var strip = document.querySelector('.stats-strip');
   if (!strip) return;
   var triggered = false;
+  function tryFlip() {
+    if (triggered) return;
+    triggered = true;
+    runFlipCounters();
+  }
   var obs = new IntersectionObserver(function(entries) {
-    if (entries[0].isIntersecting && !triggered) {
-      triggered = true;
-      runFlipCounters();
-      obs.disconnect();
-    }
-  }, {threshold: 0.4});
+    if (entries[0].isIntersecting) tryFlip();
+  }, {threshold: 0.2});
   obs.observe(strip);
+  // Also trigger on scroll near stats
+  window.addEventListener('scroll', function() {
+    if (triggered) return;
+    var r = strip.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) tryFlip();
+  }, {passive:true});
 })();
 
 
@@ -1881,6 +2150,169 @@ function createNeural(canvasId, nodeCount, connectDist, speed, stopWhenHidden) {
 
 createNeural('splash-canvas', 55, 140, 0.35, 'splash');
 createNeural('hero-canvas',   45, 120, 0.25, null);
+
+
+// ── EVROTRUST KNOWLEDGE ASSISTANT ──
+const ET_KNOWLEDGE = `
+Evrotrust is a Bulgaria-based Qualified Trust Service Provider (QTSP), fully eIDAS (Regulation EU 910/2014) compliant. Notified national eID scheme — obligatory for all EU public services.
+
+SERVICES:
+- eID (Electronic Identification): Remote identity verification via mobile app. Three levels:
+  * Basic ID: 9 attributes, no attestation, no profile, NFC yes, single checks, plug-and-play
+  * Enhanced ID (Web SDK): full attributes, attestation yes, no profile, NFC yes, manual supervision yes, multiple signs short period, API access 2 hours, no profile creation
+  * Full eID: all attributes, attestation yes, profile yes, NFC yes, manual supervision yes, full KYC, 2FA, automation, financial services
+
+- eSign (Electronic Signature): Three types:
+  * SES (Simple): email/SMS, low legal weight, non-risk operations
+  * AES (Advanced): cryptographic, certificate-based, medium legal weight, B2B contracts
+  * QES (Qualified): highest standard, equivalent to handwritten signature, requires mobile app from QTSP, smartcard or USB token, official/legal/financial operations
+
+- eDelivery: Qualified electronic registered delivery (ERDS). Statuses: Submitted → Delivered (ConsignmentAcceptance) → Opened (ContentHandover). Default 3-day window. Receipts have qualified timestamp = court evidence.
+
+- eTimestamp: 0.02 TU per timestamp. Proves document existed at specific time. Tamper-proof under eIDAS.
+
+- eSeal: Qualified electronic seals for organizations (eIDAS Art. 35).
+
+TRUST UNITS (TU) PRICING:
+- 1 TU = QES document signing
+- 0.7 TU = QES hash signing
+- 3 TU = eID (Full)
+- 1 TU = eDelivery
+- 0.02 TU = qualified timestamp
+- 0.05 TU = 2FA
+Packages: prepaid, 12-month validity, certificates free, corporate support included.
+
+MOBILE SDK vs WEB SDK vs API:
+- Mobile SDK: most secure, private key in HSM device memory (never leaves), iOS/Android/React, native KYC video flow, biometric auth, required for QES
+- Web SDK: browser-based, no app install needed, uses OTP for auth, less secure key storage, good for one-time or rare signings, API data access 2 hours
+- API (RESTful): server-to-server, JSON format, GET/POST/PUT, full automation, backend developers, Postman for non-technical users
+
+INTEGRATION FLOW (API):
+1) Check user exists → 2) Create profile → 3) Send contract for signing → 4) User signs → 5) eDelivery → 6) Decrypt → 7) Download and archive
+
+API KEY: unique token per partner, used for authentication/tracking/permissions. Each partner gets different key for security isolation.
+
+TECHNICAL (PKI & HSM):
+- PKI: manages public/private key pairs, X.509 certificates
+- HSM: Hardware Security Module — stores private key, never leaves device
+- Hash (SHA-256/512): one-way fingerprint, detects any document change, used in signing
+- Signing process: document → hash → encrypt hash with private key in HSM → QES
+
+BUSINESS MODELS:
+- Package Resell: sell license packages through partner network
+- Commitment: prepay minimum annual transaction volume, excess invoiced
+- Package per Client: specialized corporate packages per industry (banks, insurance, government), prepaid
+- Referral: partners recommend Evrotrust, receive 15% commission on signed deal
+- ISV (Independent Software Vendor): integrate Evrotrust into own platform (ERP/CRM), sell as bundle
+- Rebate: discount based on 50% profit on ET cost — more volume = more discount
+
+PARTNER PROGRAM:
+Referral: L1 qualified lead 5%, L2 drive & sign 15%, L3 renewal year 2 = 7%, year 3 = 5%
+Reseller: Starter 5% off, Silver (36,000 TU) 7%, Gold (72,000 TU) 10%, Platinum (240,000 TU) 15%
+
+LEGAL & COMPLIANCE:
+- eIDAS Regulation (EU) 910/2014: main framework for eID and trust services across EU
+- GDPR (EU) 2016/679: data protection for user data
+- AML/KYC (ЗМИП): strict client identification requirements
+- ISO/IEC 27001, ETSI EN 319 401/411: security and quality standards
+- Qualified providers = official legal force (equivalent to public authority)
+- Cross-border: automatic EU recognition. Outside EU: only via bilateral agreements (Art. 218 TFEU)
+
+COMPETITION:
+- Evrotrust: fully remote, mobile-first, complete QES+eID+eDelivery, no physical presence
+- B-Trust/BORICA: banking payments + qualified signatures, cloud signing
+- Informационно обслужване/StampIt: government IT systems + certificates
+
+TRUSTED BY: 200+ clients, 15 major EU banks, 2M+ users, 62 nationalities, 11 countries. Partners include Mastercard, governments, telcos, financial services.
+
+HOW TO PRESENT (Partnership Specialist pitch):
+"We are a Qualified Trust Service Provider (QTSP). We provide the highest legal certainty for digital transactions across the entire EU, fully compliant with eIDAS. Our mission: transform paper-based or partially digital processes into complete, secure, legally binding electronic cycles. 200+ clients, 15 major banks, 2M+ users."
+
+CERTIFICATES: DNV-GL ISO 9001, ISO/IEC 20000, ISO/IEC 27001, ISO/IEC 27701, ISO 22301, ETSI, KYC, GDPR, eIDAS, AML, eIDAS2
+
+FACT SHEETS — DETAILED SERVICE INFO:
+
+eID FACT SHEET:
+Evrotrust eID enables remote identity verification via mobile app. Users create a reusable digital identity from mobile device. Identity verified through one or more official data sources. No physical presence needed — banking, insurance, government services accessed remotely. Three types: Basic ID (9 attributes, plug-and-play, NFC), Enhanced ID (full attributes, attestation, Web SDK, API 2h access, no profile), Full eID (all attributes, attestation, profile, NFC, manual supervision, 2FA, KYC, financial services). SDK supports iOS, Android, React. Plug-and-play integration, no redirect from client app. Document validity checked via national register (Bulgaria, Macedonia). 3 TU per eID transaction.
+
+QES FACT SHEET:
+Qualified Electronic Signature (QES) = highest eIDAS standard. Legally equivalent to handwritten signature across ALL EU member states — automatically recognized, no additional proof needed. Evrotrust QES created via mobile app (no smartcard/USB needed — cloud-based HSM). Signing process: document hashed → hash encrypted with private key in HSM → QES applied. 1 TU per QES document, 0.7 TU per QES hash. Use cases: contracts, bank procedures, government filings, employment contracts, commercial registrations, financial agreements. Supports remote signing — document sent to signer's mobile, signed with biometric confirmation.
+
+AES FACT SHEET:
+Advanced Electronic Signature (AES) — cryptographic, uniquely linked to signer, detects subsequent changes. Higher than SES, lower than QES. Based on qualified certificate. eIDAS Article 26 compliant. Good for: corporate documents, internal contracts, B2B agreements, situations where QES not legally required but higher assurance needed. Evrotrust AES uses certificate-based mechanism. 0.7-1 TU depending on document type.
+
+OTP eSIGN FACT SHEET:
+One-Time Password electronic signature. Simpler signing method using OTP code sent to user's registered mobile/email. Suitable for: lower-risk operations, consumer agreements, platform registrations, quick approvals. Does not require full KYC — user just needs to be registered in Evrotrust system. Fast, lightweight, no biometric needed. Lower TU cost.
+
+CORPORATE SIGN FACT SHEET:
+Corporate electronic signing solution for organizations. Enables companies to sign documents on behalf of the legal entity (corporate seal equivalent). Integrated with company's signing authority structure. Useful for: bulk contract signing, automated document workflows, corporate governance documents, board resolutions, financial statements filing. Can be automated via API for high-volume use cases.
+
+IDENT LITE FACT SHEET:
+Lightweight identity verification solution. Quick identity check without full KYC flow. Suitable for: employee ID verification, access control, password reset verification, low-risk user authentication. Uses subset of eID attributes. Faster than Full eID. Plug-and-play via SDK.
+
+eNOTARY FACT SHEET:
+Electronic notarization service. Allows notarial acts to be performed digitally with QES + qualified timestamp. Legal validity equivalent to physical notarial deed in supported jurisdictions. Process: identity verified via Full eID → document prepared → QES + timestamp applied by notary system → legally valid electronic notarial deed. Reduces cost and time of traditional notarization dramatically.
+
+eDELIVERY FACT SHEET:
+Qualified Electronic Registered Delivery Service (ERDS) under eIDAS Article 43-44. Provider: Evrotrust Technologies AD. Purpose: transmit data between persons electronically with proof of processing, sending and receiving. Legal force: data cannot be disputed solely because electronic. Receipts have evidential force in court proceedings. Process: 1) Identify parties → 2) Create and address content → 3) Secure encrypted channel (web portal/API/mobile) → 4) Set delivery deadline (default 3 days) → 5) Generate receipts with qualified timestamp. Statuses: SubmissionAcceptance (sent) → ConsignmentAcceptance (delivered/accessible) → ContentHandover (opened by recipient = proof of receipt). 1 TU per eDelivery.
+
+eTIMESTAMP FACT SHEET:
+Qualified Electronic Timestamp under eIDAS. Proves a document or data existed at a specific point in time. Tamper-proof — any change invalidates timestamp. Used for: audit trails, intellectual property protection, contract timestamping, regulatory compliance, long-term archiving. Evrotrust timestamps included in EU Trusted List. 0.02 TU per timestamp. Can be combined with QES for maximum legal certainty (QES + timestamp = strongest evidence).
+
+IDENTITY SUITE FACT SHEET:
+Complete identity management platform combining all Evrotrust eID services. Includes: Full eID onboarding, 2FA authentication, document verification, attribute attestation, continuous authentication. Designed for enterprises needing comprehensive digital identity infrastructure. Supports: banking onboarding (KYC), insurance policy signing, telecom eSIM activation, HR digital labor files, government service access. White-label available — fully branded to partner. API + SDK integration. Scalable — handles large volumes. Trusted by 15+ major EU banks.
+`;
+
+var chatHistory = [];
+
+function askQuestion(q) {
+  document.getElementById('slides-input').value = q;
+  sendSlideQuestion();
+}
+
+async function sendSlideQuestion() {
+  var input = document.getElementById('slides-input');
+  var q = input.value.trim();
+  if (!q) return;
+  input.value = '';
+
+  // Hide welcome, show messages
+  var welcome = document.getElementById('chat-welcome');
+  if (welcome) welcome.style.display = 'none';
+  var msgs = document.getElementById('chat-messages');
+  msgs.style.display = 'flex';
+
+  msgs.innerHTML += '<div class="chat-msg user"><div class="chat-avatar">You</div><div class="chat-bubble">' + q + '</div></div>';
+
+  var typingId = 'typing-' + Date.now();
+  msgs.innerHTML += '<div class="chat-msg ai" id="' + typingId + '"><div class="chat-avatar">ET</div><div class="chat-bubble"><div class="chat-typing"><span></span><span></span><span></span></div></div></div>';
+
+  var chat = document.getElementById('slides-chat');
+  chat.scrollTop = chat.scrollHeight;
+  chatHistory.push({role:'user', content: q});
+
+  try {
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: 'You are the Evrotrust Knowledge Assistant for the internal Evrotrust Partners portal. Answer questions clearly and concisely using the knowledge base. Respond in the same language the user writes in (Bulgarian or English). Keep answers focused and practical. Use bullet points for lists. Knowledge base:\n\n' + ET_KNOWLEDGE,
+        messages: chatHistory
+      })
+    });
+    var data = await response.json();
+    var answer = data.content && data.content[0] ? data.content[0].text : 'Sorry, I could not get an answer. Please try again.';
+    var el = document.getElementById(typingId);
+    if (el) el.querySelector('.chat-bubble').innerHTML = answer.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+    chatHistory.push({role:'assistant', content: answer});
+  } catch(e) {
+    var el2 = document.getElementById(typingId);
+    if (el2) el2.querySelector('.chat-bubble').innerHTML = '<span style="color:#E63946">Connection error. Please try again.</span>';
+  }
+  chat.scrollTop = chat.scrollHeight;
+}
 
 buildPills();
 buildLegal();
