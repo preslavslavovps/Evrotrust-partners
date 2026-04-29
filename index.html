@@ -131,7 +131,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
 
 /* CARD */
-.card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:box-shadow .2s,border-color .2s,transform .2s;display:flex;flex-direction:column;animation:fadeUp .35s ease both;position:relative}
+.card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:box-shadow .2s,border-color .2s,transform .2s;display:flex;flex-direction:column;animation:fadeUp .35s ease both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .card:hover{box-shadow:var(--shadow-md);border-color:#b8cfe8;transform:translateY(-2px)}
 .card-top{padding:1.25rem 1.25rem .875rem;display:flex;flex-direction:column;gap:.75rem;flex:1}
@@ -142,7 +142,16 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .card-region-badge{font-size:.68rem;font-weight:600;color:var(--blue);background:#e0f7ff;border:1px solid #b0e4f8;border-radius:6px;padding:3px 8px;white-space:nowrap;line-height:1.4;flex-shrink:0;max-width:110px;overflow:hidden;text-overflow:ellipsis}
 .card-name{font-size:1rem;font-weight:700;color:var(--text);line-height:1.25}
 .card-desc{font-size:.82rem;color:var(--text-muted);line-height:1.6;flex:1}
-.card-bottom{padding:.65rem 1.25rem .875rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:#fafbfd}
+.card-bottom{padding:.65rem 1rem .75rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:#fafbfd;gap:6px}
+.card-actions{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.card-icon-btn{width:30px;height:30px;border:1.5px solid var(--border);border-radius:7px;background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:1px;transition:all .15s;padding:0;flex-shrink:0}
+.card-icon-btn svg{width:13px;height:13px;fill:none;stroke:var(--text-muted);transition:stroke .15s}
+.card-icon-btn:hover{border-color:var(--blue);background:#f0f9ff}
+.card-icon-btn:hover svg{stroke:var(--blue)}
+.card-icon-btn--active{background:var(--navy)!important;border-color:var(--navy)!important}
+.card-icon-btn--active svg{stroke:#fff!important}
+.card-icon-btn--fav svg{fill:none;stroke:#ddd}
+.card-icon-btn--fav.card-icon-btn--active-fav svg,.card-icon-btn.card-icon-btn--fav.active-fav svg{fill:#E63946;stroke:#E63946}
 .card-tag{font-size:.65rem;font-weight:600;letter-spacing:.03em;padding:3px 8px;border-radius:20px}
 .card-action{font-size:.72rem;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:3px;transition:gap .15s}
 .card:hover .card-action{gap:5px}
@@ -217,7 +226,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
   100%{opacity:1; transform:translate(0,0)         scale(1);  clip-path:circle(150% at 50% 50%)}
 }
 .modal-head{padding:1.5rem 1.5rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:1rem;position:sticky;top:0;background:var(--white);z-index:5}
-.modal-avatar{width:54px;height:54px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.14)}
+.modal-avatar{width:72px;height:52px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.14)}
 .modal-avatar::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.28) 0%,transparent 65%)}
 .modal-title-group{flex:1;min-width:0}
 .modal-name{font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:3px;word-break:break-word}
@@ -495,11 +504,7 @@ body.theme-midnight .map-tooltip-name{color:#F1F1F1}
 .compare-btn-go:hover{background:var(--blue-dark)}
 .compare-btn-go:disabled{opacity:.4;cursor:not-allowed}
 .compare-btn-clear{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:none;border-radius:8px;padding:8px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;cursor:pointer}
-.compare-card-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;position:absolute;bottom:10px;left:10px;z-index:6;transition:all .2s}
-.compare-card-btn svg{width:13px;height:13px;stroke:var(--text-muted);fill:none;stroke-width:2.5}
-.compare-card-btn.active{background:var(--navy);border-color:var(--navy)}
-.compare-card-btn.active svg{stroke:#fff}
-.compare-card-btn:hover{border-color:var(--navy)}
+
 
 /* COMPARISON MODAL */
 .compare-modal{background:var(--white);border-radius:16px;width:min(900px,100%);max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popIn .5s cubic-bezier(.4,0,.2,1) both}
@@ -524,6 +529,24 @@ body.theme-midnight .map-tooltip-name{color:#F1F1F1}
 /* SHARE TOAST */
 .share-toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:10px 20px;border-radius:20px;font-size:.83rem;font-weight:600;opacity:0;transition:all .3s;z-index:300;pointer-events:none;white-space:nowrap}
 .share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+
+/* INFO GUIDE BUTTON */
+.info-guide-btn{width:38px;height:38px;border:1.5px solid var(--border);border-radius:8px;background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;color:var(--text-muted)}
+.info-guide-btn:hover{border-color:var(--blue);color:var(--blue)}
+.info-guide-btn svg{width:18px;height:18px}
+
+/* GUIDE MODAL */
+.guide-modal{background:var(--white);border-radius:16px;width:min(480px,100%);max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popIn .5s cubic-bezier(.4,0,.2,1) both;padding:0}
+.guide-head{background:var(--navy);padding:1.5rem 1.75rem;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:space-between}
+.guide-head h3{font-size:1.1rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:.6rem}
+.guide-body{padding:1.5rem}
+.guide-item{display:flex;align-items:flex-start;gap:1rem;padding:.875rem 0;border-bottom:1px solid var(--border)}
+.guide-item:last-child{border-bottom:none}
+.guide-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.guide-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+.guide-item-title{font-size:.875rem;font-weight:700;color:var(--navy);margin-bottom:3px}
+.guide-item-desc{font-size:.78rem;color:var(--text-muted);line-height:1.5}
 
 </style>
 </head>
@@ -646,6 +669,9 @@ body.theme-midnight .map-tooltip-name{color:#F1F1F1}
       <button class="view-btn" id="btn-map" onclick="setView('map')" title="Map"><svg viewBox="0 0 24 24" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></button>
     </div>
     <button class="add-btn" onclick="openAdd()" title="Add partner"><svg stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span class="btn-label">Add partner</span></button>
+    <button class="info-guide-btn" onclick="openGuide()" title="Help">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+    </button>
   </div>
   <div class="cat-pills" id="pills"></div>
 </div>
@@ -726,6 +752,47 @@ body.theme-midnight .map-tooltip-name{color:#F1F1F1}
       <button class="modal-close" onclick="closeOv('compare-ov')" style="background:rgba(255,255,255,0.15);color:#fff">✕</button>
     </div>
     <div class="compare-body" id="compare-body"></div>
+  </div>
+</div>
+
+
+<!-- GUIDE MODAL -->
+<div class="overlay" id="guide-ov" onclick="ovClick(event,'guide-ov')">
+  <div class="guide-modal">
+    <div class="guide-head">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> How to use this page</h3>
+      <button class="modal-close" onclick="closeOv('guide-ov')" style="background:rgba(255,255,255,0.15);color:#fff">✕</button>
+    </div>
+    <div class="guide-body">
+      <div class="guide-item">
+        <div class="guide-icon" style="background:#e0f7ff;color:#0090C8"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <div><div class="guide-item-title">Search & Filter</div><div class="guide-item-desc">Type in the search box to find partners by name, region or category. Use the category pills to filter by type.</div></div>
+      </div>
+      <div class="guide-item">
+        <div class="guide-icon" style="background:#f0f9ff;color:#0B2A4A"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+        <div><div class="guide-item-title">Open partner details</div><div class="guide-item-desc">Click any card to see full use case, integrated services, business model and related partners. On desktop — hover 2 seconds to auto-open.</div></div>
+      </div>
+      <div class="guide-item">
+        <div class="guide-icon" style="background:#fff0f0;color:#E63946"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div><div class="guide-item-title">❤ Save favorites</div><div class="guide-item-desc">Click the heart icon on any card to save it. View all saved partners under the "❤ Saved" tab — great for preparing before a meeting.</div></div>
+      </div>
+      <div class="guide-item">
+        <div class="guide-icon" style="background:#f0f4ff;color:#0B2A4A"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div>
+        <div><div class="guide-item-title">⇄ Compare partners</div><div class="guide-item-desc">Click the arrows icon on 2 cards to compare them side by side — category, use case, integrations and more.</div></div>
+      </div>
+      <div class="guide-item">
+        <div class="guide-icon" style="background:#f0fdf4;color:#15803d"><svg viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div>
+        <div><div class="guide-item-title">🗺 Map view</div><div class="guide-item-desc">Switch to map view with the map icon to see partners by country. Click a dot to see who is there.</div></div>
+      </div>
+      <div class="guide-item">
+        <div class="guide-icon" style="background:#fefce8;color:#854d0e"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div><div class="guide-item-title">📄 Fact sheets & Legal</div><div class="guide-item-desc">Scroll down for downloadable fact sheets for each Evrotrust service, and country-by-country legal signing requirements across Europe.</div></div>
+      </div>
+      <div class="guide-item">
+        <div class="guide-icon" style="background:#f9fafb;color:#374151"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <div><div class="guide-item-title">🎨 Themes</div><div class="guide-item-desc">Use the color dots in the top navigation to switch between Ocean Blue, Forest, Sunset and Midnight themes.</div></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1029,16 +1096,23 @@ function render(){
       </div>
       <div class="card-bottom">
         <span class="card-tag" style="background:${cs.bg};color:${cs.text}">${p.cat}</span>
-        <span class="card-action">Use case<svg stroke-width="2.5" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span>
+        <div class="card-actions">
+          <button class="card-icon-btn ${isInCompare(pidx)?'card-icon-btn--active':''}" id="cmp-${pidx}" onclick="event.stopPropagation();toggleCompare(${pidx})" title="Compare">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="transform:scaleX(-1)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <button class="card-icon-btn " id="fav-${pidx}" onclick="event.stopPropagation();toggleFav(${pidx})" title="Save">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+          <span class="card-action">Details<svg stroke-width="2.5" viewBox="0 0 24 24" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
       </div>
-      <button class="fav-btn ${isFav(pidx)?'active':''}" id="fav-${pidx}" onclick="event.stopPropagation();toggleFav(${pidx})" title="Save">
-        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </button>
-      <button class="compare-card-btn ${isInCompare(pidx)?'active':''}" id="cmp-${pidx}" onclick="event.stopPropagation();toggleCompare(${pidx})" title="Compare">
-        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-      </button>
     </div>`;
   }).join('');
+  // Set initial fav states
+  partners.forEach(function(_,i){
+    if(isFav(i)){var b=document.getElementById('fav-'+i);if(b){var s=b.querySelector('svg');if(s){s.style.fill='#E63946';s.style.stroke='#E63946';}}}
+  });
   },150);
 }
 function setView(v){
@@ -1122,6 +1196,7 @@ function openAdd(){
   document.getElementById('add-ov').classList.add('open');document.body.style.overflow='hidden';
   setTimeout(()=>document.getElementById('np-name').focus(),60);
 }
+function openGuide(){document.getElementById('guide-ov').classList.add('open');document.body.style.overflow='hidden';}
 function openProg(){document.getElementById('prog-ov').classList.add('open');document.body.style.overflow='hidden';}
 function closeOv(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
 function ovClick(e,id){if(e.target.id===id)closeOv(id);}
@@ -1267,7 +1342,7 @@ function startHoverTimer(idx, el){
   _hoverTimer = setTimeout(function(){
     el.classList.remove('hovered');
     openDetail(idx);
-  }, 2000);
+  }, 4000);
 }
 function clearHoverTimer(){
   if(_hoverTimer){clearTimeout(_hoverTimer);_hoverTimer=null;}
@@ -1307,7 +1382,7 @@ function toggleFav(idx){
   else{_favs.push(idx);}
   try{localStorage.setItem('et-favs',JSON.stringify(_favs));}catch(e){}
   var btn=document.getElementById('fav-'+idx);
-  if(btn)btn.classList.toggle('active',isFav(idx));
+  if(btn){btn.classList.toggle('card-icon-btn--active',isFav(idx));var svg=btn.querySelector('svg');if(svg){svg.style.fill=isFav(idx)?'#E63946':'none';svg.style.stroke=isFav(idx)?'#E63946':'#ddd';}}
   // Update saved tab count
   updateSavedTab();
 }
