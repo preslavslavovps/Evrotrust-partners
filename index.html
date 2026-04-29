@@ -452,6 +452,79 @@ body.theme-midnight .map-tooltip-name{color:#F1F1F1}
 .card.hovered .card-hover-ring{display:block}
 .card.hovered .card-hover-ring circle{stroke-dashoffset:0}
 
+
+/* SKELETON LOADING */
+.skeleton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.skeleton-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;animation:fadeUp .35s ease both}
+.skeleton-card .sk-top{padding:1.25rem 1.25rem .875rem}
+.skeleton-card .sk-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem}
+.sk{background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
+.sk-avatar{width:56px;height:40px;border-radius:10px}
+.sk-badge{width:40px;height:20px;border-radius:10px}
+.sk-name{height:16px;width:65%;margin-bottom:8px}
+.sk-desc1{height:11px;width:100%;margin-bottom:5px}
+.sk-desc2{height:11px;width:80%}
+.sk-bottom{padding:.65rem 1.25rem .875rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:#fafbfd}
+.sk-tag{height:20px;width:100px;border-radius:20px}
+.sk-action{height:14px;width:60px;border-radius:6px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* FAVORITES */
+.fav-btn{position:absolute;bottom:10px;right:10px;width:28px;height:28px;border:none;background:transparent;cursor:pointer;z-index:6;padding:0;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.fav-btn:hover{transform:scale(1.2)}
+.fav-btn svg{width:18px;height:18px;transition:all .2s}
+.fav-btn.active svg{fill:#E63946;stroke:#E63946}
+.fav-btn svg{fill:none;stroke:#ccc;stroke-width:2}
+
+/* BACK TO TOP */
+.back-top{position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;background:var(--navy);color:#fff;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);z-index:80;opacity:0;transform:translateY(16px);transition:opacity .3s,transform .3s}
+.back-top.show{opacity:1;transform:translateY(0)}
+.back-top:hover{background:var(--blue)}
+.back-top svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2.5}
+
+/* COMPARISON */
+.compare-bar{position:fixed;bottom:0;left:0;right:0;background:var(--navy);color:#fff;z-index:150;transform:translateY(100%);transition:transform .35s cubic-bezier(.22,1,.36,1);padding:.75rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.compare-bar.show{transform:translateY(0)}
+.compare-slots{display:flex;gap:8px;flex:1}
+.compare-slot{background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);border-radius:8px;padding:6px 12px;font-size:.8rem;display:flex;align-items:center;gap:8px;min-width:140px}
+.compare-slot-name{flex:1;font-weight:600}
+.compare-slot-x{background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:1rem;padding:0;line-height:1}
+.compare-slot-x:hover{color:#fff}
+.compare-slot.empty{border-style:dashed;color:rgba(255,255,255,0.4);font-style:italic}
+.compare-btn-go{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:8px 20px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.83rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s}
+.compare-btn-go:hover{background:var(--blue-dark)}
+.compare-btn-go:disabled{opacity:.4;cursor:not-allowed}
+.compare-btn-clear{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:none;border-radius:8px;padding:8px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;cursor:pointer}
+.compare-card-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;position:absolute;bottom:10px;left:10px;z-index:6;transition:all .2s}
+.compare-card-btn svg{width:13px;height:13px;stroke:var(--text-muted);fill:none;stroke-width:2.5}
+.compare-card-btn.active{background:var(--navy);border-color:var(--navy)}
+.compare-card-btn.active svg{stroke:#fff}
+.compare-card-btn:hover{border-color:var(--navy)}
+
+/* COMPARISON MODAL */
+.compare-modal{background:var(--white);border-radius:16px;width:min(900px,100%);max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popIn .5s cubic-bezier(.4,0,.2,1) both}
+.compare-head{background:var(--navy);padding:1.5rem 1.75rem;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:space-between}
+.compare-head h3{font-size:1.2rem;font-weight:700;color:#fff}
+.compare-body{padding:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.compare-col{display:flex;flex-direction:column;gap:10px}
+.compare-col-name{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.25rem;display:flex;align-items:center;gap:.5rem}
+.compare-row{background:var(--gray-bg);border:1px solid var(--border);border-radius:8px;padding:.75rem;font-size:.82rem}
+.compare-row-label{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+.compare-row-val{color:var(--text);line-height:1.5}
+.compare-divider{width:1px;background:var(--border);position:absolute;left:50%;top:0;bottom:0}
+
+/* RELATED PARTNERS */
+.related-section{border-top:1px solid var(--border);margin-top:1.25rem;padding-top:1.25rem}
+.related-label{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.75rem}
+.related-list{display:flex;gap:8px;flex-wrap:wrap}
+.related-chip{background:var(--gray-bg);border:1.5px solid var(--border);border-radius:8px;padding:6px 12px;font-size:.78rem;font-weight:600;color:var(--navy);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+.related-chip:hover{border-color:var(--blue);background:#f0f9ff}
+.related-chip-av{width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:800;color:#fff;flex-shrink:0}
+
+/* SHARE TOAST */
+.share-toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:10px 20px;border-radius:20px;font-size:.83rem;font-weight:600;opacity:0;transition:all .3s;z-index:300;pointer-events:none;white-space:nowrap}
+.share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
 </style>
 </head>
 <body>
@@ -625,6 +698,37 @@ body.theme-midnight .map-tooltip-name{color:#F1F1F1}
   </div>
 </div>
 
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<!-- SHARE TOAST -->
+<div class="share-toast" id="share-toast">✓ Copied to clipboard!</div>
+
+<!-- COMPARE BAR -->
+<div class="compare-bar" id="compare-bar">
+  <span style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap">Compare</span>
+  <div class="compare-slots" id="compare-slots">
+    <div class="compare-slot empty" id="cslot-0">Add partner 1</div>
+    <div class="compare-slot empty" id="cslot-1">Add partner 2</div>
+  </div>
+  <button class="compare-btn-go" id="compare-go" onclick="openCompare()" disabled>Compare →</button>
+  <button class="compare-btn-clear" onclick="clearCompare()">Clear</button>
+</div>
+
+<!-- COMPARE MODAL -->
+<div class="overlay" id="compare-ov" onclick="ovClick(event,'compare-ov')">
+  <div class="compare-modal">
+    <div class="compare-head">
+      <h3>Partner Comparison</h3>
+      <button class="modal-close" onclick="closeOv('compare-ov')" style="background:rgba(255,255,255,0.15);color:#fff">✕</button>
+    </div>
+    <div class="compare-body" id="compare-body"></div>
+  </div>
+</div>
+
 <!-- DETAIL MODAL -->
 <div class="overlay" id="detail-ov" onclick="ovClick(event,'detail-ov')">
   <div class="modal">
@@ -640,7 +744,9 @@ body.theme-midnight .map-tooltip-name{color:#F1F1F1}
       <div class="modal-links">
         <a class="modal-link" id="m-link" href="#" target="_blank">View on evrotrust.com <svg stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         <a class="modal-link material" id="m-material" href="#" target="_blank">📄 Partner material <svg stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        <button class="modal-link" id="m-share" onclick="sharePartner()" style="border:none;cursor:pointer">🔗 Share <svg stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
       </div>
+      <div class="related-section" id="m-related"></div>
     </div>
   </div>
 </div>
@@ -865,7 +971,7 @@ function buildPills(){
   document.getElementById('pills').innerHTML=ALL_CATS.map(c=>{
     const count=c==='All'?partners.length:partners.filter(p=>p.cat===c).length;
     return `<button class="pill${c==='All'?' active':''}" onclick="setCat('${c}')">${c} <span class="pill-count">${count}</span></button>`;
-  }).join('');
+  }).join('')+`<button class="pill" id="pill-saved" onclick="setCat('Saved')">❤ Saved <span class="pill-count">${_favs.length}</span></button>`;
 }
 function setCat(c){
   activeCat=c==='All'?'':c;
@@ -874,7 +980,10 @@ function setCat(c){
 }
 function getFiltered(){
   const q=document.getElementById('search').value.toLowerCase();
-  let f=partners.filter(p=>(!activeCat||p.cat===activeCat)&&(p.name.toLowerCase().includes(q)||p.short.toLowerCase().includes(q)||(p.region||'').toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)));
+  let f=partners.filter((p,i)=>{
+    if(activeCat==='Saved') return isFav(i);
+    return (!activeCat||p.cat===activeCat)&&(p.name.toLowerCase().includes(q)||p.short.toLowerCase().includes(q)||(p.region||'').toLowerCase().includes(q)||p.cat.toLowerCase().includes(q));
+  });
   const s=document.getElementById('sort-sel').value;
   if(s==='az')f.sort((a,b)=>a.name.localeCompare(b.name));
   else if(s==='za')f.sort((a,b)=>b.name.localeCompare(a.name));
@@ -884,6 +993,8 @@ function getFiltered(){
 }
 function render(){
   const _q=document.getElementById('search').value;
+  showSkeleton();
+  setTimeout(function(){
   const filtered=getFiltered();
   document.getElementById('total-count').textContent=partners.length;
   if(currentView==='map'){renderMap(filtered);return;}
@@ -920,8 +1031,15 @@ function render(){
         <span class="card-tag" style="background:${cs.bg};color:${cs.text}">${p.cat}</span>
         <span class="card-action">Use case<svg stroke-width="2.5" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span>
       </div>
+      <button class="fav-btn ${isFav(pidx)?'active':''}" id="fav-${pidx}" onclick="event.stopPropagation();toggleFav(${pidx})" title="Save">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <button class="compare-card-btn ${isInCompare(pidx)?'active':''}" id="cmp-${pidx}" onclick="event.stopPropagation();toggleCompare(${pidx})" title="Compare">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+      </button>
     </div>`;
   }).join('');
+  },150);
 }
 function setView(v){
   currentView=v;
@@ -979,6 +1097,7 @@ function renderMap(filtered){
   document.getElementById('map-legend').innerHTML=[...new Set(filtered.map(p=>p.cat))].map(c=>{const cs=CATS[c]||CATS['Other'];return `<div class="map-legend-item"><div class="map-legend-dot" style="background:${cs.text}"></div>${c}</div>`;}).join('');
 }
 function openDetail(idx){
+  _currentPartnerIdx=idx;
   const p=partners[idx];const av=avCol(p.name);const rs=getRegionShort(p.region);
   document.getElementById('m-av').innerHTML=`<span style="position:relative;z-index:1">${initials(p.name)}</span>`;
   document.getElementById('m-av').style.background=av.bg;document.getElementById('m-av').style.color=av.text;
@@ -995,6 +1114,7 @@ function openDetail(idx){
   document.getElementById('m-about').textContent=p.desc||p.short;
   const lnk=document.getElementById('m-link');lnk.href=p.url||'#';lnk.style.display=p.url?'inline-flex':'none';
   const mat=document.getElementById('m-material');mat.href=p.material||'#';mat.style.display=p.material?'inline-flex':'none';
+  showRelated(p);
   document.getElementById('detail-ov').classList.add('open');document.body.style.overflow='hidden';
 }
 function openAdd(){
@@ -1152,6 +1272,167 @@ function startHoverTimer(idx, el){
 function clearHoverTimer(){
   if(_hoverTimer){clearTimeout(_hoverTimer);_hoverTimer=null;}
   if(_hoverCard){_hoverCard.classList.remove('hovered');_hoverCard=null;}
+}
+
+
+// ── SKELETON LOADING ──
+function showSkeleton(){
+  const grid=document.getElementById('grid');
+  grid.innerHTML=Array(8).fill(0).map((_,i)=>`
+    <div class="skeleton-card" style="animation-delay:${i*0.05}s">
+      <div class="sk-top">
+        <div class="sk-header"><div class="sk sk-avatar"></div><div class="sk sk-badge"></div></div>
+        <div class="sk sk-name"></div>
+        <div class="sk sk-desc1"></div>
+        <div class="sk sk-desc2"></div>
+      </div>
+      <div class="sk-bottom"><div class="sk sk-tag"></div><div class="sk sk-action"></div></div>
+    </div>`).join('');
+}
+
+// ── BACK TO TOP ──
+(function(){
+  const btn=document.getElementById('back-top');
+  window.addEventListener('scroll',function(){
+    btn.classList.toggle('show',window.scrollY>400);
+  },{passive:true});
+})();
+
+// ── FAVORITES ──
+var _favs=[];
+try{_favs=JSON.parse(localStorage.getItem('et-favs')||'[]');}catch(e){}
+function isFav(idx){return _favs.includes(idx);}
+function toggleFav(idx){
+  if(isFav(idx)){_favs=_favs.filter(function(i){return i!==idx;});}
+  else{_favs.push(idx);}
+  try{localStorage.setItem('et-favs',JSON.stringify(_favs));}catch(e){}
+  var btn=document.getElementById('fav-'+idx);
+  if(btn)btn.classList.toggle('active',isFav(idx));
+  // Update saved tab count
+  updateSavedTab();
+}
+function updateSavedTab(){
+  var pill=document.getElementById('pill-saved');
+  if(pill){pill.querySelector('.pill-count').textContent=_favs.length;}
+}
+
+// ── COMPARE ──
+var _compare=[];
+function isInCompare(idx){return _compare.includes(idx);}
+function toggleCompare(idx){
+  if(isInCompare(idx)){
+    _compare=_compare.filter(function(i){return i!==idx;});
+  } else if(_compare.length<2){
+    _compare.push(idx);
+  } else {return;}
+  updateCompareBar();
+  // Update button state
+  var btn=document.getElementById('cmp-'+idx);
+  if(btn)btn.classList.toggle('active',isInCompare(idx));
+}
+function updateCompareBar(){
+  var bar=document.getElementById('compare-bar');
+  var go=document.getElementById('compare-go');
+  bar.classList.toggle('show',_compare.length>0);
+  go.disabled=_compare.length<2;
+  [0,1].forEach(function(i){
+    var slot=document.getElementById('cslot-'+i);
+    if(!slot)return;
+    var pidx=_compare[i];
+    if(pidx!==undefined){
+      var p=partners[pidx];
+      slot.className='compare-slot';
+      slot.innerHTML='<span class="compare-slot-name">'+p.name+'</span><button class="compare-slot-x" onclick="removeFromCompare('+pidx+')">×</button>';
+    } else {
+      slot.className='compare-slot empty';
+      slot.innerHTML='Add partner '+(i+1);
+    }
+  });
+}
+function removeFromCompare(idx){
+  _compare=_compare.filter(function(i){return i!==idx;});
+  var btn=document.getElementById('cmp-'+idx);
+  if(btn)btn.classList.remove('active');
+  updateCompareBar();
+}
+function clearCompare(){
+  _compare.forEach(function(idx){
+    var btn=document.getElementById('cmp-'+idx);
+    if(btn)btn.classList.remove('active');
+  });
+  _compare=[];
+  updateCompareBar();
+}
+function openCompare(){
+  if(_compare.length<2)return;
+  var p1=partners[_compare[0]];
+  var p2=partners[_compare[1]];
+  var fields=[
+    {label:'Category',key:'cat'},
+    {label:'Use case',key:'usecase'},
+    {label:'Integrated services',key:'integration'},
+    {label:'Business model',key:'bizmodel'},
+    {label:'Region',key:'region'},
+  ];
+  var av1=avCol(p1.name),av2=avCol(p2.name);
+  var b1=BRAND_COLORS[p1.name],b2=BRAND_COLORS[p2.name];
+  document.getElementById('compare-body').innerHTML=`
+    <div class="compare-col">
+      <div class="compare-col-name">
+        <div style="width:28px;height:28px;border-radius:6px;background:${b1?b1.bg:av1.bg};display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;color:${b1?b1.text:av1.text}">${(b1?b1.label:initials(p1.name))}</div>
+        ${p1.name}
+      </div>
+      ${fields.map(function(f){return `<div class="compare-row"><div class="compare-row-label">${f.label}</div><div class="compare-row-val">${p1[f.key]||'—'}</div></div>`;}).join('')}
+      <div class="compare-row"><div class="compare-row-label">Description</div><div class="compare-row-val" style="font-size:.78rem">${p1.desc||p1.short}</div></div>
+    </div>
+    <div class="compare-col">
+      <div class="compare-col-name">
+        <div style="width:28px;height:28px;border-radius:6px;background:${b2?b2.bg:av2.bg};display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;color:${b2?b2.text:av2.text}">${(b2?b2.label:initials(p2.name))}</div>
+        ${p2.name}
+      </div>
+      ${fields.map(function(f){return `<div class="compare-row"><div class="compare-row-label">${f.label}</div><div class="compare-row-val">${p2[f.key]||'—'}</div></div>`;}).join('')}
+      <div class="compare-row"><div class="compare-row-label">Description</div><div class="compare-row-val" style="font-size:.78rem">${p2.desc||p2.short}</div></div>
+    </div>`;
+  document.getElementById('compare-ov').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+// ── SHARE PARTNER ──
+var _currentPartnerIdx = -1;
+function sharePartner(){
+  var p=partners[_currentPartnerIdx];
+  if(!p)return;
+  var text=p.name+' — '+p.short+'\nCategory: '+p.cat+(p.region?' | '+p.region:'')+(p.usecase?'\nUse case: '+p.usecase:'');
+  try{
+    navigator.clipboard.writeText(text).then(function(){showToast();});
+  } catch(e){
+    // fallback
+    var ta=document.createElement('textarea');
+    ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    showToast();
+  }
+}
+function showToast(){
+  var t=document.getElementById('share-toast');
+  t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},2500);
+}
+
+// ── RELATED PARTNERS ──
+function showRelated(p){
+  var related=partners.filter(function(r){
+    return r!==p&&(r.cat===p.cat||(r.integration&&p.integration&&r.integration.split(',').some(function(s){return p.integration.includes(s.trim());})));
+  }).slice(0,5);
+  var el=document.getElementById('m-related');
+  if(!related.length){el.innerHTML='';return;}
+  var cs_map=CATS;
+  el.innerHTML='<div class="related-label">Related partners</div><div class="related-list">'+
+    related.map(function(r){
+      var av=avCol(r.name);var b=BRAND_COLORS[r.name];
+      var bg=b?b.bg:av.bg;var tc=b?b.text:av.text;var lbl=b?b.label:initials(r.name);
+      return '<button class="related-chip" onclick="closeOv(\'detail-ov\');setTimeout(function(){openDetail('+partners.indexOf(r)+');},100)">'+
+        '<span class="related-chip-av" style="background:'+bg+';color:'+tc+'">'+lbl+'</span>'+r.name+'</button>';
+    }).join('')+'</div>';
 }
 
 buildPills();
