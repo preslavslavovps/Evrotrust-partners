@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evrotrust Partners</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{max-width:100%;overflow-x:hidden}
+:root{
+  --navy:#0B2A4A;--blue:#00AEEF;--blue-dark:#0090C8;--red:#cc2b2b;
+  --white:#fff;--gray-bg:#F5F7FA;--text:#1A1A1A;--text-muted:#5A6B7B;
+  --border:#DDE3EA;--radius:12px;
+  --shadow-sm:0 1px 3px rgba(11,42,74,.08);
+  --shadow-md:0 4px 20px rgba(11,42,74,.12);
+  --shadow-lg:0 12px 48px rgba(11,42,74,.18);
+}
+body{font-family:'Inter',-apple-system,sans-serif;color:var(--text);background:var(--white);min-height:100vh}
+
+/* SPLASH */
+.splash{position:fixed;inset:0;z-index:1000;background:linear-gradient(160deg,#061828 0%,#0B2A4A 50%,#0d3a65 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .65s cubic-bezier(.76,0,.24,1),opacity .65s ease;touch-action:none;overflow:hidden;cursor:grab}
+.splash.swiped{transform:translateY(-100%);opacity:0;pointer-events:none}
+.splash::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.splash-glow1{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,174,239,0.12) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
+.splash-glow2{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,174,239,0.08) 0%,transparent 70%);bottom:-80px;left:-80px;pointer-events:none}
+.splash-content{position:relative;z-index:1;text-align:center;padding:2rem;user-select:none}
+.splash-logo{width:72px;height:72px;border-radius:18px;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
+.splash-logo svg{width:38px;height:38px}
+.splash-title{font-size:clamp(2rem,6vw,3.2rem);font-weight:800;color:#fff;letter-spacing:-0.04em;line-height:1.1;margin-bottom:.4rem}
+.splash-title span{color:var(--blue)}
+.splash-sub{font-size:1rem;color:rgba(255,255,255,0.5);margin-bottom:3rem}
+.swipe-hint{display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.swipe-arrow{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;animation:bounceUp 1.4s ease-in-out infinite}
+.swipe-arrow svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.5}
+.swipe-text{font-size:.78rem;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:.12em;text-transform:uppercase}
+@keyframes bounceUp{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-8px);opacity:1}}
+.splash-bar{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.08)}
+.splash-bar-fill{height:100%;background:var(--blue);width:0%;transition:width .1s linear}
+
+/* NAV */
+.nav{background:#e8f4f0;height:64px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;position:sticky;top:0;z-index:100}
+.nav-title{font-weight:800;font-size:1.7rem;color:#2d3748;letter-spacing:-0.03em;flex:1}
+.nav-program-btn{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-family:'Inter',sans-serif;font-size:.83rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:background .15s}
+.nav-program-btn:hover{background:#1a4a7a}
+.nav-program-btn svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:2;flex-shrink:0}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#061828 0%,#0B2A4A 55%,#0d3a65 100%);padding:3rem 1.5rem 2.5rem;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.035) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.hero-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:.75rem;position:relative;z-index:1}
+.hero h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:#fff;letter-spacing:-.04em;margin-bottom:.75rem;line-height:1.1;position:relative;z-index:1}
+.hero h1 span{color:var(--blue)}
+.hero p{font-size:.95rem;color:rgba(255,255,255,0.65);max-width:520px;margin:0 auto 2rem;line-height:1.65;position:relative;z-index:1}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;position:relative;z-index:1}
+.hero-stat{text-align:center}
+.hero-stat-num{font-size:1.7rem;font-weight:800;color:#fff;line-height:1}
+.hero-stat-label{font-size:.6rem;color:rgba(255,255,255,0.45);margin-top:4px;letter-spacing:.1em;text-transform:uppercase}
+.hero-divider{width:1px;height:32px;background:rgba(255,255,255,0.15)}
+
+/* STATS STRIP */
+.stats-strip{background:var(--navy);padding:2.5rem 1.5rem}
+.stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:3rem}
+.stats-title{font-size:1.1rem;font-weight:800;color:rgba(255,255,255,0.9);line-height:1.4;flex-shrink:0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat-item{padding:0 1.5rem;border-left:1px solid rgba(255,255,255,0.12)}
+.stat-num{font-size:1.7rem;font-weight:800;color:var(--blue);line-height:1;letter-spacing:-0.02em}
+.stat-desc{font-size:.72rem;color:rgba(255,255,255,0.5);line-height:1.4;margin-top:5px}
+
+/* CERTS CAROUSEL */
+.certs-section{background:#1a2e40;padding:1.2rem 0;overflow:hidden}
+.certs-track-wrap{display:flex;align-items:center;gap:1.5rem;padding:0 1.5rem}
+.certs-label{font-size:.65rem;font-weight:700;color:rgba(255,255,255,0.4);white-space:nowrap;letter-spacing:.12em;text-transform:uppercase;flex-shrink:0}
+.certs-carousel{flex:1;overflow:hidden;position:relative}
+.certs-carousel::before{content:'';position:absolute;left:0;top:0;bottom:0;width:30px;background:linear-gradient(to right,#1a2e40,transparent);z-index:1;pointer-events:none}
+.certs-carousel::after{content:'';position:absolute;right:0;top:0;bottom:0;width:30px;background:linear-gradient(to left,#1a2e40,transparent);z-index:1;pointer-events:none}
+.certs-track{display:flex;gap:10px;animation:scrollCerts 28s linear infinite;width:max-content}
+.certs-track:hover{animation-play-state:paused}
+.cert{display:flex;flex-direction:column;align-items:center;justify-content:center;width:68px;height:68px;border-radius:10px;gap:2px;flex-shrink:0;cursor:pointer;transition:transform .2s}
+.cert:hover{transform:scale(1.06)}
+.cert-light{background:#fff}.cert-eu{background:#003399}
+.cert-text{font-weight:800;font-size:.62rem;color:#0B2A4A;text-align:center;line-height:1.2}
+.cert-sub{font-size:.36rem;font-weight:500;color:#6b7280;text-align:center;line-height:1.2;letter-spacing:.04em;text-transform:uppercase}
+.eu-stars{display:grid;grid-template-columns:repeat(6,1fr);width:44px}
+.eu-stars span{color:#ffcc00;font-size:5.5px;line-height:1.2;text-align:center}
+.eu-label{font-size:.55rem;font-weight:800;color:#fff;letter-spacing:.06em}
+@keyframes scrollCerts{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* FACTSHEETS CAROUSEL */
+.factsheets-section{background:var(--navy);padding:1.5rem 0}
+.factsheets-inner{padding:0 1.5rem;display:flex;align-items:center;gap:1.5rem}
+.factsheets-label{font-size:.65rem;font-weight:700;color:rgba(255,255,255,0.4);white-space:nowrap;letter-spacing:.12em;text-transform:uppercase;flex-shrink:0}
+.factsheets-scroll{flex:1;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;display:flex;gap:10px;padding-bottom:4px}
+.factsheets-scroll::-webkit-scrollbar{display:none}
+.factsheet-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:.875rem 1rem;display:flex;align-items:center;gap:.75rem;flex-shrink:0;text-decoration:none;transition:background .2s,border-color .2s;cursor:pointer;min-width:160px}
+.factsheet-card:hover{background:rgba(0,174,239,0.2);border-color:var(--blue)}
+.factsheet-icon{width:32px;height:32px;border-radius:7px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.factsheet-icon svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2}
+.factsheet-name{font-size:.78rem;font-weight:600;color:#fff;line-height:1.3}
+.factsheet-type{font-size:.62rem;color:rgba(255,255,255,0.45);margin-top:1px}
+
+/* CONTROLS */
+.controls{background:var(--white);border-bottom:1.5px solid var(--border);padding:.75rem 1rem;display:flex;flex-direction:column;gap:8px;position:sticky;top:64px;z-index:90;transition:transform .3s ease,opacity .3s ease;width:100%}
+.controls.hidden{transform:translateY(-100%);opacity:0;pointer-events:none}
+.controls-top{display:flex;align-items:center;gap:8px;width:100%}
+.search-wrap{position:relative;flex:1;min-width:0}
+.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--text-muted);pointer-events:none}
+.search-wrap input{width:100%;height:38px;border:1.5px solid var(--border);border-radius:8px;padding:0 10px 0 32px;font-family:'Inter',sans-serif;font-size:.875rem;color:var(--text);outline:none;background:var(--gray-bg);transition:border-color .15s}
+.search-wrap input:focus{border-color:var(--blue);background:#fff}
+.search-wrap input::placeholder{color:var(--text-muted)}
+.sort-select{height:38px;border:1.5px solid var(--border);border-radius:8px;padding:0 8px;font-family:'Inter',sans-serif;font-size:.78rem;color:var(--text-muted);background:var(--gray-bg);outline:none;cursor:pointer;flex-shrink:0}
+.view-toggle{display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0}
+.view-btn{width:36px;height:36px;border:none;background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.view-btn svg{width:15px;height:15px;stroke:var(--text-muted);fill:none}
+.view-btn.active{background:var(--navy)}.view-btn.active svg{stroke:#fff}
+.view-btn:first-child{border-right:1px solid var(--border)}
+.add-btn{height:38px;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:0 14px;font-family:'Inter',sans-serif;font-size:.83rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .15s;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.add-btn:hover{background:#1a4a7a}
+.add-btn svg{width:14px;height:14px;stroke:#fff;fill:none}
+.cat-pills{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;scrollbar-width:none;width:100%}
+.cat-pills::-webkit-scrollbar{display:none}
+.pill{height:30px;padding:0 11px;border:1.5px solid var(--border);border-radius:20px;font-family:'Inter',sans-serif;font-size:.75rem;font-weight:500;color:var(--text-muted);background:var(--white);cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.pill:hover{border-color:var(--blue);color:var(--blue)}
+.pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.pill-count{opacity:.5;font-size:.68em;margin-left:2px}
+
+/* MAIN GRID */
+.main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem 4rem;width:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+
+/* CARD */
+.card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:box-shadow .2s,border-color .2s,transform .2s;display:flex;flex-direction:column;animation:fadeUp .35s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card:hover{box-shadow:var(--shadow-md);border-color:#b8cfe8;transform:translateY(-2px)}
+.card-top{padding:1.25rem 1.25rem .875rem;display:flex;flex-direction:column;gap:.75rem;flex:1}
+.card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem}
+.card-avatar{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;flex-shrink:0;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.card-avatar::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.28) 0%,transparent 70%)}
+.card-avatar span{position:relative;z-index:1}
+.card-region-badge{font-size:.68rem;font-weight:600;color:var(--blue);background:#e0f7ff;border:1px solid #b0e4f8;border-radius:6px;padding:3px 8px;white-space:nowrap;line-height:1.4;flex-shrink:0;max-width:110px;overflow:hidden;text-overflow:ellipsis}
+.card-name{font-size:1rem;font-weight:700;color:var(--text);line-height:1.25}
+.card-desc{font-size:.82rem;color:var(--text-muted);line-height:1.6;flex:1}
+.card-bottom{padding:.65rem 1.25rem .875rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:#fafbfd}
+.card-tag{font-size:.65rem;font-weight:600;letter-spacing:.03em;padding:3px 8px;border-radius:20px}
+.card-action{font-size:.72rem;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:3px;transition:gap .15s}
+.card:hover .card-action{gap:5px}
+.card-action svg{width:11px;height:11px;stroke:var(--navy);fill:none;flex-shrink:0}
+
+/* MAP */
+.map-view{display:none;padding:1.5rem 1rem}
+.map-view.active{display:block}
+.world-map-wrap{position:relative;background:var(--gray-bg);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;padding:1rem}
+.world-map-wrap svg{width:100%;height:auto;display:block}
+.map-dot{cursor:pointer;transition:opacity .15s}
+.map-dot:hover{opacity:.75}
+.map-tooltip{display:none;position:absolute;background:var(--navy);color:#fff;border-radius:10px;padding:10px 14px;font-size:.78rem;font-family:'Inter',sans-serif;pointer-events:none;z-index:10;min-width:160px;max-width:220px;box-shadow:var(--shadow-lg)}
+.map-tooltip.show{display:block}
+.map-tooltip-name{font-weight:700;font-size:.85rem;margin-bottom:3px}
+.map-tooltip-count{font-size:.72rem;font-weight:600;color:var(--blue)}
+.map-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem}
+.map-legend-item{display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--text-muted)}
+.map-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* LEGAL SECTION */
+.legal-section{background:var(--white);border-top:2px solid var(--border);padding:3rem 1.5rem}
+.legal-inner{max-width:1100px;margin:0 auto}
+.section-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:.4rem}
+.section-title{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:var(--navy);letter-spacing:-0.03em;margin-bottom:.5rem}
+.section-sub{font-size:.9rem;color:var(--text-muted);max-width:540px;line-height:1.65;margin-bottom:2rem}
+
+.legal-search-wrap{position:relative;max-width:480px;margin-bottom:1.5rem}
+.legal-search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--text-muted);pointer-events:none}
+.legal-search{width:100%;height:42px;border:1.5px solid var(--border);border-radius:8px;padding:0 14px 0 38px;font-family:'Inter',sans-serif;font-size:.875rem;color:var(--text);outline:none;background:var(--gray-bg);transition:border-color .15s}
+.legal-search:focus{border-color:var(--blue);background:#fff}
+.legal-search::placeholder{color:var(--text-muted)}
+
+.legal-countries{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.legal-country-btn{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:1rem;cursor:pointer;text-align:left;transition:all .2s;display:flex;align-items:center;gap:.875rem}
+.legal-country-btn:hover{border-color:var(--blue);box-shadow:var(--shadow-sm)}
+.legal-country-btn.active{border-color:var(--blue);background:#f0f9ff}
+.legal-country-flag{font-size:1.6rem;line-height:1;flex-shrink:0}
+.legal-country-name{font-size:.9rem;font-weight:700;color:var(--navy)}
+.legal-country-count{font-size:.72rem;color:var(--text-muted);margin-top:2px}
+
+.legal-detail{display:none;margin-top:1.5rem;background:var(--gray-bg);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;animation:fadeUp .25s ease}
+.legal-detail.show{display:block}
+.legal-detail-head{background:var(--navy);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.legal-detail-title{font-size:1.2rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:.75rem}
+.legal-detail-close{width:30px;height:30px;border:none;background:rgba(255,255,255,0.15);border-radius:7px;cursor:pointer;color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.legal-detail-body{padding:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.legal-block-highlight{grid-column:span 2}
+.legal-block{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.legal-block-title{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:.6rem}
+.legal-block ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.legal-block li{font-size:.8rem;color:var(--text);line-height:1.5;padding-left:1rem;position:relative}
+.legal-block li::before{content:'•';position:absolute;left:0;color:var(--blue)}
+.legal-block-empty{font-size:.8rem;color:var(--text-muted);font-style:italic}
+.legal-docs-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.legal-doc-chip{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:20px;background:#e0f7ff;color:#0090C8}
+.legal-block-highlight{background:#fff8e1;border-color:#ffe082;}
+.legal-block-highlight .legal-block-title{color:#e65100}
+
+/* EMPTY */
+.empty{text-align:center;padding:4rem 2rem;color:var(--text-muted);font-size:.95rem;display:none}
+.empty svg{width:44px;height:44px;stroke:#d1d5db;fill:none;margin:0 auto 1rem;display:block}
+
+/* OVERLAY */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(2px)}
+.overlay.open{display:flex}
+.modal{background:var(--white);border-radius:16px;width:min(680px,100%);max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popIn .22s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+.modal-head{padding:1.5rem 1.5rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:1rem;position:sticky;top:0;background:var(--white);z-index:5}
+.modal-avatar{width:54px;height:54px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.14)}
+.modal-avatar::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.28) 0%,transparent 65%)}
+.modal-title-group{flex:1;min-width:0}
+.modal-name{font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:3px;word-break:break-word}
+.modal-sub{font-size:.83rem;color:var(--text-muted);line-height:1.5}
+.modal-close{width:32px;height:32px;border:none;background:var(--gray-bg);border-radius:8px;cursor:pointer;font-size:1rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
+.modal-close:hover{background:var(--border)}
+.modal-body{padding:1.25rem 1.5rem 1.75rem}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
+.info-card{background:var(--gray-bg);border:1px solid var(--border);border-radius:10px;padding:.875rem}
+.info-card-label{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:5px}
+.info-card-val{font-size:.83rem;color:var(--text);line-height:1.55;font-weight:500}
+.benefits-list{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.benefit-chip{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:20px;background:#e0f7ff;color:#0090C8}
+.icp-chip{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:20px;background:#e8f0fb;color:#0B2A4A}
+.about-label{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:7px}
+.about-text{font-size:.85rem;color:var(--text-muted);line-height:1.7}
+.modal-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:.875rem}
+.modal-link{display:inline-flex;align-items:center;gap:5px;font-size:.8rem;font-weight:600;color:var(--navy);text-decoration:none;padding:7px 12px;border:1.5px solid var(--border);border-radius:8px;transition:border-color .15s,background .15s}
+.modal-link:hover{border-color:var(--blue);background:#f0f9ff}
+.modal-link svg{width:12px;height:12px;stroke:var(--navy);fill:none}
+.modal-link.material{background:#e0f7ff;border-color:#b0e4f8}
+.add-modal{background:var(--white);border-radius:16px;width:min(500px,100%);max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popIn .22s cubic-bezier(.34,1.56,.64,1) both;padding:1.5rem}
+.add-modal h3{font-size:1.1rem;font-weight:700;margin-bottom:1.25rem}
+.field{margin-bottom:.875rem}
+.field label{display:block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+.field input,.field select,.field textarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:8px 11px;font-family:'Inter',sans-serif;font-size:.875rem;color:var(--text);outline:none;background:var(--gray-bg);transition:border-color .15s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);background:#fff}
+.field textarea{height:72px;resize:vertical}
+.add-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:1rem}
+.btn-ghost{height:36px;border:1.5px solid var(--border);border-radius:8px;background:transparent;padding:0 12px;font-family:'Inter',sans-serif;font-size:.83rem;cursor:pointer;color:var(--text-muted)}
+.btn-solid{height:36px;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:0 16px;font-family:'Inter',sans-serif;font-size:.83rem;font-weight:600;cursor:pointer}
+.btn-solid:hover{background:#1a4a7a}
+
+/* PROG MODAL */
+.prog-modal{background:var(--white);border-radius:16px;width:min(820px,100%);max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popIn .22s cubic-bezier(.34,1.56,.64,1) both}
+.prog-head{background:linear-gradient(135deg,#061828,#0B2A4A);padding:1.75rem 1.75rem 1.5rem;border-radius:16px 16px 0 0}
+.prog-head h2{font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:4px}
+.prog-head p{font-size:.85rem;color:rgba(255,255,255,0.6)}
+.prog-close{position:absolute;top:1.25rem;right:1.25rem;width:32px;height:32px;border:none;background:rgba(255,255,255,0.15);border-radius:8px;cursor:pointer;font-size:1rem;color:#fff;display:flex;align-items:center;justify-content:center}
+.prog-head-wrap{position:relative}
+.prog-body{padding:1.25rem 1.5rem 1.75rem}
+.prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.25rem}
+.prog-card{border:1.5px solid var(--border);border-radius:12px;padding:1.25rem;background:var(--gray-bg)}
+.program-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.875rem}
+.badge-ref{background:#e0f7ff;color:#0090C8}.badge-res{background:#e8f0fb;color:#0B2A4A}
+.prog-card-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.prog-card-desc{font-size:.8rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem}
+.prog-features{display:flex;flex-direction:column;gap:5px;margin-bottom:1rem}
+.prog-feat{display:flex;align-items:flex-start;gap:7px;font-size:.78rem;color:var(--text);line-height:1.5}
+.prog-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:7px}
+.commission-box{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:.875rem}
+.commission-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.5rem}
+.c-rows{display:flex;flex-direction:column;gap:4px}
+.c-row{display:flex;align-items:center;justify-content:space-between;font-size:.76rem;padding:5px 8px;background:var(--gray-bg);border-radius:6px;border:1px solid var(--border)}
+.c-tier{font-weight:600;color:var(--navy)}.c-val{font-weight:700;color:var(--blue)}
+.how-section{border-top:1.5px solid var(--border);padding-top:1.25rem;margin-top:.5rem}
+.how-title{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:.875rem}
+.how-steps{display:flex;gap:0;position:relative;overflow-x:auto;padding-bottom:4px}
+.how-steps::before{content:'';position:absolute;top:18px;left:18px;right:18px;height:2px;background:rgba(0,174,239,0.2);z-index:0}
+.how-step{flex:1;min-width:80px;text-align:center;position:relative;z-index:1;padding:0 4px}
+.how-num{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:.78rem;display:flex;align-items:center;justify-content:center;margin:0 auto .5rem;box-shadow:0 0 0 4px rgba(0,174,239,0.15)}
+.how-step-title{font-size:.68rem;font-weight:700;color:var(--navy);margin-bottom:2px}
+.how-step-desc{font-size:.6rem;color:var(--text-muted);line-height:1.3}
+.tu-section{background:var(--navy);border-radius:10px;padding:1rem;margin-top:1.25rem}
+.tu-title{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:.6rem}
+.tu-items{display:flex;flex-wrap:wrap;gap:7px}
+.tu-item{background:rgba(255,255,255,0.1);border-radius:8px;padding:5px 11px;display:flex;align-items:center;gap:7px}
+.tu-val{font-weight:800;font-size:.9rem;color:var(--blue)}.tu-name{font-size:.7rem;color:rgba(255,255,255,0.6)}
+.prog-cta{display:block;text-align:center;margin-top:1.25rem;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:11px 20px;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s}
+.prog-cta:hover{background:var(--blue-dark)}
+.modal::-webkit-scrollbar,.add-modal::-webkit-scrollbar,.prog-modal::-webkit-scrollbar{width:4px}
+.modal::-webkit-scrollbar-thumb,.add-modal::-webkit-scrollbar-thumb,.prog-modal::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:20px}
+
+@media(max-width:640px){
+  .nav{height:56px;padding:0 1rem}.nav-title{font-size:1.4rem}
+  .nav-program-btn .btn-label{display:none}
+  .controls{top:56px}
+  .sort-select{display:none}
+  .grid{grid-template-columns:1fr}
+  .info-grid,.prog-grid{grid-template-columns:1fr}
+  .stats-inner{grid-template-columns:1fr;gap:1.25rem}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat-item{padding:.5rem 1rem}
+  .legal-detail-body{grid-template-columns:1fr}
+  .legal-countries{grid-template-columns:1fr 1fr}
+  .prog-body{padding:.875rem 1rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div class="splash" id="splash">
+  <div class="splash-glow1"></div><div class="splash-glow2"></div>
+  <div class="splash-content">
+    <div class="splash-logo"><svg viewBox="0 0 38 38" fill="none"><path d="M19 2L35 11V27L19 36L3 27V11L19 2Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M12 16h10M12 19h8M12 22h10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <div class="splash-title">Evrotrust<br><span>Partners</span></div>
+    <div class="splash-sub">Official Partner Network</div>
+    <div class="swipe-hint"><div class="swipe-arrow"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div><span class="swipe-text">Swipe up to continue</span></div>
+  </div>
+  <div class="splash-bar"><div class="splash-bar-fill" id="splash-bar-fill"></div></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-title">Evrotrust</span>
+  <button class="nav-program-btn" onclick="openProg()">
+    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span class="btn-label">Partner Program</span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Official Partner Network</div>
+  <h1>Evrotrust <span>Partners</span></h1>
+  <p>A global ecosystem of technology and business partners building digital trust, identity, and signing solutions powered by Evrotrust.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num" id="total-count">51</div><div class="hero-stat-label">Total Partners</div></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><div class="hero-stat-num">7</div><div class="hero-stat-label">Categories</div></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><div class="hero-stat-num">30+</div><div class="hero-stat-label">Countries</div></div>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stats-title">Trust the<br>numbers</div>
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-num">2M+</div><div class="stat-desc">users already trust Evrotrust</div></div>
+      <div class="stat-item"><div class="stat-num">36,000</div><div class="stat-desc">e-signatures daily via our app</div></div>
+      <div class="stat-item"><div class="stat-num">150+</div><div class="stat-desc">companies you can sign with</div></div>
+      <div class="stat-item"><div class="stat-num">320t</div><div class="stat-desc">CO2 reduced via e-signatures in 2024</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CERTS CAROUSEL -->
+<div class="certs-section">
+  <div class="certs-track-wrap">
+    <span class="certs-label">We are certified</span>
+    <div class="certs-carousel">
+      <div class="certs-track" id="certs-track">
+        <!-- Will be duplicated by JS for infinite scroll -->
+        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 9001"><span class="cert-text">DNV·GL</span><span class="cert-sub">ISO 9001</span></a>
+        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 20000"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 20000</span></a>
+        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27001"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27001</span></a>
+        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27701"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27701</span></a>
+        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 22301"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO 22301</span></a>
+        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="ETSI"><span class="cert-text" style="font-size:.75rem;color:#003087">ETSI</span></a>
+        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="KYC"><span class="cert-text">KYC</span><span class="cert-sub">Know Your<br>Customer</span></a>
+        <a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label">GDPR</span></a>
+        <a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label">eIDAS</span></a>
+        <a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label" style="font-size:.48rem">AML</span></a>
+        <a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label" style="font-size:.48rem">eIDAS2</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FACTSHEETS -->
+<div class="factsheets-section">
+  <div class="factsheets-inner">
+    <span class="factsheets-label">Fact sheets</span>
+    <div class="factsheets-scroll">
+      <a class="factsheet-card" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/eid-fact-sheet.pdf" target="_blank"><div class="factsheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="factsheet-name">eID</div><div class="factsheet-type">Factsheet PDF</div></div></a>
+      <a class="factsheet-card" href="https://evrotrust.com/wp-content/uploads/2025/07/evrotrust-esign-fact-sheet.pdf" target="_blank"><div class="factsheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="factsheet-name">QES</div><div class="factsheet-type">Factsheet PDF</div></div></a>
+      <a class="factsheet-card" href="https://evrotrust.com/wp-content/uploads/2025/07/evrotrust-esign-fact-sheet.pdf" target="_blank"><div class="factsheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="factsheet-name">AES</div><div class="factsheet-type">Factsheet PDF</div></div></a>
+      <a class="factsheet-card" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/otp-fact-sheet.pdf" target="_blank"><div class="factsheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="factsheet-name">OTP eSign</div><div class="factsheet-type">Factsheet PDF</div></div></a>
+      <a class="factsheet-card" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/corporate-sign-fact-sheet-v1.1.pdf" target="_blank"><div class="factsheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="factsheet-name">Corporate Sign</div><div class="factsheet-type">Factsheet PDF</div></div></a>
+      <a class="factsheet-card" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/ident-lite-fact-sheet-1.pdf" target="_blank"><div class="factsheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="factsheet-name">IdentLite</div><div class="factsheet-type">Factsheet PDF</div></div></a>
+      <a class="factsheet-card" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/enotary-fact-sheet-.pdf" target="_blank"><div class="factsheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="factsheet-name">eNotary</div><div class="factsheet-type">Factsheet PDF</div></div></a>
+      <a class="factsheet-card" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/edelivery-factsheet.pdf" target="_blank"><div class="factsheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="factsheet-name">eDelivery</div><div class="factsheet-type">Factsheet PDF</div></div></a>
+      <a class="factsheet-card" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/etimestamp-fact-sheet.pdf" target="_blank"><div class="factsheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="factsheet-name">eTimestamp</div><div class="factsheet-type">Factsheet PDF</div></div></a>
+      <a class="factsheet-card" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/identity-suite-fact-sheet.pdf" target="_blank"><div class="factsheet-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div><div class="factsheet-name">Identity Suite</div><div class="factsheet-type">Factsheet PDF</div></div></a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls" id="controls">
+  <div class="controls-top">
+    <div class="search-wrap">
+      <svg fill="none" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Search partners…" oninput="render()">
+    </div>
+    <select class="sort-select" id="sort-sel" onchange="render()">
+      <option value="default">Default</option>
+      <option value="az">A → Z</option>
+      <option value="za">Z → A</option>
+      <option value="cat">Category</option>
+      <option value="region">Region</option>
+    </select>
+    <div class="view-toggle">
+      <button class="view-btn active" id="btn-grid" onclick="setView('grid')" title="Grid"><svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button>
+      <button class="view-btn" id="btn-map" onclick="setView('map')" title="Map"><svg viewBox="0 0 24 24" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></button>
+    </div>
+    <button class="add-btn" onclick="openAdd()" title="Add partner"><svg stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span class="btn-label">Add partner</span></button>
+  </div>
+  <div class="cat-pills" id="pills"></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="grid" id="grid"></div>
+  <div class="map-view" id="map-view">
+    <div class="world-map-wrap">
+      <svg id="world-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+        <rect width="1000" height="500" fill="#e8f4f0" rx="8"/>
+        <path d="M480 120 L520 110 L550 120 L560 140 L540 160 L510 165 L490 155 L475 140 Z" fill="#c8dce8" stroke="#b0c8d8" stroke-width="1"/>
+        <ellipse cx="465" cy="125" rx="8" ry="12" fill="#c8dce8" stroke="#b0c8d8" stroke-width="1"/>
+        <path d="M500 90 L520 80 L530 100 L510 115 L495 105 Z" fill="#c8dce8" stroke="#b0c8d8" stroke-width="1"/>
+        <path d="M490 210 L530 200 L560 220 L570 280 L550 320 L520 330 L495 310 L480 270 L485 230 Z" fill="#c8dce8" stroke="#b0c8d8" stroke-width="1"/>
+        <path d="M150 120 L250 100 L280 130 L270 200 L230 230 L180 220 L140 180 Z" fill="#c8dce8" stroke="#b0c8d8" stroke-width="1"/>
+        <path d="M220 260 L270 250 L290 300 L280 370 L250 400 L220 380 L200 330 L205 280 Z" fill="#c8dce8" stroke="#b0c8d8" stroke-width="1"/>
+        <path d="M560 100 L700 80 L780 100 L800 160 L750 200 L680 210 L620 190 L580 170 L550 140 Z" fill="#c8dce8" stroke="#b0c8d8" stroke-width="1"/>
+        <path d="M650 200 L680 195 L690 240 L665 270 L645 240 Z" fill="#c8dce8" stroke="#b0c8d8" stroke-width="1"/>
+        <path d="M760 130 L800 120 L820 150 L800 170 L770 160 Z" fill="#c8dce8" stroke="#b0c8d8" stroke-width="1"/>
+        <path d="M760 310 L820 300 L850 330 L840 370 L800 380 L765 360 Z" fill="#c8dce8" stroke="#b0c8d8" stroke-width="1"/>
+        <path d="M580 170 L620 165 L630 200 L600 210 L575 195 Z" fill="#c8dce8" stroke="#b0c8d8" stroke-width="1"/>
+        <g id="map-dots"></g>
+      </svg>
+      <div class="map-tooltip" id="map-tooltip"></div>
+      <div class="map-legend" id="map-legend"></div>
+    </div>
+  </div>
+  <div class="empty" id="empty"><svg stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>No partners match your search.</div>
+</div>
+
+<!-- LEGAL SECTION -->
+<div class="legal-section">
+  <div class="legal-inner">
+    <div class="section-eyebrow">Country-by-Country</div>
+    <h2 class="section-title">Legal & Compliance Guide</h2>
+    <p class="section-sub">Qualified signing requirements, AML identification rules, and accepted documents by country across Europe.</p>
+    <div class="legal-search-wrap">
+      <svg fill="none" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="legal-search" type="text" id="legal-search" placeholder="Search country…" oninput="filterLegal()">
+    </div>
+    <div class="legal-countries" id="legal-countries"></div>
+    <div class="legal-detail" id="legal-detail">
+      <div class="legal-detail-head">
+        <div class="legal-detail-title" id="legal-detail-title"></div>
+        <button class="legal-detail-close" onclick="closeLegal()">✕</button>
+      </div>
+      <div class="legal-detail-body" id="legal-detail-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="overlay" id="detail-ov" onclick="ovClick(event,'detail-ov')">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-avatar" id="m-av"></div>
+      <div class="modal-title-group"><div class="modal-name" id="m-name"></div><div class="modal-sub" id="m-sub"></div></div>
+      <button class="modal-close" onclick="closeOv('detail-ov')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="info-grid" id="m-grid"></div>
+      <div class="about-label">About</div>
+      <div class="about-text" id="m-about"></div>
+      <div class="modal-links">
+        <a class="modal-link" id="m-link" href="#" target="_blank">View on evrotrust.com <svg stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        <a class="modal-link material" id="m-material" href="#" target="_blank">📄 Partner material <svg stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD MODAL -->
+<div class="overlay" id="add-ov" onclick="ovClick(event,'add-ov')">
+  <div class="add-modal">
+    <h3>Add new partner</h3>
+    <div class="field"><label>Partner name *</label><input id="np-name" type="text"></div>
+    <div class="field"><label>Short description *</label><input id="np-short" type="text"></div>
+    <div class="field"><label>Full description</label><textarea id="np-desc"></textarea></div>
+    <div class="field"><label>Category</label><select id="np-cat"><option>Digital Signature</option><option>Document Management</option><option>HR Management</option><option>eID & Identity</option><option>Software & Integration</option><option>Consulting</option><option>Fintech</option><option>Other</option></select></div>
+    <div class="field"><label>Integrated services</label><input id="np-int" type="text" placeholder="e.g. QES, eID"></div>
+    <div class="field"><label>Use case</label><input id="np-uc" type="text"></div>
+    <div class="field"><label>Business model</label><input id="np-biz" type="text"></div>
+    <div class="field"><label>Benefits (comma separated)</label><input id="np-ben" type="text"></div>
+    <div class="field"><label>Target industries (comma separated)</label><input id="np-icp" type="text"></div>
+    <div class="field"><label>Country / Region</label><input id="np-region" type="text"></div>
+    <div class="field"><label>Partner material URL</label><input id="np-material" type="text"></div>
+    <div class="field"><label>Website URL</label><input id="np-url" type="text"></div>
+    <div class="add-actions"><button class="btn-ghost" onclick="closeOv('add-ov')">Cancel</button><button class="btn-solid" onclick="addPartner()">Add partner</button></div>
+  </div>
+</div>
+
+<!-- PROGRAM MODAL -->
+<div class="overlay" id="prog-ov" onclick="ovClick(event,'prog-ov')">
+  <div class="prog-modal">
+    <div class="prog-head-wrap">
+      <div class="prog-head"><h2>Evrotrust Partner Program</h2><p>Choose the model that fits your strategy</p></div>
+      <button class="prog-close" onclick="closeOv('prog-ov')">✕</button>
+    </div>
+    <div class="prog-body">
+      <div class="prog-grid">
+        <div class="prog-card"><span class="program-badge badge-ref">🤝 Referral</span><div class="prog-card-title">Referral Model</div><p class="prog-card-desc">Refer clients to Evrotrust. Earn commission for each signed contract — no volume commitment.</p><div class="prog-features"><div class="prog-feat"><div class="prog-dot"></div><span>No volume commitment</span></div><div class="prog-feat"><div class="prog-dot"></div><span>Suitable for CRM, HR or software resellers</span></div><div class="prog-feat"><div class="prog-dot"></div><span>No integration engagement required</span></div><div class="prog-feat"><div class="prog-dot"></div><span>Payment 30 days after paid invoice</span></div></div><div class="commission-box"><div class="commission-label">Commission Structure</div><div class="c-rows"><div class="c-row"><span class="c-tier">L1 · Qualified Lead</span><span class="c-val">5%</span></div><div class="c-row"><span class="c-tier">L2 · Drive & Sign</span><span class="c-val">15%</span></div><div class="c-row"><span class="c-tier">L3 · Renewal 2nd year</span><span class="c-val">7%</span></div><div class="c-row"><span class="c-tier">L3 · Renewal 3rd year</span><span class="c-val">5%</span></div></div></div></div>
+        <div class="prog-card"><span class="program-badge badge-res">🏢 Reseller</span><div class="prog-card-title">Reseller Model</div><p class="prog-card-desc">Client ownership sits with you. Buy Trust Unit packages at discount and set your own pricing.</p><div class="prog-features"><div class="prog-feat"><div class="prog-dot"></div><span>Prepaid Trust Unit packages at discount</span></div><div class="prog-feat"><div class="prog-dot"></div><span>Suitable for software platform providers</span></div><div class="prog-feat"><div class="prog-dot"></div><span>One-time integration for embedded solutions</span></div><div class="prog-feat"><div class="prog-dot"></div><span>Bundle trust services with your own pricing</span></div></div><div class="commission-box"><div class="commission-label">Reseller Tiers (12-month TU volume)</div><div class="c-rows"><div class="c-row"><span class="c-tier">⭐ Starter</span><span class="c-val">5% off</span></div><div class="c-row"><span class="c-tier">🥈 Silver · 36,000 TU</span><span class="c-val">7% off</span></div><div class="c-row"><span class="c-tier">🥇 Gold · 72,000 TU</span><span class="c-val">10% off</span></div><div class="c-row"><span class="c-tier">💎 Platinum · 240,000 TU</span><span class="c-val">15% off</span></div></div></div></div>
+      </div>
+      <div class="how-section"><div class="how-title">How to become a partner</div><div class="how-steps"><div class="how-step"><div class="how-num">1</div><div class="how-step-title">Contact us</div><div class="how-step-desc">partners@evrotrust.com</div></div><div class="how-step"><div class="how-num">2</div><div class="how-step-title">Intro call</div><div class="how-step-desc">Team contacts you</div></div><div class="how-step"><div class="how-num">3</div><div class="how-step-title">Program info</div><div class="how-step-desc">Details provided</div></div><div class="how-step"><div class="how-num">4</div><div class="how-step-title">Choose model</div><div class="how-step-desc">Referral or Reseller</div></div><div class="how-step"><div class="how-num">5</div><div class="how-step-title">Sign NDA</div><div class="how-step-desc">NDA + Agreement</div></div><div class="how-step"><div class="how-num">6</div><div class="how-step-title">Get started!</div><div class="how-step-desc">Find prospects</div></div></div></div>
+      <div class="tu-section"><div class="tu-title">Trust Units — pricing</div><div class="tu-items"><div class="tu-item"><span class="tu-val">1 TU</span><span class="tu-name">QES Document</span></div><div class="tu-item"><span class="tu-val">0.7 TU</span><span class="tu-name">QES Hash</span></div><div class="tu-item"><span class="tu-val">3 TU</span><span class="tu-name">eID</span></div><div class="tu-item"><span class="tu-val">1 TU</span><span class="tu-name">eDelivery</span></div><div class="tu-item"><span class="tu-val">0.02 TU</span><span class="tu-name">Timestamp</span></div><div class="tu-item"><span class="tu-val">0.05 TU</span><span class="tu-name">2FA</span></div></div></div>
+      <a class="prog-cta" href="mailto:partners@evrotrust.com">Become a partner → partners@evrotrust.com</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const CATS={
+  'Digital Signature':{bg:'#e0f7ff',text:'#0090C8'},
+  'Document Management':{bg:'#eef2ff',text:'#3730a3'},
+  'HR Management':{bg:'#e8f5e9',text:'#15803d'},
+  'eID & Identity':{bg:'#fff3e0',text:'#b45309'},
+  'Software & Integration':{bg:'#f1f5f9',text:'#334155'},
+  'Consulting':{bg:'#fef9c3',text:'#854d0e'},
+  'Fintech':{bg:'#fce7f3',text:'#9d174d'},
+  'Other':{bg:'#f3f4f6',text:'#374151'},
+};
+const AVCOLORS=[
+  {bg:'#0B2A4A',text:'#fff'},{bg:'#0090C8',text:'#fff'},{bg:'#1e5799',text:'#fff'},
+  {bg:'#15803d',text:'#fff'},{bg:'#0f766e',text:'#fff'},{bg:'#6d28d9',text:'#fff'},
+  {bg:'#b45309',text:'#fff'},{bg:'#be185d',text:'#fff'},{bg:'#9f1239',text:'#fff'},
+  {bg:'#374151',text:'#fff'},{bg:'#0369a1',text:'#fff'},{bg:'#065f46',text:'#fff'},
+];
+const BRAND_COLORS = {
+  'eID Easy': {bg:'#F5A623',text:'#fff',label:'eID'},
+  'TrustLynx': {bg:'#1A3D6E',text:'#fff',label:'TL'},
+  'Advania': {bg:'#E4003A',text:'#fff',label:'ADV'},
+  'Mark ID': {bg:'#00BCD4',text:'#fff',label:'MID'},
+  'inSign GmbH': {bg:'#FF6B00',text:'#fff',label:'iS'},
+  'SigniFlow': {bg:'#00A651',text:'#fff',label:'SF'},
+  'Adobe': {bg:'#FF0000',text:'#fff',label:'Ae'},
+  'BoldSign': {bg:'#FF6200',text:'#fff',label:'BS'},
+  'Hopae': {bg:'#6A1B9A',text:'#fff',label:'HOP'},
+  'Authologic': {bg:'#2B3990',text:'#fff',label:'AL'},
+  'Trinsic': {bg:'#0052CC',text:'#fff',label:'TR'},
+  'TRINSIC eID': {bg:'#0052CC',text:'#fff',label:'TE'},
+  'Regula': {bg:'#003087',text:'#fff',label:'RGL'},
+  'DigiTech Consult / DRUID': {bg:'#7B2FBE',text:'#fff',label:'DTC'},
+  'Asebo': {bg:'#C8102E',text:'#fff',label:'AS'},
+  'DigiSign': {bg:'#1E3A5F',text:'#fff',label:'DS'},
+  'Dreamview': {bg:'#2D6A9F',text:'#fff',label:'DV'},
+  'Creatio': {bg:'#F2683C',text:'#fff',label:'CR'},
+  'DRUID': {bg:'#7B2FBE',text:'#fff',label:'DR'},
+  'Salesforce': {bg:'#00A1E0',text:'#fff',label:'SF'},
+  'ZOHO': {bg:'#E42527',text:'#fff',label:'ZO'},
+  'sHRedy': {bg:'#00B388',text:'#fff',label:'SH'},
+  'SB Accounting & Consulting': {bg:'#1B4F72',text:'#fff',label:'SB'},
+  'Konica Minolta / M-Files': {bg:'#E4032E',text:'#fff',label:'KM'},
+  'Open Business Solutions': {bg:'#004B87',text:'#fff',label:'OBS'},
+  'Digital Lights / SAP SuccessFactors': {bg:'#00ADEF',text:'#fff',label:'DL'},
+  'Technologica / HeRMeS': {bg:'#E31837',text:'#fff',label:'TCH'},
+  'M Soft': {bg:'#0070C0',text:'#fff',label:'MS'},
+  'Microcomplex': {bg:'#003087',text:'#fff',label:'MC'},
+  'Motion Software': {bg:'#FF6B35',text:'#fff',label:'MS'},
+  'IBS / DigiSign': {bg:'#1B2A4A',text:'#fff',label:'IBS'},
+  'Planit': {bg:'#5C2D91',text:'#fff',label:'PL'},
+  'Омекс @ 2000': {bg:'#1E4D8C',text:'#fff',label:'ОМ'},
+  'HROne': {bg:'#00A878',text:'#fff',label:'HR'},
+  'sHRedy (Junior)': {bg:'#00B388',text:'#fff',label:'SHJ'},
+  'Nula.bg': {bg:'#F5A623',text:'#fff',label:'NL'},
+  'TRESORIT': {bg:'#00B4D8',text:'#fff',label:'TR'},
+  'One Span': {bg:'#E31837',text:'#fff',label:'OS'},
+  'SoftwareOne': {bg:'#E31C3D',text:'#fff',label:'SW1'},
+  'Sync Fusion / BoldSign': {bg:'#FF6200',text:'#fff',label:'S/B'},
+  'Talent Factor': {bg:'#2E86AB',text:'#fff',label:'TF'},
+  'Teranode': {bg:'#1A1A2E',text:'#fff',label:'TN'},
+  'Smart Factoring': {bg:'#27AE60',text:'#fff',label:'SMF'},
+  'YNV Group': {bg:'#2C3E50',text:'#fff',label:'YNV'},
+  'Montenegro': {bg:'#D4AF37',text:'#fff',label:'MNE'},
+  'N.I.D.O. S.R.L. A Socio Unico': {bg:'#009246',text:'#fff',label:'NID'},
+  'GEDA': {bg:'#006B3F',text:'#fff',label:'GDA'},
+  'i4P — Informatics': {bg:'#E74C3C',text:'#fff',label:'i4P'},
+  'NF Innova': {bg:'#1ABC9C',text:'#fff',label:'NFI'},
+  'OverExposed OOD': {bg:'#2C3E50',text:'#fff',label:'OEX'},
+  'Scale Up Partner': {bg:'#C0392B',text:'#fff',label:'SUP'},
+  'KAO BG': {bg:'#1B4F72',text:'#fff',label:'KAO'},
+  'Integrator JSC': {bg:'#1A5276',text:'#fff',label:'INT'},
+  'DocuWare': {bg:'#E31837',text:'#fff',label:'DW'},
+  'DMS (DocuSign / Apposite / Wawasoft / Digidemat)': {bg:'#FF5722',text:'#fff',label:'DMS'},
+  'David Holding / Acstre': {bg:'#1565C0',text:'#fff',label:'DH'},
+  'Nemetschek / DocuWare': {bg:'#E31837',text:'#fff',label:'NMT'},
+  'VIKTA': {bg:'#1A237E',text:'#fff',label:'VKT'},
+  'MobyPDF': {bg:'#E64A19',text:'#fff',label:'MPF'},
+  'Software developers': {bg:'#455A64',text:'#fff',label:'DEV'},
+  'easySign': {bg:'#00897B',text:'#fff',label:'eS'},
+};
+
+const REGION_COORDS={
+  'Bulgaria':{x:530,y:148},'Germany':{x:510,y:130},'USA':{x:195,y:165},
+  'Estonia':{x:528,y:112},'Poland':{x:525,y:130},'Romania':{x:535,y:145},
+  'Switzerland':{x:505,y:138},'France':{x:492,y:140},'Italy':{x:515,y:148},
+  'Spain':{x:483,y:148},'Czech Republic':{x:520,y:132},'Montenegro':{x:527,y:150},
+  'Serbia':{x:528,y:146},'Kenya':{x:540,y:280},'South Korea':{x:785,y:148},
+  'Scandinavia':{x:510,y:105},'Belarus':{x:535,y:128},
+};
+function avCol(n){let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))%AVCOLORS.length;return AVCOLORS[h];}
+function initials(n){const w=n.trim().split(/\s+/);return w.length>=2?(w[0][0]+w[1][0]).toUpperCase():n.slice(0,2).toUpperCase();}
+function getRegionShort(r){if(!r)return '';const m={'Bulgaria':'BG','Germany':'DE','USA':'US','Estonia':'EE','Poland':'PL','Romania':'RO','Switzerland':'CH','France':'FR','Italy':'IT','Spain':'ES','Czech Republic':'CZ','Montenegro':'ME','Serbia':'RS','Kenya':'KE','South Korea':'KR','Scandinavia':'SE','Belarus':'BY'};for(const[k,v]of Object.entries(m))if(r.includes(k))return v;return r.slice(0,2).toUpperCase();}
+
+let partners=[
+  {name:'eID Easy',short:'Electronic signature solution — 80+ eID methods, 160+ countries.',desc:'eID Easy eliminates the complexities of managing multiple trust services. Whether verifying users with national eIDs, enabling advanced or qualified electronic signatures, or applying trusted eSeals — all in a single unified experience.',cat:'Digital Signature',integration:'QES',usecase:'Electronic signature solution',bizmodel:'Client buys from the platform',benefits:['Single API for 160+ countries','Regulatory compliance','Scalable cross-border trust'],icp:['Fintech','SaaS platforms','Government'],region:'Estonia',url:'https://evrotrust.com/partners/eid-easy/',material:'https://evrotrust-my.sharepoint.com/:b:/p/stefan_hadjistoytchev/EYkerCKTCzdGhH6ty7CzxtcBrWERJYNwvcUzxUHe-qMgKQ?e=bpAsJQ'},
+  {name:'TrustLynx',short:'Integrate, automate and manage digital identities, e-signing and e-sealing — from Estonia.',desc:'TrustLynx provides digital trust infrastructure and signature management solutions for organizations seeking to scale qualified electronic signing across complex multi-party workflows.',cat:'Digital Signature',integration:'QES',usecase:'Solution to integrate, automate and manage digital identities, e-signing and e-sealing',bizmodel:'Client buys from the platform',benefits:['Enterprise-scale signing','Multi-party workflows','Complete audit trail'],icp:['Enterprise','Financial services','Legal'],region:'Estonia',url:'',material:'https://www.youtube.com/watch?v=Klmr97W72is'},
+  {name:'Advania',short:'IT-services, platforms and cloud services with Evrotrust QES integration.',desc:'Advania is a leading Nordic IT services company providing platforms and cloud services. Partners with Evrotrust to offer qualified electronic signatures through their Signet platform.',cat:'Digital Signature',integration:'QES',usecase:'IT-services, platforms, cloud services',bizmodel:'Client buys from the platform',benefits:['Nordic market expertise','Cloud-native integration','Enterprise-grade platform'],icp:['Nordic enterprises','Financial services','Public sector'],region:'Scandinavia',url:'',material:''},
+  {name:'Mark ID',short:'Universal Identification/KYC and eSignature gateway.',desc:'Mark ID provides a universal identification and KYC gateway combined with eSignature capabilities, bridging traditional KYC with modern digital identity verification.',cat:'eID & Identity',integration:'N/A',usecase:'Universal Identification/KYC and eSignature gateway',bizmodel:'N/A',benefits:['Universal ID gateway','KYC compliance','eSignature integration'],icp:['Banking','Insurance','RegTech'],region:'Lithuania',url:'',material:''},
+  {name:'inSign GmbH',short:'Simple signature processes — QES with Evrotrust since 2011.',desc:'inSign GmbH is the No. 1 German signature provider based near Munich, servers in Germany, 10+ years of market experience, available in 17 languages. Supports all signature types under eIDAS and ZertES including QES.',cat:'Digital Signature',integration:'QES',usecase:'Simple signature processes',bizmodel:'Client buys from the platform',benefits:['17 languages','German-hosted servers','Full eIDAS & ZertES support'],icp:['Enterprise','Legal','HR'],region:'Germany',url:'https://evrotrust.com/partners/insign/',material:''},
+  {name:'SigniFlow',short:'Digital signature and approval workflow system powered by Evrotrust QES.',desc:'SigniFlow is a comprehensive digital signature and approval workflow system enabling organizations to digitize complex multi-party signing processes.',cat:'Digital Signature',integration:'QES',usecase:'Digital signature & approval workflow system',bizmodel:'Client buys from the platform',benefits:['Workflow automation','Multi-party approvals','eIDAS QES compliance'],icp:['Enterprise','Legal','Financial services'],region:'South Africa',url:'',material:''},
+  {name:'Adobe',short:'Digital signature and document workflow system with Evrotrust QES.',desc:'Adobe Acrobat Sign partners with Evrotrust to provide qualified electronic signatures within the world\'s most widely used document workflow ecosystem.',cat:'Digital Signature',integration:'QES',usecase:'Digital signature & document workflow system',bizmodel:'N/A',benefits:['World\'s most used platform','Seamless document workflows','Enterprise-grade compliance'],icp:['Enterprise','Legal','Financial services'],region:'USA',url:'',material:''},
+  {name:'DMS (DocuSign / Apposite / Wawasoft / Digidemat)',short:'Document management with QES hash integration — multiple DMS platforms.',desc:'A group of document management system partners including DocuSign, Apposite, Wawasoft and Digidemat. Clients integrate Evrotrust QES hash into their existing DMS platforms for legally valid document signing and archiving.',cat:'Document Management',integration:'QES hash',usecase:'Document management',bizmodel:'Client buys directly from Evrotrust',benefits:['DMS-native signing','QES hash integration','Multiple platform support'],icp:['Enterprise','Legal','Public sector'],region:'Global',url:'',material:'https://www.youtube.com/watch?v=Klmr97W72is'},
+  {name:'David Holding / Acstre',short:'Government and municipality solutions with QES and eID.',desc:'David Holding and Acstre provide digital solutions for government and municipality clients. Partners with Evrotrust to enable qualified electronic signatures and eID for public sector digital transformation.',cat:'Consulting',integration:'QES, eID',usecase:'Government and municipality solutions',bizmodel:'N/A',benefits:['Public sector expertise','Government-grade identity','eIDAS compliance'],icp:['Government','Municipalities','Public institutions'],region:'Bulgaria',url:'',material:''},
+  {name:'Nemetschek / DocuWare',short:'Document management with QES, eID and eDelivery integration.',desc:'Nemetschek\'s DocuWare is a global leader in digital document management. Partners with Evrotrust for QES, eID and eDelivery integration (eDelivery integration starting 25.07). Enables fully compliant digital document workflows.',cat:'Document Management',integration:'QES, eID, eDelivery',usecase:'Document management',bizmodel:'Client buys directly from Evrotrust',benefits:['eIDAS-compliant signing','eDelivery integration','Automated archiving'],icp:['Enterprise','Healthcare','Legal'],region:'Germany',url:'https://evrotrust.com/partners/docuware/',material:'https://evrotrust-my.sharepoint.com/:p:/p/stefan_hadjistoytchev/EQCikF3uD2dOgCaBD9uQFbwBCssBHS0eyaQTgKDMOXEGhw?e=MEQgji'},
+  {name:'TRESORIT',short:'Cloud storage platform with QES — secure encrypted document management.',desc:'Tresorit combines end-to-end encrypted cloud storage with Evrotrust qualified electronic signatures, enabling secure document signing and storage for sensitive enterprise workflows.',cat:'Document Management',integration:'QES',usecase:'Cloud storage platform with digital signing',bizmodel:'Client buys from the platform',benefits:['End-to-end encryption','Secure qualified signing','GDPR-compliant delivery'],icp:['Legal','Healthcare','Financial services'],region:'Switzerland',url:'',material:''},
+  {name:'Salesforce',short:'CRM with Evrotrust QES — install and configure for eSigning directly in Salesforce.',desc:'Salesforce is the world\'s leading CRM platform. Partners with Evrotrust to enable qualified electronic signatures directly within Salesforce, allowing sales teams to send and sign documents without leaving the CRM.',cat:'Software & Integration',integration:'QES',usecase:'CRM with qualified eSigning',bizmodel:'Client buys directly from Evrotrust',benefits:['CRM-native signing','No context switching','Faster deal closure'],icp:['Sales teams','Financial services','Enterprise'],region:'USA',url:'',material:''},
+  {name:'ZOHO',short:'Cloud software for business with QES hash integration.',desc:'ZOHO provides a comprehensive suite of cloud software for business. Partners with Evrotrust to integrate QES hash signing into ZOHO\'s business applications, enabling legally valid document signing within the ZOHO ecosystem.',cat:'Software & Integration',integration:'QES hash',usecase:'Cloud software for business',bizmodel:'Client buys directly from Evrotrust',benefits:['Cloud-native','Business suite integration','QES hash signing'],icp:['SMEs','Startups','Growing businesses'],region:'India',url:'',material:''},
+  {name:'Creatio',short:'Business solutions marketplace with Evrotrust integration.',desc:'Creatio provides a no-code platform for workflow automation and CRM. Available through the Creatio Marketplace, the Evrotrust integration enables qualified electronic signing within business automation workflows.',cat:'Software & Integration',integration:'',usecase:'Business Solutions via Creatio Marketplace',bizmodel:'Client buys from the platform',benefits:['No-code automation','Marketplace integration','Rapid deployment'],icp:['Sales teams','Financial services','Enterprise'],region:'USA',url:'',material:''},
+  {name:'MobyPDF',short:'Digital signature and document workflow system with QES hash.',desc:'MobyPDF provides digital signature and document workflow capabilities. Partners with Evrotrust to integrate QES hash signing into PDF-based document workflows.',cat:'Digital Signature',integration:'QES hash',usecase:'Digital signature & document workflow system',bizmodel:'Client buys from the platform',benefits:['PDF-native signing','QES hash integration','Simple workflow'],icp:['SMEs','Legal','Professional services'],region:'Bulgaria',url:'',material:''},
+  {name:'Nula.bg',short:'Digital business and accounting solutions with Evrotrust QES.',desc:'Nula.bg provides digital business and accounting solutions for Bulgarian companies. Partners with Evrotrust to enable identification and document signing with qualified electronic signatures directly within accounting workflows.',cat:'Software & Integration',integration:'QES',usecase:'Digital business and accounting solutions',bizmodel:'Client buys directly from Evrotrust',benefits:['Bulgarian market focus','Accounting-native signing','Legal compliance'],icp:['Bulgarian SMEs','Accountants','Business owners'],region:'Bulgaria',url:'',material:''},
+  {name:'VIKTA',short:'Document management with QES — B2C platform integration.',desc:'VIKTA provides document management solutions for B2C platforms. Partners with Evrotrust to enable qualified electronic signatures within consumer-facing document workflows.',cat:'Document Management',integration:'QES',usecase:'Document management',bizmodel:'Client buys from the platform',benefits:['B2C-ready','Document management','QES compliance'],icp:['B2C platforms','Consumer services','Retail'],region:'France',url:'',material:''},
+  {name:'sHRedy',short:'Labor files — digitize the full employment lifecycle from hiring to termination using remote identification, qualified electronic signatures, and legally compliant electronic labour files.',desc:'Through the partnership with sHRedy, organisations can digitize the entire employment lifecycle — from hiring to termination — using remote identification, qualified electronic signatures, and legally compliant electronic labour files. This significantly reduces administrative workload, eliminates paper processes, and ensures full legal compliance for all HR operations.',cat:'HR Management',integration:'AES, QES, eDelivery, eID',usecase:'Labor files — digitize the full employment lifecycle from hiring to termination',bizmodel:'Client buys from the platform',benefits:['Full lifecycle digitization','Remote identification','Legal labor file compliance','Zero paper'],icp:['HR departments','Enterprise','Staffing agencies'],region:'Bulgaria',url:'https://shredy.bg/shredy-junior/',material:''},
+  {name:'SB Accounting & Consulting',short:'Labor files with QES, eDelivery and eID integration.',desc:'SB Accounting & Consulting is a leading outsourcing partner for Payroll, Electronic Labor File, and HR administration. Partners with Evrotrust to provide qualified electronic signatures, eDelivery and eID for fully digital labor file management.',cat:'HR Management',integration:'QES, eDelivery, eID',usecase:'Labor files',bizmodel:'Client buys from the platform',benefits:['Paperless HR outsourcing','Labor file compliance','Remote signing'],icp:['SMEs','Corporates','Outsourcing clients'],region:'Bulgaria',url:'',material:''},
+  {name:'Konica Minolta / M-Files',short:'Digital office for HR and CFOs with QES and eID.',desc:'Konica Minolta together with M-Files provides a digital office solution for HR and CFO functions. Partners with Evrotrust to enable qualified electronic signatures and eID within digital workplace document workflows.',cat:'HR Management',integration:'QES, eID',usecase:'Digital office for HR and CFOs',bizmodel:'Client buys from the platform',benefits:['HR & CFO digital office','QES + eID integration','Document management'],icp:['Enterprise','HR departments','Finance'],region:'Bulgaria',url:'',material:''},
+  {name:'Open Business Solutions',short:'ERP & HR solutions with QES and eDelivery — client buys directly from Evrotrust.',desc:'Open Business Solutions (OBS) provides ERP and HR software. Partners with Evrotrust to integrate QES and eDelivery into ERP and HR workflows for fully digital business operations.',cat:'HR Management',integration:'QES, eDelivery',usecase:'ERP & HR solutions',bizmodel:'Client buys directly from Evrotrust',benefits:['ERP-native integration','eDelivery','HR digitization'],icp:['Enterprise','Manufacturing','Services'],region:'Bulgaria',url:'',material:''},
+  {name:'Digital Lights / SAP SuccessFactors',short:'HR module from SAP SuccessFactors with full Evrotrust trust services stack — QES, AES, eDelivery, Timestamp and OTP Signature.',desc:'Digital Lights integrates Evrotrust\'s full trust services stack into the SAP SuccessFactors HR module, enabling enterprises to sign, deliver and timestamp HR documents with the highest level of legal assurance.',cat:'HR Management',integration:'QES, AES, eDelivery, Timestamp, OTP Signature',usecase:'HR module from SAP software',bizmodel:'Client buys directly from Evrotrust',benefits:['SAP SuccessFactors integration','Full trust services','AES + QES + eDelivery'],icp:['Large enterprise','Manufacturing','International companies'],region:'Bulgaria',url:'',material:''},
+  {name:'Technologica / HeRMeS',short:'HR software and digital labor file management via the HeRMeS platform, integrated with Evrotrust QES.',desc:'Technologica provides HR software including the HeRMeS platform for digital labor file and HR process management. Partners with Evrotrust for qualified electronic signatures in HR document workflows.',cat:'HR Management',integration:'QES',usecase:'HR software, Digital Labor file and HR processes',bizmodel:'Client buys from the platform',benefits:['HeRMeS platform','Digital labor file','HR process automation'],icp:['Bulgarian enterprises','HR departments','Public sector'],region:'Bulgaria',url:'',material:''},
+  {name:'M Soft',short:'HR and Payroll system with QES, eDelivery, Timestamp and eID.',desc:'M Soft provides a comprehensive HR and Payroll system. Partners with Evrotrust to integrate QES, eDelivery, Timestamp and eID into HR and payroll document workflows for full digital compliance.',cat:'HR Management',integration:'QES, eDelivery, Timestamp, eID',usecase:'HR and Payroll system',bizmodel:'Client buys directly from Evrotrust',benefits:['Payroll + HR combined','Full trust services','Legal compliance'],icp:['SMEs','Enterprises','Accountants'],region:'Bulgaria',url:'',material:''},
+  {name:'Microcomplex',short:'Aladin — HR Management Software with QES and eDelivery.',desc:'Microcomplex develops the Aladin HR Management Software that has streamlined digital HR operations for over 35 years. Partners with Evrotrust to integrate QES and eDelivery into established HR workflows.',cat:'HR Management',integration:'QES, eDelivery',usecase:'Aladin — HR Management Software',bizmodel:'Client buys directly from Evrotrust',benefits:['35+ years HR expertise','QES + eDelivery','Minimal disruption'],icp:['Bulgarian enterprises','HR departments','Public institutions'],region:'Bulgaria',url:'',material:''},
+  {name:'Motion Software',short:'HR management tool with QES integration.',desc:'Motion Software provides HR management tools. Partners with Evrotrust to enable qualified electronic signatures within HR document workflows, enabling remote and fully digital HR operations.',cat:'HR Management',integration:'QES',usecase:'HR management tool',bizmodel:'Client buys directly from Evrotrust',benefits:['HR tool integration','QES compliance','Remote signing'],icp:['Tech companies','SMEs','Startups'],region:'Bulgaria',url:'',material:''},
+  {name:'IBS / DigiSign',short:'HR Management System integrating Profile.Guru and DigiSign with Evrotrust QES for qualified electronic signing of HR documents.',desc:'IBS provides an HR Management System integrating Profile.Guru and DIGISign with Evrotrust QES for qualified electronic signing of HR documents.',cat:'HR Management',integration:'QES',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['Profile.Guru integration','DIGISign integration','Legal HR signing'],icp:['Bulgarian enterprises','HR departments'],region:'Bulgaria',url:'',material:''},
+  {name:'Planit',short:'HR Management System with Evrotrust QES integration.',desc:'Planit provides an HR Management System. Partners with Evrotrust to enable qualified electronic signatures for HR document workflows.',cat:'HR Management',integration:'QES',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['HR system integration','QES compliance','Digital workflows'],icp:['Enterprises','HR managers'],region:'Bulgaria',url:'',material:''},
+  {name:'Омекс @ 2000',short:'HR Management System with QES hash integration.',desc:'Омекс® 2000 by ОмегаСофт provides an HR Management System. Partners with Evrotrust to integrate QES hash signing into HR document workflows.',cat:'HR Management',integration:'QES hash',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['QES hash integration','HR compliance','Bulgarian market'],icp:['Bulgarian enterprises','HR departments'],region:'Bulgaria',url:'',material:''},
+  {name:'HROne',short:'HR Management System with QES and eDelivery.',desc:'HROne provides an HR Management System. Partners with Evrotrust to integrate qualified electronic signatures and eDelivery into HR workflows for fully digital labor file management.',cat:'HR Management',integration:'QES, eDelivery',usecase:'HR Management System',bizmodel:'Client buys from the platform',benefits:['QES + eDelivery','Digital labor files','HR compliance'],icp:['Enterprises','HR departments','Staffing'],region:'Bulgaria',url:'',material:''},
+  {name:'Hopae',short:'IDV provider — global identity infrastructure and KYC.',desc:'Hopae provides digital identity wallet technology and verifiable credential solutions. Integrates with Evrotrust combining wallet-based identity with qualified trust services for comprehensive KYC.',cat:'eID & Identity',integration:'QES, eID',usecase:'IDV provider, global identity infrastructure, KYC',bizmodel:'Client buys from the platform',benefits:['Wallet-native identity','Verifiable credentials','Global KYC'],icp:['Government','Banking','Healthcare'],region:'South Korea',url:'https://www.hopae.com/blog/hopae-and-incert-strategic-partnership',material:'https://www.hopae.com/blog/hopae-and-incert-strategic-partnership'},
+  {name:'Authologic',short:'IDV provider — global identity infrastructure and KYC conversion.',desc:'Authologic bridges the gap between traditional KYC and digital identity verification with its global eID Hub, boosting KYC conversion rates through a single API.',cat:'eID & Identity',integration:'QES, eID',usecase:'IDV provider, global identity infrastructure, KYC',bizmodel:'Client buys from the platform',benefits:['Single API access','Global eID coverage','KYC & AML compliance'],icp:['Fintech','Banking','RegTech'],region:'Poland',url:'https://evrotrust.com/partners/authologic/',material:''},
+  {name:'Trinsic',short:'IDV provider — global identity infrastructure and KYC with eID.',desc:'Trinsic provides verifiable credential and decentralized identity infrastructure. Partners with Evrotrust to bridge qualified EU eID with verifiable credential ecosystems for comprehensive KYC.',cat:'eID & Identity',integration:'eID',usecase:'IDV provider, global identity infrastructure, KYC',bizmodel:'Client buys from the platform',benefits:['Verifiable credentials','Decentralized identity','eIDAS + W3C'],icp:['Government','Education','Healthcare'],region:'USA',url:'https://trinsic.id',material:'https://trinsic.id'},
+  {name:'Regula',short:'Identity verification and document authentication for global compliance.',desc:'Regula combines physical document authentication with Evrotrust qualified eID verification for comprehensive identity assurance covering both physical and digital checks.',cat:'eID & Identity',integration:'eID',usecase:'Physical + digital identity verification',bizmodel:'',benefits:['Combined physical + digital ID','Global document coverage','High assurance KYC'],icp:['Banking','Border control','AML compliance'],region:'Latvia',url:'',material:''},
+  {name:'DigiTech Consult / DRUID',short:'AI-powered remote identification and qualified electronic signing — combining DigiTech Consult\'s virtual assistant with DRUID\'s conversational AI automation.',desc:'DigiTech Consult enables companies to benefit from an AI virtual assistant for remote identification and qualified electronic signing, streamlining compliance-heavy onboarding.',cat:'Digital Signature',integration:'QES, eID',usecase:'AI-powered remote identification and QES signing',bizmodel:'',benefits:['AI-powered UX','QES compliance','Reduced manual effort'],icp:['Financial services','Public sector','Insurance'],region:'Bulgaria',url:'https://evrotrust.com/partners/digitech-consult/',material:''},
+  {name:'Asebo',short:'Software development partner embedding Evrotrust trust services in bespoke apps.',desc:'Asebo Bulgaria builds bespoke applications with eID, QES, eDelivery, and eTimestamp capabilities built-in for enterprises and public sector organizations.',cat:'Software & Integration',integration:'QES, eID, eDelivery, eTimestamp',usecase:'Custom app development with embedded trust services',bizmodel:'',benefits:['Time-to-value','Tailored UX','Compliance by design'],icp:['Enterprises','Public sector'],region:'Bulgaria',url:'https://evrotrust.com/partners/asebo/',material:''},
+  {name:'Dreamview',short:'Digital transformation partner in Czech Republic and Slovakia.',desc:'Dreamview helps organizations across Czech Republic and Slovakia move from paper-based to fully digital workflows with Evrotrust QES and eID.',cat:'Consulting',integration:'QES, eID',usecase:'Digital transformation consultancy with trust services',bizmodel:'',benefits:['Local market expertise','End-to-end transformation','eIDAS compliance'],icp:['Czech & Slovak enterprises','Public institutions','Financial services'],region:'Czech Republic',url:'',material:''},
+  {name:'Scale Up Partner',short:'Business development and market expansion partner in Spain.',desc:'Scale Up Partner drives adoption of Evrotrust qualified trust services among Spanish enterprises and public sector organizations.',cat:'Consulting',integration:'QES, eID',usecase:'Market expansion and trust services adoption in Spain',bizmodel:'',benefits:['Spanish market expertise','Regulatory knowledge','Enterprise network'],icp:['Spanish enterprises','Public sector','Financial services'],region:'Spain',url:'',material:''},
+  {name:'NF Innova',short:'Digital innovation for banking and insurance with QES and eID.',desc:'NF Innova integrates Evrotrust QES and eID into banking, insurance, and enterprise digital transformation projects across the Balkans.',cat:'Software & Integration',integration:'QES, eID',usecase:'Digital banking and insurance with trust services',bizmodel:'',benefits:['Balkans market expertise','Banking-grade integration','Digital innovation'],icp:['Banking','Insurance','Telecom'],region:'Serbia',url:'',material:''},
+  {name:'One Span',short:'Global leader in digital identity and e-signature security solutions.',desc:'OneSpan partners with Evrotrust to offer EU-compliant qualified electronic signatures within its enterprise-grade signing and security platform.',cat:'Digital Signature',integration:'QES',usecase:'Enterprise digital signature and identity security',bizmodel:'',benefits:['Enterprise-grade security','Financial institution trust','eIDAS QES compliance'],icp:['Banking','Insurance','Financial services'],region:'USA',url:'',material:''},
+  {name:'N.I.D.O. S.R.L. A Socio Unico',short:'Italian partner delivering Evrotrust trust services to the Italian market.',desc:'N.I.D.O. S.R.L. delivers qualified electronic signatures, eID, and eDelivery to Italian enterprises and public institutions.',cat:'Consulting',integration:'QES, eID',usecase:'Trust services for Italian market',bizmodel:'',benefits:['Italian market expertise','EU eIDAS compliance','Full trust services'],icp:['Italian enterprises','Public sector','Financial services'],region:'Italy',url:'',material:''},
+  {name:'GEDA',short:'Digital identity and e-government solutions for Kenya and Africa.',desc:'GEDA provides digital identity and e-government solutions for emerging markets in Kenya and across Africa, bringing eIDAS-compatible identity verification to African government and enterprise projects.',cat:'eID & Identity',integration:'eID',usecase:'Digital identity for emerging markets',bizmodel:'',benefits:['Emerging market expertise','Government-grade identity','International compliance'],icp:['Government','Financial services','Telecom'],region:'Kenya',url:'',material:''},
+  {name:'i4P — Informatics',short:'HR and payroll management software with Evrotrust QES integration for digital document workflows.',desc:'i4P provides comprehensive HR and payroll software. Partners with Evrotrust to integrate qualified electronic signing into payroll document approval and HR administrative workflows.',cat:'HR Management',integration:'QES',usecase:'HR and payroll management',bizmodel:'Client buys from the platform',benefits:['Payroll automation','Legal document signing','Remote HR operations'],icp:['SMEs','Enterprises','Accountants'],region:'Bulgaria',url:'https://www.i4p.com',material:'https://www.i4p.com'},
+  {name:'TRINSIC eID',short:'eID-focused solutions combining verifiable credentials with qualified trust services.',desc:'TRINSIC eID bridges traditional qualified eID under eIDAS with next-generation decentralized identity standards for future-proof digital identity.',cat:'eID & Identity',integration:'eID',usecase:'Qualified eID with verifiable credential standards',bizmodel:'',benefits:['Dual compliance eIDAS + W3C','Future-proof identity','Cross-border recognition'],icp:['Government','Financial services','Healthcare'],region:'USA',url:'',material:''},
+  {name:'Teranode',short:'Blockchain + QES for tamper-proof digital records.',desc:'Teranode combines blockchain immutability with Evrotrust qualified signatures and timestamps for highly trusted and auditable digital transaction records.',cat:'Software & Integration',integration:'QES, eTimestamp',usecase:'Blockchain + QES for tamper-proof digital records',bizmodel:'',benefits:['Blockchain immutability','Qualified signatures','Highest audit assurance'],icp:['Financial services','Government','Healthcare'],region:'Switzerland',url:'',material:''},
+  {name:'OverExposed OOD',short:'Bulgarian software development with Evrotrust trust services.',desc:'OverExposed OOD integrates Evrotrust\'s qualified trust services into bespoke applications for local and international clients.',cat:'Software & Integration',integration:'QES, eID',usecase:'Custom software with embedded trust services',bizmodel:'',benefits:['Custom development','Local expertise','Full trust services integration'],icp:['Bulgarian enterprises','Startups','Public sector'],region:'Bulgaria',url:'',material:''},
+  {name:'Talent Factor',short:'HR consulting and talent management with digital HR processes.',desc:'Talent Factor digitizes employment documents, contracts, and HR agreements with Evrotrust qualified electronic signatures.',cat:'HR Management',integration:'QES',usecase:'Digital talent management and employment contracts',bizmodel:'',benefits:['Digital talent management','Compliant contracts','Remote signing capability'],icp:['HR consultancies','Enterprise','Staffing agencies'],region:'Bulgaria',url:'',material:''},
+  {name:'Integrator JSC',short:'IT integration delivering Evrotrust trust services to Bulgarian enterprises.',desc:'Integrator JSC delivers eID, QES, eDelivery, and eTimestamp capabilities to Bulgarian enterprises and public institutions through custom integration projects.',cat:'Software & Integration',integration:'QES, eID, eDelivery',usecase:'Enterprise IT integration with trust services',bizmodel:'',benefits:['Local expertise','Custom integrations','Full trust services stack'],icp:['Bulgarian enterprises','Public sector','Banking'],region:'Bulgaria',url:'',material:''},
+  {name:'KAO BG',short:'Bulgarian technology partner for digital transformation with trust services.',desc:'KAO BG integrates Evrotrust\'s qualified trust services into client digital transformation projects, enabling digital onboarding, qualified signing, and compliant document management.',cat:'Software & Integration',integration:'QES, eID',usecase:'Digital transformation with trust services',bizmodel:'',benefits:['Local market knowledge','End-to-end delivery','Trusted Evrotrust partner'],icp:['Bulgarian enterprises','Public institutions','Financial services'],region:'Bulgaria',url:'',material:''},
+  {name:'SoftwareOne',short:'Global software and cloud solutions provider with Evrotrust integration.',desc:'SoftwareOne integrates Evrotrust qualified trust services into enterprise digital transformation and cloud migration projects for global clients.',cat:'Software & Integration',integration:'QES',usecase:'Enterprise cloud and digital transformation with trust services',bizmodel:'',benefits:['Global reach','Enterprise-scale delivery','Cloud-native integration'],icp:['Global enterprise','Public sector','Financial services'],region:'Switzerland',url:'',material:''},
+  {name:'Sync Fusion / BoldSign',short:'Developer platform and electronic signature software — Syncfusion components power BoldSign\'s eSigning capabilities with Evrotrust QES.',desc:'Syncfusion provides comprehensive UI components and libraries, powering the BoldSign eSignature product with Evrotrust QES capabilities.',cat:'Software & Integration',integration:'QES',usecase:'Developer components with embedded qualified signing',bizmodel:'',benefits:['Developer-friendly integration','Rich component library','Scalable architecture'],icp:['Software developers','ISVs','Enterprise IT'],region:'USA',url:'',material:''}
+]
+let activeCat='',currentView='grid';
+const ALL_CATS=['All',...Object.keys(CATS)];
+function buildPills(){
+  document.getElementById('pills').innerHTML=ALL_CATS.map(c=>{
+    const count=c==='All'?partners.length:partners.filter(p=>p.cat===c).length;
+    return `<button class="pill${c==='All'?' active':''}" onclick="setCat('${c}')">${c} <span class="pill-count">${count}</span></button>`;
+  }).join('');
+}
+function setCat(c){
+  activeCat=c==='All'?'':c;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.toggle('active',p.textContent.trim().startsWith(c)));
+  render();
+}
+function getFiltered(){
+  const q=document.getElementById('search').value.toLowerCase();
+  let f=partners.filter(p=>(!activeCat||p.cat===activeCat)&&(p.name.toLowerCase().includes(q)||p.short.toLowerCase().includes(q)||(p.region||'').toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)));
+  const s=document.getElementById('sort-sel').value;
+  if(s==='az')f.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(s==='za')f.sort((a,b)=>b.name.localeCompare(a.name));
+  else if(s==='cat')f.sort((a,b)=>a.cat.localeCompare(b.cat)||a.name.localeCompare(b.name));
+  else if(s==='region')f.sort((a,b)=>(a.region||'zzz').localeCompare(b.region||'zzz'));
+  return f;
+}
+function render(){
+  const _q=document.getElementById('search').value;
+  const filtered=getFiltered();
+  document.getElementById('total-count').textContent=partners.length;
+  if(currentView==='map'){renderMap(filtered);return;}
+  const grid=document.getElementById('grid');
+  const empty=document.getElementById('empty');
+  if(!filtered.length){grid.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  grid.innerHTML=filtered.map((p,i)=>{
+    const cs=CATS[p.cat]||CATS['Other'];
+    const av=avCol(p.name);
+    const brand=BRAND_COLORS[p.name];
+    const avatarBg=brand?brand.bg:av.bg;
+    const avatarText=brand?brand.text:av.text;
+    const avatarLabel=brand?brand.label:initials(p.name);
+    const rs=getRegionShort(p.region);
+    return `<div class="card" onclick="openDetail(${partners.indexOf(p)})" style="animation-delay:${Math.min(i,12)*0.04}s">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-avatar" style="background:${avatarBg};color:${avatarText}">
+          <span style="position:relative;z-index:1;font-size:.8rem;font-weight:800;letter-spacing:-.02em;text-align:center;line-height:1">${avatarLabel}</span>
+        </div>
+          ${rs?`<span class="card-region-badge">${rs}</span>`:''}
+        </div>
+        <div class="card-name">${hl(p.name,_q)}</div>
+        <div class="card-desc">${hl(p.short,_q)}</div>
+      </div>
+      <div class="card-bottom">
+        <span class="card-tag" style="background:${cs.bg};color:${cs.text}">${p.cat}</span>
+        <span class="card-action">Use case<svg stroke-width="2.5" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span>
+      </div>
+    </div>`;
+  }).join('');
+}
+function setView(v){
+  currentView=v;
+  document.getElementById('btn-grid').classList.toggle('active',v==='grid');
+  document.getElementById('btn-map').classList.toggle('active',v==='map');
+  document.getElementById('grid').style.display=v==='grid'?'':'none';
+  document.getElementById('map-view').classList.toggle('active',v==='map');
+  render();
+}
+function renderMap(filtered){
+  const dotsG=document.getElementById('map-dots');dotsG.innerHTML='';
+  const groups={};
+  filtered.forEach(p=>{
+    const r=p.region||'';let coords=null;
+    for(const[k,v]of Object.entries(REGION_COORDS)){if(r.includes(k)){coords=v;break;}}
+    if(!coords)return;
+    const key=`${coords.x},${coords.y}`;
+    if(!groups[key])groups[key]={coords,partners:[]};
+    groups[key].partners.push(p);
+  });
+  const svg=document.getElementById('world-svg');
+  Object.values(groups).forEach(g=>{
+    const cs=CATS[g.partners[0].cat]||CATS['Other'];
+    const count=g.partners.length;
+    const r=count>3?10:count>1?8:6;
+    const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx',g.coords.x);circle.setAttribute('cy',g.coords.y);
+    circle.setAttribute('r',r);circle.setAttribute('fill',cs.text);
+    circle.setAttribute('stroke','#fff');circle.setAttribute('stroke-width','2');
+    circle.setAttribute('class','map-dot');
+    if(count>1){
+      const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+      txt.setAttribute('x',g.coords.x);txt.setAttribute('y',g.coords.y+4);
+      txt.setAttribute('text-anchor','middle');txt.setAttribute('fill','#fff');
+      txt.setAttribute('font-size','8');txt.setAttribute('font-weight','700');
+      txt.setAttribute('font-family','Inter,sans-serif');txt.setAttribute('pointer-events','none');
+      txt.textContent=count;dotsG.appendChild(circle);dotsG.appendChild(txt);
+    }else{dotsG.appendChild(circle);}
+    circle.addEventListener('click',e=>{
+      e.stopPropagation();
+      if(g.partners.length===1){openDetail(partners.indexOf(g.partners[0]));}
+      else{
+        const tooltip=document.getElementById('map-tooltip');
+        const names=g.partners.map(p=>`• ${p.name}`).join('<br>');
+        tooltip.innerHTML=`<div class="map-tooltip-name">${g.partners[0].region||''}</div><div class="map-tooltip-count">${count} partners</div><div style="margin-top:6px;font-size:.72rem;line-height:1.6;opacity:.8">${names}</div>`;
+        const svgR=svg.getBoundingClientRect();
+        const mainR=document.querySelector('.main').getBoundingClientRect();
+        const scaleX=svgR.width/1000,scaleY=svgR.height/500;
+        tooltip.style.left=Math.min(svgR.left-mainR.left+g.coords.x*scaleX,mainR.width-230)+'px';
+        tooltip.style.top=(svgR.top-mainR.top+g.coords.y*scaleY+16)+'px';
+        tooltip.classList.add('show');setTimeout(()=>tooltip.classList.remove('show'),3000);
+      }
+    });
+  });
+  document.getElementById('map-legend').innerHTML=[...new Set(filtered.map(p=>p.cat))].map(c=>{const cs=CATS[c]||CATS['Other'];return `<div class="map-legend-item"><div class="map-legend-dot" style="background:${cs.text}"></div>${c}</div>`;}).join('');
+}
+function openDetail(idx){
+  const p=partners[idx];const av=avCol(p.name);const rs=getRegionShort(p.region);
+  document.getElementById('m-av').innerHTML=`<span style="position:relative;z-index:1">${initials(p.name)}</span>`;
+  document.getElementById('m-av').style.background=av.bg;document.getElementById('m-av').style.color=av.text;
+  document.getElementById('m-name').textContent=p.name;document.getElementById('m-sub').textContent=p.short;
+  const items=[
+    p.usecase&&{label:'Use case',val:p.usecase},
+    p.integration&&{label:'Integrated services',val:`<div class="benefits-list">${p.integration.split(',').map(s=>`<span class="benefit-chip">${s.trim()}</span>`).join('')}</div>`},
+    p.bizmodel&&{label:'Business model',val:p.bizmodel},
+    p.benefits?.length&&{label:'Benefits',val:`<div class="benefits-list">${p.benefits.map(b=>`<span class="benefit-chip">${b}</span>`).join('')}</div>`},
+    p.icp?.length&&{label:'Target industries',val:`<div class="benefits-list">${p.icp.map(b=>`<span class="icp-chip">${b}</span>`).join('')}</div>`},
+    p.region&&{label:'Region',val:(rs?`<span class="benefit-chip" style="background:#f1f5f9;color:#334155">${rs}</span> `:'')+p.region},
+  ].filter(Boolean);
+  document.getElementById('m-grid').innerHTML=items.map(it=>`<div class="info-card"><div class="info-card-label">${it.label}</div><div class="info-card-val">${it.val}</div></div>`).join('');
+  document.getElementById('m-about').textContent=p.desc||p.short;
+  const lnk=document.getElementById('m-link');lnk.href=p.url||'#';lnk.style.display=p.url?'inline-flex':'none';
+  const mat=document.getElementById('m-material');mat.href=p.material||'#';mat.style.display=p.material?'inline-flex':'none';
+  document.getElementById('detail-ov').classList.add('open');document.body.style.overflow='hidden';
+}
+function openAdd(){
+  ['np-name','np-short','np-desc','np-int','np-uc','np-biz','np-ben','np-icp','np-region','np-material','np-url'].forEach(id=>{const el=document.getElementById(id);if(el){el.value='';el.style.borderColor='';}});
+  document.getElementById('add-ov').classList.add('open');document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('np-name').focus(),60);
+}
+function openProg(){document.getElementById('prog-ov').classList.add('open');document.body.style.overflow='hidden';}
+function closeOv(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+function ovClick(e,id){if(e.target.id===id)closeOv(id);}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){['detail-ov','add-ov','prog-ov'].forEach(closeOv);}});
+function addPartner(){
+  const name=document.getElementById('np-name').value.trim();const short=document.getElementById('np-short').value.trim();
+  if(!name){document.getElementById('np-name').style.borderColor='#cc2b2b';return;}
+  if(!short){document.getElementById('np-short').style.borderColor='#cc2b2b';return;}
+  const benRaw=document.getElementById('np-ben').value;const icpRaw=document.getElementById('np-icp').value;
+  partners.unshift({name,short,desc:document.getElementById('np-desc').value.trim()||short,cat:document.getElementById('np-cat').value,integration:document.getElementById('np-int').value.trim(),usecase:document.getElementById('np-uc').value.trim(),bizmodel:document.getElementById('np-biz').value.trim(),benefits:benRaw?benRaw.split(',').map(s=>s.trim()).filter(Boolean):[],icp:icpRaw?icpRaw.split(',').map(s=>s.trim()).filter(Boolean):[],region:document.getElementById('np-region').value.trim(),material:document.getElementById('np-material').value.trim(),url:document.getElementById('np-url').value.trim()});
+  closeOv('add-ov');document.getElementById('search').value='';setCat('All');
+}
+
+
+const LEGAL = {"Austria": {"flag": "🇦🇹", "civil": ["Contracts for sale & leases", "Fixed duration rental agreements (QES)", "Developer contracts (Bauträgervertrag)", "Condominium ownership agreements", "Brokerage arrangements", "Consumer credit & bank account agreements", "Powers of attorney (case-by-case)", "NDAs"], "corporate": ["Management board resolutions (GmbH)", "Executive board resolutions (AG)", "Board meeting minutes", "Shareholder resolutions (not requiring registry filing)"], "labour": ["Employment contracts (no mandatory form)", "Mutual termination with military/public officials (QES)", "Mutual termination with protected employees (QES)", "Premature termination of apprenticeships (QES)", "Training cost reimbursement obligation"], "aml": ["Full Name", "Date of Birth", "Residential Address"], "aml_methods": ["Video-based ID with official photo document", "Statutory prescribed electronic identification", "Qualified electronic signature", "Registered mail + copy of official photo ID"], "docs": []}, "Belgium": {"flag": "🇧🇪", "civil": ["Lease agreements", "Consumer credit contracts"], "corporate": ["Registered securities transfer", "Proxy appointment by shareholders", "Shareholders remote voting (QES)", "Proxy appointment for listed company shareholders", "Management body minutes", "Remote and proxy voting (QES)"], "labour": ["Employment contracts (QES)", "Termination notice via qualified e-mail (QES)"], "aml": ["Full Name", "Date of Birth", "Place of Birth", "Residential Address", "Personal identification number"], "aml_methods": ["Check personal ID number against National Register", "Copy of information from National Register", "National electronic identification services", "Qualified electronic signature (Regulation 910/2014)"], "docs": ["Passport", "Identity Card", "Residence Permits"]}, "Croatia": {"flag": "🇭🇷", "civil": ["NDAs & LOIs", "Commercial agency contracts", "Travel arrangement contracts", "Consumer purchase agreements", "Bank account opening agreements", "Loan agreements & bank guarantees", "Letters of credit", "Licence agreements", "Guarantee contracts"], "corporate": ["Share pledge agreements", "Share purchase agreements (notarial deed form)"], "labour": ["Employment contracts", "NDAs", "Notices of termination"], "aml": ["Full Name", "Permanent address", "Date of Birth", "Place of Birth", "Personal Identification Number", "Name and country of issuing authority"], "aml_methods": ["Qualified Certificate for Electronic Signature or Seal", "Video Electronic Identification per special regulation"], "docs": ["Passport"]}, "Cyprus": {"flag": "🇨🇾", "civil": ["Private contracts (QES required — Evidence Law Cap. 9)", "Real estate purchase (wet ink required by Land Registry)"], "corporate": ["Forms, certificates & minutes to Registrar of Companies", "All documents requiring affirmation or signature (QES)"], "labour": ["Employment contracts (no mandatory written form)", "Written notice of employment terms (employer obligation)"], "aml": ["Full Name", "Date of Birth", "Place of Birth", "Residence address (incl. postal code)", "Profession", "Specimen signature", "Photograph", "Telephone Number", "Email address"], "aml_methods": ["ID document + additional documents", "Supplementary measures / confirmatory certification", "First payment from account in customer's name"], "docs": ["Passport", "Identity Card"]}, "Czech Republic": {"flag": "🇨🇿", "civil": ["Leases (not in Real Estate Register)", "Licences for alterations", "NDAs & exclusivity agreements", "Side letters", "Pre-emption rights agreements", "Insurance contracts (>1 year)", "Waiver of defective performance rights", "Agency agreements"], "corporate": ["Memorandum & articles of association (written form)", "Company decisions & share transfer agreements", "Consent for premises use", "Consent for public register registration"], "labour": ["Employment contracts & modifications (QES/AES)", "Termination notices", "Collective agreements", "Job completion agreements", "Establishment & change documents (with employee consent)"], "aml": ["Full Name", "Personal Identification Number or Date of Birth", "Residential Address", "Sex", "Place of Birth", "Citizenship"], "aml_methods": [], "docs": [], "mandatory_qes": ["Public sector signers — QES + qualified timestamp (Act No. 297/2016, §5)", "Electronic notarial deeds — notary's QES + qualified timestamp (Notarial Code §61a)", "Electronic authentication clauses — notary's QES (§74a)", "Electronic copies & certificates by notary (§94a)", "Lawyer authentication declarations — QES + qualified timestamp (Advocacy Act §25a)"], "strategic_qes": ["Higher evidentiary strength vs AES for private contracts", "Cross-border acceptance under eIDAS", "Public authority filings — AES sufficient but QES preferred", "Private-sector B2B/B2C — QES not mandatory but recommended for compliance positioning"]}, "Denmark": {"flag": "🇩🇰", "civil": ["Sale and purchase agreements", "Lease agreements", "NDAs & exclusivity agreements", "Letters of intent", "Side letters"], "corporate": ["Registration applications to Commerce and Companies Agency", "Financial statements & company documents"], "labour": ["Employment contracts", "Termination contracts"], "aml": ["Full Name", "Personal identification number (CPR) or Date of Birth"], "aml_methods": [], "docs": ["Passport"]}, "Estonia": {"flag": "🇪🇪", "civil": ["Trade agreements (NDAs, purchasing contracts, sales & delivery agreements)", "Consumer agreements", "Suretyship contracts", "Gratuitous contracts", "Life annuity contracts", "Leases"], "corporate": ["Transfer of Enterprise"], "labour": ["Employment contracts", "Agreement on training cost compensation", "Holiday requests", "Notices of cancellation"], "aml": ["Full Name", "Personal Identification Number", "Date of Birth & Residential Address (if no PIN)"], "aml_methods": ["Video conference per special regulation", "Qualified electronic signature", "First transaction from licensed bank account"], "docs": ["Passport", "Identity Card", "Residence Permits"]}, "Finland": {"flag": "🇫🇮", "civil": ["Sale deeds & real estate transfers (QES required)", "Mortgage applications", "Electronic pledge transfers", "Powers of attorney for real estate"], "corporate": ["Minutes of shareholder/board meetings", "Memoranda of association", "Certificates of sharing"], "labour": ["Employment contracts", "Labour condition modifications", "Dismissal notices", "Contract terminations"], "aml": ["Full Name", "Date of Birth", "Personal Identification Number"], "aml_methods": ["ID document + additional documents", "First transaction from licensed bank account", "Validated qualified electronic signature"], "docs": ["Passport", "Identity Card"]}, "France": {"flag": "🇫🇷", "civil": ["Sale contracts & letters of intent", "Transfer deeds", "Leases & deeds of assignment", "Loan contracts", "Assignment of contracts/debts", "Insurance contracts", "Commercial leases"], "corporate": ["Partnership minutes & shareholder decisions", "LLC resolutions"], "labour": ["Employment contracts"], "aml": [], "aml_methods": [], "docs": []}, "Germany": {"flag": "🇩🇪", "civil": ["Licences, NDAs, exclusivity agreements", "Leases <1 year (any e-sig)", "Leases >1 year — QES required", "Rental agreements (QES)", "Termination of rental agreements", "Receipts"], "corporate": ["Board & supervisory board resolutions", "Shareholder resolutions of GmbH", "Transfer of shares (AG)", "Audit reports on annual financial statements", "Securities transactions"], "labour": ["Fixed-term agreements (QES)", "Works council minutes", "Post-contractual non-competition clauses"], "aml": [], "aml_methods": [], "docs": []}, "Greece": {"flag": "🇬🇷", "civil": ["Guarantees & loan agreements", "Receivables & waiver letters", "Real estate leases", "Powers of attorney", "NDAs, purchase orders, sales & distribution agreements"], "corporate": ["Board & committee minutes", "Resolutions (board and shareholder)"], "labour": [], "aml": [], "aml_methods": [], "docs": []}, "Hungary": {"flag": "🇭🇺", "civil": ["NDAs & exclusivity agreements", "Sale contracts", "Leases & guarantees", "Donation, business & loan contracts", "Pre-emption / repurchase rights", "Copyright licence contracts"], "corporate": ["Articles of association", "Company resolutions", "Business quota / share SPAs", "Powers of attorney", "Shareholder resolutions"], "labour": [], "aml": [], "aml_methods": [], "docs": []}, "Ireland": {"flag": "🇮🇪", "civil": ["Contracts for sale", "NDAs & pre-emption agreements", "Licences for works/occupancy/assign", "Rent deposit agreements", "Revenue filings", "Exclusivity agreements"], "corporate": ["Minutes & resolutions in writing", "Financial statements", "CRO Forms: B1, B10, B2, C1, C1A"], "labour": ["Employment contracts"], "aml": ["Full Name", "Date of Birth", "Residential Address"], "aml_methods": [], "docs": []}, "Italy": {"flag": "🇮🇹", "civil": [], "corporate": ["Financial statements", "Company deeds"], "labour": ["Employment contracts"], "aml": ["Full Name", "Date of Birth", "Place of Birth", "Address", "Tax Identification Number", "ID card data"], "aml_methods": ["Digital signature through public documents", "Video identification", "Qualified e-sig + AdID", "eIDAS + bank transfer"], "docs": ["Passport", "Identity Card", "Residence Permits"]}, "Netherlands": {"flag": "🇳🇱", "civil": ["Consumer credit agreements", "Insurance policies", "Construction agreements for residential buildings"], "corporate": ["Board minutes (e-sig strongly recommended)", "General Assembly minutes"], "labour": ["Trial periods (QES)", "Non-compete clauses (QES)", "Collective labour agreements"], "aml": ["Full Name", "Date of Birth", "Residential Address", "ID type, number, date and place"], "aml_methods": ["ID document + additional documents", "First transaction from licensed bank account"], "docs": ["Passport", "Identity Card"]}, "Norway": {"flag": "🇳🇴", "civil": [], "corporate": [], "labour": [], "aml": ["Full Name", "Personal Identification Number or similar", "Signature", "Photograph", "Nationality (non-residents)", "Sex (non-residents)"], "aml_methods": ["Certified copies of official ID documents", "Electronic signature per Regulation 1296/2005"], "docs": ["Passport", "Identity Card", "Residence Permits"]}, "Poland": {"flag": "🇵🇱", "civil": ["NDAs & side letters", "Leases (any term)", "Powers of attorney & commercial proxies", "Leasing agreements", "Guarantee agreements", "Copyright licensing"], "corporate": ["Financial statements to National Court Register", "Incorporation of simple LLC (S24)", "Sale of shares in online LLC", "Articles of association changes"], "labour": ["Alteration letters", "Non-competition agreements", "Work particulars", "Monitoring notifications"], "aml": ["Full Name", "Personal Identification Number"], "aml_methods": [], "docs": [], "mandatory_qes": ["Public procurement bids — QES under pain of nullity (PPL Art. 63 §2)", "KRS corporate filings for foreign directors without PESEL (KRS Act Art. 19e)", "Financial statements — QES, trusted or personal signature required (Accounting Act Art. 45 §1f)", "Board member signatures on financial statements (Art. 52 §2)", "VAT/CIT/JPK tax reporting for legal persons", "ZUS social insurance reporting for 5+ insured (Social Insurance Act Art. 47a)", "Non-compete agreements — QES required if electronic (Labour Code Art. 101³)", "Transfer of economic copyrights, surety agreements, prokura", "E-government access for non-residents without PESEL"], "strategic_qes": ["Market access requirement for public tenders — QES is prerequisite", "Corporate governance enabler for foreign directors & shareholders", "Tax & reporting compliance tool for multinational groups", "Written-form substitute for electronic contracts requiring formal validity"]}, "Portugal": {"flag": "🇵🇹", "civil": ["Bank/civil loans €2,500–€25,000", "Lease contracts", "Promise of debt compliance", "Trademark & patent licences", "Financial intermediary agreements"], "corporate": ["Board members validating capacity (SCAP)", "Supplier contracts", "Funding applications", "Bank account opening", "Company minutes & resolutions"], "labour": ["Employment contract termination agreements"], "aml": ["Full Name", "Date of Birth", "Place of Birth", "Profession", "Residential Address", "Photograph", "Signature", "Nationality", "Document type & expiry"], "aml_methods": [], "docs": []}, "Romania": {"flag": "🇷🇴", "civil": ["NDAs & sale contracts (not Land Registry)", "Leases & free leases", "Deeds of variation & lease assignments", "Guarantees", "Construction/design agreements", "Termination notices"], "corporate": ["Company decisions", "Share transfer agreements", "Deeds of foundation", "Specimen signatures"], "labour": ["Employment contracts & modifications", "Termination of employment", "Rights/obligations notifications", "Offer letters"], "aml": ["Full Name", "Date of Birth", "Place of Birth", "Personal Identification Number", "Domicile & Residential Address"], "aml_methods": ["Documents from credible and independent sources"], "docs": []}, "Slovakia": {"flag": "🇸🇰", "civil": ["Real estate purchase contracts (QES + timestamp)", "Insurance agreements", "Pre-emption right contracts", "Exclusive licences", "Bank account agreements"], "corporate": ["Memorandums of association", "Share transfer agreements", "Ownership interest transfer (LLC)", "Board meeting minutes (QES + timestamp)"], "labour": ["Employment contracts (QES)", "Termination of employment (QES)", "Employment contract modifications (QES)"], "aml": ["Full Name", "Personal Identification Number or Date of Birth"], "aml_methods": [], "docs": []}, "Slovenia": {"flag": "🇸🇮", "civil": ["Instalment sales, donation & construction agreements", "Distribution agreements", "Real estate leases & sales", "Loan & lease agreements", "Consumer agreements & loans", "Licence agreements"], "corporate": [], "labour": ["Employment agreements & modifications", "Vacancy notices", "Mutual terminations", "Compensation agreements"], "aml": [], "aml_methods": [], "docs": []}, "Spain": {"flag": "🇪🇸", "civil": ["Leases & sale/purchase contracts", "Options & pre-emption agreements", "Deposits, guarantees & easements", "NDAs & exclusivity agreements", "Insurance contracts", "Consumer loan contracts"], "corporate": ["Electronic voting at Shareholders' Meetings", "Digital deposit of annual accounts", "Shareholder meeting notices", "Signing meeting minutes & attendance lists"], "labour": [], "aml": [], "aml_methods": [], "docs": []}, "Sweden": {"flag": "🇸🇪", "civil": ["Sale & purchase agreements for real property", "Lease agreements", "Licences"], "corporate": ["Shareholder & board meeting minutes (AES+)", "Annual report copies & balance sheets (AES+)", "Auditor reports (AES+)"], "labour": ["Employment contracts", "NDAs", "Termination notices (+ physical delivery)"], "aml": ["Full Name", "Personal Identification Number or similar", "Residential Address"], "aml_methods": ["Check identity with external databases", "Electronic signature or electronic means"], "docs": ["Passport", "Identity Card"]}, "UK": {"flag": "🇬🇧", "civil": [], "corporate": [], "labour": [], "aml": ["Full Name", "Residential Address", "Photograph on official document"], "aml_methods": ["Copy of ID + proof of address", "Selfie + ID + background checks", "Electronic identification or trust service", "First payment from named credit account"], "docs": ["Passport", "Residence Permits"]}};
+let activeLegal = null;
+function buildLegal(){
+  const countries=Object.keys(LEGAL);
+  document.getElementById('legal-countries').innerHTML=countries.map(c=>{
+    const d=LEGAL[c];
+    const total=[...d.civil,...d.corporate,...d.labour].length;
+    return `<button class="legal-country-btn" id="lbtn-${c.replace(/\s/g,'_')}" onclick="openLegal('${c}')">
+      <span class="legal-country-flag">${d.flag}</span>
+      <div><div class="legal-country-name">${c}</div><div class="legal-country-count">${total} legal fields</div></div>
+    </button>`;
+  }).join('');
+}
+function filterLegal(){
+  const q=document.getElementById('legal-search').value.toLowerCase();
+  document.querySelectorAll('.legal-country-btn').forEach(btn=>{
+    btn.style.display=btn.textContent.toLowerCase().includes(q)?'':'none';
+  });
+}
+function openLegal(country){
+  const d=LEGAL[country];
+  if(activeLegal===country){closeLegal();return;}
+  activeLegal=country;
+  document.querySelectorAll('.legal-country-btn').forEach(b=>b.classList.remove('active'));
+  const btn=document.getElementById('lbtn-'+country.replace(/\s/g,'_'));
+  if(btn)btn.classList.add('active');
+  document.getElementById('legal-detail-title').innerHTML=`${d.flag} ${country}`;
+  const blocks=[];
+  if(d.mandatory_qes&&d.mandatory_qes.length)blocks.push({title:'⚡ Mandatory QES Use Cases',items:d.mandatory_qes,highlight:true});
+  if(d.strategic_qes&&d.strategic_qes.length)blocks.push({title:'Strategic QES Use Cases',items:d.strategic_qes});
+  if(d.civil.length)blocks.push({title:'Private / Civil Law',items:d.civil});
+  if(d.corporate.length)blocks.push({title:'Corporate Law',items:d.corporate});
+  if(d.labour.length)blocks.push({title:'Labour Law',items:d.labour});
+  if(d.aml.length)blocks.push({title:'AML — Required ID Attributes',items:d.aml});
+  if(d.aml_methods.length)blocks.push({title:'AML — Compliant CDD Methods',items:d.aml_methods});
+  if(d.docs.length)blocks.push({title:'Accepted Documents',items:d.docs,chips:true});
+  document.getElementById('legal-detail-body').innerHTML=blocks.map(b=>`
+    <div class="legal-block${b.highlight?' legal-block-highlight':''}">
+      <div class="legal-block-title">${b.title}</div>
+      ${b.chips
+        ?`<div class="legal-docs-chips">${b.items.map(i=>`<span class="legal-doc-chip">${i}</span>`).join('')}</div>`
+        :`<ul>${b.items.map(i=>`<li>${i}</li>`).join('')}</ul>`
+      }
+    </div>`).join('');
+  const detail=document.getElementById('legal-detail');
+  detail.classList.add('show');
+  setTimeout(()=>detail.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
+function closeLegal(){
+  activeLegal=null;
+  document.querySelectorAll('.legal-country-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('legal-detail').classList.remove('show');
+}
+
+// Duplicate certs for infinite scroll
+(function(){
+  const track=document.getElementById('certs-track');
+  if(track){track.innerHTML+=track.innerHTML;}
+})();
+
+// Scroll hide controls
+(function(){
+  let lastY=0;const ctrl=document.getElementById('controls');
+  window.addEventListener('scroll',function(){
+    if(window.innerWidth>640)return;
+    const y=window.scrollY;
+    if(y>lastY&&y>120)ctrl.classList.add('hidden');else ctrl.classList.remove('hidden');
+    lastY=y;
+  },{passive:true});
+})();
+
+// Splash
+(function(){
+  const splash=document.getElementById('splash');const bar=document.getElementById('splash-bar-fill');
+  let startY=null,dismissed=false;
+  function dismiss(){if(dismissed)return;dismissed=true;splash.classList.add('swiped');setTimeout(()=>splash.style.display='none',700);}
+  splash.addEventListener('touchstart',e=>{startY=e.touches[0].clientY;},{passive:true});
+  splash.addEventListener('touchmove',e=>{
+    if(startY===null)return;const dy=startY-e.touches[0].clientY;
+    if(dy>0){bar.style.width=Math.min(dy/120*100,100)+'%';splash.style.transition='none';splash.style.transform=`translateY(-${Math.min(dy*.6,80)}px)`;if(dy>80)dismiss();}
+  },{passive:true});
+  splash.addEventListener('touchend',e=>{
+    if(dismissed)return;splash.style.transition='';
+    if(startY-e.changedTouches[0].clientY<80){splash.style.transform='';bar.style.width='0%';}
+    startY=null;
+  },{passive:true});
+  splash.addEventListener('mousedown',e=>{startY=e.clientY;});
+  window.addEventListener('mousemove',e=>{if(startY===null||dismissed)return;const dy=startY-e.clientY;if(dy>0){bar.style.width=Math.min(dy/120*100,100)+'%';splash.style.transition='none';splash.style.transform=`translateY(-${Math.min(dy*.6,80)}px)`;if(dy>80)dismiss();}});
+  window.addEventListener('mouseup',()=>{if(dismissed)return;splash.style.transition='';splash.style.transform='';bar.style.width='0%';startY=null;});
+  splash.addEventListener('click',dismiss);
+  setTimeout(dismiss,8000);
+})();
+
+
+// ── SEARCH HIGHLIGHTING ──
+function hl(text,q){
+  if(!q||q.length<2)return text;
+  const esc=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return text.replace(new RegExp('('+esc+')','gi'),'<mark style="background:#FFF176;color:#1a1a1a;border-radius:2px;padding:0 1px">$1</mark>');
+}
+
+
+buildPills();
+buildLegal();
+render();
+</script>
+</body>
+</html>
