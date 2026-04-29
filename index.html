@@ -19,12 +19,12 @@ html,body{max-width:100%;overflow-x:hidden}
 body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);background:var(--white);min-height:100vh}
 
 /* SPLASH */
-.splash{position:fixed;inset:0;z-index:1000;background:linear-gradient(160deg,#061828 0%,#0B2A4A 50%,#0d3a65 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .65s cubic-bezier(.76,0,.24,1),opacity .65s ease;touch-action:none;overflow:hidden;cursor:grab}
+.splash{position:fixed;inset:0;z-index:1000;background:linear-gradient(-45deg,#061828,#0B2A4A,#0d3a65,#0a2255,#061828);background-size:400% 400%;animation:gradientShift 12s ease infinite,none;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .65s cubic-bezier(.76,0,.24,1),opacity .65s ease;touch-action:none;overflow:hidden;cursor:grab}
 .splash.swiped{transform:translateY(-100%);opacity:0;pointer-events:none}
 .splash::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
 .splash-glow1{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,174,239,0.12) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
 .splash-glow2{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,174,239,0.08) 0%,transparent 70%);bottom:-80px;left:-80px;pointer-events:none}
-.splash-content{position:relative;z-index:1;text-align:center;padding:2rem;user-select:none}
+.splash-content{position:relative;z-index:2;text-align:center;padding:2rem;user-select:none}
 .splash-logo{width:72px;height:72px;border-radius:18px;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
 .splash-logo svg{width:38px;height:38px}
 .splash-title{font-size:clamp(2rem,6vw,3.2rem);font-weight:800;color:#fff;letter-spacing:-0.04em;line-height:1.1;margin-bottom:.4rem}
@@ -650,6 +650,7 @@ body.theme-midnight .hero{background:linear-gradient(-45deg,#000,#0D0D0D,#1A0000
 
 <!-- SPLASH -->
 <div class="splash" id="splash">
+  <canvas id="splash-canvas" style="position:absolute;inset:0;pointer-events:none;z-index:0;width:100%;height:100%"></canvas>
   <div class="splash-glow1"></div><div class="splash-glow2"></div>
   <div class="splash-content">
     <div class="splash-logo"><svg viewBox="0 0 38 38" fill="none"><path d="M19 2L35 11V27L19 36L3 27V11L19 2Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M12 16h10M12 19h8M12 22h10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
@@ -1789,6 +1790,74 @@ function runFlipCounters() {
     requestAnimationFrame(draw);
   }
   draw();
+})();
+
+
+// ── SPLASH PARTICLES ──
+(function(){
+  var canvas = document.getElementById('splash-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var animId;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, {passive:true});
+
+  for (var i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 1.5 + 0.3,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      alpha: Math.random() * 0.6 + 0.1
+    });
+  }
+
+  function draw() {
+    var W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(function(p) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,174,239,' + p.alpha + ')';
+      ctx.fill();
+    });
+    for (var i = 0; i < particles.length; i++) {
+      for (var j = i+1; j < particles.length; j++) {
+        var dx = particles[i].x-particles[j].x;
+        var dy = particles[i].y-particles[j].y;
+        var dist = Math.sqrt(dx*dx+dy*dy);
+        if (dist < 100) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(0,174,239,'+(0.08*(1-dist/100))+')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    animId = requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Stop animation when splash is dismissed
+  var observer = new MutationObserver(function() {
+    if (document.getElementById('splash').style.display === 'none') {
+      cancelAnimationFrame(animId);
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.getElementById('splash'), {attributes:true, attributeFilter:['style']});
 })();
 
 buildPills();
