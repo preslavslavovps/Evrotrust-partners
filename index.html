@@ -84,7 +84,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .eu-stars{display:grid;grid-template-columns:repeat(6,1fr);width:44px}
 .eu-stars span{color:#ffcc00;font-size:5.5px;line-height:1.2;text-align:center}
 .eu-label{font-size:.55rem;font-weight:800;color:#fff;letter-spacing:.06em}
-@keyframes scrollCerts{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes scrollCerts{0%{transform:translateX(0)}100%{transform:translateX(-25%)}}
 
 /* FACTSHEETS CAROUSEL */
 .factsheets-section{background:var(--navy);padding:1.5rem 0;overflow:hidden}
@@ -628,19 +628,39 @@ body.theme-midnight #m-share:hover{border-color:#E63946;background:#2A0000}
     <span class="certs-label">We are certified</span>
     <div class="certs-carousel">
       <div class="certs-track" id="certs-track">
-        <!-- Will be duplicated by JS for infinite scroll -->
-        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 9001"><span class="cert-text">DNV·GL</span><span class="cert-sub">ISO 9001</span></a>
-        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 20000"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 20000</span></a>
-        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27001"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27001</span></a>
-        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27701"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27701</span></a>
-        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 22301"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO 22301</span></a>
-        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="ETSI"><span class="cert-text" style="font-size:.75rem;color:#003087">ETSI</span></a>
-        <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="KYC"><span class="cert-text">KYC</span><span class="cert-sub">Know Your<br>Customer</span></a>
-        <a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label">GDPR</span></a>
-        <a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label">eIDAS</span></a>
-        <a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label" style="font-size:.48rem">AML</span></a>
-        <a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label" style="font-size:.48rem">eIDAS2</span></a>
-      </div>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 9001"><span class="cert-text">DNV·GL</span><span class="cert-sub">ISO 9001</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 20000"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 20000</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27001"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27001</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27701"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27701</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 22301"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO 22301</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="ETSI"><span class="cert-text" style="font-size:.75rem;color:#003087">ETSI</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="KYC"><span class="cert-text">KYC</span><span class="cert-sub">Know Your<br>Customer</span></a>
+<a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label">GDPR</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 9001"><span class="cert-text">DNV·GL</span><span class="cert-sub">ISO 9001</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 20000"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 20000</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27001"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27001</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27701"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27701</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 22301"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO 22301</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="ETSI"><span class="cert-text" style="font-size:.75rem;color:#003087">ETSI</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="KYC"><span class="cert-text">KYC</span><span class="cert-sub">Know Your<br>Customer</span></a>
+<a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label">GDPR</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 9001"><span class="cert-text">DNV·GL</span><span class="cert-sub">ISO 9001</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 20000"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 20000</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27001"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27001</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27701"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27701</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 22301"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO 22301</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="ETSI"><span class="cert-text" style="font-size:.75rem;color:#003087">ETSI</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="KYC"><span class="cert-text">KYC</span><span class="cert-sub">Know Your<br>Customer</span></a>
+<a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label">GDPR</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 9001"><span class="cert-text">DNV·GL</span><span class="cert-sub">ISO 9001</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 20000"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 20000</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27001"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27001</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO/IEC 27701"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO/IEC 27701</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="DNV·GL ISO 22301"><span class="cert-text" style="font-size:.55rem">DNV·GL</span><span class="cert-sub">ISO 22301</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="ETSI"><span class="cert-text" style="font-size:.75rem;color:#003087">ETSI</span></a>
+<a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert cert-light" title="KYC"><span class="cert-text">KYC</span><span class="cert-sub">Know Your<br>Customer</span></a>
+<a href="https://evrotrust.com/compliance/" target="_blank" class="cert cert-eu"><div class="eu-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><span class="eu-label">GDPR</span></a>
+</div>
     </div>
   </div>
 </div>
@@ -1281,12 +1301,10 @@ function closeLegal(){
   document.getElementById('legal-detail').classList.remove('show');
 }
 
-// Duplicate carousel tracks for seamless infinite loop
+// Duplicate factsheets track for seamless infinite loop
 (function(){
-  ['certs-track','factsheets-track'].forEach(function(id){
-    var el=document.getElementById(id);
-    if(el&&el.children.length>0){el.innerHTML+=el.innerHTML;}
-  });
+  var el=document.getElementById('factsheets-track');
+  if(el&&el.children.length>0){el.innerHTML+=el.innerHTML;}
 })();
 
 // Scroll hide controls
