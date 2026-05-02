@@ -39,11 +39,88 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .splash-bar-fill{height:100%;background:var(--blue);width:0%;transition:width .1s linear}
 
 /* NAV */
-.nav{background:#e8f4f0;height:64px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;position:sticky;top:0;z-index:100}
-.nav-title{font-weight:800;font-size:1.4rem;color:#2d3748;letter-spacing:-0.03em}
-.nav-program-btn{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.83rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:background .15s}
-.nav-program-btn:hover{background:#1a4a7a}
-.nav-program-btn svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:2;flex-shrink:0}
+.nav{background:#fff;height:64px;display:flex;align-items:center;padding:0 1.5rem;gap:.75rem;position:sticky;top:0;z-index:200;border-bottom:1px solid #e2e8f0;box-shadow:0 1px 0 rgba(9,30,66,.06)}
+.nav-logo-area{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0}
+.nav-logo-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#0052CC,#0747A6);display:flex;align-items:center;justify-content:center}
+.nav-logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.5}
+.nav-title{font-weight:800;font-size:1.15rem;color:#091E42;letter-spacing:-0.03em;line-height:1}
+.nav-title span{color:#0052CC}
+.nav-divider{width:1px;height:24px;background:#e2e8f0;flex-shrink:0}
+.nav-program-btn{background:#0052CC;color:#fff;border:none;border-radius:7px;padding:7px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:background .15s}
+.nav-program-btn:hover{background:#003A99}
+.nav-program-btn svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2;flex-shrink:0}
+
+/* ── SERVICES NAV DROPDOWN ── */
+.nav-services-wrap{position:relative;display:flex;align-items:center}
+.nav-services-btn{display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;background:none;border:1.5px solid #DFE1E6;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:600;color:#172B4D;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-services-btn:hover,.nav-services-btn.open{border-color:#0052CC;color:#0052CC;background:#EAF2FF}
+.nav-services-btn svg{width:14px;height:14px;flex-shrink:0}
+.nav-services-btn .svc-chev{width:12px;height:12px;transition:transform .25s;stroke:#5E6C84}
+.nav-services-btn.open .svc-chev{transform:rotate(180deg)}
+.nav-services-btn.open .svc-chev{stroke:#0052CC}
+
+.nav-svc-dropdown{
+  position:absolute;top:calc(100% + 10px);left:0;
+  width:680px;max-width:calc(100vw - 2rem);
+  background:#fff;border-radius:14px;
+  border:1px solid #DFE1E6;
+  box-shadow:0 12px 40px rgba(9,30,66,.15),0 2px 8px rgba(9,30,66,.08);
+  padding:0;overflow:hidden;
+  animation:svcDropIn .22s cubic-bezier(.4,0,.2,1) both;
+  z-index:300;
+}
+@keyframes svcDropIn{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+.svc-drop-head{
+  background:linear-gradient(135deg,#091E42 0%,#0052CC 100%);
+  padding:1rem 1.25rem .875rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.svc-drop-head-left{display:flex;align-items:center;gap:10px}
+.svc-drop-badge{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+  border-radius:6px;padding:4px 10px;
+}
+.svc-drop-badge-dot{width:7px;height:7px;border-radius:50%;background:#00B8D4;animation:pulse2 2s ease-in-out infinite}
+@keyframes pulse2{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+.svc-drop-badge-text{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.svc-drop-title{font-size:.95rem;font-weight:700;color:#fff}
+.svc-drop-sub{font-size:.72rem;color:rgba(255,255,255,.55);margin-top:1px}
+.svc-drop-link{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.6);text-decoration:none;transition:color .15s;flex-shrink:0}
+.svc-drop-link:hover{color:#fff}
+.svc-drop-link svg{width:11px;height:11px;stroke:currentColor;fill:none}
+
+.svc-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:0;padding:.75rem;gap:6px;
+}
+.svc-item{
+  display:flex;flex-direction:column;gap:6px;
+  padding:.875rem .875rem .75rem;border-radius:10px;
+  border:1.5px solid transparent;
+  cursor:pointer;transition:all .18s;background:#F8F9FA;
+  text-decoration:none;
+}
+.svc-item:hover{background:#EAF2FF;border-color:#0052CC}
+.svc-item-icon-row{display:flex;align-items:center;justify-content:space-between}
+.svc-item-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.svc-item-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2}
+.svc-item-tag{font-size:.55rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.svc-item-name{font-size:.82rem;font-weight:700;color:#091E42;line-height:1.25}
+.svc-item-desc{font-size:.7rem;color:#5E6C84;line-height:1.5;flex:1}
+
+.svc-drop-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.75rem 1rem;border-top:1px solid #DFE1E6;
+  background:#F8F9FA;
+}
+.svc-footer-info{display:flex;align-items:center;gap:6px;font-size:.7rem;color:#8993A4}
+.svc-footer-info svg{width:12px;height:12px;stroke:#00875A;fill:none}
+.svc-footer-info b{color:#172B4D;font-weight:600}
+.svc-footer-cta{display:inline-flex;align-items:center;gap:5px;font-size:.75rem;font-weight:700;color:#0052CC;cursor:pointer;background:none;border:none;font-family:inherit;padding:0;transition:gap .15s}
+.svc-footer-cta:hover{gap:7px}
+.svc-footer-cta svg{width:12px;height:12px;stroke:#0052CC;fill:none}
 
 /* HERO */
 .hero{background:linear-gradient(135deg,#061828 0%,#0B2A4A 55%,#0d3a65 100%);padding:3rem 1.5rem 2.5rem;text-align:center;position:relative;overflow:hidden}
@@ -75,7 +152,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .certs-carousel::before{content:'';position:absolute;left:0;top:0;bottom:0;width:30px;background:linear-gradient(to right,#1a2e40,transparent);z-index:1;pointer-events:none}
 .certs-carousel::after{content:'';position:absolute;right:0;top:0;bottom:0;width:30px;background:linear-gradient(to left,#1a2e40,transparent);z-index:1;pointer-events:none}
 .certs-track{display:flex;gap:10px;animation:scrollCerts 28s linear infinite;width:max-content}
-.certs-track:hover{animation-play-state:paused}
+/* certs scroll always active */
 .cert{display:flex;flex-direction:column;align-items:center;justify-content:center;width:68px;height:68px;border-radius:10px;gap:2px;flex-shrink:0;cursor:pointer;transition:transform .2s}
 .cert:hover{transform:scale(1.06)}
 .cert-light{background:#fff}.cert-eu{background:#003399}
@@ -84,7 +161,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .eu-stars{display:grid;grid-template-columns:repeat(6,1fr);width:44px}
 .eu-stars span{color:#ffcc00;font-size:5.5px;line-height:1.2;text-align:center}
 .eu-label{font-size:.55rem;font-weight:800;color:#fff;letter-spacing:.06em}
-@keyframes scrollCerts{0%{transform:translateX(0)}100%{transform:translateX(-25%)}}
+@keyframes scrollCerts{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* FACTSHEETS CAROUSEL */
 .factsheets-section{background:var(--navy);padding:1.5rem 0;overflow:hidden}
@@ -639,27 +716,26 @@ body { background: #F4F5F7; font-family:'Space Grotesk','Plus Jakarta Sans','Int
 .certs-track-wrap { display: flex; align-items: center; gap: 1rem; padding: 0 1.5rem; }
 .certs-label { font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-subtle); white-space: nowrap; flex-shrink: 0; }
 .certs-carousel { flex: 1; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent); }
-.certs-track { display: flex; gap: 8px; animation: scrollCerts 30s linear infinite; width: max-content; }
+.certs-track { display: flex; gap: 8px; animation: scrollCerts 30s linear infinite; width: max-content; will-change: transform; }
 @keyframes scrollCerts { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 .cert-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 20px; font-size: .7rem; font-weight: 600; color: var(--text-muted); white-space: nowrap; text-decoration: none; transition: border-color .15s; }
 .cert-chip:hover { border-color: var(--primary); color: var(--primary); }
 .cert-chip svg { width: 11px; height: 11px; stroke: var(--primary); fill: none; stroke-width: 2; }
 
-/* FACTSHEETS */
-.fs-bar { background: #fff; border-bottom: 1px solid var(--border); padding: .625rem 1.5rem; }
-.fs-bar-inner { max-width: 1100px; margin: 0 auto; }
-.fs-toggle-btn { display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 6px; color: var(--text-muted); font-family: inherit; font-size: .75rem; font-weight: 600; cursor: pointer; transition: all .15s; }
-.fs-toggle-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light, #E6F0FF); }
-.fs-toggle-btn svg:first-child { width: 13px; height: 13px; stroke: var(--primary); fill: none; }
-.fs-count { background: #E6F0FF; color: var(--primary); border-radius: 20px; font-size: .62rem; font-weight: 700; padding: 1px 7px; }
-.fs-chev { width: 12px; height: 12px; transition: transform .25s; stroke: var(--text-subtle); fill: none; }
-.fs-chev.open { transform: rotate(180deg); }
-.fs-panel { background: #fff; border-bottom: 1px solid var(--border); }
-.factsheet-chip { display: inline-flex; align-items: center; padding: 5px 12px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 6px; font-size: .73rem; font-weight: 600; color: var(--navy); text-decoration: none; transition: all .15s; white-space: nowrap; }
+/* FACTSHEETS CAROUSEL */
+.fs-bar { background: #fff; border-bottom: 1px solid var(--border); padding: .75rem 0; overflow: hidden; }
+.fs-bar-inner { display: flex; align-items: center; gap: 1rem; padding: 0 1.5rem; }
+.fs-label { font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-subtle); white-space: nowrap; flex-shrink: 0; }
+.fs-carousel { flex: 1; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent); }
+.fs-track { display: flex; gap: 8px; width: max-content; animation: scrollFS 28s linear infinite; }
+.fs-track:hover { animation-play-state: paused; }
+@keyframes scrollFS { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.factsheet-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 6px; font-size: .73rem; font-weight: 600; color: var(--navy); text-decoration: none; transition: all .15s; white-space: nowrap; }
+.factsheet-chip svg { width: 11px; height: 11px; stroke: var(--primary); fill: none; stroke-width: 2; }
 .factsheet-chip:hover { border-color: var(--primary); background: #E6F0FF; color: var(--primary); }
 
 /* NAV */
-.nav { background: #fff !important; border-bottom: 1px solid var(--border) !important; }
+.nav { border-bottom: 1px solid var(--border) !important; }
 .nav-title { color: var(--navy) !important; font-weight: 700; }
 
 /* CONTROLS */
@@ -835,6 +911,38 @@ body.int-open .hero-btn-integration::after { opacity: 1; }
 
 
 /* ── MODAL COMPARE BUTTON ── */
+/* COMPARE BAR */
+.compare-bar{position:fixed;bottom:-100px;left:50%;transform:translateX(-50%);z-index:150;background:var(--navy);border-radius:14px;padding:.75rem 1rem;display:flex;align-items:center;gap:.75rem;box-shadow:0 8px 32px rgba(9,30,66,.35);transition:bottom .35s cubic-bezier(.4,0,.2,1);width:min(580px,calc(100vw - 2rem))}
+.compare-bar.show{bottom:1.5rem}
+.compare-slot{flex:1;background:rgba(255,255,255,.1);border:1.5px dashed rgba(255,255,255,.25);border-radius:8px;padding:8px 12px;font-size:.78rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:6px;min-height:38px}
+.compare-slot:not(.empty){border-style:solid;border-color:var(--blue);background:rgba(0,174,239,.12);color:#fff}
+.compare-slot-x{width:20px;height:20px;border:none;background:rgba(255,255,255,.15);color:#fff;border-radius:4px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1}
+.compare-vs{font-size:.65rem;font-weight:800;color:rgba(255,255,255,.35);letter-spacing:.1em;flex-shrink:0}
+.compare-go{height:38px;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:0 18px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.83rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background .15s}
+.compare-go:hover:not(:disabled){background:var(--blue-dark)}
+.compare-go:disabled{opacity:.45;cursor:not-allowed}
+.compare-clear{width:30px;height:30px;border:none;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);border-radius:6px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
+.compare-clear:hover{background:rgba(255,255,255,.2);color:#fff}
+/* CARD ICON BUTTONS (compare + fav) */
+.card-icon-btn{width:28px;height:28px;border:1.5px solid var(--border);border-radius:7px;background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s;flex-shrink:0}
+.card-icon-btn svg{width:13px;height:13px;stroke:var(--text-muted);fill:none;stroke-width:2.2;transition:stroke .18s,fill .18s}
+.card-icon-btn:hover{border-color:#b0b8c8;background:#f0f4fa}
+.card-icon-btn.cmp-active{background:#E6F0FF;border-color:#0052CC}
+.card-icon-btn.cmp-active svg{stroke:#0052CC}
+.card-icon-btn.fav-active{background:#FFF0F0;border-color:#e53935}
+.card-icon-btn.fav-active svg{stroke:#e53935;fill:#e53935}
+/* COMPARE MODAL */
+.compare-modal{background:var(--white);border-radius:16px;width:min(720px,100%);max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popIn .4s cubic-bezier(.4,0,.2,1) both}
+.compare-head{background:linear-gradient(135deg,#061828,#0B2A4A);padding:1.5rem;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:space-between}
+.compare-head h2{font-size:1.1rem;font-weight:700;color:#fff}
+.compare-inner{padding:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.compare-col{display:flex;flex-direction:column;gap:10px}
+.compare-col-name{font-size:1rem;font-weight:800;color:var(--navy);padding-bottom:.5rem;border-bottom:2px solid var(--blue)}
+.compare-row{background:var(--gray-bg);border:1px solid var(--border);border-radius:8px;padding:.75rem}
+.compare-row-label{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+.compare-row-val{font-size:.83rem;color:var(--text);font-weight:500;line-height:1.5}
+@media(max-width:560px){.compare-inner{grid-template-columns:1fr}.compare-bar{flex-wrap:wrap}}
+
 .modal-compare-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 6px 14px; border: 1.5px solid #DFE1E6; border-radius: 6px;
@@ -844,6 +952,8 @@ body.int-open .hero-btn-integration::after { opacity: 1; }
 .modal-compare-btn svg { width: 14px; height: 14px; }
 .modal-compare-btn:hover { border-color: #0052CC; color: #0052CC; background: #E6F0FF; }
 .modal-compare-btn.active { background: #0052CC; border-color: #0052CC; color: #fff; }
+.modal-compare-btn.fav-active { background: #FFF0F0; border-color: #e53935; color: #e53935; }
+.modal-compare-btn.fav-active svg { fill: #e53935; }
 
 /* ── RELATED PARTNERS ── */
 .related-section { border-top: 1px solid #DFE1E6; padding-top: 1rem; margin-top: .25rem; }
@@ -875,8 +985,144 @@ body.int-open .hero-btn-integration::after { opacity: 1; }
 
 <!-- NAV -->
 <nav class="nav">
-  <button class="et-services-btn" onclick="openServices()" style="background:none;border:none;padding:0;cursor:pointer"><span class="nav-title">Evrotrust <span style="color:#0052CC;font-weight:800">Partners</span></span></button>
+  <!-- Logo + title -->
+  <div class="nav-logo-area" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <span class="nav-title">Evrotrust <span>Partners</span></span>
+  </div>
+
+  <div class="nav-divider"></div>
+
+  <!-- Services Dropdown -->
+  <div class="nav-services-wrap" id="nav-svc-wrap">
+    <button class="nav-services-btn" id="nav-svc-btn" onclick="toggleSvcDropdown()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Services
+      <svg class="svc-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+
+    <!-- Dropdown panel -->
+    <div class="nav-svc-dropdown" id="nav-svc-dropdown" style="display:none">
+      <!-- Header -->
+      <div class="svc-drop-head">
+        <div class="svc-drop-head-left">
+          <div class="svc-drop-badge">
+            <span class="svc-drop-badge-dot"></span>
+            <span class="svc-drop-badge-text">QTSP · eIDAS Compliant</span>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div class="svc-drop-title">Evrotrust Services</div>
+          <div class="svc-drop-sub">Qualified Trust Service Provider for the EU</div>
+        </div>
+        <a class="svc-drop-link" href="https://evrotrust.com" target="_blank">
+          evrotrust.com
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+
+      <!-- Service Grid -->
+      <div class="svc-grid">
+        <div class="svc-item" onclick="closeSvcDropdown()">
+          <div class="svc-item-icon-row">
+            <div class="svc-item-icon" style="background:#EAF2FF;color:#0052CC"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M7 15h2M13 15h4"/></svg></div>
+            <span class="svc-item-tag" style="background:#EAF2FF;color:#0052CC">eID</span>
+          </div>
+          <div class="svc-item-name">Electronic Identification</div>
+          <div class="svc-item-desc">Remote KYC identity verification via mobile app. 62+ nationalities. No physical presence.</div>
+        </div>
+
+        <div class="svc-item" onclick="closeSvcDropdown()">
+          <div class="svc-item-icon-row">
+            <div class="svc-item-icon" style="background:#E3FCEF;color:#00875A"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+            <span class="svc-item-tag" style="background:#E3FCEF;color:#00875A">QES</span>
+          </div>
+          <div class="svc-item-name">Electronic Signature</div>
+          <div class="svc-item-desc">SES, AES and QES — legally equivalent to handwritten signature across all EU member states.</div>
+        </div>
+
+        <div class="svc-item" onclick="closeSvcDropdown()">
+          <div class="svc-item-icon-row">
+            <div class="svc-item-icon" style="background:#FFF0E6;color:#C94E0A"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg></div>
+            <span class="svc-item-tag" style="background:#FFF0E6;color:#C94E0A">eDel</span>
+          </div>
+          <div class="svc-item-name">eDelivery</div>
+          <div class="svc-item-desc">Qualified registered e-delivery with legal proof of sending, delivery, and opening.</div>
+        </div>
+
+        <div class="svc-item" onclick="closeSvcDropdown()">
+          <div class="svc-item-icon-row">
+            <div class="svc-item-icon" style="background:#EEF2FF;color:#3730A3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+            <span class="svc-item-tag" style="background:#EEF2FF;color:#3730A3">eTS</span>
+          </div>
+          <div class="svc-item-name">eTimestamp</div>
+          <div class="svc-item-desc">Qualified timestamp proving document existence at a point in time. 0.02 TU per timestamp.</div>
+        </div>
+
+        <div class="svc-item" onclick="closeSvcDropdown()">
+          <div class="svc-item-icon-row">
+            <div class="svc-item-icon" style="background:#FCE7F3;color:#9D174D"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            <span class="svc-item-tag" style="background:#FCE7F3;color:#9D174D">eSeal</span>
+          </div>
+          <div class="svc-item-name">eSeal</div>
+          <div class="svc-item-desc">Qualified electronic seals for legal entities. Ensures authenticity under eIDAS Art. 35.</div>
+        </div>
+
+        <div class="svc-item" onclick="closeSvcDropdown()">
+          <div class="svc-item-icon-row">
+            <div class="svc-item-icon" style="background:#F0FDF4;color:#15803D"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+            <span class="svc-item-tag" style="background:#F0FDF4;color:#15803D">KYC</span>
+          </div>
+          <div class="svc-item-name">AML / KYC Compliance</div>
+          <div class="svc-item-desc">eIDAS, GDPR and AML-compliant remote identification for banks, insurance, and fintech.</div>
+        </div>
+
+        <div class="svc-item" onclick="closeSvcDropdown()">
+          <div class="svc-item-icon-row">
+            <div class="svc-item-icon" style="background:#F5F3FF;color:#6D28D9"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+            <span class="svc-item-tag" style="background:#F5F3FF;color:#6D28D9">SDK</span>
+          </div>
+          <div class="svc-item-name">Mobile SDK</div>
+          <div class="svc-item-desc">Native iOS, Android and React Native SDK. Private key in device HSM, full KYC video flow.</div>
+        </div>
+
+        <div class="svc-item" onclick="closeSvcDropdown()">
+          <div class="svc-item-icon-row">
+            <div class="svc-item-icon" style="background:#FEFCE8;color:#A16207"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+            <span class="svc-item-tag" style="background:#FEFCE8;color:#A16207">TU</span>
+          </div>
+          <div class="svc-item-name">Trust Units</div>
+          <div class="svc-item-desc">Prepaid packages valid 12 months. 1 TU = QES · 3 TU = eID · 0.02 TU = Timestamp.</div>
+        </div>
+
+        <div class="svc-item" onclick="closeSvcDropdown()">
+          <div class="svc-item-icon-row">
+            <div class="svc-item-icon" style="background:#F1F5F9;color:#334155"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <span class="svc-item-tag" style="background:#F1F5F9;color:#334155">WL</span>
+          </div>
+          <div class="svc-item-name">White-label SDK</div>
+          <div class="svc-item-desc">Embed Evrotrust into your platform. Web SDK, fully customizable UX, plug-and-play.</div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="svc-drop-footer">
+        <div class="svc-footer-info">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <span>ISO 9001 · ISO 27001 · <b>eIDAS QTSP</b> · GDPR · AML</span>
+        </div>
+        <button class="svc-footer-cta" onclick="openProg();closeSvcDropdown()">
+          Become a Partner
+          <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div style="flex:1"></div>
+
   <button class="meeting-notes-btn" onclick="openMeetingNotes()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
     Meeting Notes
@@ -890,9 +1136,56 @@ body.int-open .hero-btn-integration::after { opacity: 1; }
 <!-- HERO -->
 <div class="hero">
   <canvas id="grid-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:1"></canvas>
+
   <div class="hero-eyebrow">Official Partner Network · eIDAS Qualified Trust Service Provider</div>
-  <h1>Digital Trust<br>Infrastructure for <span>Europe</span></h1>
-  <p>Evrotrust enables legally-binding remote identity verification and qualified electronic signatures across the EU — built on eIDAS, GDPR, and PKI standards.</p>
+
+  <h1>The Partner Network<br>Behind <span id="hero-rotating-word">Europe's Digital Identity</span></h1>
+
+  <p id="hero-desc" style="max-width:600px;margin:0 auto 1.5rem;font-size:1.05rem;line-height:1.7;color:rgba(255,255,255,0.72)">
+    Evrotrust is an EU-notified QTSP — legally responsible for KYC, AML-compliant identity verification, and Qualified Electronic Signatures. Our partner ecosystem spans banks, fintechs, telecoms, legal platforms and public institutions across Europe.
+  </p>
+
+  <!-- INTERACTIVE USE-CASE PILLS -->
+  <div id="hero-pills" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:1.75rem;position:relative;z-index:2">
+    <button class="hero-pill active" data-idx="0" onclick="selectPill(0)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Remote Onboarding
+    </button>
+    <button class="hero-pill" data-idx="1" onclick="selectPill(1)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      Qualified eSignatures
+    </button>
+    <button class="hero-pill" data-idx="2" onclick="selectPill(2)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      KYC / AML Compliance
+    </button>
+    <button class="hero-pill" data-idx="3" onclick="selectPill(3)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      API & SDK Integration
+    </button>
+    <button class="hero-pill" data-idx="4" onclick="selectPill(4)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Pan-European Reach
+    </button>
+  </div>
+
+  <!-- DYNAMIC CONTEXT CARD -->
+  <div id="hero-context-card" style="background:rgba(255,255,255,0.07);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.13);border-radius:14px;padding:.875rem 1.25rem;max-width:560px;margin:0 auto 1.75rem;display:flex;align-items:flex-start;gap:10px;position:relative;z-index:2;text-align:left;transition:opacity .3s">
+    <div id="hero-ctx-icon" style="width:32px;height:32px;border-radius:8px;background:rgba(0,174,239,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#00AEEF" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div>
+      <div id="hero-ctx-title" style="font-size:.8rem;font-weight:700;color:#fff;margin-bottom:3px">eIDAS-compliant Remote Identity Verification</div>
+      <div id="hero-ctx-body" style="font-size:.75rem;color:rgba(255,255,255,0.6);line-height:1.6">Onboard customers in under 2 minutes — AI-powered liveness check, ID document scan, and expert manual review. Reusable digital identity means returning users approve in one tap. Trusted by DSK Bank, Telenor, A1, Mastercard and 50+ partners.</div>
+    </div>
+  </div>
+
+  <style>
+  .hero-pill{display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border-radius:20px;border:1.5px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.65);font-family:'Plus Jakarta Sans',sans-serif;font-size:.74rem;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.01em}
+  .hero-pill:hover{border-color:rgba(0,174,239,0.6);color:#fff;background:rgba(0,174,239,0.12)}
+  .hero-pill.active{border-color:#00AEEF;background:rgba(0,174,239,0.18);color:#fff;box-shadow:0 0 12px rgba(0,174,239,0.25)}
+  </style>
+
   <div class="hero-cta-row">
     <button class="hero-btn-primary" onclick="document.getElementById('controls').scrollIntoView({behavior:'smooth'})">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -910,8 +1203,63 @@ body.int-open .hero-btn-integration::after { opacity: 1; }
     <div class="hero-stat"><div class="hero-stat-num">7</div><div class="hero-stat-label">Categories</div></div>
     <div class="hero-divider"></div>
     <div class="hero-stat"><div class="hero-stat-num">30+</div><div class="hero-stat-label">Countries</div></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><div class="hero-stat-num">&lt;2min</div><div class="hero-stat-label">KYC Onboarding</div></div>
   </div>
 </div>
+
+<script>
+const pillData = [
+  {
+    word: "Europe's Digital Identity",
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#00AEEF" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    title: 'eIDAS-compliant Remote Identity Verification',
+    body: 'Onboard customers in under 2 minutes — AI-powered liveness check, ID document scan, and expert manual review. Reusable digital identity means returning users approve in one tap. Trusted by DSK Bank, Telenor, A1, Mastercard and 50+ partners.'
+  },
+  {
+    word: 'Qualified eSignatures',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#00AEEF" stroke-width="2" width="16" height="16"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>',
+    title: 'Qualified Electronic Signatures — highest EU assurance',
+    body: 'Evrotrust QES carries automatic legal validity across all EU member states under eIDAS. Partners like BoldSign and DocuWare embed QES directly in their workflows — no office visit required, signed from any smartphone in seconds.'
+  },
+  {
+    word: 'KYC & AML Compliance',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#00AEEF" stroke-width="2" width="16" height="16"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+    title: 'Legal responsibility backed by up to $2M insurance',
+    body: 'As a QTSP, Evrotrust is legally responsible for correctly identifying your customers — audited by independent conformity assessment bodies supervised by national authorities. Full PSD2 SCA, AML5, GDPR, and eIDAS Art. 24 compliance, out of the box.'
+  },
+  {
+    word: 'Developer-Ready Integration',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#00AEEF" stroke-width="2" width="16" height="16"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+    title: 'REST API, Mobile SDK & White-label — plug-and-play',
+    body: 'Integrate Evrotrust via REST API or embed our fully customizable SDK directly into your web or mobile app. White-label the full UX under your brand. Our Digital Services Portal also enables zero-code access — no dev work needed to start.'
+  },
+  {
+    word: 'Pan-European Scale',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="#00AEEF" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+    title: 'One integration — valid across all EU member states',
+    body: 'Evrotrust is registered in an EU Member State, making all qualified trust services automatically valid EU-wide. With €6.6M in growth funding (2025), the network is actively expanding into DACH and CEE — 30+ countries and counting.'
+  }
+];
+
+function selectPill(idx) {
+  document.querySelectorAll('.hero-pill').forEach((p,i)=>p.classList.toggle('active',i===idx));
+  const d = pillData[idx];
+  const card = document.getElementById('hero-context-card');
+  card.style.opacity='0';
+  setTimeout(()=>{
+    document.getElementById('hero-ctx-icon').innerHTML = d.icon;
+    document.getElementById('hero-ctx-title').textContent = d.title;
+    document.getElementById('hero-ctx-body').textContent = d.body;
+    document.getElementById('hero-rotating-word').textContent = d.word;
+    card.style.opacity='1';
+  },150);
+}
+
+// Auto-rotate pills every 5s
+let pillIdx=0;
+setInterval(()=>{ pillIdx=(pillIdx+1)%pillData.length; selectPill(pillIdx); }, 5000);
+</script>
 
 
 <!-- TRUST BAR -->
@@ -997,31 +1345,47 @@ body.int-open .hero-btn-integration::after { opacity: 1; }
       <a href="https://evrotrust.com/compliance/" target="_blank" class="cert-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>GDPR</a>
       <a href="https://evrotrust.com/compliance/" target="_blank" class="cert-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>AML</a>
       <a href="https://evrotrust.com/compliance/" target="_blank" class="cert-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>KYC</a>
+      <!-- duplicate set for seamless infinite loop -->
+      <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>ISO 9001</a>
+      <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>ISO 27001</a>
+      <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>ISO 27701</a>
+      <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>ISO 22301</a>
+      <a href="https://evrotrust.com/certificate-and-useful-links/" target="_blank" class="cert-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>ISO 20000</a>
+      <a href="https://evrotrust.com/compliance/" target="_blank" class="cert-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>eIDAS QTSP</a>
+      <a href="https://evrotrust.com/compliance/" target="_blank" class="cert-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>GDPR</a>
+      <a href="https://evrotrust.com/compliance/" target="_blank" class="cert-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>AML</a>
+      <a href="https://evrotrust.com/compliance/" target="_blank" class="cert-chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>KYC</a>
     </div></div>
   </div>
 </div>
 
-<!-- FACTSHEETS -->
+<!-- FACTSHEETS CAROUSEL -->
 <div class="fs-bar">
   <div class="fs-bar-inner">
-    <button class="fs-toggle-btn" onclick="toggleFactsheets()" id="fs-toggle-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      Fact Sheets <span class="fs-count">9</span>
-      <svg class="fs-chev" id="fs-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-  </div>
-</div>
-<div class="fs-panel" id="fs-panel" style="display:none">
-  <div style="max-width:1100px;margin:0 auto;padding:.75rem 1.5rem;display:flex;gap:8px;flex-wrap:wrap">
-    <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/eid-fact-sheet.pdf" target="_blank">eID</a>
-    <a class="factsheet-chip" href="https://evrotrust.com/wp-content/uploads/2025/07/evrotrust-esign-fact-sheet.pdf" target="_blank">QES</a>
-    <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/otp-fact-sheet.pdf" target="_blank">OTP eSign</a>
-    <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/corporate-sign-fact-sheet-v1.1.pdf" target="_blank">Corporate Sign</a>
-    <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/ident-lite-fact-sheet-1.pdf" target="_blank">IdentLite</a>
-    <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/enotary-fact-sheet-.pdf" target="_blank">eNotary</a>
-    <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/edelivery-factsheet.pdf" target="_blank">eDelivery</a>
-    <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/etimestamp-fact-sheet.pdf" target="_blank">eTimestamp</a>
-    <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/identity-suite-fact-sheet.pdf" target="_blank">Identity Suite</a>
+    <span class="fs-label">Fact Sheets</span>
+    <div class="fs-carousel">
+      <div class="fs-track" id="fs-track">
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/eid-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eID</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/wp-content/uploads/2025/07/evrotrust-esign-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>QES</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/otp-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>OTP eSign</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/corporate-sign-fact-sheet-v1.1.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Corporate Sign</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/ident-lite-fact-sheet-1.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>IdentLite</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/enotary-fact-sheet-.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eNotary</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/edelivery-factsheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eDelivery</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/etimestamp-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eTimestamp</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/identity-suite-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Identity Suite</a>
+        <!-- duplicate for seamless infinite loop -->
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/eid-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eID</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/wp-content/uploads/2025/07/evrotrust-esign-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>QES</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/otp-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>OTP eSign</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/corporate-sign-fact-sheet-v1.1.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Corporate Sign</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/ident-lite-fact-sheet-1.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>IdentLite</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/enotary-fact-sheet-.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eNotary</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/edelivery-factsheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eDelivery</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/etimestamp-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eTimestamp</a>
+        <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/identity-suite-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Identity Suite</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1168,6 +1532,10 @@ body.int-open .hero-btn-integration::after { opacity: 1; }
         <div class="modal-sub" id="m-sub"></div>
       </div>
       <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+        <button class="modal-compare-btn" id="m-fav-btn" onclick="toggleFavFromModal()" title="Favourite" style="gap:6px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Favourite
+        </button>
         <button class="modal-compare-btn" id="m-compare-btn" onclick="toggleCompareFromModal()" title="Compare">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
           Compare
@@ -1484,7 +1852,15 @@ function render(){
       </div>
       <div class="card-bottom">
         <span class="card-tag" style="background:${cs.bg};color:${cs.text};cursor:pointer" onclick="event.stopPropagation();setCatFromTag('${p.cat}')">${p.cat}</span>
-        <button class="card-action-link" onclick="event.stopPropagation();openDetail(${pidx})">Details <svg stroke-width="2.5" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+        <div style="display:flex;align-items:center;gap:5px">
+          <button class="card-icon-btn${isFav(pidx)?' fav-active':''}" id="fav-${pidx}" onclick="event.stopPropagation();toggleFav(${pidx})" title="Favourite">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+          <button class="card-icon-btn${isInCompare(pidx)?' cmp-active':''}" id="cmp-${pidx}" onclick="event.stopPropagation();toggleCompare(${pidx})" title="Compare">
+            <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          </button>
+          <button class="card-action-link" onclick="event.stopPropagation();openDetail(${pidx})">Details <svg stroke-width="2.5" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
       </div>
     </div>`;
   })();
@@ -1545,6 +1921,7 @@ function renderMap(filtered){
   });
   document.getElementById('map-legend').innerHTML=[...new Set(filtered.map(p=>p.cat))].map(c=>{const cs=CATS[c]||CATS['Other'];return `<div class="map-legend-item"><div class="map-legend-dot" style="background:${cs.text}"></div>${c}</div>`;}).join('');
 }
+var _currentDetailIdx=-1;
 function openDetail(idx){
   _currentDetailIdx=idx;
   const p=partners[idx];const av=avCol(p.name);const rs=getRegionShort(p.region);
@@ -1562,6 +1939,8 @@ function openDetail(idx){
   document.getElementById('m-sub').textContent=p.short;
   var cmpBtn=document.getElementById('m-compare-btn');
   if(cmpBtn){var inCmp=isInCompare(idx);cmpBtn.classList.toggle('active',inCmp);}
+  var favBtn=document.getElementById('m-fav-btn');
+  if(favBtn){favBtn.classList.toggle('fav-active',isFav(idx));}
   const items=[
     p.usecase&&{label:'Use case',val:p.usecase},
     p.integration&&{label:'Integrated services',val:'<div class="benefits-list">'+p.integration.split(',').map(function(s){return '<span class="benefit-chip">'+s.trim()+'</span>';}).join('')+'</div>'},
@@ -1590,7 +1969,10 @@ function openDetail(idx){
   }
   document.getElementById('detail-ov').classList.add('open');document.body.style.overflow='hidden';
 }
-var _currentDetailIdx=-1;
+function toggleFavFromModal(){
+  if(_currentDetailIdx<0)return;
+  toggleFav(_currentDetailIdx);
+}
 function toggleCompareFromModal(){
   if(_currentDetailIdx<0)return;
   toggleCompare(_currentDetailIdx);
@@ -1605,7 +1987,7 @@ function openAdd(){
 function openProg(){document.getElementById('prog-ov').classList.add('open');document.body.style.overflow='hidden';}
 function closeOv(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
 function ovClick(e,id){if(e.target.id===id)closeOv(id);}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){['detail-ov','add-ov','prog-ov'].forEach(closeOv);}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){['detail-ov','add-ov','prog-ov','compare-ov'].forEach(closeOv);}});
 function addPartner(){
   const name=document.getElementById('np-name').value.trim();const short=document.getElementById('np-short').value.trim();
   if(!name){document.getElementById('np-name').style.borderColor='#cc2b2b';return;}
@@ -1747,6 +2129,123 @@ function createNeural(canvasId,nodeCount,connectDist,speed,stopWhenHidden){
   }
 }
 // neural removed
+
+// ── HERO INTERACTIVE PARTICLES ──
+(function(){
+  var canvas = document.getElementById('grid-canvas');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H, nodes = [], mouse = {x: -9999, y: -9999};
+  var NODE_COUNT = 55, CONNECT_DIST = 130, SPEED = 0.38, MOUSE_RADIUS = 140, MOUSE_FORCE = 0.06;
+
+  function resize(){
+    var hero = canvas.parentElement;
+    W = canvas.width = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, {passive:true});
+
+  // Spread nodes across grid with slight randomness
+  var cols = Math.ceil(Math.sqrt(NODE_COUNT * W / H));
+  var rows = Math.ceil(NODE_COUNT / cols);
+  for(var r = 0; r < rows; r++) for(var c = 0; c < cols; c++){
+    if(nodes.length >= NODE_COUNT) break;
+    nodes.push({
+      x: (c + 0.5 + (Math.random()-.5)*0.9) / cols * W,
+      y: (r + 0.5 + (Math.random()-.5)*0.9) / rows * H,
+      vx: (Math.random()-.5) * SPEED,
+      vy: (Math.random()-.5) * SPEED,
+      phase: Math.random() * Math.PI * 2,
+      r: Math.random() * 1.2 + 1.4
+    });
+  }
+
+  // Mouse tracking relative to hero element
+  var hero = canvas.parentElement;
+  hero.addEventListener('mousemove', function(e){
+    var rect = hero.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  }, {passive:true});
+  hero.addEventListener('mouseleave', function(){
+    mouse.x = -9999; mouse.y = -9999;
+  }, {passive:true});
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+
+    // Move nodes + mouse repulsion
+    nodes.forEach(function(n){
+      n.phase += 0.013;
+      // Mouse interaction — gentle repel
+      var dx = n.x - mouse.x, dy = n.y - mouse.y;
+      var dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < MOUSE_RADIUS && dist > 0){
+        var force = (1 - dist/MOUSE_RADIUS) * MOUSE_FORCE;
+        n.vx += (dx/dist) * force;
+        n.vy += (dy/dist) * force;
+      }
+      // Speed cap
+      var spd = Math.sqrt(n.vx*n.vx + n.vy*n.vy);
+      var maxSpd = SPEED * 3;
+      if(spd > maxSpd){ n.vx = n.vx/spd*maxSpd; n.vy = n.vy/spd*maxSpd; }
+      // Gentle drift back to normal speed
+      n.vx *= 0.995; n.vy *= 0.995;
+      // Clamp min speed
+      if(Math.abs(n.vx) < 0.05) n.vx += (Math.random()-.5)*0.05;
+      if(Math.abs(n.vy) < 0.05) n.vy += (Math.random()-.5)*0.05;
+
+      n.x += n.vx; n.y += n.vy;
+      if(n.x < 0) n.x = W; if(n.x > W) n.x = 0;
+      if(n.y < 0) n.y = H; if(n.y > H) n.y = 0;
+    });
+
+    // Connections — brighter near mouse
+    ctx.lineWidth = 0.7;
+    for(var i = 0; i < nodes.length; i++){
+      for(var j = i+1; j < nodes.length; j++){
+        var dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        var d = Math.sqrt(dx*dx + dy*dy);
+        if(d < CONNECT_DIST){
+          var baseAlpha = 0.22 * (1 - d/CONNECT_DIST);
+          // Boost alpha when near mouse
+          var mx = (nodes[i].x + nodes[j].x)/2 - mouse.x;
+          var my = (nodes[i].y + nodes[j].y)/2 - mouse.y;
+          var mDist = Math.sqrt(mx*mx + my*my);
+          var boost = mDist < MOUSE_RADIUS ? (1 - mDist/MOUSE_RADIUS) * 0.45 : 0;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = 'rgba(0,174,239,' + (baseAlpha + boost) + ')';
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Nodes
+    nodes.forEach(function(n){
+      var p = 0.7 + 0.3 * Math.sin(n.phase);
+      // Glow near mouse
+      var ndx = n.x - mouse.x, ndy = n.y - mouse.y;
+      var nd = Math.sqrt(ndx*ndx + ndy*ndy);
+      var glow = nd < MOUSE_RADIUS ? (1 - nd/MOUSE_RADIUS) * 0.6 : 0;
+      // Outer glow
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * p * 3.5, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,174,239,' + (0.05*p + glow*0.12) + ')';
+      ctx.fill();
+      // Inner dot
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * p, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,174,239,' + (0.55*p + glow*0.4) + ')';
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
 
 function buildFlipCounter(el,display){el.innerHTML='';for(var i=0;i<display.length;i++){var ch=display[i];if(ch===','||ch==='+'||ch==='t'||ch==='M'){var span=document.createElement('span');span.className='flip-suffix';span.textContent=ch;el.appendChild(span);}else{var wrap=document.createElement('div');wrap.className='flip-digit-wrap';var digit=document.createElement('div');digit.className='flip-digit';digit.textContent='0';wrap.appendChild(digit);el.appendChild(wrap);}}}
@@ -2056,11 +2555,13 @@ function openCompare(){
 // ── FAVS ──
 var _favs=[];try{_favs=JSON.parse(localStorage.getItem('et-favs')||'[]');}catch(e){}
 function isFav(i){return _favs.includes(i);}
-function toggleFav(i,ev){
-  if(ev)ev.stopPropagation();
+function toggleFav(i){
   if(isFav(i))_favs=_favs.filter(function(x){return x!==i;});else _favs.push(i);
   try{localStorage.setItem('et-favs',JSON.stringify(_favs));}catch(e){}
-  render();
+  var btn=document.getElementById('fav-'+i);
+  if(btn)btn.classList.toggle('fav-active',isFav(i));
+  // also update modal fav button if open
+  if(_currentDetailIdx===i){var mb=document.getElementById('m-fav-btn');if(mb)mb.classList.toggle('fav-active',isFav(i));}
 }
 
 // ── HOVER TIMER ──
@@ -2068,6 +2569,33 @@ var _isMob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 var _hoverTimer=null,_hoverCard=null;
 function startHoverTimer(idx,el){if(_isMob)return;clearHoverTimer();el.classList.add('hovered');_hoverCard=el;_hoverTimer=setTimeout(function(){el.classList.remove('hovered');openDetail(idx);},4000);}
 function clearHoverTimer(){if(_hoverTimer){clearTimeout(_hoverTimer);_hoverTimer=null;}if(_hoverCard){_hoverCard.classList.remove('hovered');_hoverCard=null;}}
+
+// ── SERVICES DROPDOWN ──
+var _svcOpen=false;
+function toggleSvcDropdown(){
+  _svcOpen=!_svcOpen;
+  var dd=document.getElementById('nav-svc-dropdown');
+  var btn=document.getElementById('nav-svc-btn');
+  if(_svcOpen){
+    dd.style.display='block';
+    btn.classList.add('open');
+  } else {
+    dd.style.display='none';
+    btn.classList.remove('open');
+  }
+}
+function closeSvcDropdown(){
+  _svcOpen=false;
+  var dd=document.getElementById('nav-svc-dropdown');
+  var btn=document.getElementById('nav-svc-btn');
+  if(dd)dd.style.display='none';
+  if(btn)btn.classList.remove('open');
+}
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('nav-svc-wrap');
+  if(wrap&&!wrap.contains(e.target)){closeSvcDropdown();}
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSvcDropdown();});
 
 </script>
 
@@ -2106,6 +2634,26 @@ function clearHoverTimer(){if(_hoverTimer){clearTimeout(_hoverTimer);_hoverTimer
       </div>
       <div id="int-ctas"></div>
     </div>
+  </div>
+</div>
+
+<!-- COMPARE BAR -->
+<div id="compare-bar" class="compare-bar">
+  <div id="cslot-0" class="compare-slot empty">Add partner 1</div>
+  <div class="compare-vs">VS</div>
+  <div id="cslot-1" class="compare-slot empty">Add partner 2</div>
+  <button id="compare-go" class="compare-go" onclick="openCompare()" disabled>Compare</button>
+  <button class="compare-clear" onclick="clearCompare()" title="Clear">✕</button>
+</div>
+
+<!-- COMPARE MODAL -->
+<div class="overlay" id="compare-ov" onclick="if(event.target.id==='compare-ov')closeOv('compare-ov')">
+  <div class="compare-modal">
+    <div class="compare-head">
+      <h2>Partner Comparison</h2>
+      <button class="modal-close" onclick="closeOv('compare-ov')">✕</button>
+    </div>
+    <div class="compare-inner" id="compare-body"></div>
   </div>
 </div>
 
