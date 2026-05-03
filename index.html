@@ -46,6 +46,133 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .nav-title{font-weight:800;font-size:1.15rem;color:#091E42;letter-spacing:-0.03em;line-height:1}
 .nav-title span{color:#0052CC}
 .nav-divider{width:1px;height:24px;background:#e2e8f0;flex-shrink:0}
+
+/* ABOUT EVROTRUST BUTTON + PANEL */
+.about-btn{display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;background:linear-gradient(135deg,#0052CC,#0747A6);border:none;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:700;color:#fff;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;letter-spacing:-.01em}
+.about-btn:hover{background:linear-gradient(135deg,#0747A6,#053884);box-shadow:0 4px 12px rgba(0,82,204,.35)}
+.about-btn svg{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none}
+
+.about-overlay{position:fixed;inset:0;background:rgba(9,30,66,.45);z-index:500;display:none;align-items:flex-start;justify-content:flex-start;padding:72px 12px 12px}
+.about-overlay.open{display:flex;animation:fadeIn .2s ease}
+
+.about-panel{width:480px;max-width:calc(100vw - 24px);max-height:calc(100vh - 84px);background:#fff;border-radius:16px;border:1px solid #DFE1E6;box-shadow:0 20px 60px rgba(9,30,66,.2),0 4px 16px rgba(9,30,66,.1);display:flex;flex-direction:column;overflow:hidden;animation:panelIn .25s cubic-bezier(.4,0,.2,1)}
+
+.about-header{background:linear-gradient(135deg,#091E42 0%,#0052CC 100%);padding:1.25rem 1.25rem 1.125rem;flex-shrink:0}
+.about-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}
+.about-header-left{display:flex;align-items:center;gap:10px}
+.about-header-icon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center}
+.about-header-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2}
+.about-header-title{font-size:1.05rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+.about-header-sub{font-size:.7rem;color:rgba(255,255,255,.55);margin-top:2px}
+.about-close{width:30px;height:30px;border-radius:7px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s;flex-shrink:0}
+.about-close:hover{background:rgba(255,255,255,.2)}
+.about-close svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2.5}
+.about-badge-row{display:flex;gap:6px;flex-wrap:wrap}
+.about-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;font-size:.68rem;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.04em}
+.about-badge svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.5}
+
+.about-body{flex:1;overflow-y:auto;padding:1.125rem}
+.about-body::-webkit-scrollbar{width:4px}
+.about-body::-webkit-scrollbar-track{background:transparent}
+.about-body::-webkit-scrollbar-thumb{background:#DDE3EA;border-radius:4px}
+
+.about-intro{font-size:.88rem;line-height:1.7;color:#344563;margin-bottom:1.125rem;padding-bottom:1.125rem;border-bottom:1px solid #F0F2F5}
+
+.about-section-title{font-size:.68rem;font-weight:800;color:#0052CC;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.625rem;display:flex;align-items:center;gap:6px}
+.about-section-title::after{content:'';flex:1;height:1px;background:#EAF2FF}
+
+.about-why-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.125rem}
+.about-why-card{background:#F8FAFF;border:1.5px solid #E8EEFF;border-radius:10px;padding:.75rem .875rem;transition:border-color .15s}
+.about-why-card:hover{border-color:#0052CC}
+.about-why-icon{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#EAF2FF,#DCE8FF);display:flex;align-items:center;justify-content:center;margin-bottom:.5rem}
+.about-why-icon svg{width:13px;height:13px;fill:none;stroke:#0052CC;stroke-width:2.5}
+.about-why-label{font-size:.72rem;font-weight:700;color:#091E42;margin-bottom:2px}
+.about-why-desc{font-size:.68rem;color:#5A6B7B;line-height:1.5}
+
+.about-services-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
+.about-svc-row{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem;background:#F8FAFF;border:1.5px solid #EEF0F3;border-radius:10px;transition:border-color .15s;text-decoration:none}
+.about-svc-row:hover{border-color:#0052CC;background:#F0F5FF}
+.about-svc-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.about-svc-icon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.about-svc-name{font-size:.82rem;font-weight:700;color:#091E42;margin-bottom:2px}
+.about-svc-desc{font-size:.7rem;color:#5A6B7B;line-height:1.5}
+
+.about-footer{padding:.875rem 1.125rem;border-top:1px solid #F0F2F5;background:#FAFBFC;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.about-footer-text{font-size:.7rem;color:#7A8B9A}
+.about-footer-link{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;font-weight:700;color:#0052CC;text-decoration:none;padding:6px 14px;border:1.5px solid #0052CC;border-radius:7px;transition:all .15s}
+.about-footer-link:hover{background:#0052CC;color:#fff}
+.about-footer-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.5}
+
+/* GLOSSARY BUTTON + MODAL */
+.glossary-btn{display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;background:none;border:1.5px solid #DFE1E6;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:600;color:#172B4D;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.glossary-btn:hover,.glossary-btn.active{border-color:#0052CC;color:#0052CC;background:#EAF2FF}
+.glossary-btn svg{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none}
+
+.glossary-overlay{position:fixed;inset:0;background:rgba(9,30,66,.45);z-index:500;display:none;align-items:flex-start;justify-content:flex-end;padding:72px 12px 12px}
+.glossary-overlay.open{display:flex;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.glossary-panel{width:440px;max-width:calc(100vw - 24px);max-height:calc(100vh - 84px);background:#fff;border-radius:16px;border:1px solid #DFE1E6;box-shadow:0 20px 60px rgba(9,30,66,.2),0 4px 16px rgba(9,30,66,.1);display:flex;flex-direction:column;overflow:hidden;animation:panelIn .25s cubic-bezier(.4,0,.2,1)}
+@keyframes panelIn{from{opacity:0;transform:translateY(-12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+.glossary-header{background:linear-gradient(135deg,#091E42 0%,#0052CC 100%);padding:1.125rem 1.25rem 1rem;flex-shrink:0}
+.glossary-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem}
+.glossary-header-left{display:flex;align-items:center;gap:10px}
+.glossary-header-icon{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center}
+.glossary-header-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2}
+.glossary-header-title{font-size:1rem;font-weight:700;color:#fff}
+.glossary-header-sub{font-size:.68rem;color:rgba(255,255,255,.55);margin-top:1px}
+.glossary-close{width:30px;height:30px;border-radius:7px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s;flex-shrink:0}
+.glossary-close:hover{background:rgba(255,255,255,.2)}
+.glossary-close svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2.5}
+
+.glossary-search{position:relative}
+.glossary-search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;stroke:rgba(255,255,255,.5);fill:none;pointer-events:none}
+.glossary-search input{width:100%;height:36px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:8px;padding:0 10px 0 32px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;color:#fff;outline:none;transition:border-color .15s}
+.glossary-search input::placeholder{color:rgba(255,255,255,.4)}
+.glossary-search input:focus{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.18)}
+
+.glossary-alpha{display:flex;gap:4px;flex-wrap:wrap;margin-top:.75rem}
+.glossary-alpha-btn{height:26px;min-width:26px;padding:0 6px;border:1px solid rgba(255,255,255,.2);border-radius:6px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.65);font-family:'Plus Jakarta Sans',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+.glossary-alpha-btn:hover,.glossary-alpha-btn.active{background:#fff;color:#0052CC;border-color:#fff}
+.glossary-alpha-btn.all{padding:0 10px}
+
+.glossary-count{font-size:.65rem;color:rgba(255,255,255,.4);margin-top:.5rem;letter-spacing:.05em}
+
+.glossary-body{flex:1;overflow-y:auto;padding:.75rem}
+.glossary-body::-webkit-scrollbar{width:4px}
+.glossary-body::-webkit-scrollbar-track{background:transparent}
+.glossary-body::-webkit-scrollbar-thumb{background:#DDE3EA;border-radius:4px}
+
+.glossary-letter-group{margin-bottom:1rem}
+.glossary-letter-heading{font-size:.65rem;font-weight:800;color:#0052CC;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .625rem;background:#EAF2FF;border-radius:6px;display:inline-block;margin-bottom:.5rem}
+
+.glossary-card{border:1.5px solid #EEF0F3;border-radius:10px;overflow:hidden;margin-bottom:.5rem;transition:border-color .15s,box-shadow .15s;cursor:pointer}
+.glossary-card:hover{border-color:#0052CC;box-shadow:0 2px 12px rgba(0,82,204,.1)}
+.glossary-card.expanded{border-color:#0052CC}
+.glossary-card-head{display:flex;align-items:center;justify-content:space-between;padding:.75rem .875rem;gap:10px}
+.glossary-card-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.glossary-card-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.glossary-card-icon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2}
+.glossary-card-name{font-size:.88rem;font-weight:700;color:#091E42;line-height:1.3}
+.glossary-card-tag{font-size:.55rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:4px;flex-shrink:0}
+.glossary-chev{width:20px;height:20px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s}
+.glossary-chev svg{width:14px;height:14px;fill:none;stroke:#8993A4;stroke-width:2.5}
+.glossary-card.expanded .glossary-chev{transform:rotate(180deg)}
+
+.glossary-card-body{display:none;padding:0 .875rem .875rem;border-top:1px solid #EEF0F3}
+.glossary-card.expanded .glossary-card-body{display:block}
+.glossary-card-body p{font-size:.8rem;color:#5E6C84;line-height:1.6;margin-top:.75rem}
+.glossary-card-body .glossary-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:.625rem}
+.glossary-card-body .gtag{font-size:.62rem;font-weight:600;color:#0052CC;background:#EAF2FF;padding:2px 8px;border-radius:5px}
+.glossary-card-link{display:inline-flex;align-items:center;gap:4px;font-size:.75rem;font-weight:700;color:#0052CC;text-decoration:none;margin-top:.75rem;transition:gap .15s}
+.glossary-card-link:hover{gap:7px}
+.glossary-card-link svg{width:11px;height:11px;stroke:#0052CC;fill:none}
+
+.glossary-empty{text-align:center;padding:2.5rem 1rem;color:#8993A4}
+.glossary-empty svg{width:36px;height:36px;stroke:#DDE3EA;fill:none;margin-bottom:.75rem}
+.glossary-empty p{font-size:.85rem}
+
 .nav-program-btn{background:linear-gradient(135deg,#0052CC 0%,#0B2A4A 100%);color:#fff;border:none;border-radius:7px;padding:7px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s;box-shadow:0 2px 8px rgba(0,82,204,0.35);position:relative;overflow:hidden}
 .nav-program-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.12) 0%,transparent 60%);pointer-events:none}
 .nav-program-btn:hover{background:linear-gradient(135deg,#0066FF 0%,#0B2A4A 100%);box-shadow:0 4px 16px rgba(0,82,204,0.5);transform:translateY(-1px)}
@@ -53,70 +180,15 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .nav-program-btn .btn-star{font-size:.7rem;opacity:.85}
 
 /* ── SERVICES NAV DROPDOWN ── */
-.nav-services-wrap{position:relative;display:flex;align-items:center}
-.nav-services-btn{display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;background:none;border:1.5px solid #DFE1E6;border-radius:7px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:600;color:#172B4D;cursor:pointer;transition:all .2s;white-space:nowrap}
-.nav-services-btn:hover,.nav-services-btn.open{border-color:#0052CC;color:#0052CC;background:#EAF2FF}
-.nav-services-btn svg{width:14px;height:14px;flex-shrink:0}
-.nav-services-btn .svc-chev{width:12px;height:12px;transition:transform .25s;stroke:#5E6C84}
-.nav-services-btn.open .svc-chev{transform:rotate(180deg)}
-.nav-services-btn.open .svc-chev{stroke:#0052CC}
 
-.nav-svc-dropdown{
-  position:absolute;top:calc(100% + 10px);left:0;
-  width:680px;max-width:calc(100vw - 2rem);
-  background:#fff;border-radius:14px;
-  border:1px solid #DFE1E6;
-  box-shadow:0 12px 40px rgba(9,30,66,.15),0 2px 8px rgba(9,30,66,.08);
-  padding:0;overflow:hidden;
-  animation:svcDropIn .22s cubic-bezier(.4,0,.2,1) both;
-  z-index:300;
-}
-@keyframes svcDropIn{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 
-.svc-drop-head{
-  background:linear-gradient(135deg,#091E42 0%,#0052CC 100%);
-  padding:1rem 1.25rem .875rem;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.svc-drop-head-left{display:flex;align-items:center;gap:10px}
-.svc-drop-badge{
-  display:flex;align-items:center;gap:6px;
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
-  border-radius:6px;padding:4px 10px;
-}
-.svc-drop-badge-dot{width:7px;height:7px;border-radius:50%;background:#00B8D4;animation:pulse2 2s ease-in-out infinite}
+
 @keyframes pulse2{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
-.svc-drop-badge-text{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8)}
-.svc-drop-title{font-size:.95rem;font-weight:700;color:#fff}
-.svc-drop-sub{font-size:.72rem;color:rgba(255,255,255,.55);margin-top:1px}
-.svc-drop-link{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.6);text-decoration:none;transition:color .15s;flex-shrink:0}
-.svc-drop-link:hover{color:#fff}
-.svc-drop-link svg{width:11px;height:11px;stroke:currentColor;fill:none}
 
-.svc-grid{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  gap:0;padding:.75rem;gap:6px;
-}
-.svc-item{
-  display:flex;flex-direction:column;gap:6px;
-  padding:.875rem .875rem .75rem;border-radius:10px;
-  border:1.5px solid transparent;
-  cursor:pointer;transition:all .18s;background:#F8F9FA;
-  text-decoration:none;
-}
-.svc-item:hover{background:#EAF2FF;border-color:#0052CC}
-.svc-item-icon-row{display:flex;align-items:center;justify-content:space-between}
-.svc-item-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.svc-item-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2}
-.svc-item-tag{font-size:.55rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
-.svc-item-name{font-size:.82rem;font-weight:700;color:#091E42;line-height:1.25}
-.svc-item-desc{font-size:.7rem;color:#5E6C84;line-height:1.5;flex:1}
 
-.svc-drop-footer{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.75rem 1rem;border-top:1px solid #DFE1E6;
-  background:#F8F9FA;
-}
+
+
+
 .svc-footer-info{display:flex;align-items:center;gap:6px;font-size:.7rem;color:#8993A4}
 .svc-footer-info svg{width:12px;height:12px;stroke:#00875A;fill:none}
 .svc-footer-info b{color:#172B4D;font-weight:600}
@@ -205,12 +277,60 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 .pill-count{opacity:.5;font-size:.68em;margin-left:2px}
 
+/* LAYOUT PICKER */
+.layout-picker-wrap{position:relative;flex-shrink:0}
+.layout-picker-btn{display:flex;align-items:center;gap:6px;height:38px;padding:0 10px 0 9px;background:var(--white);border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:600;color:#172B4D;transition:all .18s;white-space:nowrap}
+.layout-picker-btn:hover,.layout-picker-btn.open{border-color:#0052CC;color:#0052CC;background:#EAF2FF}
+.layout-picker-btn.open .layout-chev{transform:rotate(180deg)}
+.layout-btn-icon{display:flex;align-items:center;justify-content:center;width:18px}
+.layout-btn-label{font-size:.75rem;font-weight:600}
+.layout-chev{transition:transform .22s;flex-shrink:0;opacity:.6}
+.layout-menu{
+  position:absolute;top:calc(100% + 8px);right:0;
+  width:200px;background:#fff;border:1.5px solid #DFE1E6;
+  border-radius:12px;box-shadow:0 8px 32px rgba(9,30,66,.14),0 2px 6px rgba(9,30,66,.08);
+  padding:6px;z-index:500;
+  opacity:0;transform:translateY(-6px) scale(.97);pointer-events:none;
+  transition:opacity .18s,transform .18s;
+  transform-origin:top right;
+}
+.layout-menu.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.layout-menu-head{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8993A4;padding:4px 8px 6px;margin-bottom:2px}
+.layout-menu-divider{height:1px;background:#F0F1F3;margin:4px 0}
+.layout-opt{display:flex;align-items:center;gap:10px;width:100%;padding:7px 8px;border:none;background:none;cursor:pointer;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;text-align:left;transition:background .15s;position:relative}
+.layout-opt:hover{background:#F4F5F7}
+.layout-opt.active{background:#EAF2FF}
+.layout-opt-icon{width:28px;height:28px;border-radius:6px;background:#F4F5F7;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#344563;transition:background .15s}
+.layout-opt.active .layout-opt-icon{background:#0052CC;color:#fff}
+.layout-opt.active .layout-opt-icon svg{stroke:#fff}
+.layout-opt-text{display:flex;flex-direction:column;gap:1px;flex:1}
+.layout-opt-text strong{font-size:.8rem;font-weight:700;color:#091E42}
+.layout-opt-text span{font-size:.67rem;color:#8993A4}
+.layout-opt.active .layout-opt-text strong{color:#0052CC}
+.layout-check{font-size:.7rem;color:#0052CC;font-weight:700;flex-shrink:0}
+
 /* MAIN GRID */
 .main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem 4rem;width:100%}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+/* Grid column variations */
+.grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.grid.cols-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1050px){.grid.cols-4{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.grid,.grid.cols-3,.grid.cols-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.grid,.grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}}
 
-/* CARD */
-.card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:box-shadow .2s,border-color .2s,transform .2s;display:flex;flex-direction:column;animation:fadeUp .35s ease both;position:relative}
+/* LIST VIEW */
+.grid.list-view{grid-template-columns:1fr;gap:8px}
+.grid.list-view .card{flex-direction:row;align-items:center}
+.grid.list-view .card-top{padding:.875rem 1rem;flex-direction:row;align-items:center;gap:1rem;flex:1}
+.grid.list-view .card-header{flex-direction:row;align-items:center;gap:.875rem;flex:1;min-width:0}
+.grid.list-view .card-avatar{width:40px;height:40px;border-radius:8px;flex-shrink:0}
+.grid.list-view .card-name{font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.grid.list-view .card-desc{display:none}
+.grid.list-view .card-region-badge{display:none}
+.grid.list-view .card-bottom{border-top:none;border-left:1px solid var(--border);padding:.875rem 1rem;background:none;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;min-width:140px;flex-shrink:0}
+@media(max-width:600px){.grid.list-view .card{flex-direction:column}.grid.list-view .card-bottom{border-left:none;border-top:1px solid var(--border);flex-direction:row;width:100%}}background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:box-shadow .2s,border-color .2s,transform .2s;display:flex;flex-direction:column;animation:fadeUp .35s ease both;position:relative}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .card:hover{box-shadow:var(--shadow-md);border-color:#b8cfe8;transform:translateY(-2px)}
 .card-top{padding:1.25rem 1.25rem .875rem;display:flex;flex-direction:column;gap:.75rem;flex:1}
@@ -1125,145 +1245,45 @@ body.int-open .hero-btn-integration {
 </head>
 <body>
 
-
+<!-- SPLASH SCREEN -->
+<div class="splash" id="splash">
+  <canvas id="splash-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.6"></canvas>
+  <div class="splash-glow1"></div>
+  <div class="splash-glow2"></div>
+  <div class="splash-content">
+    <div class="splash-title">Evrotrust <span>Partners</span></div>
+    <div class="splash-sub">51 verified partners across Europe</div>
+    <div class="swipe-hint">
+      <div class="swipe-arrow">
+        <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+      </div>
+      <div class="swipe-text">Swipe up or click to continue</div>
+    </div>
+  </div>
+  <div class="splash-bar"><div class="splash-bar-fill" id="splash-bar-fill"></div></div>
+</div>
 
 <!-- NAV -->
 <nav class="nav">
   <!-- Logo + title -->
   <div class="nav-logo-area" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <div class="nav-logo-icon">
-      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    </div>
     <span class="nav-title">Evrotrust <span>Partners</span></span>
   </div>
 
+  <!-- About Evrotrust Button -->
+  <button class="about-btn" id="about-nav-btn" onclick="openAbout()">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+    About Evrotrust
+  </button>
+
   <div class="nav-divider"></div>
 
-  <!-- Services Dropdown -->
-  <div class="nav-services-wrap" id="nav-svc-wrap">
-    <button class="nav-services-btn" id="nav-svc-btn" onclick="toggleSvcDropdown()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      Services
-      <svg class="svc-chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
+  <!-- Glossary Button -->
+  <button class="glossary-btn" id="glossary-nav-btn" onclick="openGlossary()">
+    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h6M9 11h4"/></svg>
+    Glossary
+  </button>
 
-    <!-- Dropdown panel -->
-    <div class="nav-svc-dropdown" id="nav-svc-dropdown" style="display:none">
-      <!-- Header -->
-      <div class="svc-drop-head">
-        <div class="svc-drop-head-left">
-          <div class="svc-drop-badge">
-            <span class="svc-drop-badge-dot"></span>
-            <span class="svc-drop-badge-text">QTSP · eIDAS Compliant</span>
-          </div>
-        </div>
-        <div style="text-align:right">
-          <div class="svc-drop-title">Evrotrust Services</div>
-          <div class="svc-drop-sub">Qualified Trust Service Provider for the EU</div>
-        </div>
-        <a class="svc-drop-link" href="https://evrotrust.com" target="_blank">
-          evrotrust.com
-          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
-      </div>
-
-      <!-- Service Grid -->
-      <div class="svc-grid">
-        <div class="svc-item" onclick="closeSvcDropdown()">
-          <div class="svc-item-icon-row">
-            <div class="svc-item-icon" style="background:#EAF2FF;color:#0052CC"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M7 15h2M13 15h4"/></svg></div>
-            <span class="svc-item-tag" style="background:#EAF2FF;color:#0052CC">eID</span>
-          </div>
-          <div class="svc-item-name">Electronic Identification</div>
-          <div class="svc-item-desc">Remote KYC identity verification via mobile app. 62+ nationalities. No physical presence.</div>
-        </div>
-
-        <div class="svc-item" onclick="closeSvcDropdown()">
-          <div class="svc-item-icon-row">
-            <div class="svc-item-icon" style="background:#E3FCEF;color:#00875A"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-            <span class="svc-item-tag" style="background:#E3FCEF;color:#00875A">QES</span>
-          </div>
-          <div class="svc-item-name">Electronic Signature</div>
-          <div class="svc-item-desc">SES, AES and QES — legally equivalent to handwritten signature across all EU member states.</div>
-        </div>
-
-        <div class="svc-item" onclick="closeSvcDropdown()">
-          <div class="svc-item-icon-row">
-            <div class="svc-item-icon" style="background:#FFF0E6;color:#C94E0A"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg></div>
-            <span class="svc-item-tag" style="background:#FFF0E6;color:#C94E0A">eDel</span>
-          </div>
-          <div class="svc-item-name">eDelivery</div>
-          <div class="svc-item-desc">Qualified registered e-delivery with legal proof of sending, delivery, and opening.</div>
-        </div>
-
-        <div class="svc-item" onclick="closeSvcDropdown()">
-          <div class="svc-item-icon-row">
-            <div class="svc-item-icon" style="background:#EEF2FF;color:#3730A3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-            <span class="svc-item-tag" style="background:#EEF2FF;color:#3730A3">eTS</span>
-          </div>
-          <div class="svc-item-name">eTimestamp</div>
-          <div class="svc-item-desc">Qualified timestamp proving document existence at a point in time. 0.02 TU per timestamp.</div>
-        </div>
-
-        <div class="svc-item" onclick="closeSvcDropdown()">
-          <div class="svc-item-icon-row">
-            <div class="svc-item-icon" style="background:#FCE7F3;color:#9D174D"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-            <span class="svc-item-tag" style="background:#FCE7F3;color:#9D174D">eSeal</span>
-          </div>
-          <div class="svc-item-name">eSeal</div>
-          <div class="svc-item-desc">Qualified electronic seals for legal entities. Ensures authenticity under eIDAS Art. 35.</div>
-        </div>
-
-        <div class="svc-item" onclick="closeSvcDropdown()">
-          <div class="svc-item-icon-row">
-            <div class="svc-item-icon" style="background:#F0FDF4;color:#15803D"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
-            <span class="svc-item-tag" style="background:#F0FDF4;color:#15803D">KYC</span>
-          </div>
-          <div class="svc-item-name">AML / KYC Compliance</div>
-          <div class="svc-item-desc">eIDAS, GDPR and AML-compliant remote identification for banks, insurance, and fintech.</div>
-        </div>
-
-        <div class="svc-item" onclick="closeSvcDropdown()">
-          <div class="svc-item-icon-row">
-            <div class="svc-item-icon" style="background:#F5F3FF;color:#6D28D9"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
-            <span class="svc-item-tag" style="background:#F5F3FF;color:#6D28D9">SDK</span>
-          </div>
-          <div class="svc-item-name">Mobile SDK</div>
-          <div class="svc-item-desc">Native iOS, Android and React Native SDK. Private key in device HSM, full KYC video flow.</div>
-        </div>
-
-        <div class="svc-item" onclick="closeSvcDropdown()">
-          <div class="svc-item-icon-row">
-            <div class="svc-item-icon" style="background:#FEFCE8;color:#A16207"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-            <span class="svc-item-tag" style="background:#FEFCE8;color:#A16207">TU</span>
-          </div>
-          <div class="svc-item-name">Trust Units</div>
-          <div class="svc-item-desc">Prepaid packages valid 12 months. 1 TU = QES · 3 TU = eID · 0.02 TU = Timestamp.</div>
-        </div>
-
-        <div class="svc-item" onclick="closeSvcDropdown()">
-          <div class="svc-item-icon-row">
-            <div class="svc-item-icon" style="background:#F1F5F9;color:#334155"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-            <span class="svc-item-tag" style="background:#F1F5F9;color:#334155">WL</span>
-          </div>
-          <div class="svc-item-name">White-label SDK</div>
-          <div class="svc-item-desc">Embed Evrotrust into your platform. Web SDK, fully customizable UX, plug-and-play.</div>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="svc-drop-footer">
-        <div class="svc-footer-info">
-          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          <span>ISO 9001 · ISO 27001 · <b>eIDAS QTSP</b> · GDPR · AML</span>
-        </div>
-        <button class="svc-footer-cta" onclick="openProg();closeSvcDropdown()">
-          Become a Partner
-          <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
 
   <div style="flex:1"></div>
 
@@ -1547,9 +1567,45 @@ setInterval(()=>{ pillIdx=(pillIdx+1)%pillData.length; selectPill(pillIdx); }, 5
       <option value="cat">Category</option>
       <option value="region">Region</option>
     </select>
-    <div class="view-toggle">
-      <button class="view-btn active" id="btn-grid" onclick="setView('grid')" title="Grid"><svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button>
-      <button class="view-btn" id="btn-list" onclick="setView('list')" title="List"><svg viewBox="0 0 24 24" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
+    <!-- LAYOUT PICKER -->
+    <div class="layout-picker-wrap" id="layout-picker-wrap">
+      <button class="layout-picker-btn" id="layout-picker-btn" onclick="toggleLayoutMenu()" title="Change layout">
+        <span class="layout-btn-icon" id="layout-btn-icon">
+          <!-- grid 3 icon default -->
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="7.5" y="1" width="5" height="5" rx="1"/><rect x="14" y="1" width="5" height="5" rx="1"/><rect x="1" y="7.5" width="5" height="5" rx="1"/><rect x="7.5" y="7.5" width="5" height="5" rx="1"/><rect x="14" y="7.5" width="5" height="5" rx="1"/><rect x="1" y="14" width="5" height="5" rx="1"/><rect x="7.5" y="14" width="5" height="5" rx="1"/><rect x="14" y="14" width="5" height="5" rx="1"/></svg>
+        </span>
+        <span class="layout-btn-label" id="layout-btn-label">3 cols</span>
+        <svg class="layout-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M2 4l4 4 4-4"/></svg>
+      </button>
+      <div class="layout-menu" id="layout-menu">
+        <div class="layout-menu-head">Layout</div>
+        <button class="layout-opt" data-layout="2" onclick="setLayout(2,this)">
+          <span class="layout-opt-icon">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><rect x="1" y="1" width="8" height="8" rx="1.5"/><rect x="11" y="1" width="8" height="8" rx="1.5"/><rect x="1" y="11" width="8" height="8" rx="1.5"/><rect x="11" y="11" width="8" height="8" rx="1.5"/></svg>
+          </span>
+          <span class="layout-opt-text"><strong>2 columns</strong><span>Wider cards</span></span>
+        </button>
+        <button class="layout-opt active" data-layout="3" onclick="setLayout(3,this)">
+          <span class="layout-opt-icon">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="7.5" y="1" width="5" height="5" rx="1"/><rect x="14" y="1" width="5" height="5" rx="1"/><rect x="1" y="7.5" width="5" height="5" rx="1"/><rect x="7.5" y="7.5" width="5" height="5" rx="1"/><rect x="14" y="7.5" width="5" height="5" rx="1"/><rect x="1" y="14" width="5" height="5" rx="1"/><rect x="7.5" y="14" width="5" height="5" rx="1"/><rect x="14" y="14" width="5" height="5" rx="1"/></svg>
+          </span>
+          <span class="layout-opt-text"><strong>3 columns</strong><span>Default</span></span>
+          <span class="layout-check">✓</span>
+        </button>
+        <button class="layout-opt" data-layout="4" onclick="setLayout(4,this)">
+          <span class="layout-opt-icon">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><rect x="0" y="0" width="4" height="4" rx="1"/><rect x="5.3" y="0" width="4" height="4" rx="1"/><rect x="10.7" y="0" width="4" height="4" rx="1"/><rect x="16" y="0" width="4" height="4" rx="1"/><rect x="0" y="5.3" width="4" height="4" rx="1"/><rect x="5.3" y="5.3" width="4" height="4" rx="1"/><rect x="10.7" y="5.3" width="4" height="4" rx="1"/><rect x="16" y="5.3" width="4" height="4" rx="1"/><rect x="0" y="10.7" width="4" height="4" rx="1"/><rect x="5.3" y="10.7" width="4" height="4" rx="1"/><rect x="10.7" y="10.7" width="4" height="4" rx="1"/><rect x="16" y="10.7" width="4" height="4" rx="1"/></svg>
+          </span>
+          <span class="layout-opt-text"><strong>4 columns</strong><span>Compact</span></span>
+        </button>
+        <div class="layout-menu-divider"></div>
+        <button class="layout-opt" data-layout="list" onclick="setLayout('list',this)">
+          <span class="layout-opt-icon">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><rect x="0" y="1" width="20" height="4" rx="1.5"/><rect x="0" y="8" width="20" height="4" rx="1.5"/><rect x="0" y="15" width="20" height="4" rx="1.5"/></svg>
+          </span>
+          <span class="layout-opt-text"><strong>List</strong><span>Compact rows</span></span>
+        </button>
+      </div>
     </div>
     <button class="add-btn" onclick="openAdd()" title="Add partner">
       <svg stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
@@ -2149,57 +2205,58 @@ function initials(n){const w=n.trim().split(/\s+/);return w.length>=2?(w[0][0]+w
 function getRegionShort(r){if(!r)return '';const m={'Bulgaria':'BG','Germany':'DE','USA':'US','Estonia':'EE','Poland':'PL','Romania':'RO','Switzerland':'CH','France':'FR','Italy':'IT','Spain':'ES','Czech Republic':'CZ','Montenegro':'ME','Serbia':'RS','Kenya':'KE','South Korea':'KR','Scandinavia':'SE','Belarus':'BY'};for(const[k,v]of Object.entries(m))if(r.includes(k))return v;return r.slice(0,2).toUpperCase();}
 
 let partners=[
-  {name:'eID Easy',website:'https://eideasy.com',website:'https://eideasy.com',short:'Electronic signature solution — 80+ eID methods, 160+ countries.',desc:'eID Easy eliminates the complexities of managing multiple trust services. Whether verifying users with national eIDs, enabling advanced or qualified electronic signatures, or applying trusted eSeals — all in a single unified experience.',cat:'Digital Signature',integration:'QES',usecase:'Electronic signature solution',bizmodel:'Client buys from the platform',benefits:['Single API for 160+ countries','Regulatory compliance','Scalable cross-border trust'],icp:['Fintech','SaaS platforms','Government'],region:'Estonia',url:'https://evrotrust.com/partners/eid-easy/',material:'https://evrotrust-my.sharepoint.com/:b:/p/stefan_hadjistoytchev/EYkerCKTCzdGhH6ty7CzxtcBrWERJYNwvcUzxUHe-qMgKQ?e=bpAsJQ'},
-  {name:'TrustLynx',short:'Integrate, automate and manage digital identities, e-signing and e-sealing — from Estonia.',desc:'TrustLynx provides digital trust infrastructure and signature management solutions for organizations seeking to scale qualified electronic signing across complex multi-party workflows.',cat:'Digital Signature',integration:'QES',usecase:'Solution to integrate, automate and manage digital identities, e-signing and e-sealing',bizmodel:'Client buys from the platform',benefits:['Enterprise-scale signing','Multi-party workflows','Complete audit trail'],icp:['Enterprise','Financial services','Legal'],region:'Estonia',url:'',material:'https://www.youtube.com/watch?v=Klmr97W72is'},
-  {name:'Advania',short:'IT-services, platforms and cloud services with Evrotrust QES integration.',desc:'Advania is a leading Nordic IT services company providing platforms and cloud services. Partners with Evrotrust to offer qualified electronic signatures through their Signet platform.',cat:'Digital Signature',integration:'QES',usecase:'IT-services, platforms, cloud services',bizmodel:'Client buys from the platform',benefits:['Nordic market expertise','Cloud-native integration','Enterprise-grade platform'],icp:['Nordic enterprises','Financial services','Public sector'],region:'Scandinavia',url:'',material:''},
-  {name:'Mark ID',short:'Universal Identification/KYC and eSignature gateway.',desc:'Mark ID provides a universal identification and KYC gateway combined with eSignature capabilities, bridging traditional KYC with modern digital identity verification.',cat:'eID & Identity',integration:'N/A',usecase:'Universal Identification/KYC and eSignature gateway',bizmodel:'N/A',benefits:['Universal ID gateway','KYC compliance','eSignature integration'],icp:['Banking','Insurance','RegTech'],region:'Lithuania',url:'',material:''},
-  {name:'inSign GmbH',short:'Simple signature processes — QES with Evrotrust since 2011.',desc:'inSign GmbH is the No. 1 German signature provider based near Munich, servers in Germany, 10+ years of market experience, available in 17 languages. Supports all signature types under eIDAS and ZertES including QES.',cat:'Digital Signature',integration:'QES',usecase:'Simple signature processes',bizmodel:'Client buys from the platform',benefits:['17 languages','German-hosted servers','Full eIDAS & ZertES support'],icp:['Enterprise','Legal','HR'],region:'Germany',url:'https://evrotrust.com/partners/insign/',material:''},
-  {name:'SigniFlow',short:'Digital signature and approval workflow system powered by Evrotrust QES.',desc:'SigniFlow is a comprehensive digital signature and approval workflow system enabling organizations to digitize complex multi-party signing processes.',cat:'Digital Signature',integration:'QES',usecase:'Digital signature & approval workflow system',bizmodel:'Client buys from the platform',benefits:['Workflow automation','Multi-party approvals','eIDAS QES compliance'],icp:['Enterprise','Legal','Financial services'],region:'South Africa',url:'',material:''},
-  {name:'Adobe',website:'https://www.adobe.com',website:'https://www.adobe.com',short:'Digital signature and document workflow system with Evrotrust QES.',desc:'Adobe Acrobat Sign partners with Evrotrust to provide qualified electronic signatures within the world\'s most widely used document workflow ecosystem.',cat:'Digital Signature',integration:'QES',usecase:'Digital signature & document workflow system',bizmodel:'N/A',benefits:['World\'s most used platform','Seamless document workflows','Enterprise-grade compliance'],icp:['Enterprise','Legal','Financial services'],region:'USA',url:'',material:''},
-  {name:'DMS (DocuSign / Apposite / Wawasoft / Digidemat)',short:'Document management with QES hash integration — multiple DMS platforms.',desc:'A group of document management system partners including DocuSign, Apposite, Wawasoft and Digidemat. Clients integrate Evrotrust QES hash into their existing DMS platforms for legally valid document signing and archiving.',cat:'Document Management',integration:'QES hash',usecase:'Document management',bizmodel:'Client buys directly from Evrotrust',benefits:['DMS-native signing','QES hash integration','Multiple platform support'],icp:['Enterprise','Legal','Public sector'],region:'Global',url:'',material:'https://www.youtube.com/watch?v=Klmr97W72is'},
-  {name:'David Holding / Acstre',short:'Government and municipality solutions with QES and eID.',desc:'David Holding and Acstre provide digital solutions for government and municipality clients. Partners with Evrotrust to enable qualified electronic signatures and eID for public sector digital transformation.',cat:'Consulting',integration:'QES, eID',usecase:'Government and municipality solutions',bizmodel:'N/A',benefits:['Public sector expertise','Government-grade identity','eIDAS compliance'],icp:['Government','Municipalities','Public institutions'],region:'Bulgaria',url:'',material:''},
-  {name:'Nemetschek / DocuWare',short:'Document management with QES, eID and eDelivery integration.',desc:'Nemetschek\'s DocuWare is a global leader in digital document management. Partners with Evrotrust for QES, eID and eDelivery integration (eDelivery integration starting 25.07). Enables fully compliant digital document workflows.',cat:'Document Management',integration:'QES, eID, eDelivery',usecase:'Document management',bizmodel:'Client buys directly from Evrotrust',benefits:['eIDAS-compliant signing','eDelivery integration','Automated archiving'],icp:['Enterprise','Healthcare','Legal'],region:'Germany',url:'https://evrotrust.com/partners/docuware/',material:'https://evrotrust-my.sharepoint.com/:p:/p/stefan_hadjistoytchev/EQCikF3uD2dOgCaBD9uQFbwBCssBHS0eyaQTgKDMOXEGhw?e=MEQgji'},
-  {name:'TRESORIT',short:'Cloud storage platform with QES — secure encrypted document management.',desc:'Tresorit combines end-to-end encrypted cloud storage with Evrotrust qualified electronic signatures, enabling secure document signing and storage for sensitive enterprise workflows.',cat:'Document Management',integration:'QES',usecase:'Cloud storage platform with digital signing',bizmodel:'Client buys from the platform',benefits:['End-to-end encryption','Secure qualified signing','GDPR-compliant delivery'],icp:['Legal','Healthcare','Financial services'],region:'Switzerland',url:'',material:''},
-  {name:'Salesforce',website:'https://www.salesforce.com',website:'https://www.salesforce.com',featured:true,short:'CRM with Evrotrust QES — install and configure for eSigning directly in Salesforce.',desc:'Salesforce is the world\'s leading CRM platform. Partners with Evrotrust to enable qualified electronic signatures directly within Salesforce, allowing sales teams to send and sign documents without leaving the CRM.',cat:'Software & Integration',integration:'QES',usecase:'CRM with qualified eSigning',bizmodel:'Client buys directly from Evrotrust',benefits:['CRM-native signing','No context switching','Faster deal closure'],icp:['Sales teams','Financial services','Enterprise'],region:'USA',url:'',material:''},
-  {name:'ZOHO',short:'Cloud software for business with QES hash integration.',desc:'ZOHO provides a comprehensive suite of cloud software for business. Partners with Evrotrust to integrate QES hash signing into ZOHO\'s business applications, enabling legally valid document signing within the ZOHO ecosystem.',cat:'Software & Integration',integration:'QES hash',usecase:'Cloud software for business',bizmodel:'Client buys directly from Evrotrust',benefits:['Cloud-native','Business suite integration','QES hash signing'],icp:['SMEs','Startups','Growing businesses'],region:'India',url:'',material:''},
-  {name:'Creatio',short:'Business solutions marketplace with Evrotrust integration.',desc:'Creatio provides a no-code platform for workflow automation and CRM. Available through the Creatio Marketplace, the Evrotrust integration enables qualified electronic signing within business automation workflows.',cat:'Software & Integration',integration:'',usecase:'Business Solutions via Creatio Marketplace',bizmodel:'Client buys from the platform',benefits:['No-code automation','Marketplace integration','Rapid deployment'],icp:['Sales teams','Financial services','Enterprise'],region:'USA',url:'',material:''},
-  {name:'MobyPDF',short:'Digital signature and document workflow system with QES hash.',desc:'MobyPDF provides digital signature and document workflow capabilities. Partners with Evrotrust to integrate QES hash signing into PDF-based document workflows.',cat:'Digital Signature',integration:'QES hash',usecase:'Digital signature & document workflow system',bizmodel:'Client buys from the platform',benefits:['PDF-native signing','QES hash integration','Simple workflow'],icp:['SMEs','Legal','Professional services'],region:'Bulgaria',url:'',material:''},
-  {name:'Nula.bg',short:'Digital business and accounting solutions with Evrotrust QES.',desc:'Nula.bg provides digital business and accounting solutions for Bulgarian companies. Partners with Evrotrust to enable identification and document signing with qualified electronic signatures directly within accounting workflows.',cat:'Software & Integration',integration:'QES',usecase:'Digital business and accounting solutions',bizmodel:'Client buys directly from Evrotrust',benefits:['Bulgarian market focus','Accounting-native signing','Legal compliance'],icp:['Bulgarian SMEs','Accountants','Business owners'],region:'Bulgaria',url:'',material:''},
-  {name:'VIKTA',short:'Document management with QES — B2C platform integration.',desc:'VIKTA provides document management solutions for B2C platforms. Partners with Evrotrust to enable qualified electronic signatures within consumer-facing document workflows.',cat:'Document Management',integration:'QES',usecase:'Document management',bizmodel:'Client buys from the platform',benefits:['B2C-ready','Document management','QES compliance'],icp:['B2C platforms','Consumer services','Retail'],region:'France',url:'',material:''},
-  {name:'sHRedy',short:'Labor files — digitize the full employment lifecycle from hiring to termination using remote identification, qualified electronic signatures, and legally compliant electronic labour files.',desc:'Through the partnership with sHRedy, organisations can digitize the entire employment lifecycle — from hiring to termination — using remote identification, qualified electronic signatures, and legally compliant electronic labour files. This significantly reduces administrative workload, eliminates paper processes, and ensures full legal compliance for all HR operations.',cat:'HR Management',integration:'AES, QES, eDelivery, eID',usecase:'Labor files — digitize the full employment lifecycle from hiring to termination',bizmodel:'Client buys from the platform',benefits:['Full lifecycle digitization','Remote identification','Legal labor file compliance','Zero paper'],icp:['HR departments','Enterprise','Staffing agencies'],region:'Bulgaria',url:'https://shredy.bg/shredy-junior/',material:''},
-  {name:'SB Accounting & Consulting',short:'Labor files with QES, eDelivery and eID integration.',desc:'SB Accounting & Consulting is a leading outsourcing partner for Payroll, Electronic Labor File, and HR administration. Partners with Evrotrust to provide qualified electronic signatures, eDelivery and eID for fully digital labor file management.',cat:'HR Management',integration:'QES, eDelivery, eID',usecase:'Labor files',bizmodel:'Client buys from the platform',benefits:['Paperless HR outsourcing','Labor file compliance','Remote signing'],icp:['SMEs','Corporates','Outsourcing clients'],region:'Bulgaria',url:'',material:''},
-  {name:'Konica Minolta / M-Files',short:'Digital office for HR and CFOs with QES and eID.',desc:'Konica Minolta together with M-Files provides a digital office solution for HR and CFO functions. Partners with Evrotrust to enable qualified electronic signatures and eID within digital workplace document workflows.',cat:'HR Management',integration:'QES, eID',usecase:'Digital office for HR and CFOs',bizmodel:'Client buys from the platform',benefits:['HR & CFO digital office','QES + eID integration','Document management'],icp:['Enterprise','HR departments','Finance'],region:'Bulgaria',url:'',material:''},
-  {name:'Open Business Solutions',short:'ERP & HR solutions with QES and eDelivery — client buys directly from Evrotrust.',desc:'Open Business Solutions (OBS) provides ERP and HR software. Partners with Evrotrust to integrate QES and eDelivery into ERP and HR workflows for fully digital business operations.',cat:'HR Management',integration:'QES, eDelivery',usecase:'ERP & HR solutions',bizmodel:'Client buys directly from Evrotrust',benefits:['ERP-native integration','eDelivery','HR digitization'],icp:['Enterprise','Manufacturing','Services'],region:'Bulgaria',url:'',material:''},
-  {name:'Digital Lights / SAP SuccessFactors',short:'HR module from SAP SuccessFactors with full Evrotrust trust services stack — QES, AES, eDelivery, Timestamp and OTP Signature.',desc:'Digital Lights integrates Evrotrust\'s full trust services stack into the SAP SuccessFactors HR module, enabling enterprises to sign, deliver and timestamp HR documents with the highest level of legal assurance.',cat:'HR Management',integration:'QES, AES, eDelivery, Timestamp, OTP Signature',usecase:'HR module from SAP software',bizmodel:'Client buys directly from Evrotrust',benefits:['SAP SuccessFactors integration','Full trust services','AES + QES + eDelivery'],icp:['Large enterprise','Manufacturing','International companies'],region:'Bulgaria',url:'',material:''},
-  {name:'Technologica / HeRMeS',short:'HR software and digital labor file management via the HeRMeS platform, integrated with Evrotrust QES.',desc:'Technologica provides HR software including the HeRMeS platform for digital labor file and HR process management. Partners with Evrotrust for qualified electronic signatures in HR document workflows.',cat:'HR Management',integration:'QES',usecase:'HR software, Digital Labor file and HR processes',bizmodel:'Client buys from the platform',benefits:['HeRMeS platform','Digital labor file','HR process automation'],icp:['Bulgarian enterprises','HR departments','Public sector'],region:'Bulgaria',url:'',material:''},
-  {name:'M Soft',short:'HR and Payroll system with QES, eDelivery, Timestamp and eID.',desc:'M Soft provides a comprehensive HR and Payroll system. Partners with Evrotrust to integrate QES, eDelivery, Timestamp and eID into HR and payroll document workflows for full digital compliance.',cat:'HR Management',integration:'QES, eDelivery, Timestamp, eID',usecase:'HR and Payroll system',bizmodel:'Client buys directly from Evrotrust',benefits:['Payroll + HR combined','Full trust services','Legal compliance'],icp:['SMEs','Enterprises','Accountants'],region:'Bulgaria',url:'',material:''},
-  {name:'Microcomplex',short:'Aladin — HR Management Software with QES and eDelivery.',desc:'Microcomplex develops the Aladin HR Management Software that has streamlined digital HR operations for over 35 years. Partners with Evrotrust to integrate QES and eDelivery into established HR workflows.',cat:'HR Management',integration:'QES, eDelivery',usecase:'Aladin — HR Management Software',bizmodel:'Client buys directly from Evrotrust',benefits:['35+ years HR expertise','QES + eDelivery','Minimal disruption'],icp:['Bulgarian enterprises','HR departments','Public institutions'],region:'Bulgaria',url:'',material:''},
-  {name:'Motion Software',short:'HR management tool with QES integration.',desc:'Motion Software provides HR management tools. Partners with Evrotrust to enable qualified electronic signatures within HR document workflows, enabling remote and fully digital HR operations.',cat:'HR Management',integration:'QES',usecase:'HR management tool',bizmodel:'Client buys directly from Evrotrust',benefits:['HR tool integration','QES compliance','Remote signing'],icp:['Tech companies','SMEs','Startups'],region:'Bulgaria',url:'',material:''},
-  {name:'IBS / DigiSign',short:'HR Management System integrating Profile.Guru and DigiSign with Evrotrust QES for qualified electronic signing of HR documents.',desc:'IBS provides an HR Management System integrating Profile.Guru and DIGISign with Evrotrust QES for qualified electronic signing of HR documents.',cat:'HR Management',integration:'QES',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['Profile.Guru integration','DIGISign integration','Legal HR signing'],icp:['Bulgarian enterprises','HR departments'],region:'Bulgaria',url:'',material:''},
-  {name:'Planit',short:'HR Management System with Evrotrust QES integration.',desc:'Planit provides an HR Management System. Partners with Evrotrust to enable qualified electronic signatures for HR document workflows.',cat:'HR Management',integration:'QES',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['HR system integration','QES compliance','Digital workflows'],icp:['Enterprises','HR managers'],region:'Bulgaria',url:'',material:''},
-  {name:'Омекс @ 2000',short:'HR Management System with QES hash integration.',desc:'Омекс® 2000 by ОмегаСофт provides an HR Management System. Partners with Evrotrust to integrate QES hash signing into HR document workflows.',cat:'HR Management',integration:'QES hash',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['QES hash integration','HR compliance','Bulgarian market'],icp:['Bulgarian enterprises','HR departments'],region:'Bulgaria',url:'',material:''},
-  {name:'HROne',short:'HR Management System with QES and eDelivery.',desc:'HROne provides an HR Management System. Partners with Evrotrust to integrate qualified electronic signatures and eDelivery into HR workflows for fully digital labor file management.',cat:'HR Management',integration:'QES, eDelivery',usecase:'HR Management System',bizmodel:'Client buys from the platform',benefits:['QES + eDelivery','Digital labor files','HR compliance'],icp:['Enterprises','HR departments','Staffing'],region:'Bulgaria',url:'',material:''},
-  {name:'Hopae',short:'IDV provider — global identity infrastructure and KYC.',desc:'Hopae provides digital identity wallet technology and verifiable credential solutions. Integrates with Evrotrust combining wallet-based identity with qualified trust services for comprehensive KYC.',cat:'eID & Identity',integration:'QES, eID',usecase:'IDV provider, global identity infrastructure, KYC',bizmodel:'Client buys from the platform',benefits:['Wallet-native identity','Verifiable credentials','Global KYC'],icp:['Government','Banking','Healthcare'],region:'South Korea',url:'https://www.hopae.com/blog/hopae-and-incert-strategic-partnership',material:'https://www.hopae.com/blog/hopae-and-incert-strategic-partnership'},
-  {name:'Authologic',short:'IDV provider — global identity infrastructure and KYC conversion.',desc:'Authologic bridges the gap between traditional KYC and digital identity verification with its global eID Hub, boosting KYC conversion rates through a single API.',cat:'eID & Identity',integration:'QES, eID',usecase:'IDV provider, global identity infrastructure, KYC',bizmodel:'Client buys from the platform',benefits:['Single API access','Global eID coverage','KYC & AML compliance'],icp:['Fintech','Banking','RegTech'],region:'Poland',url:'https://evrotrust.com/partners/authologic/',material:''},
-  {name:'Trinsic',short:'IDV provider — global identity infrastructure and KYC with eID.',desc:'Trinsic provides verifiable credential and decentralized identity infrastructure. Partners with Evrotrust to bridge qualified EU eID with verifiable credential ecosystems for comprehensive KYC.',cat:'eID & Identity',integration:'eID',usecase:'IDV provider, global identity infrastructure, KYC',bizmodel:'Client buys from the platform',benefits:['Verifiable credentials','Decentralized identity','eIDAS + W3C'],icp:['Government','Education','Healthcare'],region:'USA',url:'https://trinsic.id',material:'https://trinsic.id'},
-  {name:'Regula',short:'Identity verification and document authentication for global compliance.',desc:'Regula combines physical document authentication with Evrotrust qualified eID verification for comprehensive identity assurance covering both physical and digital checks.',cat:'eID & Identity',integration:'eID',usecase:'Physical + digital identity verification',bizmodel:'',benefits:['Combined physical + digital ID','Global document coverage','High assurance KYC'],icp:['Banking','Border control','AML compliance'],region:'Latvia',url:'',material:''},
-  {name:'DigiTech Consult / DRUID',short:'AI-powered remote identification and qualified electronic signing — combining DigiTech Consult\'s virtual assistant with DRUID\'s conversational AI automation.',desc:'DigiTech Consult enables companies to benefit from an AI virtual assistant for remote identification and qualified electronic signing, streamlining compliance-heavy onboarding.',cat:'Digital Signature',integration:'QES, eID',usecase:'AI-powered remote identification and QES signing',bizmodel:'',benefits:['AI-powered UX','QES compliance','Reduced manual effort'],icp:['Financial services','Public sector','Insurance'],region:'Bulgaria',url:'https://evrotrust.com/partners/digitech-consult/',material:''},
-  {name:'Asebo',short:'Software development partner embedding Evrotrust trust services in bespoke apps.',desc:'Asebo Bulgaria builds bespoke applications with eID, QES, eDelivery, and eTimestamp capabilities built-in for enterprises and public sector organizations.',cat:'Software & Integration',integration:'QES, eID, eDelivery, eTimestamp',usecase:'Custom app development with embedded trust services',bizmodel:'',benefits:['Time-to-value','Tailored UX','Compliance by design'],icp:['Enterprises','Public sector'],region:'Bulgaria',url:'https://evrotrust.com/partners/asebo/',material:''},
-  {name:'Dreamview',short:'Digital transformation partner in Czech Republic and Slovakia.',desc:'Dreamview helps organizations across Czech Republic and Slovakia move from paper-based to fully digital workflows with Evrotrust QES and eID.',cat:'Consulting',integration:'QES, eID',usecase:'Digital transformation consultancy with trust services',bizmodel:'',benefits:['Local market expertise','End-to-end transformation','eIDAS compliance'],icp:['Czech & Slovak enterprises','Public institutions','Financial services'],region:'Czech Republic',url:'',material:''},
-  {name:'Scale Up Partner',short:'Business development and market expansion partner in Spain.',desc:'Scale Up Partner drives adoption of Evrotrust qualified trust services among Spanish enterprises and public sector organizations.',cat:'Consulting',integration:'QES, eID',usecase:'Market expansion and trust services adoption in Spain',bizmodel:'',benefits:['Spanish market expertise','Regulatory knowledge','Enterprise network'],icp:['Spanish enterprises','Public sector','Financial services'],region:'Spain',url:'',material:''},
-  {name:'NF Innova',short:'Digital innovation for banking and insurance with QES and eID.',desc:'NF Innova integrates Evrotrust QES and eID into banking, insurance, and enterprise digital transformation projects across the Balkans.',cat:'Software & Integration',integration:'QES, eID',usecase:'Digital banking and insurance with trust services',bizmodel:'',benefits:['Balkans market expertise','Banking-grade integration','Digital innovation'],icp:['Banking','Insurance','Telecom'],region:'Serbia',url:'',material:''},
-  {name:'One Span',short:'Global leader in digital identity and e-signature security solutions.',desc:'OneSpan partners with Evrotrust to offer EU-compliant qualified electronic signatures within its enterprise-grade signing and security platform.',cat:'Digital Signature',integration:'QES',usecase:'Enterprise digital signature and identity security',bizmodel:'',benefits:['Enterprise-grade security','Financial institution trust','eIDAS QES compliance'],icp:['Banking','Insurance','Financial services'],region:'USA',url:'',material:''},
-  {name:'N.I.D.O. S.R.L. A Socio Unico',short:'Italian partner delivering Evrotrust trust services to the Italian market.',desc:'N.I.D.O. S.R.L. delivers qualified electronic signatures, eID, and eDelivery to Italian enterprises and public institutions.',cat:'Consulting',integration:'QES, eID',usecase:'Trust services for Italian market',bizmodel:'',benefits:['Italian market expertise','EU eIDAS compliance','Full trust services'],icp:['Italian enterprises','Public sector','Financial services'],region:'Italy',url:'',material:''},
-  {name:'GEDA',short:'Digital identity and e-government solutions for Kenya and Africa.',desc:'GEDA provides digital identity and e-government solutions for emerging markets in Kenya and across Africa, bringing eIDAS-compatible identity verification to African government and enterprise projects.',cat:'eID & Identity',integration:'eID',usecase:'Digital identity for emerging markets',bizmodel:'',benefits:['Emerging market expertise','Government-grade identity','International compliance'],icp:['Government','Financial services','Telecom'],region:'Kenya',url:'',material:''},
-  {name:'i4P — Informatics',short:'HR and payroll management software with Evrotrust QES integration for digital document workflows.',desc:'i4P provides comprehensive HR and payroll software. Partners with Evrotrust to integrate qualified electronic signing into payroll document approval and HR administrative workflows.',cat:'HR Management',integration:'QES',usecase:'HR and payroll management',bizmodel:'Client buys from the platform',benefits:['Payroll automation','Legal document signing','Remote HR operations'],icp:['SMEs','Enterprises','Accountants'],region:'Bulgaria',url:'https://www.i4p.com',material:'https://www.i4p.com'},
-  {name:'TRINSIC eID',short:'eID-focused solutions combining verifiable credentials with qualified trust services.',desc:'TRINSIC eID bridges traditional qualified eID under eIDAS with next-generation decentralized identity standards for future-proof digital identity.',cat:'eID & Identity',integration:'eID',usecase:'Qualified eID with verifiable credential standards',bizmodel:'',benefits:['Dual compliance eIDAS + W3C','Future-proof identity','Cross-border recognition'],icp:['Government','Financial services','Healthcare'],region:'USA',url:'',material:''},
-  {name:'Teranode',short:'Blockchain + QES for tamper-proof digital records.',desc:'Teranode combines blockchain immutability with Evrotrust qualified signatures and timestamps for highly trusted and auditable digital transaction records.',cat:'Software & Integration',integration:'QES, eTimestamp',usecase:'Blockchain + QES for tamper-proof digital records',bizmodel:'',benefits:['Blockchain immutability','Qualified signatures','Highest audit assurance'],icp:['Financial services','Government','Healthcare'],region:'Switzerland',url:'',material:''},
-  {name:'OverExposed OOD',short:'Bulgarian software development with Evrotrust trust services.',desc:'OverExposed OOD integrates Evrotrust\'s qualified trust services into bespoke applications for local and international clients.',cat:'Software & Integration',integration:'QES, eID',usecase:'Custom software with embedded trust services',bizmodel:'',benefits:['Custom development','Local expertise','Full trust services integration'],icp:['Bulgarian enterprises','Startups','Public sector'],region:'Bulgaria',url:'',material:''},
-  {name:'Talent Factor',short:'HR consulting and talent management with digital HR processes.',desc:'Talent Factor digitizes employment documents, contracts, and HR agreements with Evrotrust qualified electronic signatures.',cat:'HR Management',integration:'QES',usecase:'Digital talent management and employment contracts',bizmodel:'',benefits:['Digital talent management','Compliant contracts','Remote signing capability'],icp:['HR consultancies','Enterprise','Staffing agencies'],region:'Bulgaria',url:'',material:''},
-  {name:'Integrator JSC',short:'IT integration delivering Evrotrust trust services to Bulgarian enterprises.',desc:'Integrator JSC delivers eID, QES, eDelivery, and eTimestamp capabilities to Bulgarian enterprises and public institutions through custom integration projects.',cat:'Software & Integration',integration:'QES, eID, eDelivery',usecase:'Enterprise IT integration with trust services',bizmodel:'',benefits:['Local expertise','Custom integrations','Full trust services stack'],icp:['Bulgarian enterprises','Public sector','Banking'],region:'Bulgaria',url:'',material:''},
-  {name:'KAO BG',short:'Bulgarian technology partner for digital transformation with trust services.',desc:'KAO BG integrates Evrotrust\'s qualified trust services into client digital transformation projects, enabling digital onboarding, qualified signing, and compliant document management.',cat:'Software & Integration',integration:'QES, eID',usecase:'Digital transformation with trust services',bizmodel:'',benefits:['Local market knowledge','End-to-end delivery','Trusted Evrotrust partner'],icp:['Bulgarian enterprises','Public institutions','Financial services'],region:'Bulgaria',url:'',material:''},
-  {name:'SoftwareOne',short:'Global software and cloud solutions provider with Evrotrust integration.',desc:'SoftwareOne integrates Evrotrust qualified trust services into enterprise digital transformation and cloud migration projects for global clients.',cat:'Software & Integration',integration:'QES',usecase:'Enterprise cloud and digital transformation with trust services',bizmodel:'',benefits:['Global reach','Enterprise-scale delivery','Cloud-native integration'],icp:['Global enterprise','Public sector','Financial services'],region:'Switzerland',url:'',material:''},
-  {name:'Sync Fusion / BoldSign',short:'Developer platform and electronic signature software — Syncfusion components power BoldSign\'s eSigning capabilities with Evrotrust QES.',desc:'Syncfusion provides comprehensive UI components and libraries, powering the BoldSign eSignature product with Evrotrust QES capabilities.',cat:'Software & Integration',integration:'QES',usecase:'Developer components with embedded qualified signing',bizmodel:'',benefits:['Developer-friendly integration','Rich component library','Scalable architecture'],icp:['Software developers','ISVs','Enterprise IT'],region:'USA',url:'',material:''}
+  {name:'eID Easy',website:'https://eideasy.com',short:'Electronic signature solution — 80+ eID methods, 160+ countries.',desc:'eID Easy eliminates the complexities of managing multiple trust services. Whether verifying users with national eIDs, enabling advanced or qualified electronic signatures, or applying trusted eSeals — all in a single unified experience.',cat:'Digital Signature',integration:'QES',usecase:'Electronic signature solution',bizmodel:'Client buys from the platform',benefits:['Single API for 160+ countries','Regulatory compliance','Scalable cross-border trust'],icp:['Fintech','SaaS platforms','Government'],region:'Estonia',url:'https://evrotrust.com/partners/eid-easy/',material:'https://evrotrust-my.sharepoint.com/:b:/p/stefan_hadjistoytchev/EYkerCKTCzdGhH6ty7CzxtcBrWERJYNwvcUzxUHe-qMgKQ?e=bpAsJQ'},
+  {name:'TrustLynx',website:'https://trustlynx.com',short:'Integrate, automate and manage digital identities, e-signing and e-sealing — from Estonia.',desc:'TrustLynx provides digital trust infrastructure and signature management solutions for organizations seeking to scale qualified electronic signing across complex multi-party workflows.',cat:'Digital Signature',integration:'QES',usecase:'Solution to integrate, automate and manage digital identities, e-signing and e-sealing',bizmodel:'Client buys from the platform',benefits:['Enterprise-scale signing','Multi-party workflows','Complete audit trail'],icp:['Enterprise','Financial services','Legal'],region:'Estonia',url:'',material:'https://www.youtube.com/watch?v=Klmr97W72is'},
+  {name:'Advania',website:'https://www.advania.com',short:'IT-services, platforms and cloud services with Evrotrust QES integration.',desc:'Advania is a leading Nordic IT services company providing platforms and cloud services. Partners with Evrotrust to offer qualified electronic signatures through their Signet platform.',cat:'Digital Signature',integration:'QES',usecase:'IT-services, platforms, cloud services',bizmodel:'Client buys from the platform',benefits:['Nordic market expertise','Cloud-native integration','Enterprise-grade platform'],icp:['Nordic enterprises','Financial services','Public sector'],region:'Scandinavia',url:'',material:''},
+  {name:'Mark ID',website:'https://markid.lt',short:'Universal Identification/KYC and eSignature gateway.',desc:'Mark ID provides a universal identification and KYC gateway combined with eSignature capabilities, bridging traditional KYC with modern digital identity verification.',cat:'eID & Identity',integration:'N/A',usecase:'Universal Identification/KYC and eSignature gateway',bizmodel:'N/A',benefits:['Universal ID gateway','KYC compliance','eSignature integration'],icp:['Banking','Insurance','RegTech'],region:'Lithuania',url:'',material:''},
+  {name:'inSign GmbH',website:'https://www.getinsign.com',short:'Simple signature processes — QES with Evrotrust since 2011.',desc:'inSign GmbH is the No. 1 German signature provider based near Munich, servers in Germany, 10+ years of market experience, available in 17 languages. Supports all signature types under eIDAS and ZertES including QES.',cat:'Digital Signature',integration:'QES',usecase:'Simple signature processes',bizmodel:'Client buys from the platform',benefits:['17 languages','German-hosted servers','Full eIDAS & ZertES support'],icp:['Enterprise','Legal','HR'],region:'Germany',url:'https://evrotrust.com/partners/insign/',material:''},
+  {name:'SigniFlow',website:'https://www.signiflow.com',short:'Digital signature and approval workflow system powered by Evrotrust QES.',desc:'SigniFlow is a comprehensive digital signature and approval workflow system enabling organizations to digitize complex multi-party signing processes.',cat:'Digital Signature',integration:'QES',usecase:'Digital signature & approval workflow system',bizmodel:'Client buys from the platform',benefits:['Workflow automation','Multi-party approvals','eIDAS QES compliance'],icp:['Enterprise','Legal','Financial services'],region:'South Africa',url:'',material:''},
+  {name:'Adobe',website:'https://www.adobe.com',short:'Digital signature and document workflow system with Evrotrust QES.',desc:'Adobe Acrobat Sign partners with Evrotrust to provide qualified electronic signatures within the world\'s most widely used document workflow ecosystem.',cat:'Digital Signature',integration:'QES',usecase:'Digital signature & document workflow system',bizmodel:'N/A',benefits:['World\'s most used platform','Seamless document workflows','Enterprise-grade compliance'],icp:['Enterprise','Legal','Financial services'],region:'USA',url:'',material:''},
+  {name:'DMS (DocuSign / Apposite / Wawasoft / Digidemat)',website:'https://www.docusign.com',short:'Document management with QES hash integration — multiple DMS platforms.',desc:'A group of document management system partners including DocuSign, Apposite, Wawasoft and Digidemat. Clients integrate Evrotrust QES hash into their existing DMS platforms for legally valid document signing and archiving.',cat:'Document Management',integration:'QES hash',usecase:'Document management',bizmodel:'Client buys directly from Evrotrust',benefits:['DMS-native signing','QES hash integration','Multiple platform support'],icp:['Enterprise','Legal','Public sector'],region:'Global',url:'',material:'https://www.youtube.com/watch?v=Klmr97W72is'},
+  {name:'David Holding / Acstre',website:'https://www.david.bg',short:'Government and municipality solutions with QES and eID.',desc:'David Holding and Acstre provide digital solutions for government and municipality clients. Partners with Evrotrust to enable qualified electronic signatures and eID for public sector digital transformation.',cat:'Consulting',integration:'QES, eID',usecase:'Government and municipality solutions',bizmodel:'N/A',benefits:['Public sector expertise','Government-grade identity','eIDAS compliance'],icp:['Government','Municipalities','Public institutions'],region:'Bulgaria',url:'',material:''},
+  {name:'Nemetschek / DocuWare',website:'https://start.docuware.com',short:'Document management with QES, eID and eDelivery integration.',desc:'Nemetschek\'s DocuWare is a global leader in digital document management. Partners with Evrotrust for QES, eID and eDelivery integration (eDelivery integration starting 25.07). Enables fully compliant digital document workflows.',cat:'Document Management',integration:'QES, eID, eDelivery',usecase:'Document management',bizmodel:'Client buys directly from Evrotrust',benefits:['eIDAS-compliant signing','eDelivery integration','Automated archiving'],icp:['Enterprise','Healthcare','Legal'],region:'Germany',url:'https://evrotrust.com/partners/docuware/',material:'https://evrotrust-my.sharepoint.com/:p:/p/stefan_hadjistoytchev/EQCikF3uD2dOgCaBD9uQFbwBCssBHS0eyaQTgKDMOXEGhw?e=MEQgji'},
+  {name:'TRESORIT',website:'https://tresorit.com',short:'Cloud storage platform with QES — secure encrypted document management.',desc:'Tresorit combines end-to-end encrypted cloud storage with Evrotrust qualified electronic signatures, enabling secure document signing and storage for sensitive enterprise workflows.',cat:'Document Management',integration:'QES',usecase:'Cloud storage platform with digital signing',bizmodel:'Client buys from the platform',benefits:['End-to-end encryption','Secure qualified signing','GDPR-compliant delivery'],icp:['Legal','Healthcare','Financial services'],region:'Switzerland',url:'',material:''},
+  {name:'Salesforce',website:'https://www.salesforce.com',featured:true,short:'CRM with Evrotrust QES — install and configure for eSigning directly in Salesforce.',desc:'Salesforce is the world\'s leading CRM platform. Partners with Evrotrust to enable qualified electronic signatures directly within Salesforce, allowing sales teams to send and sign documents without leaving the CRM.',cat:'Software & Integration',integration:'QES',usecase:'CRM with qualified eSigning',bizmodel:'Client buys directly from Evrotrust',benefits:['CRM-native signing','No context switching','Faster deal closure'],icp:['Sales teams','Financial services','Enterprise'],region:'USA',url:'',material:''},
+  {name:'ZOHO',website:'https://www.zoho.com',short:'Cloud software for business with QES hash integration.',desc:'ZOHO provides a comprehensive suite of cloud software for business. Partners with Evrotrust to integrate QES hash signing into ZOHO\'s business applications, enabling legally valid document signing within the ZOHO ecosystem.',cat:'Software & Integration',integration:'QES hash',usecase:'Cloud software for business',bizmodel:'Client buys directly from Evrotrust',benefits:['Cloud-native','Business suite integration','QES hash signing'],icp:['SMEs','Startups','Growing businesses'],region:'India',url:'',material:''},
+  {name:'Creatio',website:'https://www.creatio.com',short:'Business solutions marketplace with Evrotrust integration.',desc:'Creatio provides a no-code platform for workflow automation and CRM. Available through the Creatio Marketplace, the Evrotrust integration enables qualified electronic signing within business automation workflows.',cat:'Software & Integration',integration:'',usecase:'Business Solutions via Creatio Marketplace',bizmodel:'Client buys from the platform',benefits:['No-code automation','Marketplace integration','Rapid deployment'],icp:['Sales teams','Financial services','Enterprise'],region:'USA',url:'',material:''},
+  {name:'MobyPDF',website:'https://mobypdf.com',short:'Digital signature and document workflow system with QES hash.',desc:'MobyPDF provides digital signature and document workflow capabilities. Partners with Evrotrust to integrate QES hash signing into PDF-based document workflows.',cat:'Digital Signature',integration:'QES hash',usecase:'Digital signature & document workflow system',bizmodel:'Client buys from the platform',benefits:['PDF-native signing','QES hash integration','Simple workflow'],icp:['SMEs','Legal','Professional services'],region:'Bulgaria',url:'',material:''},
+  {name:'Nula.bg',website:'https://nula.bg',short:'Digital business and accounting solutions with Evrotrust QES.',desc:'Nula.bg provides digital business and accounting solutions for Bulgarian companies. Partners with Evrotrust to enable identification and document signing with qualified electronic signatures directly within accounting workflows.',cat:'Software & Integration',integration:'QES',usecase:'Digital business and accounting solutions',bizmodel:'Client buys directly from Evrotrust',benefits:['Bulgarian market focus','Accounting-native signing','Legal compliance'],icp:['Bulgarian SMEs','Accountants','Business owners'],region:'Bulgaria',url:'',material:''},
+  {name:'VIKTA',website:'https://www.vikta.fr',short:'Document management with QES — B2C platform integration.',desc:'VIKTA provides document management solutions for B2C platforms. Partners with Evrotrust to enable qualified electronic signatures within consumer-facing document workflows.',cat:'Document Management',integration:'QES',usecase:'Document management',bizmodel:'Client buys from the platform',benefits:['B2C-ready','Document management','QES compliance'],icp:['B2C platforms','Consumer services','Retail'],region:'France',url:'',material:''},
+  {name:'sHRedy',website:'https://shredy.bg',short:'Labor files — digitize the full employment lifecycle from hiring to termination using remote identification, qualified electronic signatures, and legally compliant electronic labour files.',desc:'Through the partnership with sHRedy, organisations can digitize the entire employment lifecycle — from hiring to termination — using remote identification, qualified electronic signatures, and legally compliant electronic labour files. This significantly reduces administrative workload, eliminates paper processes, and ensures full legal compliance for all HR operations.',cat:'HR Management',integration:'AES, QES, eDelivery, eID',usecase:'Labor files — digitize the full employment lifecycle from hiring to termination',bizmodel:'Client buys from the platform',benefits:['Full lifecycle digitization','Remote identification','Legal labor file compliance','Zero paper'],icp:['HR departments','Enterprise','Staffing agencies'],region:'Bulgaria',url:'https://shredy.bg/shredy-junior/',material:''},
+  {name:'SB Accounting & Consulting',website:'https://sb-bg.com',short:'Labor files with QES, eDelivery and eID integration.',desc:'SB Accounting & Consulting is a leading outsourcing partner for Payroll, Electronic Labor File, and HR administration. Partners with Evrotrust to provide qualified electronic signatures, eDelivery and eID for fully digital labor file management.',cat:'HR Management',integration:'QES, eDelivery, eID',usecase:'Labor files',bizmodel:'Client buys from the platform',benefits:['Paperless HR outsourcing','Labor file compliance','Remote signing'],icp:['SMEs','Corporates','Outsourcing clients'],region:'Bulgaria',url:'',material:''},
+  {name:'Konica Minolta / M-Files',website:'https://www.m-files.com',short:'Digital office for HR and CFOs with QES and eID.',desc:'Konica Minolta together with M-Files provides a digital office solution for HR and CFO functions. Partners with Evrotrust to enable qualified electronic signatures and eID within digital workplace document workflows.',cat:'HR Management',integration:'QES, eID',usecase:'Digital office for HR and CFOs',bizmodel:'Client buys from the platform',benefits:['HR & CFO digital office','QES + eID integration','Document management'],icp:['Enterprise','HR departments','Finance'],region:'Bulgaria',url:'',material:''},
+  {name:'Open Business Solutions',website:'https://www.obs.bg',short:'ERP & HR solutions with QES and eDelivery — client buys directly from Evrotrust.',desc:'Open Business Solutions (OBS) provides ERP and HR software. Partners with Evrotrust to integrate QES and eDelivery into ERP and HR workflows for fully digital business operations.',cat:'HR Management',integration:'QES, eDelivery',usecase:'ERP & HR solutions',bizmodel:'Client buys directly from Evrotrust',benefits:['ERP-native integration','eDelivery','HR digitization'],icp:['Enterprise','Manufacturing','Services'],region:'Bulgaria',url:'',material:''},
+  {name:'Digital Lights / SAP SuccessFactors',website:'https://www.digitallights.bg',short:'HR module from SAP SuccessFactors with full Evrotrust trust services stack — QES, AES, eDelivery, Timestamp and OTP Signature.',desc:'Digital Lights integrates Evrotrust\'s full trust services stack into the SAP SuccessFactors HR module, enabling enterprises to sign, deliver and timestamp HR documents with the highest level of legal assurance.',cat:'HR Management',integration:'QES, AES, eDelivery, Timestamp, OTP Signature',usecase:'HR module from SAP software',bizmodel:'Client buys directly from Evrotrust',benefits:['SAP SuccessFactors integration','Full trust services','AES + QES + eDelivery'],icp:['Large enterprise','Manufacturing','International companies'],region:'Bulgaria',url:'',material:''},
+  {name:'Technologica / HeRMeS',website:'https://technologica.com',short:'HR software and digital labor file management via the HeRMeS platform, integrated with Evrotrust QES.',desc:'Technologica provides HR software including the HeRMeS platform for digital labor file and HR process management. Partners with Evrotrust for qualified electronic signatures in HR document workflows.',cat:'HR Management',integration:'QES',usecase:'HR software, Digital Labor file and HR processes',bizmodel:'Client buys from the platform',benefits:['HeRMeS platform','Digital labor file','HR process automation'],icp:['Bulgarian enterprises','HR departments','Public sector'],region:'Bulgaria',url:'',material:''},
+  {name:'M Soft',website:'https://www.msoft.bg',short:'HR and Payroll system with QES, eDelivery, Timestamp and eID.',desc:'M Soft provides a comprehensive HR and Payroll system. Partners with Evrotrust to integrate QES, eDelivery, Timestamp and eID into HR and payroll document workflows for full digital compliance.',cat:'HR Management',integration:'QES, eDelivery, Timestamp, eID',usecase:'HR and Payroll system',bizmodel:'Client buys directly from Evrotrust',benefits:['Payroll + HR combined','Full trust services','Legal compliance'],icp:['SMEs','Enterprises','Accountants'],region:'Bulgaria',url:'',material:''},
+  {name:'Microcomplex',website:'https://microcomplex.com',short:'Aladin — HR Management Software with QES and eDelivery.',desc:'Microcomplex develops the Aladin HR Management Software that has streamlined digital HR operations for over 35 years. Partners with Evrotrust to integrate QES and eDelivery into established HR workflows.',cat:'HR Management',integration:'QES, eDelivery',usecase:'Aladin — HR Management Software',bizmodel:'Client buys directly from Evrotrust',benefits:['35+ years HR expertise','QES + eDelivery','Minimal disruption'],icp:['Bulgarian enterprises','HR departments','Public institutions'],region:'Bulgaria',url:'',material:''},
+  {name:'Motion Software',website:'https://www.motionsoftware.eu',short:'HR management tool with QES integration.',desc:'Motion Software provides HR management tools. Partners with Evrotrust to enable qualified electronic signatures within HR document workflows, enabling remote and fully digital HR operations.',cat:'HR Management',integration:'QES',usecase:'HR management tool',bizmodel:'Client buys directly from Evrotrust',benefits:['HR tool integration','QES compliance','Remote signing'],icp:['Tech companies','SMEs','Startups'],region:'Bulgaria',url:'',material:''},
+  {name:'IBS / DigiSign',website:'https://ibs.bg',short:'HR Management System integrating Profile.Guru and DigiSign with Evrotrust QES for qualified electronic signing of HR documents.',desc:'IBS provides an HR Management System integrating Profile.Guru and DIGISign with Evrotrust QES for qualified electronic signing of HR documents.',cat:'HR Management',integration:'QES',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['Profile.Guru integration','DIGISign integration','Legal HR signing'],icp:['Bulgarian enterprises','HR departments'],region:'Bulgaria',url:'',material:''},
+  {name:'Planit',website:'https://planit.bg',short:'HR Management System with Evrotrust QES integration.',desc:'Planit provides an HR Management System. Partners with Evrotrust to enable qualified electronic signatures for HR document workflows.',cat:'HR Management',integration:'QES',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['HR system integration','QES compliance','Digital workflows'],icp:['Enterprises','HR managers'],region:'Bulgaria',url:'',material:''},
+  {name:'Омекс @ 2000',website:'https://www.omex.bg',short:'HR Management System with QES hash integration.',desc:'Омекс® 2000 by ОмегаСофт provides an HR Management System. Partners with Evrotrust to integrate QES hash signing into HR document workflows.',cat:'HR Management',integration:'QES hash',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['QES hash integration','HR compliance','Bulgarian market'],icp:['Bulgarian enterprises','HR departments'],region:'Bulgaria',url:'',material:''},
+  {name:'HROne',website:'https://hrone.bg',short:'HR Management System with QES and eDelivery.',desc:'HROne provides an HR Management System. Partners with Evrotrust to integrate qualified electronic signatures and eDelivery into HR workflows for fully digital labor file management.',cat:'HR Management',integration:'QES, eDelivery',usecase:'HR Management System',bizmodel:'Client buys from the platform',benefits:['QES + eDelivery','Digital labor files','HR compliance'],icp:['Enterprises','HR departments','Staffing'],region:'Bulgaria',url:'',material:''},
+  {name:'Hopae',website:'https://www.hopae.com',short:'IDV provider — global identity infrastructure and KYC.',desc:'Hopae provides digital identity wallet technology and verifiable credential solutions. Integrates with Evrotrust combining wallet-based identity with qualified trust services for comprehensive KYC.',cat:'eID & Identity',integration:'QES, eID',usecase:'IDV provider, global identity infrastructure, KYC',bizmodel:'Client buys from the platform',benefits:['Wallet-native identity','Verifiable credentials','Global KYC'],icp:['Government','Banking','Healthcare'],region:'South Korea',url:'https://www.hopae.com/blog/hopae-and-incert-strategic-partnership',material:'https://www.hopae.com/blog/hopae-and-incert-strategic-partnership'},
+  {name:'Authologic',website:'https://authologic.com',short:'IDV provider — global identity infrastructure and KYC conversion.',desc:'Authologic bridges the gap between traditional KYC and digital identity verification with its global eID Hub, boosting KYC conversion rates through a single API.',cat:'eID & Identity',integration:'QES, eID',usecase:'IDV provider, global identity infrastructure, KYC',bizmodel:'Client buys from the platform',benefits:['Single API access','Global eID coverage','KYC & AML compliance'],icp:['Fintech','Banking','RegTech'],region:'Poland',url:'https://evrotrust.com/partners/authologic/',material:''},
+  {name:'Trinsic',website:'https://trinsic.id',short:'IDV provider — global identity infrastructure and KYC with eID.',desc:'Trinsic provides verifiable credential and decentralized identity infrastructure. Partners with Evrotrust to bridge qualified EU eID with verifiable credential ecosystems for comprehensive KYC.',cat:'eID & Identity',integration:'eID',usecase:'IDV provider, global identity infrastructure, KYC',bizmodel:'Client buys from the platform',benefits:['Verifiable credentials','Decentralized identity','eIDAS + W3C'],icp:['Government','Education','Healthcare'],region:'USA',url:'https://trinsic.id',material:'https://trinsic.id'},
+  {name:'Regula',website:'https://regulaforensics.com',short:'Identity verification and document authentication for global compliance.',desc:'Regula combines physical document authentication with Evrotrust qualified eID verification for comprehensive identity assurance covering both physical and digital checks.',cat:'eID & Identity',integration:'eID',usecase:'Physical + digital identity verification',bizmodel:'',benefits:['Combined physical + digital ID','Global document coverage','High assurance KYC'],icp:['Banking','Border control','AML compliance'],region:'Latvia',url:'',material:''},
+  {name:'DigiTech Consult / DRUID',website:'https://druid.ai',short:'AI-powered remote identification and qualified electronic signing — combining DigiTech Consult\'s virtual assistant with DRUID\'s conversational AI automation.',desc:'DigiTech Consult enables companies to benefit from an AI virtual assistant for remote identification and qualified electronic signing, streamlining compliance-heavy onboarding.',cat:'Digital Signature',integration:'QES, eID',usecase:'AI-powered remote identification and QES signing',bizmodel:'',benefits:['AI-powered UX','QES compliance','Reduced manual effort'],icp:['Financial services','Public sector','Insurance'],region:'Bulgaria',url:'https://evrotrust.com/partners/digitech-consult/',material:''},
+  {name:'Asebo',website:'https://asebo.bg',short:'Software development partner embedding Evrotrust trust services in bespoke apps.',desc:'Asebo Bulgaria builds bespoke applications with eID, QES, eDelivery, and eTimestamp capabilities built-in for enterprises and public sector organizations.',cat:'Software & Integration',integration:'QES, eID, eDelivery, eTimestamp',usecase:'Custom app development with embedded trust services',bizmodel:'',benefits:['Time-to-value','Tailored UX','Compliance by design'],icp:['Enterprises','Public sector'],region:'Bulgaria',url:'https://evrotrust.com/partners/asebo/',material:''},
+  {name:'Dreamview',website:'https://www.dreamview.cz',short:'Digital transformation partner in Czech Republic and Slovakia.',desc:'Dreamview helps organizations across Czech Republic and Slovakia move from paper-based to fully digital workflows with Evrotrust QES and eID.',cat:'Consulting',integration:'QES, eID',usecase:'Digital transformation consultancy with trust services',bizmodel:'',benefits:['Local market expertise','End-to-end transformation','eIDAS compliance'],icp:['Czech & Slovak enterprises','Public institutions','Financial services'],region:'Czech Republic',url:'',material:''},
+  {name:'Scale Up Partner',website:'https://www.scaleuppartner.com',short:'Business development and market expansion partner in Spain.',desc:'Scale Up Partner drives adoption of Evrotrust qualified trust services among Spanish enterprises and public sector organizations.',cat:'Consulting',integration:'QES, eID',usecase:'Market expansion and trust services adoption in Spain',bizmodel:'',benefits:['Spanish market expertise','Regulatory knowledge','Enterprise network'],icp:['Spanish enterprises','Public sector','Financial services'],region:'Spain',url:'',material:''},
+  {name:'NF Innova',website:'https://www.nfinnova.com',short:'Digital innovation for banking and insurance with QES and eID.',desc:'NF Innova integrates Evrotrust QES and eID into banking, insurance, and enterprise digital transformation projects across the Balkans.',cat:'Software & Integration',integration:'QES, eID',usecase:'Digital banking and insurance with trust services',bizmodel:'',benefits:['Balkans market expertise','Banking-grade integration','Digital innovation'],icp:['Banking','Insurance','Telecom'],region:'Serbia',url:'',material:''},
+  {name:'One Span',website:'https://www.onespan.com',short:'Global leader in digital identity and e-signature security solutions.',desc:'OneSpan partners with Evrotrust to offer EU-compliant qualified electronic signatures within its enterprise-grade signing and security platform.',cat:'Digital Signature',integration:'QES',usecase:'Enterprise digital signature and identity security',bizmodel:'',benefits:['Enterprise-grade security','Financial institution trust','eIDAS QES compliance'],icp:['Banking','Insurance','Financial services'],region:'USA',url:'',material:''},
+  {name:'N.I.D.O. S.R.L. A Socio Unico',website:'https://www.nido.it',short:'Italian partner delivering Evrotrust trust services to the Italian market.',desc:'N.I.D.O. S.R.L. delivers qualified electronic signatures, eID, and eDelivery to Italian enterprises and public institutions.',cat:'Consulting',integration:'QES, eID',usecase:'Trust services for Italian market',bizmodel:'',benefits:['Italian market expertise','EU eIDAS compliance','Full trust services'],icp:['Italian enterprises','Public sector','Financial services'],region:'Italy',url:'',material:''},
+  {name:'GEDA',website:'https://www.gedagroup.com',short:'Digital identity and e-government solutions for Kenya and Africa.',desc:'GEDA provides digital identity and e-government solutions for emerging markets in Kenya and across Africa, bringing eIDAS-compatible identity verification to African government and enterprise projects.',cat:'eID & Identity',integration:'eID',usecase:'Digital identity for emerging markets',bizmodel:'',benefits:['Emerging market expertise','Government-grade identity','International compliance'],icp:['Government','Financial services','Telecom'],region:'Kenya',url:'',material:''},
+  {name:'i4P — Informatics',website:'https://i4p.bg',short:'HR and payroll management software with Evrotrust QES integration for digital document workflows.',desc:'i4P provides comprehensive HR and payroll software. Partners with Evrotrust to integrate qualified electronic signing into payroll document approval and HR administrative workflows.',cat:'HR Management',integration:'QES',usecase:'HR and payroll management',bizmodel:'Client buys from the platform',benefits:['Payroll automation','Legal document signing','Remote HR operations'],icp:['SMEs','Enterprises','Accountants'],region:'Bulgaria',url:'https://www.i4p.com',material:'https://www.i4p.com'},
+  {name:'TRINSIC eID',website:'https://trinsic.id',short:'eID-focused solutions combining verifiable credentials with qualified trust services.',desc:'TRINSIC eID bridges traditional qualified eID under eIDAS with next-generation decentralized identity standards for future-proof digital identity.',cat:'eID & Identity',integration:'eID',usecase:'Qualified eID with verifiable credential standards',bizmodel:'',benefits:['Dual compliance eIDAS + W3C','Future-proof identity','Cross-border recognition'],icp:['Government','Financial services','Healthcare'],region:'USA',url:'',material:''},
+  {name:'Teranode',website:'https://www.teranode.com',short:'Blockchain + QES for tamper-proof digital records.',desc:'Teranode combines blockchain immutability with Evrotrust qualified signatures and timestamps for highly trusted and auditable digital transaction records.',cat:'Software & Integration',integration:'QES, eTimestamp',usecase:'Blockchain + QES for tamper-proof digital records',bizmodel:'',benefits:['Blockchain immutability','Qualified signatures','Highest audit assurance'],icp:['Financial services','Government','Healthcare'],region:'Switzerland',url:'',material:''},
+  {name:'OverExposed OOD',website:'https://overexposed.bg',short:'Bulgarian software development with Evrotrust trust services.',desc:'OverExposed OOD integrates Evrotrust\'s qualified trust services into bespoke applications for local and international clients.',cat:'Software & Integration',integration:'QES, eID',usecase:'Custom software with embedded trust services',bizmodel:'',benefits:['Custom development','Local expertise','Full trust services integration'],icp:['Bulgarian enterprises','Startups','Public sector'],region:'Bulgaria',url:'',material:''},
+  {name:'Talent Factor',website:'https://talentfactor.bg',short:'HR consulting and talent management with digital HR processes.',desc:'Talent Factor digitizes employment documents, contracts, and HR agreements with Evrotrust qualified electronic signatures.',cat:'HR Management',integration:'QES',usecase:'Digital talent management and employment contracts',bizmodel:'',benefits:['Digital talent management','Compliant contracts','Remote signing capability'],icp:['HR consultancies','Enterprise','Staffing agencies'],region:'Bulgaria',url:'',material:''},
+  {name:'Integrator JSC',website:'https://integrator.bg',short:'IT integration delivering Evrotrust trust services to Bulgarian enterprises.',desc:'Integrator JSC delivers eID, QES, eDelivery, and eTimestamp capabilities to Bulgarian enterprises and public institutions through custom integration projects.',cat:'Software & Integration',integration:'QES, eID, eDelivery',usecase:'Enterprise IT integration with trust services',bizmodel:'',benefits:['Local expertise','Custom integrations','Full trust services stack'],icp:['Bulgarian enterprises','Public sector','Banking'],region:'Bulgaria',url:'',material:''},
+  {name:'KAO BG',website:'https://kaobg.com',short:'Bulgarian technology partner for digital transformation with trust services.',desc:'KAO BG integrates Evrotrust\'s qualified trust services into client digital transformation projects, enabling digital onboarding, qualified signing, and compliant document management.',cat:'Software & Integration',integration:'QES, eID',usecase:'Digital transformation with trust services',bizmodel:'',benefits:['Local market knowledge','End-to-end delivery','Trusted Evrotrust partner'],icp:['Bulgarian enterprises','Public institutions','Financial services'],region:'Bulgaria',url:'',material:''},
+  {name:'SoftwareOne',website:'https://www.softwareone.com',short:'Global software and cloud solutions provider with Evrotrust integration.',desc:'SoftwareOne integrates Evrotrust qualified trust services into enterprise digital transformation and cloud migration projects for global clients.',cat:'Software & Integration',integration:'QES',usecase:'Enterprise cloud and digital transformation with trust services',bizmodel:'',benefits:['Global reach','Enterprise-scale delivery','Cloud-native integration'],icp:['Global enterprise','Public sector','Financial services'],region:'Switzerland',url:'',material:''},
+  {name:'Sync Fusion / BoldSign',website:'https://boldsign.com',short:'Developer platform and electronic signature software — Syncfusion components power BoldSign\'s eSigning capabilities with Evrotrust QES.',desc:'Syncfusion provides comprehensive UI components and libraries, powering the BoldSign eSignature product with Evrotrust QES capabilities.',cat:'Software & Integration',integration:'QES',usecase:'Developer components with embedded qualified signing',bizmodel:'',benefits:['Developer-friendly integration','Rich component library','Scalable architecture'],icp:['Software developers','ISVs','Enterprise IT'],region:'USA',url:'',material:''},
+  {name:'Shufti Pro',website:'https://shuftipro.com',short:'AI-powered identity verification and KYC/AML compliance solutions for global businesses.',desc:'Shufti Pro provides adaptable identity verification solutions combining AI and human intelligence for KYC, AML, and biometric verification — enabling businesses to onboard customers securely and comply with regulatory requirements.',cat:'KYC / Identity Verification',integration:'eID, KYC',usecase:'Digital identity verification and AML compliance for regulated industries',bizmodel:'',benefits:['AI-powered verification','Global coverage','KYC & AML compliance'],icp:['Financial services','Fintech','E-commerce','Regulated industries'],region:'United Kingdom',url:'',material:''}
 ]
 let activeCat='',currentView='grid';
 const ALL_CATS=['All',...Object.keys(CATS)];
@@ -2234,6 +2291,11 @@ function getFiltered(){
   else if(s==='cat')f.sort((a,b)=>a.cat.localeCompare(b.cat)||a.name.localeCompare(b.name));
   else if(s==='region')f.sort((a,b)=>(a.region||'zzz').localeCompare(b.region||'zzz'));
   return f;
+}
+function renderEmpty(q){
+  const empty=document.getElementById('empty');
+  if(!empty)return;
+  empty.style.display='flex';
 }
 function render(){
   const _q=document.getElementById('search').value;
@@ -2299,12 +2361,82 @@ function render(){
 }
 function setView(v){
   currentView=v;
-  document.getElementById('btn-grid').classList.toggle('active',v==='grid');
-  document.getElementById('btn-map').classList.toggle('active',v==='map');
+  var btnGrid=document.getElementById('btn-grid');
+  if(btnGrid)btnGrid.classList.toggle('active',v==='grid');
+  const btnMap=document.getElementById('btn-map');
+  if(btnMap)btnMap.classList.toggle('active',v==='map');
   document.getElementById('grid').style.display=v==='grid'?'':'none';
-  document.getElementById('map-view').classList.toggle('active',v==='map');
+  const mapView=document.getElementById('map-view');
+  if(mapView)mapView.classList.toggle('active',v==='map');
   render();
 }
+
+// ── LAYOUT PICKER ──
+var currentLayout=3;
+function toggleLayoutMenu(){
+  var btn=document.getElementById('layout-picker-btn');
+  var menu=document.getElementById('layout-menu');
+  var open=menu.classList.contains('open');
+  btn.classList.toggle('open',!open);
+  menu.classList.toggle('open',!open);
+}
+function setLayout(cols,el){
+  var grid=document.getElementById('grid');
+  var menu=document.getElementById('layout-menu');
+  var btn=document.getElementById('layout-picker-btn');
+  var icon=document.getElementById('layout-btn-icon');
+  var label=document.getElementById('layout-btn-label');
+  // Remove active from all opts
+  document.querySelectorAll('.layout-opt').forEach(function(o){
+    o.classList.remove('active');
+    var chk=o.querySelector('.layout-check');
+    if(chk)chk.remove();
+  });
+  // Activate selected
+  el.classList.add('active');
+  if(!el.querySelector('.layout-check')){
+    var chk=document.createElement('span');
+    chk.className='layout-check';chk.textContent='✓';
+    el.appendChild(chk);
+  }
+  // Update grid classes
+  grid.classList.remove('cols-2','cols-3','cols-4','list-view');
+  if(cols==='list'){
+    grid.classList.add('list-view');
+    currentView='list';
+    label.textContent='List';
+    icon.innerHTML='<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="0" y="1" width="20" height="4" rx="1.5"/><rect x="0" y="8" width="20" height="4" rx="1.5"/><rect x="0" y="15" width="20" height="4" rx="1.5"/></svg>';
+  }else{
+    currentLayout=cols;
+    currentView='grid';
+    grid.classList.add('cols-'+cols);
+    var labels={2:'2 cols',3:'3 cols',4:'4 cols'};
+    label.textContent=labels[cols]||'Grid';
+    var icons={
+      2:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="1" y="1" width="8" height="8" rx="1.5"/><rect x="11" y="1" width="8" height="8" rx="1.5"/><rect x="1" y="11" width="8" height="8" rx="1.5"/><rect x="11" y="11" width="8" height="8" rx="1.5"/></svg>',
+      3:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="7.5" y="1" width="5" height="5" rx="1"/><rect x="14" y="1" width="5" height="5" rx="1"/><rect x="1" y="7.5" width="5" height="5" rx="1"/><rect x="7.5" y="7.5" width="5" height="5" rx="1"/><rect x="14" y="7.5" width="5" height="5" rx="1"/><rect x="1" y="14" width="5" height="5" rx="1"/><rect x="7.5" y="14" width="5" height="5" rx="1"/><rect x="14" y="14" width="5" height="5" rx="1"/></svg>',
+      4:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="0" y="0" width="4" height="4" rx="1"/><rect x="5.3" y="0" width="4" height="4" rx="1"/><rect x="10.7" y="0" width="4" height="4" rx="1"/><rect x="16" y="0" width="4" height="4" rx="1"/><rect x="0" y="5.3" width="4" height="4" rx="1"/><rect x="5.3" y="5.3" width="4" height="4" rx="1"/><rect x="10.7" y="5.3" width="4" height="4" rx="1"/><rect x="16" y="5.3" width="4" height="4" rx="1"/><rect x="0" y="10.7" width="4" height="4" rx="1"/><rect x="5.3" y="10.7" width="4" height="4" rx="1"/><rect x="10.7" y="10.7" width="4" height="4" rx="1"/><rect x="16" y="10.7" width="4" height="4" rx="1"/></svg>'
+    };
+    icon.innerHTML=icons[cols]||icons[3];
+  }
+  // Close menu
+  btn.classList.remove('open');
+  menu.classList.remove('open');
+  render();
+}
+// Init grid with cols-3
+(function(){
+  var g=document.getElementById('grid');
+  if(g)g.classList.add('cols-3');
+  // Close layout menu on outside click
+  document.addEventListener('click',function(e){
+    var wrap=document.getElementById('layout-picker-wrap');
+    if(wrap&&!wrap.contains(e.target)){
+      document.getElementById('layout-picker-btn').classList.remove('open');
+      document.getElementById('layout-menu').classList.remove('open');
+    }
+  });
+})();
 function renderMap(filtered){
   const dotsG=document.getElementById('map-dots');dotsG.innerHTML='';
   const groups={};
@@ -2491,16 +2623,8 @@ function closeLegal(){
 
 (function(){try{var el=document.getElementById('factsheets-track');if(el&&el.children&&el.children.length>0){el.innerHTML+=el.innerHTML;}}catch(e){}})();
 
-// Scroll hide controls
-(function(){
-  let lastY=0;const ctrl=document.getElementById('controls');
-  window.addEventListener('scroll',function(){
-    if(window.innerWidth<=768)return;
-    const y=window.scrollY;
-    if(y>lastY&&y>200)ctrl.classList.add('hidden');else ctrl.classList.remove('hidden');
-    lastY=y;
-  },{passive:true});
-})();
+// Scroll hide controls — DISABLED: controls always visible
+// (previously hid on scroll-down, causing confusion)
 
 
 
@@ -3009,30 +3133,7 @@ function clearHoverTimer(){if(_hoverTimer){clearTimeout(_hoverTimer);_hoverTimer
 
 // ── SERVICES DROPDOWN ──
 var _svcOpen=false;
-function toggleSvcDropdown(){
-  _svcOpen=!_svcOpen;
-  var dd=document.getElementById('nav-svc-dropdown');
-  var btn=document.getElementById('nav-svc-btn');
-  if(_svcOpen){
-    dd.style.display='block';
-    btn.classList.add('open');
-  } else {
-    dd.style.display='none';
-    btn.classList.remove('open');
-  }
-}
-function closeSvcDropdown(){
-  _svcOpen=false;
-  var dd=document.getElementById('nav-svc-dropdown');
-  var btn=document.getElementById('nav-svc-btn');
-  if(dd)dd.style.display='none';
-  if(btn)btn.classList.remove('open');
-}
-document.addEventListener('click',function(e){
-  var wrap=document.getElementById('nav-svc-wrap');
-  if(wrap&&!wrap.contains(e.target)){closeSvcDropdown();}
-});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSvcDropdown();});
+
 
 </script>
 
@@ -3166,6 +3267,532 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSvcDrop
     </div>
   </div>
 </div>
+
+<!-- ═══════════════════ GLOSSARY MODAL ═══════════════════ -->
+<div class="glossary-overlay" id="glossary-overlay" onclick="closeGlossaryOnOverlay(event)">
+  <div class="glossary-panel" id="glossary-panel">
+
+    <!-- Header -->
+    <div class="glossary-header">
+      <div class="glossary-header-top">
+        <div class="glossary-header-left">
+          <div class="glossary-header-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div>
+            <div class="glossary-header-title">Evrotrust Partners</div>
+            <div class="glossary-header-sub">Terminology · eIDAS &amp; Trust Services</div>
+          </div>
+        </div>
+        <button class="glossary-close" onclick="closeGlossary()">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="glossary-search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="glossary-search-input" placeholder="Search term…" oninput="glossarySearch(this.value)">
+      </div>
+
+      <div class="glossary-alpha" id="glossary-alpha">
+        <button class="glossary-alpha-btn all active" onclick="glossaryFilterAlpha('')">All</button>
+      </div>
+      <div class="glossary-count" id="glossary-count"></div>
+    </div>
+
+    <!-- Body -->
+    <div class="glossary-body" id="glossary-body">
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ═══════════════════ GLOSSARY DATA ═══════════════════
+const GLOSSARY = [
+  {
+    id: 'biometric',
+    letter: 'B',
+    name: 'Biometric Verification',
+    tag: 'eID',
+    tagColor: { bg:'#EAF2FF', text:'#0052CC' },
+    iconColor: { bg:'#EAF2FF', text:'#0052CC' },
+    icon: `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4"/><path d="M12 9v3l2 2"/></svg>`,
+    short: 'Identity confirmation using unique physiological characteristics — face, fingerprint, iris, or voice.',
+    full: 'Biometric verification is the process of confirming a person\'s identity using unique physiological or behavioural characteristics (biometric data). The technology is central to secure digital identification and is used in compliance with eIDAS, GDPR, and AML5 in the EU. During verification, the system compares provided data against stored biometric templates. It supports remote identity confirmation, electronic signing, and access to sensitive data.',
+    tags: ['eIDAS', 'KYC', 'AML', 'GDPR'],
+    url: 'https://evrotrust.com/bg/glossary/biometrichna-verifikatsiya/'
+  },
+  {
+    id: 'cloud-sign',
+    letter: 'C',
+    name: 'Cloud Electronic Signature',
+    tag: 'Cloud',
+    tagColor: { bg:'#EEF2FF', text:'#3730A3' },
+    iconColor: { bg:'#EEF2FF', text:'#3730A3' },
+    icon: `<svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>`,
+    short: 'An electronic signature where the private key is stored in a cloud-based HSM rather than on a physical device.',
+    full: 'A cloud electronic signature is a solution in which the signing private key is stored in a secure cloud hardware security module (HSM) managed by a QTSP. The user authenticates each signing operation via a mobile device (biometrics or PIN). Evrotrust offers qualified cloud signatures without a hardware token or smart card — a smartphone is sufficient. The signature is valid across the EU under eIDAS.',
+    tags: ['HSM', 'Cloud', 'QES', 'eIDAS', 'QTSP'],
+    url: 'https://evrotrust.com/bg/glossary/kakvo-e-oblachen-elektronen-podpis/'
+  },
+  {
+    id: 'digital-id',
+    letter: 'D',
+    name: 'Digital Identity',
+    tag: 'eID',
+    tagColor: { bg:'#EAF2FF', text:'#0052CC' },
+    iconColor: { bg:'#EAF2FF', text:'#0052CC' },
+    icon: `<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M7 15h2M13 15h4"/></svg>`,
+    short: 'The digital representation of the identity of a person or organisation in an online environment.',
+    full: 'A digital identity is a set of attributes and identifiers that uniquely describe a natural person, organisation, or device in a digital environment. In the context of eIDAS it includes qualified authentication means such as mobile apps, smart cards, or cloud solutions. Evrotrust issues digital identities via a remote video-identification process, enabling legally valid identity confirmation without physical presence.',
+    tags: ['eIDAS', 'eID', 'KYC', 'Identification'],
+    url: 'https://evrotrust.com/bg/glossary/digitalna-samolichnost/'
+  },
+  {
+    id: 'edelivery',
+    letter: 'E',
+    name: 'eDelivery (Electronic Delivery)',
+    tag: 'eDel',
+    tagColor: { bg:'#FFF0E6', text:'#C94E0A' },
+    iconColor: { bg:'#FFF0E6', text:'#C94E0A' },
+    icon: `<svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>`,
+    short: 'The digital equivalent of registered mail — with legally admissible proof of sending, delivery, and opening.',
+    full: 'eDelivery is a qualified trust service that ensures the legally valid transmission of electronic documents with verifiable date and time of sending, delivery, and opening. It is equivalent to registered post in a digital environment. Evrotrust offers Qualified Electronic Delivery (QEDelivery) compliant with eIDAS, with REST API integration and support for bulk notification sending.',
+    tags: ['eIDAS', 'QEDelivery', 'Notification'],
+    url: 'https://evrotrust.com/bg/glossary/kakvo-e-elektronno-vrachvane/'
+  },
+  {
+    id: 'eidas',
+    letter: 'E',
+    name: 'eIDAS Regulation',
+    tag: 'EU',
+    tagColor: { bg:'#FEF3C7', text:'#92400E' },
+    iconColor: { bg:'#FEF3C7', text:'#92400E' },
+    icon: `<svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+    short: 'The EU regulation on electronic identification and trust services — the legal framework for digital signatures across Europe.',
+    full: 'eIDAS (Electronic IDentification, Authentication and trust Services) is EU Regulation No. 910/2014, which entered into force on 1 July 2016. It establishes a legal framework for electronic identification and trust services (signatures, seals, timestamps, web authentication, eDelivery) across the EU. eIDAS 2.0 (2024) extends the scope with the European Digital Identity Wallet (EUDIW). Evrotrust is an accredited QTSP under eIDAS.',
+    tags: ['EU', 'QTSP', 'eID', 'QES', 'eIDAS 2.0'],
+    url: 'https://evrotrust.com/bg/glossary/'
+  },
+  {
+    id: 'esign',
+    letter: 'E',
+    name: 'Electronic Signature',
+    tag: 'QES',
+    tagColor: { bg:'#E3FCEF', text:'#00875A' },
+    iconColor: { bg:'#E3FCEF', text:'#00875A' },
+    icon: `<svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    short: 'The digital equivalent of a handwritten signature, defined in three levels under eIDAS: SES, AES, and QES.',
+    full: 'An electronic signature is a mechanism for authenticating the origin and integrity of an electronic document. The eIDAS Regulation defines three levels: simple (SES), advanced (AES), and qualified (QES). The Qualified Electronic Signature (QES) is legally equivalent to a handwritten signature throughout the EU. Evrotrust provides a mobile QES enabling remote signing via smartphone — without a hardware token or smart card.',
+    tags: ['eIDAS', 'QES', 'AES', 'SES', 'Signature'],
+    url: 'https://evrotrust.com/bg/glossary/kakvo-e-elektronen-podpis/'
+  },
+  {
+    id: 'eid',
+    letter: 'E',
+    name: 'Electronic Identification (eID)',
+    tag: 'eID',
+    tagColor: { bg:'#EAF2FF', text:'#0052CC' },
+    iconColor: { bg:'#EAF2FF', text:'#0052CC' },
+    icon: `<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+    short: 'A trust service for remote identity verification under eIDAS — ideal for KYC and AML compliance checks.',
+    full: 'Electronic identification (eID) is the process of remotely verifying the identity of a natural or legal person through digital means. Under eIDAS it enables cross-border recognition of digital identifiers. Evrotrust\'s eID service supports 62+ nationalities, biometric verification, and video-identification — fully compliant with KYC, AML, and GDPR requirements.',
+    tags: ['eIDAS', 'KYC', 'AML', 'GDPR', 'Biometrics'],
+    url: 'https://evrotrust.com/bg/glossary/kakvo-e-elektronna-identifikatsiya/'
+  },
+  {
+    id: 'hr-file',
+    letter: 'E',
+    name: 'Electronic Labour File',
+    tag: 'HR',
+    tagColor: { bg:'#F3F0FF', text:'#5B21B6' },
+    iconColor: { bg:'#F3F0FF', text:'#5B21B6' },
+    icon: `<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+    short: 'A fully digitised employment file — contracts, amendments, and HR documents signed with QES.',
+    full: 'An electronic labour file is a solution for digitising the employment relationship between employer and employee. It covers signing of employment contracts, amendments, orders, and other HR documents with a Qualified Electronic Signature (QES). Evrotrust provides a complete toolkit for internal digital transformation — paperless, fully remote, and legally compliant.',
+    tags: ['QES', 'HR', 'Digitisation', 'Labour Law'],
+    url: 'https://evrotrust.com/bg/glossary/kakvo-e-elektronno-trudovo-dosie/'
+  },
+  {
+    id: 'eseal',
+    letter: 'E',
+    name: 'eSeal (Electronic Seal)',
+    tag: 'eSeal',
+    tagColor: { bg:'#FCE7F3', text:'#9D174D' },
+    iconColor: { bg:'#FCE7F3', text:'#9D174D' },
+    icon: `<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
+    short: 'A qualified electronic seal for legal entities — ensuring document authenticity under eIDAS Article 35.',
+    full: 'An electronic seal is the equivalent of an electronic signature for legal entities (companies and organisations). A Qualified Electronic Seal (QESeal) guarantees the origin and integrity of a document under eIDAS Article 35. It is used for automated document issuance, API-level signing, and institutional authentication. Evrotrust issues qualified eSeals as part of its accredited QTSP trust services portfolio.',
+    tags: ['eIDAS', 'QTSP', 'Legal Entity', 'Authentication'],
+    url: 'https://evrotrust.com/bg/business/pulen-spektur-ot-uslugi/'
+  },
+  {
+    id: 'hsm',
+    letter: 'H',
+    name: 'HSM (Hardware Security Module)',
+    tag: 'Security',
+    tagColor: { bg:'#FEE2E2', text:'#991B1B' },
+    iconColor: { bg:'#FEE2E2', text:'#991B1B' },
+    icon: `<svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><circle cx="12" cy="12" r="1"/></svg>`,
+    short: 'A physical or cloud device for the secure generation and storage of cryptographic keys.',
+    full: 'A Hardware Security Module (HSM) is a specialised physical or cloud device designed for the secure generation, storage, and management of cryptographic keys. In Evrotrust\'s cloud QES, the user\'s private key is stored in the QTSP\'s HSM and never leaves the protected environment. Activating the signature requires biometric authentication from the user via the mobile app.',
+    tags: ['Cloud', 'QES', 'Cryptography', 'FIPS 140-2'],
+    url: 'https://evrotrust.com/bg/glossary/'
+  },
+  {
+    id: 'kyc',
+    letter: 'K',
+    name: 'KYC (Know Your Customer)',
+    tag: 'AML',
+    tagColor: { bg:'#F0FDF4', text:'#15803D' },
+    iconColor: { bg:'#F0FDF4', text:'#15803D' },
+    icon: `<svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`,
+    short: 'The customer identity verification process required by AML legislation to prevent money laundering and terrorist financing.',
+    full: 'KYC (Know Your Customer) is a mandatory process for the identification and verification of customers, prescribed by AML directives. It covers collection of personal data, identity document verification, and risk assessment. Evrotrust provides remote KYC verification with biometric recognition and video-identification, fully compliant with AML5 and eIDAS. Supports 62+ nationalities.',
+    tags: ['AML', 'GDPR', 'eIDAS', 'Financial Services'],
+    url: 'https://evrotrust.com/bg/business/kyc-i-kyb/'
+  },
+  {
+    id: 'qtsp',
+    letter: 'Q',
+    name: 'QTSP (Qualified Trust Service Provider)',
+    tag: 'EU',
+    tagColor: { bg:'#FEF3C7', text:'#92400E' },
+    iconColor: { bg:'#FEF3C7', text:'#92400E' },
+    icon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M9 12l2 2 4-4"/><path d="M12 14v8M8 18h8"/></svg>`,
+    short: 'An accredited provider of qualified trust services listed on the EU Trust List under eIDAS.',
+    full: 'A Qualified Trust Service Provider (QTSP) is an organisation accredited by its national supervisory body to provide qualified trust services under eIDAS. QTSPs are listed in the EU Trust Lists. Evrotrust is an accredited QTSP in Bulgaria and offers QES, eID, eTimestamp, QEDelivery, and eSeal — all with legal force throughout the EU.',
+    tags: ['eIDAS', 'QES', 'EU Trust List', 'Accreditation'],
+    url: 'https://evrotrust.com/bg/glossary/'
+  },
+  {
+    id: 'qes',
+    letter: 'Q',
+    name: 'QES (Qualified Electronic Signature)',
+    tag: 'QES',
+    tagColor: { bg:'#E3FCEF', text:'#00875A' },
+    iconColor: { bg:'#E3FCEF', text:'#00875A' },
+    icon: `<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
+    short: 'The highest level of electronic signature under eIDAS — legally equivalent to a handwritten signature across the entire EU.',
+    full: 'The Qualified Electronic Signature (QES) is the highest level of electronic signature under the eIDAS Regulation. It is issued by a Qualified Trust Service Provider (QTSP) and is based on a qualified certificate. QES is legally equivalent to a handwritten signature and is recognised across the EU without further verification. Evrotrust is an accredited QTSP issuing mobile QES without a hardware token, with the private key stored in HSM.',
+    tags: ['eIDAS', 'QTSP', 'HSM', 'Legal Force'],
+    url: 'https://evrotrust.com/bg/glossary/kakvo-e-kvalifitsiran-elektronen-podpis/'
+  },
+  {
+    id: 'timestamp',
+    letter: 'T',
+    name: 'eTimestamp (Qualified Electronic Timestamp)',
+    tag: 'eTS',
+    tagColor: { bg:'#EEF2FF', text:'#3730A3' },
+    iconColor: { bg:'#EEF2FF', text:'#3730A3' },
+    icon: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
+    short: 'Qualified cryptographic proof that a document existed at a precise point in time.',
+    full: 'A Qualified Electronic Timestamp (eTimestamp) is a cryptographic mechanism issued by a QTSP that proves a given document existed at a specific moment. It is used for copyright protection, archiving, and legal and financial documents. Evrotrust issues eTimestamps at 0.02 TU per timestamp. Valid across the EU under eIDAS.',
+    tags: ['eIDAS', 'QTSP', 'Cryptography', 'Archiving'],
+    url: 'https://evrotrust.com/bg/business/udostoverenie-za-vreme/'
+  },
+  {
+    id: 'trust-units',
+    letter: 'T',
+    name: 'Trust Units (TU)',
+    tag: 'TU',
+    tagColor: { bg:'#FEFCE8', text:'#A16207' },
+    iconColor: { bg:'#FEFCE8', text:'#A16207' },
+    icon: `<svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+    short: 'Evrotrust\'s prepaid credit system — 1 TU = QES · 3 TU = eID · 0.02 TU = Timestamp. Valid 12 months.',
+    full: 'Trust Units (TU) are Evrotrust\'s prepaid consumption-based billing system for trust services. Partners and clients purchase TU packages which are consumed as services are used: 1 TU per qualified electronic signature (QES), 3 TU per eID verification, and 0.02 TU per qualified timestamp. Packages are valid for 12 months from purchase. Volume discounts apply for large packages.',
+    tags: ['Billing', 'QES', 'eID', 'Timestamp', 'Pricing'],
+    url: 'https://evrotrust.com/bg/glossary/'
+  }
+];
+
+// ═══════════════════ GLOSSARY LOGIC ═══════════════════
+let glossaryActiveAlpha = '';
+let glossaryExpandedId = null;
+
+function buildAlpha() {
+  const letters = [...new Set(GLOSSARY.map(t => t.letter))].sort((a,b) => a.localeCompare(b,'en'));
+  const container = document.getElementById('glossary-alpha');
+  letters.forEach(l => {
+    const btn = document.createElement('button');
+    btn.className = 'glossary-alpha-btn';
+    btn.textContent = l;
+    btn.onclick = () => glossaryFilterAlpha(l);
+    container.appendChild(btn);
+  });
+}
+
+function glossaryFilterAlpha(letter) {
+  glossaryActiveAlpha = letter;
+  document.querySelectorAll('.glossary-alpha-btn').forEach(b => {
+    b.classList.toggle('active',
+      letter === '' ? b.classList.contains('all') : b.textContent === letter
+    );
+  });
+  renderGlossary(document.getElementById('glossary-search-input').value);
+}
+
+function glossarySearch(val) {
+  renderGlossary(val);
+}
+
+function renderGlossary(search = '') {
+  const body = document.getElementById('glossary-body');
+  const q = (search || '').toLowerCase().trim();
+  const alpha = glossaryActiveAlpha;
+
+  let filtered = GLOSSARY.filter(t => {
+    const matchAlpha = !alpha || t.letter === alpha;
+    const matchSearch = !q || t.name.toLowerCase().includes(q) || t.short.toLowerCase().includes(q) || t.tags.some(tag => tag.toLowerCase().includes(q));
+    return matchAlpha && matchSearch;
+  });
+
+  document.getElementById('glossary-count').textContent = filtered.length + ' ' + (filtered.length === 1 ? 'term' : 'terms');
+
+  if (!filtered.length) {
+    body.innerHTML = `<div class="glossary-empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>No terms found</p></div>`;
+    return;
+  }
+
+  // Group by letter
+  const groups = {};
+  filtered.forEach(t => {
+    if (!groups[t.letter]) groups[t.letter] = [];
+    groups[t.letter].push(t);
+  });
+
+  body.innerHTML = Object.keys(groups).sort((a,b) => a.localeCompare(b,'en')).map(letter => `
+    <div class="glossary-letter-group">
+      <div class="glossary-letter-heading">${letter}</div>
+      ${groups[letter].map(t => renderCard(t)).join('')}
+    </div>
+  `).join('');
+
+  // Restore expanded state
+  if (glossaryExpandedId) {
+    const card = document.getElementById('gcard-' + glossaryExpandedId);
+    if (card) card.classList.add('expanded');
+  }
+}
+
+function renderCard(t) {
+  return `
+    <div class="glossary-card" id="gcard-${t.id}" onclick="toggleGlossaryCard('${t.id}')">
+      <div class="glossary-card-head">
+        <div class="glossary-card-left">
+          <div class="glossary-card-icon" style="background:${t.iconColor.bg};color:${t.iconColor.text}">${t.icon}</div>
+          <div class="glossary-card-name">${t.name}</div>
+        </div>
+        <span class="glossary-card-tag" style="background:${t.tagColor.bg};color:${t.tagColor.text}">${t.tag}</span>
+        <div class="glossary-chev"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>
+      </div>
+      <div class="glossary-card-body">
+        <p>${t.full}</p>
+        <div class="glossary-tags">${t.tags.map(tag => `<span class="gtag">${tag}</span>`).join('')}</div>
+        ${t.url !== 'https://evrotrust.com/bg/glossary/' ? `<a class="glossary-card-link" href="${t.url}" target="_blank">Learn more <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function toggleGlossaryCard(id) {
+  const card = document.getElementById('gcard-' + id);
+  if (!card) return;
+  const wasExpanded = card.classList.contains('expanded');
+  // collapse all
+  document.querySelectorAll('.glossary-card.expanded').forEach(c => c.classList.remove('expanded'));
+  if (!wasExpanded) {
+    card.classList.add('expanded');
+    glossaryExpandedId = id;
+  } else {
+    glossaryExpandedId = null;
+  }
+}
+
+function openGlossary() {
+  const overlay = document.getElementById('glossary-overlay');
+  overlay.classList.add('open');
+  document.getElementById('glossary-nav-btn').classList.add('active');
+  document.getElementById('glossary-search-input').value = '';
+  glossaryActiveAlpha = '';
+  document.querySelectorAll('.glossary-alpha-btn').forEach(b => b.classList.toggle('active', b.classList.contains('all')));
+  renderGlossary();
+  setTimeout(() => document.getElementById('glossary-search-input').focus(), 200);
+}
+
+function closeGlossary() {
+  document.getElementById('glossary-overlay').classList.remove('open');
+  document.getElementById('glossary-nav-btn').classList.remove('active');
+}
+
+function closeGlossaryOnOverlay(e) {
+  if (e.target === document.getElementById('glossary-overlay')) closeGlossary();
+}
+
+// Init
+buildAlpha();
+renderGlossary();
+</script>
+
+
+<!-- ABOUT EVROTRUST OVERLAY -->
+<div class="about-overlay" id="about-overlay" onclick="closeAboutOnOverlay(event)">
+  <div class="about-panel">
+    <div class="about-header">
+      <div class="about-header-top">
+        <div class="about-header-left">
+          <div class="about-header-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <div class="about-header-title">About Evrotrust</div>
+            <div class="about-header-sub">European Qualified Trust Service Provider</div>
+          </div>
+        </div>
+        <div class="about-close" onclick="closeAbout()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </div>
+      </div>
+      <div class="about-badge-row">
+        <span class="about-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>QTSP</span>
+        <span class="about-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>EU Trusted List</span>
+        <span class="about-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>eIDAS Compliant</span>
+      </div>
+    </div>
+    <div class="about-body">
+      <p class="about-intro">Evrotrust is a <strong>European Qualified Trust Service Provider (QTSP)</strong> officially listed in the EU Trusted List. As a leading provider of digital identity and electronic signature solutions, we enable businesses across Europe to conduct secure, legally compliant digital transactions without the need for physical presence. Our offering delivers fully remote, secure, and eIDAS compliant services designed specifically for regulated industries including banking, insurance, telecommunications, healthcare and other.</p>
+
+      <div class="about-section-title">Why Choose Evrotrust</div>
+      <div class="about-why-grid">
+        <div class="about-why-card">
+          <div class="about-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0052CC" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="about-why-label">Regulatory Compliance</div>
+          <div class="about-why-desc">Full eIDAS compliance with qualified trust services</div>
+        </div>
+        <div class="about-why-card">
+          <div class="about-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0052CC" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div class="about-why-label">Enterprise Ready</div>
+          <div class="about-why-desc">Proven scalability for high-volume operations</div>
+        </div>
+        <div class="about-why-card">
+          <div class="about-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0052CC" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div class="about-why-label">Fast Integration</div>
+          <div class="about-why-desc">API and SDK available for seamless implementation</div>
+        </div>
+        <div class="about-why-card">
+          <div class="about-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0052CC" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="about-why-label">Multi-Country Support</div>
+          <div class="about-why-desc">Coverage across European markets and beyond</div>
+        </div>
+        <div class="about-why-card" style="grid-column:1/-1">
+          <div class="about-why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0052CC" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="about-why-label">24/7 Availability</div>
+          <div class="about-why-desc">Cloud-based infrastructure with 99.9% uptime SLA</div>
+        </div>
+      </div>
+
+      <div class="about-section-title">Core Services</div>
+      <div class="about-services-list">
+        <a class="about-svc-row" href="https://docs.evrotrust.com/update/docs/evrotrust-eid" target="_blank">
+          <div class="about-svc-icon" style="background:#EAF2FF;color:#0052CC"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M7 15h2M13 15h4"/></svg></div>
+          <div><div class="about-svc-name">e-Identification</div><div class="about-svc-desc">Verify customer identity remotely through secure identification and ID document verification. Fully compliant with eIDAS, AML/KYC requirements.</div></div>
+        </a>
+        <a class="about-svc-row" href="https://docs.evrotrust.com/update/docs/esign" target="_blank">
+          <div class="about-svc-icon" style="background:#E3FCEF;color:#00875A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+          <div><div class="about-svc-name">e-Signatures</div><div class="about-svc-desc">Legally binding electronic signatures including QES, organizational e-Seals, and qualified e-Timestamps. Mobile-first with full eIDAS compliance.</div></div>
+        </a>
+        <a class="about-svc-row" href="https://docs.evrotrust.com/update/docs/e-authentication" target="_blank">
+          <div class="about-svc-icon" style="background:#FFF3E0;color:#FF8B00"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+          <div><div class="about-svc-name">e-Authentication</div><div class="about-svc-desc">Secure access via qualified two-factor authentication with biometrics and push notifications.</div></div>
+        </a>
+        <a class="about-svc-row" href="https://docs.evrotrust.com/update/docs/edelivery" target="_blank">
+          <div class="about-svc-icon" style="background:#EAE6FF;color:#5243AA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="about-svc-name">e-Delivery</div><div class="about-svc-desc">Deliver documents with the same legal value as registered mail. Secure delivery with proof of receipt, timestamps, and full audit trail.</div></div>
+        </a>
+      </div>
+    </div>
+    <div class="about-footer">
+      <span class="about-footer-text">Listed on the EU Trusted List &middot; Bulgaria</span>
+      <a class="about-footer-link" href="https://evrotrust.com" target="_blank">
+        Visit evrotrust.com
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+function openAbout() {
+  document.getElementById('about-overlay').classList.add('open');
+  document.getElementById('about-nav-btn').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeAbout() {
+  document.getElementById('about-overlay').classList.remove('open');
+  document.getElementById('about-nav-btn').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function closeAboutOnOverlay(e) {
+  if (e.target === document.getElementById('about-overlay')) closeAbout();
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeAbout(); }
+});
+
+// ── SPLASH SCREEN ──
+(function(){
+  var splash = document.getElementById('splash');
+  var barFill = document.getElementById('splash-bar-fill');
+  if(!splash) return;
+
+  var duration = 5000;
+  var start = null;
+  var autoTimer;
+
+  function dismissSplash(){
+    splash.classList.add('swiped');
+    document.body.style.overflow = '';
+    cancelAnimationFrame(autoTimer);
+    try { localStorage.setItem('evrotrust-splash-seen','1'); } catch(e){}
+  }
+
+  function animateBar(ts){
+    if(!start) start = ts;
+    var progress = Math.min((ts - start) / duration * 100, 100);
+    if(barFill) barFill.style.width = progress + '%';
+    if(progress < 100){
+      autoTimer = requestAnimationFrame(animateBar);
+    } else {
+      dismissSplash();
+    }
+  }
+  autoTimer = requestAnimationFrame(animateBar);
+
+  document.body.style.overflow = 'hidden';
+
+  splash.addEventListener('click', dismissSplash);
+
+  var touchStartY = null;
+  splash.addEventListener('touchstart', function(e){ touchStartY = e.touches[0].clientY; }, {passive:true});
+  splash.addEventListener('touchend', function(e){
+    if(touchStartY !== null){
+      var dy = touchStartY - e.changedTouches[0].clientY;
+      if(dy > 40) dismissSplash();
+      touchStartY = null;
+    }
+  }, {passive:true});
+
+  var mouseStartY = null;
+  splash.addEventListener('mousedown', function(e){ mouseStartY = e.clientY; });
+  splash.addEventListener('mouseup', function(e){
+    if(mouseStartY !== null && mouseStartY - e.clientY > 40) dismissSplash();
+    mouseStartY = null;
+  });
+
+  createNeural('splash-canvas', 60, 140, 0.4, null);
+})();
+</script>
 
 </body>
 </html>
