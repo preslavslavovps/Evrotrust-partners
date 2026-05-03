@@ -46,9 +46,11 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .nav-title{font-weight:800;font-size:1.15rem;color:#091E42;letter-spacing:-0.03em;line-height:1}
 .nav-title span{color:#0052CC}
 .nav-divider{width:1px;height:24px;background:#e2e8f0;flex-shrink:0}
-.nav-program-btn{background:#0052CC;color:#fff;border:none;border-radius:7px;padding:7px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:background .15s}
-.nav-program-btn:hover{background:#003A99}
+.nav-program-btn{background:linear-gradient(135deg,#0052CC 0%,#0B2A4A 100%);color:#fff;border:none;border-radius:7px;padding:7px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s;box-shadow:0 2px 8px rgba(0,82,204,0.35);position:relative;overflow:hidden}
+.nav-program-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.12) 0%,transparent 60%);pointer-events:none}
+.nav-program-btn:hover{background:linear-gradient(135deg,#0066FF 0%,#0B2A4A 100%);box-shadow:0 4px 16px rgba(0,82,204,0.5);transform:translateY(-1px)}
 .nav-program-btn svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2;flex-shrink:0}
+.nav-program-btn .btn-star{font-size:.7rem;opacity:.85}
 
 /* ── SERVICES NAV DROPDOWN ── */
 .nav-services-wrap{position:relative;display:flex;align-items:center}
@@ -289,11 +291,11 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .overlay.open{display:flex}
 .modal{background:var(--white);border-radius:16px;width:min(680px,100%);max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popIn .5s cubic-bezier(.4,0,.2,1) both}
 @keyframes popIn{0%{opacity:0;transform:translate(60px,-40px) scale(.6);clip-path:circle(8% at 85% 8%)}50%{opacity:1;transform:translate(8px,-6px) scale(.98);clip-path:circle(75% at 50% 50%)}100%{opacity:1;transform:translate(0,0) scale(1);clip-path:circle(150% at 50% 50%)}}
-.modal-head{padding:1.5rem 1.5rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:1rem;position:sticky;top:0;background:var(--white);z-index:5}
+.modal-head{padding:1.25rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:.875rem;position:sticky;top:0;background:var(--white);z-index:5;flex-wrap:wrap}
 .modal-avatar{width:54px;height:54px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.14)}
 .modal-avatar::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.28) 0%,transparent 65%)}
 .modal-title-group{flex:1;min-width:0}
-.modal-name{font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:3px;word-break:break-word}
+.modal-name{font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:3px;word-break:break-word;overflow-wrap:anywhere;hyphens:auto}
 .modal-sub{font-size:.83rem;color:var(--text-muted);line-height:1.5}
 .modal-close{width:32px;height:32px;border:none;background:var(--gray-bg);border-radius:8px;cursor:pointer;font-size:1rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
 .modal-close:hover{background:var(--border)}
@@ -325,42 +327,134 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .btn-solid:hover{background:#1a4a7a}
 
 /* PROG MODAL */
-.prog-modal{background:var(--white);border-radius:16px;width:min(820px,100%);max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:popIn .5s cubic-bezier(.4,0,.2,1) both}
-.prog-head{background:linear-gradient(135deg,#061828,#0B2A4A);padding:1.75rem 1.75rem 1.5rem;border-radius:16px 16px 0 0}
-.prog-head h2{font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:4px}
-.prog-head p{font-size:.85rem;color:rgba(255,255,255,0.6)}
-.prog-close{position:absolute;top:1.25rem;right:1.25rem;width:32px;height:32px;border:none;background:rgba(255,255,255,0.15);border-radius:8px;cursor:pointer;font-size:1rem;color:#fff;display:flex;align-items:center;justify-content:center}
+/* ── PARTNERSHIP PROGRAM MODAL – v17 ── */
+.prog-modal{background:var(--white);border-radius:20px;width:min(900px,100%);max-height:93vh;overflow-y:auto;box-shadow:0 24px 80px rgba(9,30,66,.24),0 4px 16px rgba(9,30,66,.1);animation:popIn .45s cubic-bezier(.4,0,.2,1) both}
 .prog-head-wrap{position:relative}
-.prog-body{padding:1.25rem 1.5rem 1.75rem}
-.prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.25rem}
-.prog-card{border:1.5px solid var(--border);border-radius:12px;padding:1.25rem;background:var(--gray-bg)}
-.program-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.875rem}
-.badge-ref{background:#e0f7ff;color:#0090C8}.badge-res{background:#e8f0fb;color:#0B2A4A}
-.prog-card-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
-.prog-card-desc{font-size:.8rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem}
-.prog-features{display:flex;flex-direction:column;gap:5px;margin-bottom:1rem}
-.prog-feat{display:flex;align-items:flex-start;gap:7px;font-size:.78rem;color:var(--text);line-height:1.5}
-.prog-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:7px}
-.commission-box{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:.875rem}
-.commission-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.5rem}
-.c-rows{display:flex;flex-direction:column;gap:4px}
-.c-row{display:flex;align-items:center;justify-content:space-between;font-size:.76rem;padding:5px 8px;background:var(--gray-bg);border-radius:6px;border:1px solid var(--border)}
-.c-tier{font-weight:600;color:var(--navy)}.c-val{font-weight:700;color:var(--blue)}
-.how-section{border-top:1.5px solid var(--border);padding-top:1.25rem;margin-top:.5rem}
-.how-title{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:.875rem}
-.how-steps{display:flex;gap:0;position:relative;overflow-x:auto;padding-bottom:4px}
-.how-steps::before{content:'';position:absolute;top:18px;left:18px;right:18px;height:2px;background:rgba(0,174,239,0.2);z-index:0}
-.how-step{flex:1;min-width:80px;text-align:center;position:relative;z-index:1;padding:0 4px}
-.how-num{width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:.78rem;display:flex;align-items:center;justify-content:center;margin:0 auto .5rem;box-shadow:0 0 0 4px rgba(0,174,239,0.15)}
-.how-step-title{font-size:.68rem;font-weight:700;color:var(--navy);margin-bottom:2px}
-.how-step-desc{font-size:.6rem;color:var(--text-muted);line-height:1.3}
-.tu-section{background:var(--navy);border-radius:10px;padding:1rem;margin-top:1.25rem}
-.tu-title{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:.6rem}
-.tu-items{display:flex;flex-wrap:wrap;gap:7px}
-.tu-item{background:rgba(255,255,255,0.1);border-radius:8px;padding:5px 11px;display:flex;align-items:center;gap:7px}
-.tu-val{font-weight:800;font-size:.9rem;color:var(--blue)}.tu-name{font-size:.7rem;color:rgba(255,255,255,0.6)}
-.prog-cta{display:block;text-align:center;margin-top:1.25rem;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:11px 20px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s}
-.prog-cta:hover{background:var(--blue-dark)}
+.prog-head{background:linear-gradient(135deg,#040f1e 0%,#061828 40%,#0a2340 70%,#0d3060 100%);padding:2rem 2rem 0;border-radius:20px 20px 0 0;position:relative;overflow:hidden}
+.prog-head::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 80% 20%,rgba(0,174,239,0.15) 0%,transparent 50%),radial-gradient(circle at 20% 80%,rgba(0,82,204,0.12) 0%,transparent 40%);pointer-events:none}
+.prog-head::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.035) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+.prog-head-top{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem}
+.prog-head-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,174,239,0.15);border:1px solid rgba(0,174,239,0.3);border-radius:20px;padding:4px 12px;margin-bottom:.75rem}
+.prog-head-badge-dot{width:6px;height:6px;border-radius:50%;background:#00AEEF;animation:pulse2 2s ease-in-out infinite}
+.prog-head-badge-text{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,174,239,0.9)}
+.prog-head h2{font-size:1.6rem;font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1.15;margin-bottom:.35rem}
+.prog-head h2 span{color:#00AEEF}
+.prog-head-sub{font-size:.83rem;color:rgba(255,255,255,0.55);line-height:1.5;max-width:520px}
+.prog-close{width:34px;height:34px;border:none;background:rgba(255,255,255,0.1);border-radius:9px;cursor:pointer;font-size:1rem;color:rgba(255,255,255,0.7);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.prog-close:hover{background:rgba(255,255,255,0.2);color:#fff}
+/* Stats strip inside header */
+.prog-stats{position:relative;z-index:1;display:flex;gap:0;border-top:1px solid rgba(255,255,255,0.08);margin:0 -2rem;padding:0 2rem}
+.prog-stat{flex:1;padding:.875rem 0;display:flex;flex-direction:column;gap:3px;border-right:1px solid rgba(255,255,255,0.06)}
+.prog-stat:last-child{border-right:none}
+.prog-stat-val{font-size:1.15rem;font-weight:800;color:#fff;letter-spacing:-.03em}
+.prog-stat-val span{color:#00AEEF}
+.prog-stat-label{font-size:.62rem;color:rgba(255,255,255,0.45);font-weight:500;text-transform:uppercase;letter-spacing:.07em}
+/* Tabs */
+.prog-tabs-wrap{background:#F8FAFC;border-bottom:1px solid #E8ECF2;padding:0 1.5rem;display:flex;gap:0}
+.prog-tab{padding:.75rem 1.125rem;font-size:.8rem;font-weight:700;color:#5E6C84;cursor:pointer;border-bottom:2.5px solid transparent;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:5px;background:none;border-top:none;border-left:none;border-right:none;font-family:'Plus Jakarta Sans',sans-serif}
+.prog-tab:hover{color:#0052CC}
+.prog-tab.active{color:#0052CC;border-bottom-color:#0052CC}
+.prog-tab-icon{font-size:.9rem}
+/* Tab panels */
+.prog-panel{display:none;padding:1.5rem}
+.prog-panel.active{display:block}
+/* ── OVERVIEW PANEL ── */
+.prog-overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.25rem}
+.prog-card{border:1.5px solid var(--border);border-radius:14px;padding:1.375rem;background:var(--white);transition:border-color .2s,box-shadow .2s;cursor:default;position:relative;overflow:hidden}
+.prog-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0}
+.prog-card.ref-card::before{background:linear-gradient(90deg,#00AEEF,#0052CC)}
+.prog-card.res-card::before{background:linear-gradient(90deg,#0B2A4A,#1e5799)}
+.prog-card:hover{border-color:#0052CC;box-shadow:0 4px 20px rgba(0,82,204,.1)}
+.program-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem}
+.badge-ref{background:#E0F5FF;color:#0077AA}.badge-res{background:#EEF2FF;color:#3730A3}
+.prog-card-title{font-size:1.05rem;font-weight:800;color:var(--navy);margin-bottom:.35rem;letter-spacing:-.02em}
+.prog-card-desc{font-size:.78rem;color:var(--text-muted);line-height:1.65;margin-bottom:1rem}
+.prog-features{display:flex;flex-direction:column;gap:6px;margin-bottom:1.1rem}
+.prog-feat{display:flex;align-items:flex-start;gap:8px;font-size:.77rem;color:var(--text);line-height:1.5}
+.prog-feat-icon{width:16px;height:16px;border-radius:4px;background:#E0F5FF;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:.55rem}
+.res-card .prog-feat-icon{background:#EEF2FF}
+/* Commission table */
+.commission-box{background:#F8FAFC;border:1px solid #E8ECF2;border-radius:10px;padding:1rem}
+.commission-label{font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8493A8;margin-bottom:.625rem}
+.c-rows{display:flex;flex-direction:column;gap:5px}
+.c-row{display:flex;align-items:center;justify-content:space-between;font-size:.75rem;padding:6px 10px;background:var(--white);border-radius:7px;border:1px solid #E8ECF2;transition:border-color .15s}
+.c-row:hover{border-color:#0052CC}
+.c-tier{font-weight:600;color:#172B4D;display:flex;align-items:center;gap:5px}
+.c-val{font-weight:800;color:#0052CC;background:#EAF2FF;border-radius:5px;padding:2px 8px;font-size:.72rem}
+.c-row.highlight{background:#EAF2FF;border-color:#B3D0FF}
+.c-row.highlight .c-val{background:#0052CC;color:#fff}
+.c-note{font-size:.6rem;color:#8493A8;margin-top:.5rem;line-height:1.4;font-style:italic}
+/* ── RESELLER TIERS PANEL ── */
+.tiers-header{margin-bottom:1.25rem}
+.tiers-header h3{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:.3rem}
+.tiers-header p{font-size:.78rem;color:var(--text-muted);line-height:1.6}
+.tiers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
+.tier-card{border-radius:12px;padding:1.1rem .875rem;border:1.5px solid var(--border);text-align:center;transition:all .2s;position:relative;overflow:hidden}
+.tier-card.popular{border-color:#0052CC;box-shadow:0 4px 20px rgba(0,82,204,.15)}
+.tier-card-crown{position:absolute;top:0;left:0;right:0;background:#0052CC;color:#fff;font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px;text-align:center}
+.tier-icon{font-size:1.5rem;margin-bottom:.4rem;display:block}
+.tier-name{font-size:.75rem;font-weight:800;color:var(--navy);margin-bottom:.25rem}
+.tier-tu{font-size:.6rem;color:var(--text-muted);margin-bottom:.6rem;line-height:1.4}
+.tier-disc{font-size:1.5rem;font-weight:800;color:#0052CC;line-height:1}
+.tier-disc-label{font-size:.58rem;color:var(--text-muted);margin-top:2px}
+.tiers-table-wrap{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
+.tiers-table{width:100%;border-collapse:collapse;font-size:.77rem}
+.tiers-table th{background:#F0F4F8;padding:.6rem .875rem;text-align:left;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#5E6C84;border-bottom:1px solid var(--border)}
+.tiers-table td{padding:.625rem .875rem;border-bottom:1px solid #F0F4F8;color:#172B4D}
+.tiers-table tr:last-child td{border-bottom:none}
+.tiers-table tr:hover td{background:#F8FAFC}
+.tiers-table .disc-cell{font-weight:800;color:#0052CC}
+.tiers-note{background:#FFF8E6;border:1px solid #FFD980;border-radius:10px;padding:.875rem 1rem;font-size:.75rem;color:#7A5800;line-height:1.6}
+.tiers-note strong{color:#5A4000}
+/* ── TRUST UNITS PANEL ── */
+.tu-panel-header{margin-bottom:1.25rem}
+.tu-panel-header h3{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:.3rem}
+.tu-panel-header p{font-size:.78rem;color:var(--text-muted);line-height:1.6}
+.tu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.25rem}
+.tu-card{border:1.5px solid var(--border);border-radius:12px;padding:1rem;background:#F8FAFC;display:flex;align-items:center;gap:.75rem;transition:border-color .2s}
+.tu-card:hover{border-color:#0052CC;background:#EEF5FF}
+.tu-card-val{font-size:1.35rem;font-weight:800;color:#0052CC;white-space:nowrap;line-height:1;min-width:44px}
+.tu-card-info{flex:1}
+.tu-card-name{font-size:.78rem;font-weight:700;color:var(--navy);margin-bottom:1px}
+.tu-card-sub{font-size:.65rem;color:var(--text-muted)}
+.tu-note{background:linear-gradient(135deg,#061828,#0B2A4A);border-radius:12px;padding:1.1rem 1.25rem;display:flex;align-items:center;gap:1rem}
+.tu-note-icon{font-size:1.5rem;flex-shrink:0}
+.tu-note-text{font-size:.78rem;color:rgba(255,255,255,0.75);line-height:1.6}
+.tu-note-text strong{color:#fff}
+.tu-pricing-section{margin-top:1.25rem}
+.tu-pricing-title{font-size:.78rem;font-weight:800;color:var(--navy);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.07em}
+.tu-pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tu-pricing-card{border:1.5px solid var(--border);border-radius:12px;padding:1rem;transition:all .2s}
+.tu-pricing-card:hover{border-color:#0052CC;box-shadow:0 4px 16px rgba(0,82,204,.1)}
+.tu-pricing-icon{font-size:1.4rem;margin-bottom:.5rem}
+.tu-pricing-name{font-size:.82rem;font-weight:800;color:#0052CC;margin-bottom:.35rem}
+.tu-pricing-desc{font-size:.73rem;color:var(--text-muted);line-height:1.55}
+/* ── HOW TO JOIN PANEL ── */
+.join-steps{display:flex;flex-direction:column;gap:14px;margin-bottom:1.5rem;position:relative}
+.join-steps::before{content:'';position:absolute;left:19px;top:20px;bottom:20px;width:2px;background:linear-gradient(to bottom,#0052CC,rgba(0,82,204,0.1))}
+.join-step{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.25rem;border:1.5px solid var(--border);border-radius:12px;background:var(--white);transition:all .2s;position:relative}
+.join-step:hover{border-color:#0052CC;box-shadow:0 4px 16px rgba(0,82,204,.08)}
+.join-num{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0052CC,#0B2A4A);color:#fff;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 4px rgba(0,82,204,0.12)}
+.join-step-body{flex:1}
+.join-step-title{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:.25rem}
+.join-step-desc{font-size:.76rem;color:var(--text-muted);line-height:1.55}
+.join-step-action{margin-top:.5rem}
+.join-step-link{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;color:#0052CC;text-decoration:none;padding:4px 10px;background:#EAF2FF;border-radius:6px;transition:background .15s}
+.join-step-link:hover{background:#D0E6FF}
+/* CTA footer */
+.prog-footer{border-top:1px solid var(--border);padding:1.25rem 1.5rem;background:#F8FAFC;border-radius:0 0 20px 20px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.prog-footer-text{font-size:.78rem;color:var(--text-muted);line-height:1.5}
+.prog-footer-text strong{color:var(--navy);display:block;font-size:.85rem;margin-bottom:2px}
+.prog-footer-btns{display:flex;gap:8px;flex-wrap:wrap}
+.prog-cta{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#0052CC,#0B2A4A);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.83rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;box-shadow:0 2px 8px rgba(0,82,204,.3)}
+.prog-cta:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,82,204,.4)}
+.prog-cta-ghost{display:inline-flex;align-items:center;gap:6px;background:transparent;color:#0052CC;border:1.5px solid #0052CC;border-radius:8px;padding:9px 16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.83rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s}
+.prog-cta-ghost:hover{background:#EAF2FF}
+/* trust strip */
+.prog-trust{display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:1.25rem;padding:1rem;background:linear-gradient(135deg,#F0F4F8,#F8FAFC);border-radius:10px;border:1px solid #E4EAF2}
+.prog-trust-item{display:flex;align-items:center;gap:6px;font-size:.72rem;color:#5E6C84;font-weight:600}
+.prog-trust-icon{font-size:.9rem}
+.program-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem}
 .modal::-webkit-scrollbar,.add-modal::-webkit-scrollbar,.prog-modal::-webkit-scrollbar{width:4px}
 .modal::-webkit-scrollbar-thumb,.add-modal::-webkit-scrollbar-thumb,.prog-modal::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:20px}
 
@@ -650,7 +744,7 @@ body { background: #F4F5F7; font-family:'Space Grotesk','Plus Jakarta Sans','Int
 /* INT PANEL */
 .int-panel.open { animation: slideDown .35s ease both; }
 @keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
-.int-hub-wrap { background: #0A1628; padding: 3rem 2rem; border-top: 1px solid rgba(255,255,255,.06); }
+.int-hub-wrap { background: #132742; padding: 3rem 2rem; border-top: 1px solid rgba(255,255,255,.12); }
 .int-hub-header { max-width: 860px; margin: 0 auto 2rem; text-align: center; }
 .int-hub-eyebrow { font-size: .6rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #00B8D4; margin-bottom: .5rem; }
 .int-hub-title { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
@@ -660,16 +754,16 @@ body { background: #F4F5F7; font-family:'Space Grotesk','Plus Jakarta Sans','Int
 .int-req-toggle svg:first-child { width: 11px; height: 11px; stroke: #00B8D4; }
 .int-req-chev { width: 11px; height: 11px; transition: transform .2s; }
 .int-req-chev.open { transform: rotate(180deg); }
-.int-req-dropdown { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 8px; padding: .875rem 1.25rem; margin: .5rem auto; max-width: 600px; }
+.int-req-dropdown { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 8px; padding: .875rem 1.25rem; margin: .5rem auto; max-width: 600px; }
 .int-req-row { display: flex; flex-direction: column; gap: .5rem; }
 .int-req-point { display: flex; align-items: flex-start; gap: .5rem; font-size: .75rem; color: rgba(255,255,255,.45); line-height: 1.6; }
 .int-req-point strong { color: rgba(255,255,255,.75); font-weight: 600; }
 .int-req-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
 .int-hub-cards { max-width: 860px; margin: 0 auto 2.5rem; display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
 @media(max-width:680px){.int-hub-cards{grid-template-columns:1fr}}
-.int-hub-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 1.5rem; cursor: pointer; display: flex; flex-direction: column; gap: .75rem; transition: all .2s; position: relative; }
+.int-hub-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; padding: 1.5rem; cursor: pointer; display: flex; flex-direction: column; gap: .75rem; transition: all .2s; position: relative; }
 .int-hub-card:hover { background: rgba(255,255,255,.08); border-color: rgba(0,184,212,.4); transform: translateY(-2px); }
-.int-hub-card--featured { border-color: rgba(0,184,212,.3); background: rgba(0,184,212,.06); }
+.int-hub-card--featured { border-color: rgba(0,184,212,.45); background: rgba(0,184,212,.1); }
 .int-hub-card--featured::before { content: 'Recommended'; position: absolute; top: -1px; right: 14px; font-size: .58rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: #00B8D4; color: #fff; padding: 3px 9px; border-radius: 0 0 6px 6px; }
 .int-hub-card-top { display: flex; align-items: center; justify-content: space-between; }
 .int-hub-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.1); }
@@ -694,7 +788,7 @@ body { background: #F4F5F7; font-family:'Space Grotesk','Plus Jakarta Sans','Int
 .int-eid-sub { font-size: .75rem; color: rgba(255,255,255,.35); line-height: 1.6; }
 .int-eid-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
 @media(max-width:640px){.int-eid-cards{grid-template-columns:1fr}}
-.int-eid-card { border-radius: 8px; padding: 1.1rem; display: flex; flex-direction: column; gap: .5rem; border: 1px solid rgba(255,255,255,.07); background: rgba(255,255,255,.03); }
+.int-eid-card { border-radius: 8px; padding: 1.1rem; display: flex; flex-direction: column; gap: .5rem; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06); }
 .int-eid-card.enhanced { border-color: rgba(0,184,212,.25); background: rgba(0,184,212,.05); }
 .int-eid-badge { font-size: .6rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; width: fit-content; }
 .int-eid-card.basic .int-eid-badge { background: rgba(0,135,90,.15); color: #36B37E; }
@@ -876,6 +970,42 @@ body { background: #F4F5F7; font-family:'Space Grotesk','Plus Jakarta Sans','Int
 .card-tag:hover { opacity: .8; }
 /* Search highlight */
 mark { background: #FFF3CD; color: #172B4D; border-radius: 2px; padding: 0 1px; }
+
+/* Website link on card */
+.card-website-link {
+  display: inline-flex; align-items: center; gap: 3px;
+  color: #0052CC !important; text-decoration: none;
+  font-size: .72rem; font-weight: 600;
+  padding: 3px 7px; border-radius: 5px;
+  background: #E6F0FF; border: 1px solid #BCD6FF;
+  transition: all .15s;
+}
+.card-website-link:hover { background: #0052CC; color: #fff !important; border-color: #0052CC; }
+.card-website-link svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+/* Mobile controls: always visible, compact */
+@media (max-width: 768px) {
+  .controls {
+    position: sticky !important;
+    top: 56px !important;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    padding: .5rem .75rem .35rem !important;
+  }
+  .controls.hidden {
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  .controls-top { gap: 6px !important; }
+  .search-wrap input { height: 34px !important; font-size: .8rem !important; }
+  .sort-select { height: 34px !important; font-size: .72rem !important; max-width: 90px; }
+  .add-btn { padding: 0 10px !important; }
+  .quick-filters-row { gap: 5px !important; padding: .35rem 0 .15rem !important; }
+  .qf-pill { height: 24px !important; font-size: .68rem !important; padding: 0 8px !important; }
+  .results-count { font-size: .68rem !important; padding: 2px 8px !important; }
+}
 /* Empty state */
 #empty { text-align: center; padding: 4rem 1.5rem; grid-column: 1/-1; }
 #empty svg { display: block; margin: 0 auto 1rem; width: 44px; height: 44px; }
@@ -890,20 +1020,34 @@ mark { background: #FFF3CD; color: #172B4D; border-radius: 2px; padding: 0 1px; 
 .search-wrap:focus-within::after { display: none; }
 
 
-.hero-btn-integration { 
+.hero-btn-integration {
   position: relative;
+  border: 1.5px solid #00B8D4 !important;
+  background: transparent !important;
+  animation: neonPulse 2.5s ease-in-out infinite;
 }
+
+.hero-btn-integration::before,
 .hero-btn-integration::after {
-  content: '';
-  position: absolute;
-  bottom: -3px; left: 50%; transform: translateX(-50%);
-  width: 0; height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid #00B8D4;
-  opacity: 0; transition: opacity .3s;
+  display: none;
 }
-body.int-open .hero-btn-integration::after { opacity: 1; }
+
+.hero-btn-integration > *,
+.hero-btn-integration svg,
+.hero-btn-integration span {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(0,184,212,0.4), 0 0 8px rgba(0,184,212,0.2); border-color: rgba(0,184,212,0.5) !important; background: transparent !important; }
+  50%       { box-shadow: 0 0 10px rgba(0,238,255,0.8), 0 0 20px rgba(0,184,212,0.4); border-color: #00eeff !important; background: transparent !important; }
+}
+
+body.int-open .hero-btn-integration {
+  background: rgba(0,184,212,0.15);
+}
+
 .int-trigger-section { display: none !important; }
 
 
@@ -1128,7 +1272,7 @@ body.int-open .hero-btn-integration::after { opacity: 1; }
     Meeting Notes
   </button>
   <button class="nav-program-btn" onclick="openProg()">
-    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span class="btn-star">✦</span>
     <span class="btn-label">Partner Program</span>
   </button>
 </nav>
@@ -1526,12 +1670,17 @@ setInterval(()=>{ pillIdx=(pillIdx+1)%pillData.length; selectPill(pillIdx); }, 5
 <div class="overlay" id="detail-ov" onclick="ovClick(event,'detail-ov')">
   <div class="modal">
     <div class="modal-head">
-      <div class="modal-avatar" id="m-av"></div>
-      <div class="modal-title-group">
-        <div class="modal-name" id="m-name"></div>
-        <div class="modal-sub" id="m-sub"></div>
+      <!-- Row 1: avatar + name + close -->
+      <div style="display:flex;align-items:flex-start;gap:.875rem;width:100%">
+        <div class="modal-avatar" id="m-av"></div>
+        <div class="modal-title-group" style="flex:1;min-width:0">
+          <div class="modal-name" id="m-name"></div>
+          <div class="modal-sub" id="m-sub"></div>
+        </div>
+        <button class="modal-close" onclick="closeOv('detail-ov')" style="flex-shrink:0;margin-top:2px">✕</button>
       </div>
-      <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+      <!-- Row 2: action buttons -->
+      <div style="display:flex;align-items:center;gap:8px;width:100%;margin-top:.75rem">
         <button class="modal-compare-btn" id="m-fav-btn" onclick="toggleFavFromModal()" title="Favourite" style="gap:6px">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           Favourite
@@ -1540,7 +1689,6 @@ setInterval(()=>{ pillIdx=(pillIdx+1)%pillData.length; selectPill(pillIdx); }, 5
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
           Compare
         </button>
-        <button class="modal-close" onclick="closeOv('detail-ov')">✕</button>
       </div>
     </div>
     <div class="modal-body">
@@ -1596,16 +1744,298 @@ setInterval(()=>{ pillIdx=(pillIdx+1)%pillData.length; selectPill(pillIdx); }, 5
 <!-- PROGRAM MODAL -->
 <div class="overlay" id="prog-ov" onclick="ovClick(event,'prog-ov')">
   <div class="prog-modal">
+    <!-- HEADER -->
     <div class="prog-head-wrap">
-      <div class="prog-head"><h2>Evrotrust Partner Program</h2><p>Choose the model that fits your strategy</p></div>
-      <button class="prog-close" onclick="closeOv('prog-ov')">✕</button>
-    </div>
-    <div class="prog-body">
-      <div class="prog-grid">
-        <div class="prog-card"><span class="program-badge badge-ref">🤝 Referral</span><div class="prog-card-title">Referral Model</div><p class="prog-card-desc">Refer clients to Evrotrust. Earn commission for each signed contract — no volume commitment.</p><div class="prog-features"><div class="prog-feat"><div class="prog-dot"></div><span>No volume commitment</span></div><div class="prog-feat"><div class="prog-dot"></div><span>Suitable for CRM, HR or software resellers</span></div><div class="prog-feat"><div class="prog-dot"></div><span>No integration engagement required</span></div><div class="prog-feat"><div class="prog-dot"></div><span>Payment 30 days after paid invoice</span></div></div><div class="commission-box"><div class="commission-label">Commission Structure</div><div class="c-rows"><div class="c-row"><span class="c-tier">L1 · Qualified Lead</span><span class="c-val">5%</span></div><div class="c-row"><span class="c-tier">L2 · Drive & Sign</span><span class="c-val">15%</span></div><div class="c-row"><span class="c-tier">L3 · Renewal 2nd year</span><span class="c-val">7%</span></div><div class="c-row"><span class="c-tier">L3 · Renewal 3rd year</span><span class="c-val">5%</span></div></div></div></div>
-        <div class="prog-card"><span class="program-badge badge-res">🏢 Reseller</span><div class="prog-card-title">Reseller Model</div><p class="prog-card-desc">Client ownership sits with you. Buy Trust Unit packages at discount and set your own pricing.</p><div class="prog-features"><div class="prog-feat"><div class="prog-dot"></div><span>Prepaid Trust Unit packages at discount</span></div><div class="prog-feat"><div class="prog-dot"></div><span>Suitable for software platform providers</span></div><div class="prog-feat"><div class="prog-dot"></div><span>One-time integration for embedded solutions</span></div><div class="prog-feat"><div class="prog-dot"></div><span>Bundle trust services with your own pricing</span></div></div><div class="commission-box"><div class="commission-label">Reseller Tiers (12-month TU volume)</div><div class="c-rows"><div class="c-row"><span class="c-tier">⭐ Starter</span><span class="c-val">5% off</span></div><div class="c-row"><span class="c-tier">🥈 Silver · 36,000 TU</span><span class="c-val">7% off</span></div><div class="c-row"><span class="c-tier">🥇 Gold · 72,000 TU</span><span class="c-val">10% off</span></div><div class="c-row"><span class="c-tier">💎 Platinum · 240,000 TU</span><span class="c-val">15% off</span></div></div></div></div>
+      <div class="prog-head">
+        <div class="prog-head-top">
+          <div>
+            <div class="prog-head-badge"><div class="prog-head-badge-dot"></div><span class="prog-head-badge-text">Official Partner Program</span></div>
+            <h2>Evrotrust <span>Partnership</span> Models</h2>
+            <p class="prog-head-sub">We empower businesses to transform digitally. Choose the model that fits your strategy and start earning.</p>
+          </div>
+          <button class="prog-close" onclick="closeOv('prog-ov')">✕</button>
+        </div>
+        <div class="prog-stats">
+          <div class="prog-stat"><div class="prog-stat-val"><span>200+</span></div><div class="prog-stat-label">Clients across EU</div></div>
+          <div class="prog-stat"><div class="prog-stat-val"><span>15%</span></div><div class="prog-stat-label">Max commission</div></div>
+          <div class="prog-stat"><div class="prog-stat-val"><span>11</span></div><div class="prog-stat-label">Countries active</div></div>
+          <div class="prog-stat"><div class="prog-stat-val">1.8<span>M</span></div><div class="prog-stat-label">Platform users</div></div>
+        </div>
       </div>
-      <div class="how-section"><div class="how-title">How to become a partner</div><div class="how-steps"><div class="how-step"><div class="how-num">1</div><div class="how-step-title">Contact us</div><div class="how-step-desc">partners@evrotrust.com</div></div><div class="how-step"><div class="how-num">2</div><div class="how-step-title">Intro call</div><div class="how-step-desc">Team contacts you</div></div><div class="how-step"><div class="how-num">3</div><div class="how-step-title">Program info</div><div class="how-step-desc">Details sent</div></div></div></div>
+    </div>
+    <!-- TABS -->
+    <div class="prog-tabs-wrap">
+      <button class="prog-tab active" onclick="switchProgTab('overview',this)"><span class="prog-tab-icon">🤝</span> Overview</button>
+      <button class="prog-tab" onclick="switchProgTab('referral',this)"><span class="prog-tab-icon">💰</span> Referral Details</button>
+      <button class="prog-tab" onclick="switchProgTab('reseller',this)"><span class="prog-tab-icon">🏢</span> Reseller Tiers</button>
+      <button class="prog-tab" onclick="switchProgTab('tu',this)"><span class="prog-tab-icon">⚡</span> Trust Units</button>
+      <button class="prog-tab" onclick="switchProgTab('join',this)"><span class="prog-tab-icon">🚀</span> How to Join</button>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div class="prog-panel active" id="prog-panel-overview">
+      <div class="prog-overview-grid">
+        <!-- REFERRAL CARD -->
+        <div class="prog-card ref-card">
+          <span class="program-badge badge-ref">🤝 Referral</span>
+          <div class="prog-card-title">Referral Model</div>
+          <p class="prog-card-desc">Refer business clients to Evrotrust. Evrotrust contracts the client and pays you commission — no volume commitment required.</p>
+          <div class="prog-features">
+            <div class="prog-feat"><div class="prog-feat-icon">✓</div><span>No volume commitment</span></div>
+            <div class="prog-feat"><div class="prog-feat-icon">✓</div><span>Suitable for licensed agents, CRM & HR software resellers</span></div>
+            <div class="prog-feat"><div class="prog-feat-icon">✓</div><span>No integration engagement required</span></div>
+            <div class="prog-feat"><div class="prog-feat-icon">✓</div><span>Payment 30 days after paid client invoice</span></div>
+            <div class="prog-feat"><div class="prog-feat-icon">✓</div><span>No specific industry knowledge needed</span></div>
+          </div>
+          <div class="commission-box">
+            <div class="commission-label">Commission — First Year</div>
+            <div class="c-rows">
+              <div class="c-row"><span class="c-tier">L1 · Qualified Lead</span><span class="c-val">5%</span></div>
+              <div class="c-row highlight"><span class="c-tier">L2 · Drive &amp; Sign</span><span class="c-val">15%</span></div>
+            </div>
+            <div class="c-note">Based on revenue from trust services only (excl. VAT, support, training, 3rd party services)</div>
+          </div>
+        </div>
+        <!-- RESELLER CARD -->
+        <div class="prog-card res-card">
+          <span class="program-badge badge-res">🏢 Reseller</span>
+          <div class="prog-card-title">Reseller Model</div>
+          <p class="prog-card-desc">Client ownership sits with you. Sign a Reseller contract, buy prepaid Trust Unit packages at discount, and set your own pricing.</p>
+          <div class="prog-features">
+            <div class="prog-feat"><div class="prog-feat-icon" style="background:#EEF2FF">✓</div><span>Prepaid Trust Unit packages at reseller discounts</span></div>
+            <div class="prog-feat"><div class="prog-feat-icon" style="background:#EEF2FF">✓</div><span>Suitable for software platform providers</span></div>
+            <div class="prog-feat"><div class="prog-feat-icon" style="background:#EEF2FF">✓</div><span>One-time integration for embedded solutions</span></div>
+            <div class="prog-feat"><div class="prog-feat-icon" style="background:#EEF2FF">✓</div><span>Bundle trust services with your own pricing</span></div>
+            <div class="prog-feat"><div class="prog-feat-icon" style="background:#EEF2FF">✓</div><span>End price negotiated directly with your clients</span></div>
+          </div>
+          <div class="commission-box">
+            <div class="commission-label">Reseller Tiers (12-month TU volume)</div>
+            <div class="c-rows">
+              <div class="c-row"><span class="c-tier">⭐ Starter</span><span class="c-val">5% off</span></div>
+              <div class="c-row"><span class="c-tier">🥈 Silver · 36,000 TU</span><span class="c-val">7% off</span></div>
+              <div class="c-row"><span class="c-tier">🥇 Gold · 72,000 TU</span><span class="c-val">10% off</span></div>
+              <div class="c-row highlight"><span class="c-tier">💎 Platinum · 240,000 TU</span><span class="c-val">15% off</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="prog-trust">
+        <div class="prog-trust-item"><span class="prog-trust-icon">🏦</span> Trusted by 15+ major EU banks</div>
+        <div class="prog-trust-item"><span class="prog-trust-icon">🇪🇺</span> EU Commission peer-reviewed National eID</div>
+        <div class="prog-trust-item"><span class="prog-trust-icon">🌍</span> Users from 61 nationalities</div>
+        <div class="prog-trust-item"><span class="prog-trust-icon">🔒</span> eIDAS-qualified trust services</div>
+      </div>
+    </div>
+
+    <!-- REFERRAL DETAILS TAB -->
+    <div class="prog-panel" id="prog-panel-referral">
+      <div class="tiers-header">
+        <h3>Referral Program — Full Commission Structure</h3>
+        <p>Earn up to 15% commission from first-year contract fees by referring qualified leads. Build recurring revenue through renewal bonuses.</p>
+      </div>
+      <div class="commission-box" style="margin-bottom:1.25rem">
+        <div class="commission-label">New Clients — First Year Partner Fees</div>
+        <div class="c-rows">
+          <div class="c-row">
+            <span class="c-tier" style="flex-direction:column;align-items:flex-start;gap:1px">
+              <span style="font-weight:800">L1 · Qualified Lead</span>
+              <span style="font-size:.65rem;font-weight:400;color:#5E6C84">Convert prospect with explicitly expressed interest, identified use-case &amp; potential volumes</span>
+            </span>
+            <span class="c-val">5%</span>
+          </div>
+          <div class="c-row highlight">
+            <span class="c-tier" style="flex-direction:column;align-items:flex-start;gap:1px">
+              <span style="font-weight:800">L2 · Drive &amp; Sign</span>
+              <span style="font-size:.65rem;font-weight:400;color:#5E6C84">Full sales engagement: demo sessions, materials, meetings, negotiations to contract signing</span>
+            </span>
+            <span class="c-val">15%</span>
+          </div>
+        </div>
+      </div>
+      <div class="commission-box" style="margin-bottom:1.25rem">
+        <div class="commission-label">Renewals — Ongoing Fees (2nd &amp; 3rd Year)</div>
+        <div class="c-rows">
+          <div class="c-row">
+            <span class="c-tier" style="flex-direction:column;align-items:flex-start;gap:1px">
+              <span style="font-weight:800">L3 · Upsell Bonus — 2nd Year</span>
+              <span style="font-size:.65rem;font-weight:400;color:#5E6C84">Active Partner status required: generate min. 5,000 EUR from new businesses annually</span>
+            </span>
+            <span class="c-val">7%</span>
+          </div>
+          <div class="c-row">
+            <span class="c-tier" style="flex-direction:column;align-items:flex-start;gap:1px">
+              <span style="font-weight:800">L3 · Upsell Bonus — 3rd Year</span>
+              <span style="font-size:.65rem;font-weight:400;color:#5E6C84">From paid invoice from clients onboarded in previous years</span>
+            </span>
+            <span class="c-val">5%</span>
+          </div>
+        </div>
+        <div class="c-note">* Applicable to L2 Drive &amp; Sign partners. L1 referral partners receive 9% in year 2. Commission bonus calculated on the paid contractual value of each client for the 2nd and 3rd year.</div>
+      </div>
+      <div class="tiers-note">
+        <strong>Payment Terms:</strong> 30 days after paid invoice by the client. Commission is based only on revenue from trust services — does not include support, professional/training services, or third-party services.
+      </div>
+    </div>
+
+    <!-- RESELLER TIERS TAB -->
+    <div class="prog-panel" id="prog-panel-reseller">
+      <div class="tiers-header">
+        <h3>Reseller Model — Select Your Volume Tier</h3>
+        <p>Buy Trust Units at a discount of up to 15% from Evrotrust standard rates. Discounts are calculated and applied on any standard volume-based package. Resellers are responsible for financial transactions with customers.</p>
+      </div>
+      <div class="tiers-grid">
+        <div class="tier-card">
+          <span class="tier-icon">⭐</span>
+          <div class="tier-name">Starter</div>
+          <div class="tier-tu">No minimum volume required</div>
+          <div class="tier-disc">5%</div>
+          <div class="tier-disc-label">off TU package price</div>
+        </div>
+        <div class="tier-card">
+          <span class="tier-icon">🥈</span>
+          <div class="tier-name">Silver</div>
+          <div class="tier-tu">36,000 TU to reach<br>30,000 TU/yr to maintain</div>
+          <div class="tier-disc">7%</div>
+          <div class="tier-disc-label">off TU package price</div>
+        </div>
+        <div class="tier-card popular">
+          <div class="tier-card-crown">Most popular</div>
+          <span class="tier-icon" style="margin-top:.875rem">🥇</span>
+          <div class="tier-name">Gold</div>
+          <div class="tier-tu">72,000 TU to reach<br>60,000 TU/yr to maintain</div>
+          <div class="tier-disc">10%</div>
+          <div class="tier-disc-label">off TU package price</div>
+        </div>
+        <div class="tier-card">
+          <span class="tier-icon">💎</span>
+          <div class="tier-name">Platinum</div>
+          <div class="tier-tu">240,000 TU to reach<br>200,000 TU/yr to maintain</div>
+          <div class="tier-disc">15%</div>
+          <div class="tier-disc-label">off TU package price</div>
+        </div>
+      </div>
+      <div class="tiers-table-wrap">
+        <table class="tiers-table">
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Required 12-month TU volume to reach tier</th>
+              <th>Minimum 12-month TU to maintain tier</th>
+              <th>Reseller Discount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>⭐ Starter</td><td>n/a</td><td>n/a</td><td class="disc-cell">5% off</td></tr>
+            <tr><td>🥈 Silver</td><td>36,000 TU</td><td>30,000 TU</td><td class="disc-cell">7% off</td></tr>
+            <tr><td>🥇 Gold</td><td>72,000 TU</td><td>60,000 TU</td><td class="disc-cell">10% off</td></tr>
+            <tr><td>💎 Platinum</td><td>240,000 TU</td><td>200,000 TU</td><td class="disc-cell">15% off</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tiers-note">
+        <strong>* Tier period: December–December.</strong> Tier discount based on accumulated volumes from all packages and calculated only for new ones until end of tier period. New tier keeps discount based on previous year — if there is no volume decrease. Resellers engage with customers directly and work with Evrotrust sales team to ensure successful service adoption, expansion and renewals.
+      </div>
+    </div>
+
+    <!-- TRUST UNITS TAB -->
+    <div class="prog-panel" id="prog-panel-tu">
+      <div class="tu-panel-header">
+        <h3>Trust Units — The Evrotrust Currency</h3>
+        <p>All services are mapped to Trust Units (TU) — a standardized unit for measuring platform usage. All current and new services are covered. You can spend them any way you want.</p>
+      </div>
+      <div class="tu-grid">
+        <div class="tu-card"><div class="tu-card-val">0.7 TU</div><div class="tu-card-info"><div class="tu-card-name">QES over hash of document</div><div class="tu-card-sub">Qualified e-signature over a hash</div></div></div>
+        <div class="tu-card"><div class="tu-card-val">1 TU</div><div class="tu-card-info"><div class="tu-card-name">Qualified e-signature</div><div class="tu-card-sub">Standard value up to €20,000*</div></div></div>
+        <div class="tu-card"><div class="tu-card-val">0.7 TU</div><div class="tu-card-info"><div class="tu-card-name">Advanced e-signature</div><div class="tu-card-sub">AES over a document</div></div></div>
+        <div class="tu-card"><div class="tu-card-val">3 TU</div><div class="tu-card-info"><div class="tu-card-name">eID Verification</div><div class="tu-card-sub">Done once — reused for all signatures</div></div></div>
+        <div class="tu-card"><div class="tu-card-val">1 TU</div><div class="tu-card-info"><div class="tu-card-name">Qualified e-Delivery</div><div class="tu-card-sub">eDelivery of documents</div></div></div>
+        <div class="tu-card"><div class="tu-card-val">0.05 TU</div><div class="tu-card-info"><div class="tu-card-name">2FA Authentication</div><div class="tu-card-sub">Two-factor authentication</div></div></div>
+        <div class="tu-card"><div class="tu-card-val">0.02 TU</div><div class="tu-card-info"><div class="tu-card-name">Qualified Timestamp</div><div class="tu-card-sub">Legal time proof for documents</div></div></div>
+        <div class="tu-card" style="border-style:dashed;border-color:#0052CC;background:#EAF2FF"><div class="tu-card-val" style="font-size:.9rem">+ New</div><div class="tu-card-info"><div class="tu-card-name" style="color:#0052CC">Upcoming Services</div><div class="tu-card-sub">All new products use your TU wallet</div></div></div>
+      </div>
+      <div class="tu-note">
+        <div class="tu-note-icon">💡</div>
+        <div class="tu-note-text"><strong>Fill your Evrotrust Wallet with Trust Units</strong> and access the full Evrotrust digital universe — eSign, eID, eDelivery and all new products. Each partner or reseller gets a <strong>unique API key and Vendor Number</strong> enabling sub-wallets for each business client.</div>
+      </div>
+      <div class="tu-pricing-section">
+        <div class="tu-pricing-title">Pricing Models</div>
+        <div class="tu-pricing-grid">
+          <div class="tu-pricing-card">
+            <div class="tu-pricing-icon">🏠</div>
+            <div class="tu-pricing-name">Pay-as-you-go</div>
+            <div class="tu-pricing-desc">No one-off costs. Embedded discounts kick in automatically with increased volume. Perfect for getting started.</div>
+          </div>
+          <div class="tu-pricing-card">
+            <div class="tu-pricing-icon">🏢</div>
+            <div class="tu-pricing-name">Committed Volume</div>
+            <div class="tu-pricing-desc">Lower your costs by committing to certain usage levels. Larger commitment = greater discount. Spend across multiple channels &amp; services.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW TO JOIN TAB -->
+    <div class="prog-panel" id="prog-panel-join">
+      <div class="tiers-header">
+        <h3>How to Become a Partner</h3>
+        <p>Joining is simple. Our team will guide you through every step of the onboarding process and help you choose the right model.</p>
+      </div>
+      <div class="join-steps">
+        <div class="join-step">
+          <div class="join-num">1</div>
+          <div class="join-step-body">
+            <div class="join-step-title">Contact the Evrotrust Partner Team</div>
+            <div class="join-step-desc">Reach out via email to start the conversation. Tell us about your business, your clients, and your goals.</div>
+            <div class="join-step-action"><a class="join-step-link" href="mailto:partners@evrotrust.com">✉ partners@evrotrust.com</a></div>
+          </div>
+        </div>
+        <div class="join-step">
+          <div class="join-num">2</div>
+          <div class="join-step-body">
+            <div class="join-step-title">Intro Call with Our Team</div>
+            <div class="join-step-desc">Our partner team contacts you to understand your needs and explain the models available — Referral or Reseller.</div>
+          </div>
+        </div>
+        <div class="join-step">
+          <div class="join-num">3</div>
+          <div class="join-step-body">
+            <div class="join-step-title">Receive Program Details &amp; Agreement</div>
+            <div class="join-step-desc">Detailed program information, pricing, and contract terms are sent to you. You select your partnership model.</div>
+          </div>
+        </div>
+        <div class="join-step">
+          <div class="join-num">4</div>
+          <div class="join-step-body">
+            <div class="join-step-title">Sign Contract &amp; Get Onboarded</div>
+            <div class="join-step-desc">Sign the partner agreement. For resellers: receive your API key and Vendor Number. For referrals: start sending leads immediately.</div>
+          </div>
+        </div>
+        <div class="join-step">
+          <div class="join-num">5</div>
+          <div class="join-step-body">
+            <div class="join-step-title">Start Earning</div>
+            <div class="join-step-desc">Refer clients or onboard them to your wallet. Evrotrust sales team works alongside you to ensure successful adoption, expansion, and renewals.</div>
+          </div>
+        </div>
+      </div>
+      <div class="prog-trust">
+        <div class="prog-trust-item"><span class="prog-trust-icon">⚡</span> Fast onboarding process</div>
+        <div class="prog-trust-item"><span class="prog-trust-icon">🤝</span> Dedicated partner support</div>
+        <div class="prog-trust-item"><span class="prog-trust-icon">📊</span> Joint sales team engagement</div>
+        <div class="prog-trust-item"><span class="prog-trust-icon">🌍</span> Access to 11+ EU markets</div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="prog-footer">
+      <div class="prog-footer-text">
+        <strong>Ready to become an Evrotrust Partner?</strong>
+        Contact our team or explore more on the official partner page.
+      </div>
+      <div class="prog-footer-btns">
+        <a class="prog-cta-ghost" href="https://evrotrust.com/partners/" target="_blank" rel="noopener">Learn more ↗</a>
+        <a class="prog-cta" href="mailto:partners@evrotrust.com">✉ Contact Partners Team</a>
+      </div>
     </div>
   </div>
 </div>
@@ -1859,6 +2289,7 @@ function render(){
           <button class="card-icon-btn${isInCompare(pidx)?' cmp-active':''}" id="cmp-${pidx}" onclick="event.stopPropagation();toggleCompare(${pidx})" title="Compare">
             <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
           </button>
+          ${p.website?`<a class="card-action-link card-website-link" href="${p.website}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Visit website"><svg viewBox="0 0 24 24" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>`:''}
           <button class="card-action-link" onclick="event.stopPropagation();openDetail(${pidx})">Details <svg stroke-width="2.5" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
         </div>
       </div>
@@ -1985,6 +2416,12 @@ function openAdd(){
   setTimeout(()=>document.getElementById('np-name').focus(),60);
 }
 function openProg(){document.getElementById('prog-ov').classList.add('open');document.body.style.overflow='hidden';}
+function switchProgTab(id,btn){
+  document.querySelectorAll('.prog-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.prog-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('prog-panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
 function closeOv(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
 function ovClick(e,id){if(e.target.id===id)closeOv(id);}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){['detail-ov','add-ov','prog-ov','compare-ov'].forEach(closeOv);}});
@@ -2058,9 +2495,9 @@ function closeLegal(){
 (function(){
   let lastY=0;const ctrl=document.getElementById('controls');
   window.addEventListener('scroll',function(){
-    if(window.innerWidth>640)return;
+    if(window.innerWidth<=768)return;
     const y=window.scrollY;
-    if(y>lastY&&y>120)ctrl.classList.add('hidden');else ctrl.classList.remove('hidden');
+    if(y>lastY&&y>200)ctrl.classList.add('hidden');else ctrl.classList.remove('hidden');
     lastY=y;
   },{passive:true});
 })();
