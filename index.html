@@ -262,11 +262,19 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .controls{background:var(--white);border-bottom:1.5px solid var(--border);padding:.75rem 1rem;display:flex;flex-direction:column;gap:8px;position:sticky;top:64px;z-index:90;transition:transform .3s ease,opacity .3s ease;width:100%}
 .controls.hidden{transform:translateY(-100%);opacity:0;pointer-events:none}
 .controls-top{display:flex;align-items:center;gap:8px;width:100%}
-.search-wrap{position:relative;flex:1;min-width:0}
-.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--text-muted);pointer-events:none}
-.search-wrap input{width:100%;height:38px;border:1.5px solid var(--border);border-radius:8px;padding:0 10px 0 32px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.875rem;color:var(--text);outline:none;background:var(--gray-bg);transition:border-color .15s}
+.search-wrap{position:relative;flex:1;min-width:0;display:flex;align-items:center;gap:0}
+.search-wrap svg.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--text-muted);pointer-events:none;z-index:1}
+.search-wrap input{width:100%;height:38px;border:1.5px solid var(--border);border-radius:8px 0 0 8px;padding:0 64px 0 32px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.875rem;color:var(--text);outline:none;background:var(--gray-bg);transition:border-color .15s,background .15s}
 .search-wrap input:focus{border-color:var(--blue);background:#fff}
+.search-wrap input:focus~.search-kbd-hint{opacity:0}
 .search-wrap input::placeholder{color:var(--text-muted)}
+.search-kbd-hint{position:absolute;right:90px;top:50%;transform:translateY(-50%);font-size:.6rem;color:#b0bac7;background:#f0f1f3;border:1px solid #dde3ea;border-radius:4px;padding:2px 5px;pointer-events:none;transition:opacity .15s;white-space:nowrap}
+.search-btn{height:38px;padding:0 14px;background:var(--blue);border:1.5px solid var(--blue);border-left:none;border-radius:0 8px 8px 0;font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;gap:5px;flex-shrink:0;transition:background .15s}
+.search-btn:hover{background:var(--blue-dark)}
+.search-btn svg{width:13px;height:13px;stroke:#fff;fill:none}
+.search-clear{position:absolute;right:90px;top:50%;transform:translateY(-50%);width:18px;height:18px;border:none;background:none;cursor:pointer;display:none;align-items:center;justify-content:center;color:#8993a4;font-size:.9rem;padding:0;line-height:1;z-index:2}
+.search-clear.show{display:flex}
+.search-clear:hover{color:#172B4D}
 .sort-select{height:38px;border:1.5px solid var(--border);border-radius:8px;padding:0 8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;color:var(--text-muted);background:var(--gray-bg);outline:none;cursor:pointer;flex-shrink:0}
 .view-toggle{display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0}
 .view-btn{width:36px;height:36px;border:none;background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
@@ -315,6 +323,42 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .layout-opt.active .layout-opt-text strong{color:#0052CC}
 .layout-check{font-size:.7rem;color:#0052CC;font-weight:700;flex-shrink:0}
 
+/* ── INTERACTIVE CARD ENHANCEMENTS ── */
+/* Spotlight / glow follow cursor */
+.card{position:relative;overflow:hidden}
+.card::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(0,82,204,0.07),transparent 60%);transition:opacity .3s}
+.card:hover::after{opacity:1}
+/* Ripple effect */
+.ripple-circle{position:absolute;border-radius:50%;background:rgba(0,82,204,0.15);transform:scale(0);animation:rippleAnim .5s linear;pointer-events:none;z-index:10}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+/* Card badge shimmer on hover */
+.card:hover .card-tag{box-shadow:0 0 0 2px rgba(0,82,204,0.18)}
+/* Details button - more prominent */
+.card-action-link{font-size:.72rem;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:3px;background:none;border:none;cursor:pointer;font-family:inherit;padding:4px 8px;border-radius:6px;transition:background .15s,gap .15s,color .15s}
+.card-action-link:hover{background:#EAF2FF;color:var(--blue);gap:5px}
+.card-action-link svg{width:12px;height:12px;stroke:currentColor;fill:none;flex-shrink:0;transition:transform .15s}
+.card-action-link:hover svg{transform:translateX(2px)}
+/* Favourite + Compare icon buttons */
+.card-icon-btn{width:28px;height:28px;border:1.5px solid var(--border);border-radius:7px;background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.card-icon-btn svg{width:13px;height:13px;stroke:var(--text-muted);fill:none;stroke-width:2}
+.card-icon-btn:hover{border-color:#0052CC;background:#EAF2FF}
+.card-icon-btn:hover svg{stroke:#0052CC}
+.card-icon-btn.fav-active{border-color:#e11d48;background:#fff0f3}
+.card-icon-btn.fav-active svg{stroke:#e11d48;fill:#e11d48}
+.card-icon-btn.cmp-active{border-color:#0052CC;background:#EAF2FF}
+.card-icon-btn.cmp-active svg{stroke:#0052CC}
+/* Website link */
+.card-website-link{width:28px;height:28px;border:1.5px solid var(--border);border-radius:7px;background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;text-decoration:none}
+.card-website-link svg{width:12px;height:12px;stroke:var(--text-muted);fill:none;stroke-width:2.5}
+.card-website-link:hover{border-color:#0052CC;background:#EAF2FF}
+.card-website-link:hover svg{stroke:#0052CC}
+/* Integration badges on card */
+.card-int-badges{display:flex;gap:3px;flex-wrap:wrap;margin-top:5px}
+.card-int-badge{font-size:.55rem;font-weight:700;letter-spacing:.04em;padding:2px 6px;border-radius:4px;background:#EAF2FF;color:#0052CC;border:1px solid #c7deff;white-space:nowrap}
+/* Animated top border on hover */
+.card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:2px;background:linear-gradient(90deg,transparent,#0052CC,transparent);transition:left .4s ease;z-index:3}
+.card:hover::before{left:100%}
+
 /* MAIN GRID */
 .main{max-width:1200px;margin:0 auto;padding:1.5rem 1rem 4rem;width:100%}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -347,8 +391,10 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--text);
 .card-region-badge{font-size:.68rem;font-weight:600;color:var(--blue);background:#e0f7ff;border:1px solid #b0e4f8;border-radius:6px;padding:3px 8px;white-space:nowrap;line-height:1.4;flex-shrink:0;max-width:110px;overflow:hidden;text-overflow:ellipsis}
 .card-name{font-size:1rem;font-weight:700;color:var(--text);line-height:1.25}
 .card-desc{font-size:.82rem;color:var(--text-muted);line-height:1.6;flex:1}
-.card-bottom{padding:.65rem 1.25rem .875rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:#fafbfd}
-.card-tag{font-size:.65rem;font-weight:600;letter-spacing:.03em;padding:3px 8px;border-radius:20px}
+.card-bottom{padding:.6rem 1.25rem .6rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:transparent}
+.card-tag{font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border-radius:6px;border:1.5px solid transparent;display:inline-flex;align-items:center;gap:4px;transition:filter .15s;line-height:1;vertical-align:middle;white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis}
+.card-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.6;flex-shrink:0;align-self:center}
+.card-tag:hover{filter:brightness(.92)}
 .card-action{font-size:.72rem;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:3px;transition:gap .15s}
 .card:hover .card-action{gap:5px}
 .card-action svg{width:11px;height:11px;stroke:var(--navy);fill:none;flex-shrink:0}
@@ -969,7 +1015,7 @@ body { background: #F4F5F7; font-family:'Space Grotesk','Plus Jakarta Sans','Int
 .main { background: var(--bg) !important; }
 .card { background: #fff !important; border: 1.5px solid var(--border) !important; border-radius: 10px !important; }
 .card:hover { border-color: var(--primary) !important; box-shadow: 0 4px 16px rgba(0,82,204,.1) !important; transform: translateY(-2px) !important; }
-.card-bottom { background: var(--bg) !important; border-top: 1px solid var(--border) !important; }
+.card-bottom { background: transparent !important; border-top: 1px solid var(--border) !important; }
 
 @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 .int-video-btn { display:flex;align-items:center;gap:8px;padding:9px 14px;border:1.5px solid #DFE1E6;border-radius:8px;background:#fff;font-family:inherit;font-size:.82rem;font-weight:600;color:#172B4D;cursor:pointer;width:fit-content;transition:all .15s; }
@@ -1363,6 +1409,26 @@ body.int-open .hero-btn-integration {
   .hero-pill.active{border-color:#00AEEF;background:rgba(0,174,239,0.18);color:#fff;box-shadow:0 0 12px rgba(0,174,239,0.25)}
   </style>
 
+  <!-- HERO SEARCH BAR -->
+  <div class="hero-search-bar" style="position:relative;z-index:2;max-width:580px;margin:0 auto 1.5rem;display:flex;align-items:center;gap:0">
+    <div style="position:relative;flex:1">
+      <svg style="position:absolute;left:16px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:rgba(255,255,255,0.45);fill:none;stroke-width:2;pointer-events:none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="hero-search-input" type="text"
+        placeholder="Search partners by name, category or country…"
+        onkeydown="if(event.key==='Enter')heroSearch()"
+        style="width:100%;height:52px;background:rgba(255,255,255,0.09);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1.5px solid rgba(255,255,255,0.18);border-right:none;border-radius:14px 0 0 14px;padding:0 16px 0 46px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;color:#fff;outline:none;transition:border-color .2s,background .2s"
+        onfocus="this.style.borderColor='rgba(0,174,239,0.7)';this.style.background='rgba(255,255,255,0.13)'"
+        onblur="this.style.borderColor='rgba(255,255,255,0.18)';this.style.background='rgba(255,255,255,0.09)'">
+    </div>
+    <button onclick="heroSearch()"
+      style="height:52px;padding:0 24px;background:linear-gradient(135deg,#0052CC,#00AEEF);border:none;border-radius:0 14px 14px 0;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;gap:7px;white-space:nowrap;transition:opacity .2s;flex-shrink:0"
+      onmouseover="this.style.opacity='.88'"
+      onmouseout="this.style.opacity='1'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Search
+    </button>
+  </div>
+
   <div class="hero-cta-row">
     <button class="hero-btn-primary" onclick="document.getElementById('controls').scrollIntoView({behavior:'smooth'})">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -1436,6 +1502,22 @@ function selectPill(idx) {
 // Auto-rotate pills every 5s
 let pillIdx=0;
 setInterval(()=>{ pillIdx=(pillIdx+1)%pillData.length; selectPill(pillIdx); }, 5000);
+
+// Hero search — copies query to main search input and scrolls to partners grid
+function heroSearch(){
+  const q = (document.getElementById('hero-search-input').value||'').trim();
+  const mainSearch = document.getElementById('search');
+  if(mainSearch){
+    mainSearch.value = q;
+    // Trigger the existing search logic
+    if(typeof onSearchInput === 'function') onSearchInput();
+    if(typeof render === 'function') render();
+  }
+  const controls = document.getElementById('controls');
+  if(controls) controls.scrollIntoView({behavior:'smooth'});
+  // Highlight the main input briefly
+  if(mainSearch){ mainSearch.focus(); }
+}
 </script>
 
 
@@ -1570,8 +1652,14 @@ setInterval(()=>{ pillIdx=(pillIdx+1)%pillData.length; selectPill(pillIdx); }, 5
 <div class="controls" id="controls">
   <div class="controls-top">
     <div class="search-wrap">
-      <svg fill="none" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" id="search" placeholder="Search partners…" oninput="render()">
+      <svg class="search-icon" fill="none" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Search partners… (press / to focus)" oninput="onSearchInput()" onkeydown="if(event.key==='Escape'){clearSearch()}">
+      <button class="search-clear" id="search-clear" onclick="clearSearch()" title="Clear">✕</button>
+      <span class="search-kbd-hint" id="search-kbd-hint">/</span>
+      <button class="search-btn" onclick="render()" title="Search">
+        <svg fill="none" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        Search
+      </button>
     </div>
     <select class="sort-select" id="sort-sel" onchange="render()">
       <option value="default">Default</option>
@@ -2268,8 +2356,10 @@ let partners=[
   {name:'Integrator JSC',website:'https://integrator.bg',short:'IT integration delivering Evrotrust trust services to Bulgarian enterprises.',desc:'Integrator JSC delivers eID, QES, eDelivery, and eTimestamp capabilities to Bulgarian enterprises and public institutions through custom integration projects.',cat:'Software & Integration',integration:'QES, eID, eDelivery',usecase:'Enterprise IT integration with trust services',bizmodel:'',benefits:['Local expertise','Custom integrations','Full trust services stack'],icp:['Bulgarian enterprises','Public sector','Banking'],region:'Bulgaria',url:'',material:''},
   {name:'KAO BG',website:'https://kaobg.com',short:'Bulgarian technology partner for digital transformation with trust services.',desc:'KAO BG integrates Evrotrust\'s qualified trust services into client digital transformation projects, enabling digital onboarding, qualified signing, and compliant document management.',cat:'Software & Integration',integration:'QES, eID',usecase:'Digital transformation with trust services',bizmodel:'',benefits:['Local market knowledge','End-to-end delivery','Trusted Evrotrust partner'],icp:['Bulgarian enterprises','Public institutions','Financial services'],region:'Bulgaria',url:'',material:''},
   {name:'SoftwareOne',website:'https://www.softwareone.com',short:'Global software and cloud solutions provider with Evrotrust integration.',desc:'SoftwareOne integrates Evrotrust qualified trust services into enterprise digital transformation and cloud migration projects for global clients.',cat:'Software & Integration',integration:'QES',usecase:'Enterprise cloud and digital transformation with trust services',bizmodel:'',benefits:['Global reach','Enterprise-scale delivery','Cloud-native integration'],icp:['Global enterprise','Public sector','Financial services'],region:'Switzerland',url:'',material:''},
-  {name:'Sync Fusion / BoldSign',website:'https://boldsign.com',short:'Developer platform and electronic signature software — Syncfusion components power BoldSign\'s eSigning capabilities with Evrotrust QES.',desc:'Syncfusion provides comprehensive UI components and libraries, powering the BoldSign eSignature product with Evrotrust QES capabilities.',cat:'Software & Integration',integration:'QES',usecase:'Developer components with embedded qualified signing',bizmodel:'',benefits:['Developer-friendly integration','Rich component library','Scalable architecture'],icp:['Software developers','ISVs','Enterprise IT'],region:'USA',url:'',material:''},
-  {name:'Shufti Pro',website:'https://shuftipro.com',short:'AI-powered identity verification and KYC/AML compliance solutions for global businesses.',desc:'Shufti Pro provides adaptable identity verification solutions combining AI and human intelligence for KYC, AML, and biometric verification — enabling businesses to onboard customers securely and comply with regulatory requirements.',cat:'KYC / Identity Verification',integration:'eID, KYC',usecase:'Digital identity verification and AML compliance for regulated industries',bizmodel:'',benefits:['AI-powered verification','Global coverage','KYC & AML compliance'],icp:['Financial services','Fintech','E-commerce','Regulated industries'],region:'United Kingdom',url:'',material:''}
+  {name:'Sync Fusion / BoldSign',website:'https://boldsign.com',short:'Developer platform and electronic signature software — Syncfusion components power BoldSign\'s eSigning capabilities with Evrotrust QES.',desc:'Syncfusion provides comprehensive UI components and libraries, powering the BoldSign eSignature product with Evrotrust QES capabilities.',cat:'Software & Integration',integration:'QES',usecase:'Developer components with embedded qualified signing',bizmodel:'',benefits:['Developer-friendly integration','Rich component library','Scalable architecture'],icp:['Software developers','ISVs','Enterprise IT'],region:'USA',url:'https://evrotrust.com/partners/boldsign/',material:''},
+  {name:'Shufti Pro',website:'https://shuftipro.com',short:'AI-powered identity verification and KYC/AML compliance solutions for global businesses.',desc:'Shufti Pro provides adaptable identity verification solutions combining AI and human intelligence for KYC, AML, and biometric verification — enabling businesses to onboard customers securely and comply with regulatory requirements.',cat:'KYC / Identity Verification',integration:'eID, KYC',usecase:'Digital identity verification and AML compliance for regulated industries',bizmodel:'',benefits:['AI-powered verification','Global coverage','KYC & AML compliance'],icp:['Financial services','Fintech','E-commerce','Regulated industries'],region:'United Kingdom',url:'',material:''},
+  {name:'DocuSign',website:'https://www.docusign.com',short:'Global leader in electronic agreements — Evrotrust QES for EU eIDAS-compliant qualified signing in DocuSign workflows.',desc:'DocuSign is a global market leader in electronic signature and digital agreement software, used by over 1.4 million customers across 180+ countries. Evrotrust integrates as a qualified trust service provider enabling EU users to apply eIDAS-compliant QES directly within DocuSign agreement workflows — combining the world\'s most widely deployed eSigning platform with Bulgarian and EU qualified electronic signatures.',cat:'Digital Signature',integration:'QES',usecase:'Qualified eIDAS signing for EU users within DocuSign agreement workflows',bizmodel:'Client buys directly from Evrotrust',benefits:['eIDAS QES compliance in DocuSign','EU market fit','High-assurance signing','Global platform reach'],icp:['Enterprises in the EU','Legal & Finance','Regulated sectors'],region:'USA',url:'https://evrotrust.com/partners/docusign/',material:''},
+  {name:'nZoom by BGService',website:'https://bgservice.bg',short:'Bulgarian business management platform with Evrotrust QES integration for digital document workflows.',desc:'nZoom by BGService is a comprehensive business management and ERP platform for Bulgarian companies. Partners with Evrotrust to enable qualified electronic signatures directly within nZoom\'s document and workflow management modules, supporting full digital transformation of business operations.',cat:'Software & Integration',integration:'QES',usecase:'Business management platform with embedded qualified signing',bizmodel:'Client buys from the platform',benefits:['Bulgarian ERP integration','QES-native workflows','Business process digitization'],icp:['Bulgarian SMEs','Enterprises','Accountants'],region:'Bulgaria',url:'https://evrotrust.com/partners/nzoom-by-bgservice/',material:''}
 ]
 let activeCat='',currentView='grid';
 const ALL_CATS=['All',...Object.keys(CATS)];
@@ -2338,7 +2428,7 @@ function render(){
     const bizBg=bizLabel==='Reseller'?'#E6F0FF':bizLabel==='Direct'?'#E3FCEF':'';
     const bizTxt=bizLabel==='Reseller'?'#0052CC':bizLabel==='Direct'?'#00875A':'';
     const featured=p.featured||false;
-    return `<div class="card${featured?' card--featured':''}" style="animation-delay:${Math.min(i,12)*0.04}s;animation:fadeUp .3s ease both" onclick="openDetail(${pidx})" onmouseenter="startHoverTimer(${pidx},this)" onmouseleave="clearHoverTimer()">
+    return `<div class="card${featured?' card--featured':''}" style="animation-delay:${Math.min(i,12)*0.04}s;animation:fadeUp .3s ease both" onclick="cardClick(event,${pidx})" onmouseenter="startHoverTimer(${pidx},this);cardMouseEnter(this)" onmouseleave="clearHoverTimer();cardMouseLeave(this)" onmousemove="cardMouseMove(event,this)">
       ${featured?'<div class="card-featured-badge">Featured</div>':''}
       <div class="card-top">
         <div style="display:flex;align-items:flex-start;gap:.75rem">
@@ -2354,9 +2444,10 @@ function render(){
           </div>
         </div>
         <div class="card-desc" style="margin-top:.5rem">${hl(p.short,_q)}</div>
+        ${p.integration?`<div class="card-int-badges">${p.integration.split(',').map(s=>`<span class="card-int-badge">${s.trim()}</span>`).join('')}</div>`:''}
       </div>
       <div class="card-bottom">
-        <span class="card-tag" style="background:${cs.bg};color:${cs.text};cursor:pointer" onclick="event.stopPropagation();setCatFromTag('${p.cat}')">${p.cat}</span>
+        <span class="card-tag" style="background:${cs.bg};color:${cs.text};border-color:${cs.text}33;cursor:pointer" onclick="event.stopPropagation();setCatFromTag('${p.cat}')">${p.cat}</span>
         <div style="display:flex;align-items:center;gap:5px">
           <button class="card-icon-btn${isFav(pidx)?' fav-active':''}" id="fav-${pidx}" onclick="event.stopPropagation();toggleFav(${pidx})" title="Favourite">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -3805,6 +3896,58 @@ document.addEventListener('keydown', function(e) {
 
   createNeural('splash-canvas', 60, 140, 0.65, null);
 })();
+
+// ── ENHANCED SEARCH ──
+function onSearchInput(){
+  var val = document.getElementById('search').value;
+  var clearBtn = document.getElementById('search-clear');
+  var kbdHint = document.getElementById('search-kbd-hint');
+  if(clearBtn) clearBtn.classList.toggle('show', val.length > 0);
+  if(kbdHint) kbdHint.style.display = val.length > 0 ? 'none' : '';
+  render();
+}
+function clearSearch(){
+  var inp = document.getElementById('search');
+  inp.value = '';
+  onSearchInput();
+  inp.focus();
+}
+// Keyboard shortcut: press "/" to focus search
+document.addEventListener('keydown', function(e){
+  if(e.key === '/' && document.activeElement !== document.getElementById('search') && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){
+    e.preventDefault();
+    var inp = document.getElementById('search');
+    if(inp){ inp.focus(); inp.select(); }
+  }
+});
+
+// ── INTERACTIVE CARD EFFECTS ──
+function cardClick(e, pidx){
+  // Ripple
+  var card = e.currentTarget;
+  var rect = card.getBoundingClientRect();
+  var size = Math.max(rect.width, rect.height) * 0.6;
+  var ripple = document.createElement('span');
+  ripple.className = 'ripple-circle';
+  ripple.style.cssText = 'width:'+size+'px;height:'+size+'px;left:'+(e.clientX - rect.left - size/2)+'px;top:'+(e.clientY - rect.top - size/2)+'px';
+  card.appendChild(ripple);
+  setTimeout(function(){ ripple.remove(); }, 520);
+  openDetail(pidx);
+}
+function cardMouseMove(e, card){
+  var rect = card.getBoundingClientRect();
+  var x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%';
+  var y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1) + '%';
+  card.style.setProperty('--mx', x);
+  card.style.setProperty('--my', y);
+}
+function cardMouseEnter(card){
+  card.style.transition = 'box-shadow .2s, border-color .2s, transform .2s';
+}
+function cardMouseLeave(card){
+  card.style.removeProperty('--mx');
+  card.style.removeProperty('--my');
+}
 </script>
 
 </body>
