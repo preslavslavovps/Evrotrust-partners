@@ -956,6 +956,18 @@ body { background: #F4F5F7; font-family:'Space Grotesk','Plus Jakarta Sans','Int
 .int-hub-card-action svg { width: 10px; height: 10px; stroke: #00B8D4; transition: transform .15s; }
 .int-hub-card:hover .int-hub-card-action svg { transform: translateX(3px); }
 
+/* EID LEVELS — TABS */
+.eid-tab-btn { display:inline-flex;align-items:center;padding:7px 18px;border-radius:20px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(255,255,255,.5);font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .18s; }
+.eid-tab-btn:hover { border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.8); }
+.eid-tab-active { border-color:#00B8D4 !important;background:rgba(0,184,212,.12) !important;color:#fff !important; }
+.eid-level-detail { background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.5rem;max-width:860px;margin:0 auto;animation:slideDown .25s ease both; }
+.eid-level-top { display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:1.25rem;flex-wrap:wrap; }
+.eid-level-features-grid { display:grid;grid-template-columns:1fr 1fr;gap:5px; }
+@media(max-width:560px){.eid-level-features-grid{grid-template-columns:1fr}}
+.eid-lf-row { display:flex;align-items:center;gap:7px;font-size:.75rem;padding:4px 0; }
+.eid-lf-row.ok { color:rgba(255,255,255,.65); }
+.eid-lf-row.no { color:rgba(255,255,255,.2); }
+
 /* EID LEVELS */
 .int-eid-section { max-width: 860px; margin: 0 auto; padding-bottom: 1rem; }
 .int-eid-header { text-align: center; margin-bottom: 1.25rem; }
@@ -1366,6 +1378,413 @@ body.int-open .hero-btn-integration {
 #m-website { background: #E6F0FF; border-color: #0052CC; color: #0052CC; font-weight: 600; }
 #m-website:hover { background: #0052CC; color: #fff; }
 
+/* ═══════════════════════════════════
+   SALES PITCH BUTTON (NAV)
+═══════════════════════════════════ */
+.pitch-nav-btn {
+  display: flex; align-items: center; gap: 6px;
+  height: 36px; padding: 0 14px;
+  background: linear-gradient(135deg, #FF6B00, #FF8B00);
+  border: none; border-radius: 7px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .8rem; font-weight: 700; color: #fff;
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+  flex-shrink: 0; letter-spacing: -.01em;
+  box-shadow: 0 2px 8px rgba(255,107,0,.3);
+}
+.pitch-nav-btn:hover {
+  background: linear-gradient(135deg, #E55C00, #FF6B00);
+  box-shadow: 0 4px 16px rgba(255,107,0,.45);
+  transform: translateY(-1px);
+}
+.pitch-nav-btn svg { stroke: #fff; flex-shrink: 0; }
+
+/* ═══════════════════════════════════
+   SALES PITCH OVERLAY
+═══════════════════════════════════ */
+.pitch-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: #040C1A;
+  display: none; flex-direction: column;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.pitch-overlay.open { display: flex; }
+
+/* Speaker notes toggle */
+.pitch-notes-toggle {
+  position: absolute; bottom: 1.25rem; left: 1.5rem;
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 20px;
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+  font-size: .68rem; font-weight: 700; color: rgba(255,255,255,.4);
+  cursor: pointer; transition: all .2s; z-index: 20;
+  letter-spacing: .04em; text-transform: uppercase;
+}
+.pitch-notes-toggle:hover { background: rgba(255,255,255,.12); color: rgba(255,255,255,.7); }
+.pitch-notes-toggle.on { background: rgba(76,154,255,.15); border-color: rgba(76,154,255,.3); color: #4C9AFF; }
+.pitch-notes-toggle svg { flex-shrink: 0; }
+.pitch-notes-panel {
+  flex-shrink: 0; background: rgba(4,12,26,.85);
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 0 3rem; max-height: 0; overflow: hidden;
+  transition: max-height .35s cubic-bezier(.4,0,.2,1), padding .35s;
+  backdrop-filter: blur(12px);
+}
+.pitch-notes-panel.open { max-height: 120px; padding: .875rem 3rem; }
+.pitch-notes-label {
+  font-size: .6rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  color: #4C9AFF; margin-bottom: .4rem; opacity: .7;
+}
+.pitch-notes-text {
+  font-size: .78rem; color: rgba(255,255,255,.55); line-height: 1.7; max-width: 900px;
+}
+
+/* Top bar */
+.pitch-topbar {
+  height: 52px; flex-shrink: 0;
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.5rem; gap: 1rem;
+}
+.pitch-topbar-left { display: flex; align-items: center; gap: 10px; }
+.pitch-logo-chip {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: linear-gradient(135deg, #0052CC, #0747A6);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.pitch-brand { font-size: .9rem; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+.pitch-brand-sub { font-size: .72rem; color: rgba(255,255,255,.35); margin-left: 2px; }
+.pitch-topbar-right { display: flex; align-items: center; gap: 12px; }
+.pitch-slide-counter { font-size: .75rem; color: rgba(255,255,255,.4); font-weight: 600; letter-spacing: .06em; }
+.pitch-close-btn {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background .15s; color: rgba(255,255,255,.7);
+}
+.pitch-close-btn:hover { background: rgba(255,255,255,.16); color: #fff; }
+
+/* Stage */
+.pitch-stage {
+  flex: 1; position: relative; overflow: hidden;
+}
+
+/* Individual slides */
+.pitch-slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateX(60px);
+  transition: opacity .45s cubic-bezier(.4,0,.2,1), transform .45s cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
+  overflow: hidden;
+}
+.pitch-slide.active {
+  opacity: 1; transform: translateX(0);
+  pointer-events: auto;
+}
+.pitch-slide.exit-left {
+  opacity: 0; transform: translateX(-60px);
+}
+
+/* Slide backgrounds */
+.pitch-slide-bg {
+  position: absolute; inset: 0; z-index: 0;
+}
+.s1-bg { background: radial-gradient(ellipse at 70% 40%, rgba(0,82,204,.25) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(0,174,239,.12) 0%, transparent 50%), #040C1A; }
+.s2-bg { background: radial-gradient(ellipse at 30% 30%, rgba(0,82,204,.18) 0%, transparent 55%), radial-gradient(ellipse at 80% 70%, rgba(0,135,90,.12) 0%, transparent 50%), #04111f; }
+.s3-bg { background: radial-gradient(ellipse at 50% 20%, rgba(0,52,100,.3) 0%, transparent 60%), #03080f; }
+.s4-bg { background: radial-gradient(ellipse at 20% 60%, rgba(0,82,204,.2) 0%, transparent 55%), radial-gradient(ellipse at 75% 25%, rgba(101,84,192,.15) 0%, transparent 50%), #04111f; }
+.s5-bg { background: radial-gradient(ellipse at 60% 50%, rgba(0,82,204,.18) 0%, transparent 55%), #040C1A; }
+.s6-bg { background: radial-gradient(ellipse at 50% 40%, rgba(0,82,204,.3) 0%, transparent 65%), radial-gradient(ellipse at 80% 80%, rgba(255,107,0,.12) 0%, transparent 45%), #040C1A; }
+
+/* eID slide background */
+.s3-eid-bg { background: radial-gradient(ellipse at 20% 50%, rgba(0,82,204,.22) 0%, transparent 55%), radial-gradient(ellipse at 80% 30%, rgba(0,174,239,.12) 0%, transparent 50%), #04111f; }
+
+/* eID slide — two-column layout */
+.pitch-eid-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px; overflow: hidden; margin-top: .75rem;
+}
+.pitch-eid-left {
+  background: rgba(0,30,70,.45); border-right: 1px solid rgba(255,255,255,.08);
+  padding: 1.25rem 1.5rem;
+}
+.pitch-eid-right { padding: 1.25rem 1.5rem; }
+.pitch-eid-stats { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: .75rem; }
+.pitch-eid-stat {
+  flex: 1; min-width: 80px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 10px; padding: .625rem .875rem;
+}
+.pitch-eid-stat-num { font-size: 1.6rem; font-weight: 800; color: #4C9AFF; letter-spacing: -.04em; line-height: 1; }
+.pitch-eid-stat-lbl { font-size: .65rem; color: rgba(255,255,255,.4); line-height: 1.4; margin-top: 2px; }
+.pitch-eid-steps { display: flex; flex-direction: column; gap: .625rem; }
+.pitch-eid-step { display: flex; align-items: flex-start; gap: .625rem; }
+.pitch-eid-step-num {
+  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, #0052CC, #00AEEF);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .65rem; font-weight: 800; color: #fff;
+}
+.pitch-eid-step-title { font-size: .78rem; font-weight: 800; color: #fff; margin-bottom: 1px; }
+.pitch-eid-step-desc { font-size: .68rem; color: rgba(255,255,255,.42); line-height: 1.5; }
+.pitch-eid-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: .875rem; }
+.pitch-eid-badge {
+  padding: 3px 9px; border-radius: 5px;
+  font-size: .62rem; font-weight: 700; letter-spacing: .05em;
+}
+.pitch-eid-badge-blue { background: rgba(0,82,204,.2); border: 1px solid rgba(0,82,204,.35); color: #4C9AFF; }
+.pitch-eid-badge-green { background: rgba(54,179,126,.15); border: 1px solid rgba(54,179,126,.3); color: #57D9A3; }
+.pitch-eid-badge-orange { background: rgba(255,139,0,.15); border: 1px solid rgba(255,139,0,.3); color: #FFB84C; }
+.pitch-eid-value-row { display: flex; flex-direction: column; gap: .45rem; margin-top: .875rem; }
+.pitch-eid-value-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: .74rem; color: rgba(255,255,255,.55); line-height: 1.5;
+}
+.pitch-eid-value-item::before {
+  content: '✓'; color: #36B37E; font-weight: 800; font-size: .68rem; flex-shrink: 0; margin-top: 2px;
+}
+.pitch-eid-section-label {
+  font-size: .6rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.25); margin-bottom: .625rem;
+}
+
+
+/* Decorative shapes */
+.pitch-slide-deco { position: absolute; z-index: 0; pointer-events: none; }
+.s1-deco {
+  right: -80px; top: -80px;
+  width: 500px; height: 500px; border-radius: 50%;
+  border: 1.5px solid rgba(0,82,204,.15);
+  box-shadow: 0 0 120px rgba(0,82,204,.08);
+}
+.s6-deco {
+  left: -120px; bottom: -120px;
+  width: 600px; height: 600px; border-radius: 50%;
+  border: 1.5px solid rgba(255,107,0,.1);
+}
+
+/* Slide inner */
+.pitch-slide-inner {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 1100px;
+  padding: 2rem 3rem;
+}
+.pitch-slide-inner--center { text-align: center; display: flex; flex-direction: column; align-items: center; }
+
+/* Typography */
+.pitch-eyebrow { margin-bottom: 1rem; }
+.pitch-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 12px; border-radius: 20px;
+  background: rgba(0,82,204,.25); border: 1px solid rgba(0,82,204,.4);
+  font-size: .7rem; font-weight: 700; color: #4C9AFF;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.pitch-badge-light {
+  background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.15); color: rgba(255,255,255,.65);
+}
+.pitch-h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800; color: #fff; line-height: 1.1;
+  letter-spacing: -.04em; margin-bottom: 1.25rem;
+}
+.pitch-h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800; color: #fff; line-height: 1.15;
+  letter-spacing: -.03em; margin-bottom: .75rem;
+}
+.pitch-h2-lg {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800; color: #fff; line-height: 1.1;
+  letter-spacing: -.04em; margin-bottom: 1.25rem;
+}
+.pitch-gradient-text {
+  background: linear-gradient(135deg, #4C9AFF 0%, #00AEEF 50%, #36B37E 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.pitch-lead {
+  font-size: 1.05rem; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 2rem;
+}
+.pitch-sublead { font-size: .9rem; color: rgba(255,255,255,.5); line-height: 1.65; margin-bottom: 1.5rem; }
+
+/* Slide 1 — stats */
+.pitch-stats-row {
+  display: flex; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.pitch-stat {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 10px; padding: .75rem 1.25rem;
+}
+.pitch-stat-num { font-size: 1.8rem; font-weight: 800; color: #4C9AFF; line-height: 1; letter-spacing: -.03em; }
+.pitch-stat-lbl { font-size: .7rem; color: rgba(255,255,255,.45); margin-top: 3px; font-weight: 500; }
+.pitch-trust-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.pitch-trust-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12); border-radius: 20px;
+  font-size: .7rem; font-weight: 600; color: rgba(255,255,255,.6);
+}
+
+/* Slide 2 — services grid */
+.pitch-services-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: .875rem;
+}
+@media (max-width: 900px) { .pitch-services-grid { grid-template-columns: repeat(2, 1fr); } }
+.pitch-svc-card {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px; padding: 1.1rem;
+  transition: border-color .2s, background .2s;
+}
+.pitch-svc-card:hover { border-color: rgba(0,82,204,.5); background: rgba(0,82,204,.08); }
+.pitch-svc-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: .75rem;
+}
+.pitch-svc-name { font-size: .85rem; font-weight: 800; color: #fff; margin-bottom: .4rem; line-height: 1.3; }
+.pitch-svc-desc { font-size: .72rem; color: rgba(255,255,255,.5); line-height: 1.6; margin-bottom: .5rem; }
+.pitch-svc-tu {
+  font-size: .65rem; font-weight: 700; color: #4C9AFF;
+  background: rgba(76,154,255,.12); border: 1px solid rgba(76,154,255,.2);
+  border-radius: 5px; padding: 2px 8px; display: inline-block;
+}
+
+/* Slide 3 — compare */
+.pitch-compare-wrap {
+  display: flex; gap: 0; align-items: stretch; margin-bottom: 1.5rem;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px; overflow: hidden;
+}
+.pitch-compare-col { flex: 1; padding: 1.25rem 1.5rem; }
+.pitch-compare-bad { background: rgba(222,53,11,.05); border-right: 1px solid rgba(255,255,255,.08); }
+.pitch-compare-good { background: rgba(0,135,90,.05); }
+.pitch-vs-badge {
+  width: 44px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .7rem; font-weight: 800; color: rgba(255,255,255,.3);
+  border-right: 1px solid rgba(255,255,255,.08);
+  letter-spacing: .08em;
+}
+.pitch-compare-head {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .8rem; font-weight: 800; color: rgba(255,255,255,.8);
+  margin-bottom: 1rem; padding-bottom: .75rem;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.pitch-compare-list {
+  list-style: none; display: flex; flex-direction: column; gap: .5rem;
+}
+.pitch-compare-list li {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: .8rem; color: rgba(255,255,255,.45); line-height: 1.5;
+}
+.pitch-compare-list li::before {
+  content: '✕'; color: #DE350B; font-size: .7rem; margin-top: 2px; flex-shrink: 0;
+}
+.pitch-compare-list-good li::before { content: '✓'; color: #36B37E; }
+.pitch-compare-list-good li { color: rgba(255,255,255,.65); }
+.pitch-qtsp-note {
+  background: rgba(76,154,255,.1); border: 1px solid rgba(76,154,255,.2);
+  border-radius: 8px; padding: .75rem 1rem;
+  font-size: .78rem; color: rgba(255,255,255,.6); line-height: 1.65;
+}
+.pitch-qtsp-note strong { color: #4C9AFF; }
+
+/* Slide 4 — ecosystem grid */
+.pitch-eco-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem;
+}
+@media (max-width: 900px) { .pitch-eco-grid { grid-template-columns: repeat(2, 1fr); } }
+.pitch-eco-card {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+  border-radius: 10px; padding: .875rem 1rem;
+  transition: border-color .2s; cursor: default;
+}
+.pitch-eco-card:hover { border-color: rgba(0,82,204,.4); }
+.pitch-eco-icon { font-size: 1.4rem; margin-bottom: .4rem; }
+.pitch-eco-cat { font-size: .8rem; font-weight: 800; color: #fff; margin-bottom: .35rem; }
+.pitch-eco-desc { font-size: .7rem; color: rgba(255,255,255,.45); line-height: 1.6; }
+
+/* Slide 5 — integration */
+.pitch-int-cols {
+  display: flex; gap: 0; background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 14px; overflow: hidden;
+}
+.pitch-int-block { flex: 1; padding: 1.25rem 1.5rem; }
+.pitch-int-divider { width: 1px; background: rgba(255,255,255,.08); flex-shrink: 0; }
+.pitch-int-title {
+  font-size: .65rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.35); margin-bottom: 1rem; padding-bottom: .75rem;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.pitch-int-list { display: flex; flex-direction: column; gap: .75rem; }
+.pitch-int-row { display: flex; gap: 10px; align-items: flex-start; }
+.pitch-int-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.pitch-int-row div { font-size: .8rem; color: rgba(255,255,255,.55); line-height: 1.6; }
+.pitch-int-row strong { color: rgba(255,255,255,.85); }
+
+/* Slide 6 — CTA */
+.pitch-cta-row { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.5rem; }
+.pitch-cta-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 11px 22px; border-radius: 8px;
+  font-family: inherit; font-size: .88rem; font-weight: 700;
+  cursor: pointer; text-decoration: none; transition: all .2s;
+}
+.pitch-cta-primary {
+  background: #0052CC; color: #fff; border: none;
+  box-shadow: 0 4px 16px rgba(0,82,204,.4);
+}
+.pitch-cta-primary:hover { background: #0747A6; transform: translateY(-1px); }
+.pitch-cta-secondary {
+  background: rgba(255,255,255,.1); color: #fff;
+  border: 1.5px solid rgba(255,255,255,.2);
+}
+.pitch-cta-secondary:hover { background: rgba(255,255,255,.18); }
+.pitch-cta-outline {
+  background: transparent; color: rgba(255,255,255,.65);
+  border: 1.5px solid rgba(255,255,255,.15);
+}
+.pitch-cta-outline:hover { border-color: rgba(255,255,255,.4); color: #fff; }
+.pitch-contact-line {
+  font-size: .8rem; color: rgba(255,255,255,.3); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;
+}
+.pitch-dot { color: rgba(255,255,255,.15); }
+
+/* Navigation arrows */
+.pitch-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .2s; z-index: 10; color: rgba(255,255,255,.7);
+}
+.pitch-nav:hover { background: rgba(255,255,255,.18); color: #fff; }
+.pitch-nav:disabled { opacity: .25; pointer-events: none; }
+.pitch-nav-prev { left: 1.25rem; }
+.pitch-nav-next { right: 1.25rem; }
+
+/* Dot indicators */
+.pitch-dots {
+  position: absolute; bottom: 1.25rem; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px; z-index: 10;
+}
+.pitch-dot-btn {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,.2); border: none; cursor: pointer;
+  transition: all .2s; padding: 0;
+}
+.pitch-dot-btn.active { background: #4C9AFF; width: 20px; border-radius: 3px; }
+
+/* Keyboard hint */
+.pitch-kbd-hint {
+  position: absolute; bottom: 1.3rem; right: 1.5rem;
+  font-size: .65rem; color: rgba(255,255,255,.2);
+  pointer-events: none; z-index: 10;
+}
+
 </style>
 </head>
 <body>
@@ -1428,7 +1847,403 @@ body.int-open .hero-btn-integration {
     <span class="btn-star">✦</span>
     <span class="btn-label">Partner Program</span>
   </button>
+  <!-- SALES PITCH BUTTON -->
+  <button class="pitch-nav-btn" onclick="openPitch()" title="Open Sales Pitch">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    <span>Sales Pitch</span>
+  </button>
 </nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     SALES PITCH OVERLAY
+═══════════════════════════════════════════════════════ -->
+<div id="pitch-overlay" class="pitch-overlay" style="flex-direction:column">
+
+  <!-- Top bar -->
+  <div class="pitch-topbar">
+    <div class="pitch-topbar-left">
+      <div class="pitch-logo-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" width="14" height="14"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <span class="pitch-brand">Evrotrust</span>
+      <span class="pitch-brand-sub">Sales Presentation</span>
+    </div>
+    <div class="pitch-topbar-right">
+      <div class="pitch-slide-counter"><span id="pitch-cur">1</span> / <span id="pitch-total">7</span></div>
+      <button class="pitch-close-btn" onclick="closePitch()" title="Close (Esc)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Slide stage -->
+  <div class="pitch-stage" id="pitch-stage">
+
+    <!-- ── SLIDE 1: WHO IS EVROTRUST ── -->
+    <div class="pitch-slide active" data-slide="1" data-notes="Evrotrust is the only Bulgarian QTSP notified by the European Commission. Key point: we bear the legal responsibility for identity verification — not the client. Highlight: 2M+ verified users, 61 nationalities, 15+ EU banks. We are on the EU Trusted List, audited by Mastercard, ISO 27001 certified. Open with context: why eIDAS notification is fundamentally different from a standard eSign vendor.">
+      <div class="pitch-slide-bg s1-bg"></div>
+      <div class="pitch-slide-inner">
+        <div class="pitch-eyebrow">
+          <span class="pitch-badge">eIDAS Notified QTSP · EU Trusted List</span>
+        </div>
+        <h1 class="pitch-h1">Who is <br><span class="pitch-gradient-text">Evrotrust?</span></h1>
+        <p class="pitch-lead">Bulgaria's only EU-notified Qualified Trust Service Provider — legally responsible for digital identity, electronic signatures, and secure document delivery across the European Union.</p>
+        <div class="pitch-stats-row">
+          <div class="pitch-stat">
+            <div class="pitch-stat-num">2M+</div>
+            <div class="pitch-stat-lbl">Verified users</div>
+          </div>
+          <div class="pitch-stat">
+            <div class="pitch-stat-num">61</div>
+            <div class="pitch-stat-lbl">Nationalities served</div>
+          </div>
+          <div class="pitch-stat">
+            <div class="pitch-stat-num">15+</div>
+            <div class="pitch-stat-lbl">EU banks onboarded</div>
+          </div>
+          <div class="pitch-stat">
+            <div class="pitch-stat-num">51</div>
+            <div class="pitch-stat-lbl">Technology partners</div>
+          </div>
+          <div class="pitch-stat">
+            <div class="pitch-stat-num">27</div>
+            <div class="pitch-stat-lbl">EU states — cross-border</div>
+          </div>
+        </div>
+        <div class="pitch-trust-row">
+          <div class="pitch-trust-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>ISO 27001
+          </div>
+          <div class="pitch-trust-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>eIDAS QTSP
+          </div>
+          <div class="pitch-trust-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>GDPR · ISO 27001
+          </div>
+          <div class="pitch-trust-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>5th AML Directive
+          </div>
+          <div class="pitch-trust-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Mastercard Audited
+          </div>
+          <div class="pitch-trust-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>EU Trusted List
+          </div>
+        </div>
+      </div>
+      <div class="pitch-slide-deco s1-deco"></div>
+    </div>
+
+    <!-- ── SLIDE 2: CORE SERVICES ── -->
+    <div class="pitch-slide" data-slide="2" data-notes="The four pillars are connected — eID → QES → eDelivery is a complete digital onboarding workflow. The Trust Unit model is the key differentiator: one wallet, all services, all clients. 1 TU ≈ €0.20–0.30 at standard volumes. Emphasise: eID costs 3 TU (one-time), QES is 1 TU per signature — after verification the user can sign repeatedly with no re-identification.">
+      <div class="pitch-slide-bg s2-bg"></div>
+      <div class="pitch-slide-inner">
+        <div class="pitch-eyebrow"><span class="pitch-badge pitch-badge-light">What We Offer</span></div>
+        <h2 class="pitch-h2">Four Core <span class="pitch-gradient-text">Service Pillars</span></h2>
+        <p class="pitch-sublead">All services run on the Trust Unit (TU) model — one wallet, any service, any volume. Verify once, sign many times.</p>
+        <div class="pitch-services-grid">
+          <div class="pitch-svc-card">
+            <div class="pitch-svc-icon" style="background:linear-gradient(135deg,#0052CC22,#0052CC44)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0052CC" stroke-width="2" width="22" height="22"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="pitch-svc-name">eID Verification</div>
+            <div class="pitch-svc-desc">Remote KYC/AML identity verification. eIDAS LoA High. 3D liveness, NFC chip, XML attestation. 61 nationalities. Verified in 2 minutes.</div>
+            <div class="pitch-svc-tu">3 TU / verification</div>
+          </div>
+          <div class="pitch-svc-card">
+            <div class="pitch-svc-icon" style="background:linear-gradient(135deg,#0065B322,#0065B344)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0065B3" stroke-width="2" width="22" height="22"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <div class="pitch-svc-name">Qualified eSignature (QES)</div>
+            <div class="pitch-svc-desc">Legally binding across all 27 EU member states. Max legal value €20,000+. Signed PDF + XML. Issued automatically post-eID. Reusable identity.</div>
+            <div class="pitch-svc-tu">1 TU / signature</div>
+          </div>
+          <div class="pitch-svc-card">
+            <div class="pitch-svc-icon" style="background:linear-gradient(135deg,#00875A22,#00875A44)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00875A" stroke-width="2" width="22" height="22"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="pitch-svc-name">Qualified eDelivery</div>
+            <div class="pitch-svc-desc">eIDAS-compliant certified document delivery. Legal equivalent of registered mail. Tamper-proof audit trail. Managed evidence for 10 years.</div>
+            <div class="pitch-svc-tu">1 TU / delivery</div>
+          </div>
+          <div class="pitch-svc-card">
+            <div class="pitch-svc-icon" style="background:linear-gradient(135deg,#6554C022,#6554C044)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#6554C0" stroke-width="2" width="22" height="22"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="pitch-svc-name">2FA &amp; eTimestamp</div>
+            <div class="pitch-svc-desc">Strong authentication for PSD2 SCA compliance. Qualified timestamps for legal proof of time. Combined biometrics for maximum security.</div>
+            <div class="pitch-svc-tu">0.05–0.02 TU</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SLIDE 3: eID — QUALIFIED IDENTITY ── -->
+    <div class="pitch-slide" data-slide="3" data-notes="Evrotrust eID is a qualified electronic identity under eIDAS — highest level of assurance (LoA High). Key for the partner: they receive verified personal data without bearing legal liability for the identification — that stays with us. Reusable identity: after a single verification the user can access QES, eDelivery, and new services with no re-verification. Cross-border: automatically valid in all 27 EU member states. Compliant with 5th AML Directive art.13(1) — AML responsibility remains with Evrotrust.">
+      <div class="pitch-slide-bg s3-eid-bg"></div>
+      <div class="pitch-slide-inner">
+        <div class="pitch-eyebrow"><span class="pitch-badge">Identity Layer · eIDAS LoA High</span></div>
+        <h2 class="pitch-h2">Evrotrust <span class="pitch-gradient-text">eID</span> — Qualified Electronic Identity</h2>
+        <div class="pitch-eid-layout">
+          <div class="pitch-eid-left">
+            <div class="pitch-eid-section-label">How it works — 2 minutes, start to finish</div>
+            <div class="pitch-eid-steps">
+              <div class="pitch-eid-step">
+                <div class="pitch-eid-step-num">1</div>
+                <div class="pitch-eid-step-body">
+                  <div class="pitch-eid-step-title">Document Scan &amp; Authentication</div>
+                  <div class="pitch-eid-step-desc">Passport, ID card, or residence permit — NFC chip read + optical scan</div>
+                </div>
+              </div>
+              <div class="pitch-eid-step">
+                <div class="pitch-eid-step-num">2</div>
+                <div class="pitch-eid-step-body">
+                  <div class="pitch-eid-step-title">3D Liveness + Facial Recognition</div>
+                  <div class="pitch-eid-step-desc">Biometric selfie vs. document photo — live presence confirmed, deepfake-resistant</div>
+                </div>
+              </div>
+              <div class="pitch-eid-step">
+                <div class="pitch-eid-step-num">3</div>
+                <div class="pitch-eid-step-body">
+                  <div class="pitch-eid-step-title">Expert Human Validation</div>
+                  <div class="pitch-eid-step-desc">Evrotrust specialists review every case — maximum assurance level</div>
+                </div>
+              </div>
+              <div class="pitch-eid-step">
+                <div class="pitch-eid-step-num">4</div>
+                <div class="pitch-eid-step-body">
+                  <div class="pitch-eid-step-title">Reusable Digital Identity + QES Enabled</div>
+                  <div class="pitch-eid-step-desc">Verified data delivered to your system. Identity reused for all future services — no re-verification needed</div>
+                </div>
+              </div>
+            </div>
+            <div class="pitch-eid-stats">
+              <div class="pitch-stat" style="display:inline-flex;gap:.75rem;flex-wrap:wrap;background:none;border:none;padding:0;margin-top:.5rem">
+                <div class="pitch-stat" style="flex:1;min-width:70px"><div class="pitch-stat-num" style="font-size:1.4rem">2 min</div><div class="pitch-stat-lbl">Full KYC</div></div>
+                <div class="pitch-stat" style="flex:1;min-width:70px"><div class="pitch-stat-num" style="font-size:1.4rem">61</div><div class="pitch-stat-lbl">Nationalities</div></div>
+                <div class="pitch-stat" style="flex:1;min-width:70px"><div class="pitch-stat-num" style="font-size:1.4rem">27</div><div class="pitch-stat-lbl">EU states</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="pitch-eid-right">
+            <div class="pitch-eid-section-label">What your business gets</div>
+            <div class="pitch-eid-value-row">
+              <div class="pitch-eid-value-item"><strong style="color:rgba(255,255,255,.8);margin-right:4px">Full KYC &amp; AML compliance</strong> — legally transferred to Evrotrust. Zero liability on you.</div>
+              <div class="pitch-eid-value-item"><strong style="color:rgba(255,255,255,.8);margin-right:4px">Verified personal data in 2 min</strong> — ready to populate your CRM or onboarding flow automatically</div>
+              <div class="pitch-eid-value-item"><strong style="color:rgba(255,255,255,.8);margin-right:4px">Cross-border EU validity</strong> — auto-accepted by all 27 member states under eIDAS Reg. 910/2014</div>
+              <div class="pitch-eid-value-item"><strong style="color:rgba(255,255,255,.8);margin-right:4px">One identity, multiple services</strong> — eID enables QES, eDelivery, 2FA without asking users to re-verify</div>
+              <div class="pitch-eid-value-item"><strong style="color:rgba(255,255,255,.8);margin-right:4px">QES issued instantly post-verification</strong> — legally binding across the EU, max legal effect</div>
+            </div>
+            <div class="pitch-eid-badges">
+              <span class="pitch-eid-badge pitch-eid-badge-blue">eIDAS LoA High</span>
+              <span class="pitch-eid-badge pitch-eid-badge-green">5th AML Art.13(1)</span>
+              <span class="pitch-eid-badge pitch-eid-badge-orange">GDPR / ISO 27001</span>
+              <span class="pitch-eid-badge pitch-eid-badge-blue">3 TU / verification</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SLIDE 4: WHY QTSP MATTERS ── -->
+    <div class="pitch-slide" data-slide="4" data-notes="This is the core differentiator — QTSP status is not just marketing. By law, only QES from a notified QTSP has the same legal effect as a handwritten signature across the entire EU. Competitors (DocuSign basic, Adobe Sign standard) offer SES or AdES — not QES. For banks, insurers, and fintech: identification via our eID scheme is NOT considered third-party reliance under the AML Directive — legal responsibility sits entirely with Evrotrust. This is a major risk transfer for the client.">
+      <div class="pitch-slide-bg s3-bg"></div>
+      <div class="pitch-slide-inner">
+        <div class="pitch-eyebrow"><span class="pitch-badge">Legal Foundation</span></div>
+        <h2 class="pitch-h2">Why <span class="pitch-gradient-text">QTSP Status</span><br>Changes Everything</h2>
+        <div class="pitch-compare-wrap">
+          <div class="pitch-compare-col pitch-compare-bad">
+            <div class="pitch-compare-head">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#DE350B" stroke-width="2.5" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              Standard eSign Vendors
+            </div>
+            <ul class="pitch-compare-list">
+              <li>Simple electronic signature only</li>
+              <li>No EU legal recognition without QTSP</li>
+              <li>Identity not legally attested</li>
+              <li>Fails AML5 / PSD2 requirements</li>
+              <li>No EU Trusted List listing</li>
+              <li>Liability stays with the customer</li>
+            </ul>
+          </div>
+          <div class="pitch-vs-badge">VS</div>
+          <div class="pitch-compare-col pitch-compare-good">
+            <div class="pitch-compare-head">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00875A" stroke-width="2.5" width="18" height="18"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Evrotrust QTSP
+            </div>
+            <ul class="pitch-compare-list pitch-compare-list-good">
+              <li>Qualified Electronic Signature (QES)</li>
+              <li>EU-wide legal recognition by law</li>
+              <li>eIDAS-notified identity attestation</li>
+              <li>Meets AML5, PSD2, DORA requirements</li>
+              <li>On EU Trusted List (peer-reviewed)</li>
+              <li>Evrotrust holds legal responsibility</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pitch-qtsp-note">Under eIDAS Regulation, only QES from a notified QTSP has the same legal effect as a handwritten signature — across all 27 EU member states. <strong>Identification via our eID scheme is not considered third-party reliance</strong> under the 5th AML Directive.</div>
+      </div>
+    </div>
+
+    <!-- ── SLIDE 5: PARTNER ECOSYSTEM ── -->
+    <div class="pitch-slide" data-slide="5" data-notes="51 partners across 6 categories. Emphasise the breadth — from DocuSign and Adobe to governments and local banks. This shows Evrotrust is already the trusted layer in many ecosystems. Ask the partner: which category do you fit into? This helps you show concrete use cases from partners in their vertical. Refer to the Partners Hub for detailed information on specific integrations.">
+      <div class="pitch-slide-bg s4-bg"></div>
+      <div class="pitch-slide-inner">
+        <div class="pitch-eyebrow"><span class="pitch-badge pitch-badge-light">Ecosystem</span></div>
+        <h2 class="pitch-h2">51 Partners Across <span class="pitch-gradient-text">6 Categories</span></h2>
+        <p class="pitch-sublead">From DocuSign and Adobe to local banks and government platforms — Evrotrust integrates everywhere trust is required.</p>
+        <div class="pitch-eco-grid">
+          <div class="pitch-eco-card">
+            <div class="pitch-eco-icon">🏦</div>
+            <div class="pitch-eco-cat">Banking &amp; Finance</div>
+            <div class="pitch-eco-desc">Core banking platforms, payment processors, fintech apps requiring KYC/AML and PSD2 SCA compliance</div>
+          </div>
+          <div class="pitch-eco-card">
+            <div class="pitch-eco-icon">✍️</div>
+            <div class="pitch-eco-cat">Digital Signature</div>
+            <div class="pitch-eco-desc">DocuSign, Adobe Sign, niche EU platforms — QES layer for legally binding EU signing</div>
+          </div>
+          <div class="pitch-eco-card">
+            <div class="pitch-eco-icon">🏛️</div>
+            <div class="pitch-eco-cat">Government &amp; Legal</div>
+            <div class="pitch-eco-desc">Public registers, notary systems, legal tech — eIDAS-compliant government-grade workflows</div>
+          </div>
+          <div class="pitch-eco-card">
+            <div class="pitch-eco-icon">⚙️</div>
+            <div class="pitch-eco-cat">Software &amp; Integration</div>
+            <div class="pitch-eco-desc">ERPs, CRMs, HR platforms embedding identity and qualified signing via API or SDK</div>
+          </div>
+          <div class="pitch-eco-card">
+            <div class="pitch-eco-icon">📱</div>
+            <div class="pitch-eco-cat">Telecom &amp; Mobile</div>
+            <div class="pitch-eco-desc">Mobile carriers and super-apps embedding eID in customer onboarding and retention flows</div>
+          </div>
+          <div class="pitch-eco-card">
+            <div class="pitch-eco-icon">🔒</div>
+            <div class="pitch-eco-cat">Identity &amp; KYC</div>
+            <div class="pitch-eco-desc">Identity verification platforms using Evrotrust as the EU-notified KYC compliance layer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SLIDE 6: INTEGRATION & PARTNER PROGRAM ── -->
+    <div class="pitch-slide" data-slide="6" data-notes="Integration takes 1–4 weeks, not months. REST API for full control, Web SDK is a drop-in for a fast start (hours). Partner programme: Referral L1 = 5% commission for a qualified lead only; Referral L2 = 15% for full sales cycle participation. Reseller = you purchase TU packages at a discount (5–15%) and resell to your clients directly. Trust Units are shared — one pool for all your clients. White-label lets you deliver a fully branded experience — your UI, our infrastructure. Referral deals must close within 6 months of submission.">
+      <div class="pitch-slide-bg s5-bg"></div>
+      <div class="pitch-slide-inner">
+        <div class="pitch-eyebrow"><span class="pitch-badge">How to Connect</span></div>
+        <h2 class="pitch-h2">Integrate in Days, <span class="pitch-gradient-text">Not Months</span></h2>
+        <div class="pitch-int-cols">
+          <div class="pitch-int-block">
+            <div class="pitch-int-title">Integration Options</div>
+            <div class="pitch-int-list">
+              <div class="pitch-int-row">
+                <div class="pitch-int-dot" style="background:#0052CC"></div>
+                <div><strong>REST API</strong> — Full programmatic access. Any tech stack. Production-ready SDKs for rapid deployment.</div>
+              </div>
+              <div class="pitch-int-row">
+                <div class="pitch-int-dot" style="background:#0065B3"></div>
+                <div><strong>Web SDK</strong> — Drop-in JavaScript widget. eID + QES in your web app within hours.</div>
+              </div>
+              <div class="pitch-int-row">
+                <div class="pitch-int-dot" style="background:#00875A"></div>
+                <div><strong>Mobile SDK</strong> — Native iOS &amp; Android. Biometric signing, liveness check, NFC chip reading.</div>
+              </div>
+              <div class="pitch-int-row">
+                <div class="pitch-int-dot" style="background:#6554C0"></div>
+                <div><strong>White-label</strong> — Fully branded experience. Your UI, Evrotrust infrastructure and compliance.</div>
+              </div>
+            </div>
+          </div>
+          <div class="pitch-int-divider"></div>
+          <div class="pitch-int-block">
+            <div class="pitch-int-title">Partner Program</div>
+            <div class="pitch-int-list">
+              <div class="pitch-int-row">
+                <div class="pitch-int-dot" style="background:#FF8B00"></div>
+                <div><strong>Referral L1</strong> — 5% commission for qualified leads. <strong>Referral L2</strong> — 15% for full sales cycle participation.</div>
+              </div>
+              <div class="pitch-int-row">
+                <div class="pitch-int-dot" style="background:#FF8B00"></div>
+                <div><strong>Reseller tiers</strong> — Starter → Silver → Gold → Platinum. 5–15% TU discount. Volume-based pricing.</div>
+              </div>
+              <div class="pitch-int-row">
+                <div class="pitch-int-dot" style="background:#FF8B00"></div>
+                <div><strong>Trust Units</strong> — One shared wallet across all services and all your clients. Pay-as-you-go or committed.</div>
+              </div>
+              <div class="pitch-int-row">
+                <div class="pitch-int-dot" style="background:#FF8B00"></div>
+                <div><strong>Dedicated support</strong> — Technical onboarding, co-marketing, deal support from Evrotrust team.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SLIDE 7: NEXT STEPS ── -->
+    <div class="pitch-slide" data-slide="7" data-notes="Closing slide. Propose a concrete next step: API sandbox access, a demo call with the technical team, or a meeting with Valeria (Head of Partnerships) to discuss the Partner Agreement. Reinforce: we are the only Bulgarian QTSP on the EU Trusted List — from day one your product is legally compliant and KYC-ready across the EU. Mention specific clients if relevant (DSK Bank, Mastercard partnership). Contact: partners@evrotrust.com">
+      <div class="pitch-slide-bg s6-bg"></div>
+      <div class="pitch-slide-inner pitch-slide-inner--center">
+        <div class="pitch-eyebrow"><span class="pitch-badge">Let's Move Forward</span></div>
+        <h2 class="pitch-h2-lg">Ready to Join<br><span class="pitch-gradient-text">Europe's Trust Infrastructure?</span></h2>
+        <p class="pitch-lead" style="max-width:560px;margin:0 auto 2.5rem">Evrotrust is the only Bulgarian QTSP on the EU Trusted List. Integrating with us means your product is legally compliant, KYC-ready, and trusted by regulators — from day one.</p>
+        <div class="pitch-cta-row">
+          <a href="https://docs.evrotrust.com" target="_blank" class="pitch-cta-btn pitch-cta-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            View API Docs
+          </a>
+          <a href="https://evrotrust.com/partners/" target="_blank" class="pitch-cta-btn pitch-cta-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Partner Program
+          </a>
+          <a href="mailto:partners@evrotrust.com" class="pitch-cta-btn pitch-cta-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact Us
+          </a>
+        </div>
+        <div class="pitch-contact-line">
+          <span>partners@evrotrust.com</span>
+          <span class="pitch-dot">·</span>
+          <span>evrotrust.com</span>
+          <span class="pitch-dot">·</span>
+          <span>Sofia, Bulgaria · EU</span>
+        </div>
+      </div>
+      <div class="pitch-slide-deco s6-deco"></div>
+    </div>
+
+  </div><!-- /pitch-stage -->
+
+  <!-- Navigation arrows -->
+  <button class="pitch-nav pitch-nav-prev" id="pitch-prev" onclick="pitchPrev()" title="Previous (←)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="pitch-nav pitch-nav-next" id="pitch-next" onclick="pitchNext()" title="Next (→)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <!-- Dot indicators -->
+  <div class="pitch-dots" id="pitch-dots"></div>
+
+  <!-- Keyboard hint -->
+  <div class="pitch-kbd-hint">Use ← → arrow keys to navigate · Esc to close</div>
+
+  <!-- Speaker notes toggle -->
+  <button class="pitch-notes-toggle" id="pitch-notes-toggle" onclick="toggleNotes()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    Speaker Notes
+  </button>
+
+  <!-- Speaker notes panel -->
+  <div class="pitch-notes-panel" id="pitch-notes-panel">
+    <div class="pitch-notes-label">🎤 Speaker Notes</div>
+    <div class="pitch-notes-text" id="pitch-notes-text">—</div>
+  </div>
+
+</div><!-- /pitch-overlay -->
+
 
 <!-- HERO -->
 <div class="hero">
@@ -1649,16 +2464,159 @@ function heroSearch(){
         <div class="int-hub-card-action">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></div>
       </div>
     </div>
-    <div class="int-eid-section">
+    <!-- KEY SERVICES SECTION -->
+    <div class="int-eid-section" style="margin-bottom:2rem">
       <div class="int-eid-header">
-        <div class="int-eid-eyebrow">eID Levels</div>
-        <h3 class="int-eid-title">Choose the Right Identity Level</h3>
-        <p class="int-eid-sub">Match the eID level to your security requirements and acceptable user friction</p>
+        <div class="int-eid-eyebrow">Key Services</div>
+        <h3 class="int-eid-title">Evrotrust Core Services</h3>
+        <p class="int-eid-sub">Click a service to see a step-by-step walkthrough and details</p>
       </div>
-      <div class="int-eid-cards">
-        <div class="int-eid-card basic"><div class="int-eid-badge">Basic</div><div class="int-eid-tagline">"Fast registration"</div><div class="int-eid-desc">Quick identity check with minimal friction. 9 attributes returned.</div><div class="int-eid-features"><div class="int-eid-feat ok">2D liveness</div><div class="int-eid-feat ok">Document capture</div><div class="int-eid-feat no">No attestation</div><div class="int-eid-feat no">No manual review</div><div class="int-eid-feat no">No signing</div></div><div class="int-eid-use">Registration · Low-risk · Lead capture</div></div>
-        <div class="int-eid-card enhanced"><div class="int-eid-badge">Enhanced</div><div class="int-eid-tagline">"Secure identification"</div><div class="int-eid-desc">Full KYC with 3D liveness, attestation and optional manual supervision.</div><div class="int-eid-features"><div class="int-eid-feat ok">3D liveness (anti-fraud)</div><div class="int-eid-feat ok">Attestation</div><div class="int-eid-feat ok">Manual supervision</div><div class="int-eid-feat ok">All attributes</div><div class="int-eid-feat no">No signing</div></div><div class="int-eid-use">Banks · Fintech · Medium-risk KYC</div></div>
-        <div class="int-eid-card full"><div class="int-eid-badge">Full eID</div><div class="int-eid-tagline">"Legally valid signature"</div><div class="int-eid-desc">Maximum security. QES + 2FA + biometric + XML attestation. eIDAS legally binding.</div><div class="int-eid-features"><div class="int-eid-feat ok">3D liveness + attestation</div><div class="int-eid-feat ok">2FA (SMS / app)</div><div class="int-eid-feat ok">Biometric PIN</div><div class="int-eid-feat ok">Qualified signing (QES)</div><div class="int-eid-feat ok">XML + signed PDF</div></div><div class="int-eid-use">Contracts · Banking · Legal · High-risk</div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:860px;margin:0 auto">
+        <div class="int-hub-card int-hub-card--featured" onclick="openIntModal('eid')" style="cursor:pointer">
+          <div class="int-hub-card-top">
+            <div class="int-hub-icon" style="background:rgba(76,154,255,.15);border:1px solid rgba(255,255,255,.1);width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2" stroke-linecap="round" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="int-hub-tag">e-Identification</div>
+          </div>
+          <div class="int-hub-card-name">e-Identification</div>
+          <div class="int-hub-card-desc">Onboard customers remotely in &lt;2 min. AI liveness + ID document scan + optional expert review. eIDAS-notified qualified eID.</div>
+          <div class="int-hub-card-meta"><span class="int-hub-meta-pill">KYC / AML</span><span class="int-hub-meta-pill">eIDAS notified</span><span class="int-hub-meta-pill">Reusable ID</span></div>
+          <div class="int-hub-card-action">Details &amp; Levels <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="10" height="10"><path d="m9 18 6-6-6-6"/></svg></div>
+        </div>
+        <div class="int-hub-card" onclick="openIntModal('eauth')" style="cursor:pointer">
+          <div class="int-hub-card-top">
+            <div class="int-hub-icon" style="background:rgba(0,174,239,.15);border:1px solid rgba(255,255,255,.1);width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00AEEF" stroke-width="2" stroke-linecap="round" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="int-hub-tag">e-Authentication</div>
+          </div>
+          <div class="int-hub-card-name">e-Authentication</div>
+          <div class="int-hub-card-desc">Users log in with one tap on their phone — no passwords. Push notification answered with a fingerprint or Face ID. Done in seconds.</div>
+          <div class="int-hub-card-meta"><span class="int-hub-meta-pill">No passwords</span><span class="int-hub-meta-pill">Biometrics</span><span class="int-hub-meta-pill">QR login</span><span class="int-hub-meta-pill">eIDAS LoA High</span></div>
+          <div class="int-hub-card-action">Details &amp; Video <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="10" height="10"><path d="m9 18 6-6-6-6"/></svg></div>
+        </div>
+        <div class="int-hub-card" onclick="openIntModal('esign')" style="cursor:pointer">
+          <div class="int-hub-card-top">
+            <div class="int-hub-icon" style="background:rgba(52,211,153,.15);border:1px solid rgba(255,255,255,.1);width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" width="18" height="18"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <div class="int-hub-tag">e-Signatures</div>
+          </div>
+          <div class="int-hub-card-name">e-Signatures</div>
+          <div class="int-hub-card-desc">Clients sign contracts from their phone in under a minute. Legally equivalent to a handwritten signature. Valid across the entire EU.</div>
+          <div class="int-hub-card-meta"><span class="int-hub-meta-pill">QES / AES / SES</span><span class="int-hub-meta-pill">Signed PDF</span><span class="int-hub-meta-pill">OTP option</span><span class="int-hub-meta-pill">All EU</span></div>
+          <div class="int-hub-card-action">Details &amp; Video <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="10" height="10"><path d="m9 18 6-6-6-6"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- eID LEVELS — INTERACTIVE TABS -->
+    <div class="int-eid-section" id="eid-levels-section">
+      <div class="int-eid-header" style="cursor:pointer;user-select:none" onclick="toggleEidLevels()">
+        <div class="int-eid-eyebrow">e-Identification · eID Levels</div>
+        <h3 class="int-eid-title" style="display:flex;align-items:center;justify-content:center;gap:8px">
+          Choose the Right Identity Level
+          <svg id="eid-levels-chev" viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="16" height="16" style="transition:transform .3s;flex-shrink:0"><path d="m6 9 6 6 6-6"/></svg>
+        </h3>
+        <p class="int-eid-sub">Match the eID level to your security requirements and acceptable user friction — click to expand</p>
+      </div>
+
+      <div id="eid-levels-body" style="display:none;animation:slideDown .3s ease both">
+        <!-- Tab nav -->
+        <div style="display:flex;justify-content:center;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap">
+          <button class="eid-tab-btn eid-tab-active" onclick="selectEidTab('basic',this)">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#36B37E;margin-right:5px"></span>Basic
+          </button>
+          <button class="eid-tab-btn" onclick="selectEidTab('enhanced',this)">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#00B8D4;margin-right:5px"></span>Enhanced
+          </button>
+          <button class="eid-tab-btn" onclick="selectEidTab('full',this)">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#4C9AFF;margin-right:5px"></span>Full eID
+          </button>
+        </div>
+
+        <!-- Tab panels -->
+        <div id="eid-tab-basic" class="eid-tab-panel" style="display:block">
+          <div class="eid-level-detail">
+            <div class="eid-level-top">
+              <div>
+                <div class="int-eid-badge" style="background:rgba(0,135,90,.15);color:#36B37E;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:5px;display:inline-block;margin-bottom:.5rem">Basic / Ident Lite</div>
+                <div class="int-eid-tagline" style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.35rem">"Fast registration"</div>
+                <div class="int-eid-desc" style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:480px">Quick identity check with minimal user friction. Returns 9 validated personal attributes from the ID document and a 2D liveness selfie. Ideal for low-risk onboarding where speed matters more than full legal attestation.</div>
+              </div>
+              <div class="eid-level-use-badge" style="background:rgba(54,179,126,.08);border:1px solid rgba(54,179,126,.2);border-radius:8px;padding:.75rem 1rem;text-align:center;min-width:140px;flex-shrink:0">
+                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#36B37E;margin-bottom:4px">Use for</div>
+                <div style="font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.65">Registration<br>Low-risk flows<br>Lead capture</div>
+              </div>
+            </div>
+            <div class="eid-level-features-grid">
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>2D liveness detection</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>ID document capture &amp; OCR</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>9 personal attributes returned</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Web &amp; Mobile SDK support</div>
+              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No identity attestation</div>
+              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No expert manual review</div>
+              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No qualified signing (QES)</div>
+              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No eIDAS LoA High</div>
+            </div>
+            <a href="https://docs.evrotrust.com/docs/evrotrust-ident-lite" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:1rem;font-size:.78rem;font-weight:700;color:#36B37E;text-decoration:none;transition:gap .15s" onmouseover="this.style.gap='8px'" onmouseout="this.style.gap='5px'">Ident Lite Docs <svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="11" height="11"><path d="m9 18 6-6-6-6"/></svg></a>
+          </div>
+        </div>
+
+        <div id="eid-tab-enhanced" class="eid-tab-panel" style="display:none">
+          <div class="eid-level-detail">
+            <div class="eid-level-top">
+              <div>
+                <div class="int-eid-badge" style="background:rgba(0,184,212,.15);color:#00B8D4;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:5px;display:inline-block;margin-bottom:.5rem">Enhanced eID</div>
+                <div class="int-eid-tagline" style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.35rem">"Secure identification"</div>
+                <div class="int-eid-desc" style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:480px">Full KYC-grade identification with 3D liveness, NFC chip readout, XML identity attestation, and optional expert manual review. Meets AML5, PSD2 SCA, and eIDAS Substantial requirements. All personal attributes included.</div>
+              </div>
+              <div class="eid-level-use-badge" style="background:rgba(0,184,212,.08);border:1px solid rgba(0,184,212,.2);border-radius:8px;padding:.75rem 1rem;text-align:center;min-width:140px;flex-shrink:0">
+                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00B8D4;margin-bottom:4px">Use for</div>
+                <div style="font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.65">Banks · Fintech<br>AML / KYC<br>Medium-risk</div>
+              </div>
+            </div>
+            <div class="eid-level-features-grid">
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>3D liveness (anti-spoofing)</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Document NFC chip readout</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>XML identity attestation</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Optional expert manual review</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>All personal attributes returned</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Public register integration</div>
+              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No qualified signing (QES)</div>
+              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No 2FA biometric PIN</div>
+            </div>
+            <a href="https://docs.evrotrust.com/docs/identity-verification-2" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:1rem;font-size:.78rem;font-weight:700;color:#00B8D4;text-decoration:none;transition:gap .15s" onmouseover="this.style.gap='8px'" onmouseout="this.style.gap='5px'">eID Types Docs <svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="11" height="11"><path d="m9 18 6-6-6-6"/></svg></a>
+          </div>
+        </div>
+
+        <div id="eid-tab-full" class="eid-tab-panel" style="display:none">
+          <div class="eid-level-detail">
+            <div class="eid-level-top">
+              <div>
+                <div class="int-eid-badge" style="background:rgba(0,82,204,.2);color:#4C9AFF;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:5px;display:inline-block;margin-bottom:.5rem">Full eID — eIDAS Notified</div>
+                <div class="int-eid-tagline" style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.35rem">"Legally valid signature"</div>
+                <div class="int-eid-desc" style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:480px">Maximum assurance — eIDAS LoA High. QES qualified electronic signature + 2FA + biometric PIN + XML attestation. Legally binding across all EU member states. Evrotrust is notified under eIDAS and listed on the EU Trusted List.</div>
+              </div>
+              <div class="eid-level-use-badge" style="background:rgba(76,154,255,.08);border:1px solid rgba(76,154,255,.25);border-radius:8px;padding:.75rem 1rem;text-align:center;min-width:140px;flex-shrink:0">
+                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4C9AFF;margin-bottom:4px">Use for</div>
+                <div style="font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.65">Contracts · Legal<br>Banking<br>High-risk KYC</div>
+              </div>
+            </div>
+            <div class="eid-level-features-grid">
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>3D liveness + XML attestation</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>2FA authentication (SMS / app)</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Biometric PIN (Face ID / fingerprint)</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Qualified signing (QES)</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Signed PDF + XML output</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>eIDAS LoA High — EU Trusted List</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Expert manual review available</div>
+              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Reusable digital identity</div>
+            </div>
+            <a href="https://docs.evrotrust.com/docs/evrotrust-eid" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:1rem;font-size:.78rem;font-weight:700;color:#4C9AFF;text-decoration:none;transition:gap .15s" onmouseover="this.style.gap='8px'" onmouseout="this.style.gap='5px'">Full eID Docs <svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="11" height="11"><path d="m9 18 6-6-6-6"/></svg></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2320,7 +3278,7 @@ const BRAND_COLORS = {
   'Motion Software': {bg:'#FF6B35',text:'#fff',label:'MS'},
   'IBS / DigiSign': {bg:'#1B2A4A',text:'#fff',label:'IBS'},
   'Planit': {bg:'#5C2D91',text:'#fff',label:'PL'},
-  'Омекс @ 2000': {bg:'#1E4D8C',text:'#fff',label:'ОМ'},
+  'Omeks @ 2000': {bg:'#1E4D8C',text:'#fff',label:'OM'},
   'HROne': {bg:'#00A878',text:'#fff',label:'HR'},
   'sHRedy (Junior)': {bg:'#00B388',text:'#fff',label:'SHJ'},
   'Nula.bg': {bg:'#F5A623',text:'#fff',label:'NL'},
@@ -2408,7 +3366,7 @@ let partners=[
   {name:'Motion Software',logo:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxyZWN0IHdpZHRoPSIyNDAiIGhlaWdodD0iODAiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iMzQiIGN5PSI0MCIgcj0iMjQiIGZpbGw9IiM2QzNGQzUiLz48cG9seWdvbiBwb2ludHM9IjI0LDUyIDI0LDI4IDQ2LDQwIiBmaWxsPSJ3aGl0ZSIvPjx0ZXh0IHg9IjcwIiB5PSIzNiIgZm9udC1mYW1pbHk9IkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjNkMzRkM1Ij5Nb3Rpb248L3RleHQ+PHRleHQgeD0iNzAiIHk9IjU2IiBmb250LWZhbWlseT0iQXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMzMzMzMzMiPlNvZnR3YXJlPC90ZXh0Pjwvc3ZnPg==',website:'https://www.motionsoftware.eu',short:'HR management tool with QES integration.',desc:'Motion Software provides HR management tools. Partners with Evrotrust to enable qualified electronic signatures within HR document workflows, enabling remote and fully digital HR operations.',cat:'HR Management',integration:'QES',usecase:'HR management tool',bizmodel:'Client buys directly from Evrotrust',benefits:['HR tool integration','QES compliance','Remote signing'],icp:['Tech companies','SMEs','Startups'],region:'Bulgaria',url:'',material:''},
   {name:'IBS / DigiSign',logo:'data:image/png;base64,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',website:'https://ibs.bg',short:'HR Management System integrating Profile.Guru and DigiSign with Evrotrust QES for qualified electronic signing of HR documents.',desc:'IBS provides an HR Management System integrating Profile.Guru and DIGISign with Evrotrust QES for qualified electronic signing of HR documents.',cat:'HR Management',integration:'QES',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['Profile.Guru integration','DIGISign integration','Legal HR signing'],icp:['Bulgarian enterprises','HR departments'],region:'Bulgaria',url:'',material:''},
   {name:'Planit',logo:'data:image/png;base64,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',website:'https://planit.bg',short:'HR Management System with Evrotrust QES integration.',desc:'Planit provides an HR Management System. Partners with Evrotrust to enable qualified electronic signatures for HR document workflows.',cat:'HR Management',integration:'QES',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['HR system integration','QES compliance','Digital workflows'],icp:['Enterprises','HR managers'],region:'Bulgaria',url:'',material:''},
-  {name:'Омекс @ 2000',logo:'data:image/png;base64,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',website:'https://www.omex.bg',short:'HR Management System with QES hash integration.',desc:'Омекс® 2000 by ОмегаСофт provides an HR Management System. Partners with Evrotrust to integrate QES hash signing into HR document workflows.',cat:'HR Management',integration:'QES hash',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['QES hash integration','HR compliance','Bulgarian market'],icp:['Bulgarian enterprises','HR departments'],region:'Bulgaria',url:'',material:''},
+  {name:'Omeks @ 2000',logo:'data:image/png;base64,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',website:'https://www.omex.bg',short:'HR Management System with QES hash integration.',desc:'Омекс® 2000 by ОмегаСофт provides an HR Management System. Partners with Evrotrust to integrate QES hash signing into HR document workflows.',cat:'HR Management',integration:'QES hash',usecase:'HR Management System',bizmodel:'Client buys directly from Evrotrust',benefits:['QES hash integration','HR compliance','Bulgarian market'],icp:['Bulgarian enterprises','HR departments'],region:'Bulgaria',url:'',material:''},
   {name:'HROne',logo:'data:image/png;base64,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NRoz09PzCwurzcZysxGzwIlzhGaoZratud62wFIVVAACU2VA7z0THzlw8Fvf+L0/feVPZrOZv/nrv/7Rj360OL8wsmfPyy+8+G//zV/sHdj9y7d/Pjs189xzz50/+FSRk1mkV9xcfPDD1//+R2+98cuPL2V5a9eevc9dvPDVs8+ePnqMXBLBVPXu/Xu/eOP1t995pw+Tbzz/8r/7i7/8wfe/31xpPH369KHDh5zzK83G5OTkL15//Wdv/KKJMZoNj46cO/PMVy9+6eyZMwNpPeZhamrqnV+/c/X6tU9vXF9YXVZRJK4ST/SJKHgEMFU2JHaKJiIWcgpKmYy6OkorzW3I1wbSep40nRG2g61mLs1rgq35pWxhGfbGYLKwvAwhItrOsdE//r3vaOJaEudWFs+dO/fChWfb84v/5a/+6rPPrppzJ06dfP7FFy++/HJ/ve+TK1cW7j+Yvzf16ldeuXL1s3feffe//Y//3my3Lpy98MrLX/727/yuM/q7N3/uaulzz5z/ype+3JemP/hf//vGtev9ff0XX37597/17aGhoWa73b59sxEzVCBEKTZgbpanX+Q36oY9AI8Eq5O2CwxI7HJTdWiAFrTfJf0Bao2wgzi2gxerOZey60uSYZcOGdURvWJf4lMiY12eX/rZz34yOTF5/tz5p589Nzg29sUzZ9/94NLeXbtOn3zq1++/96u33lyaX2TA/iR9//qnH9y9+eo3v3nqmTNTE5PNpWXLw8zM7Hd/8L03r15uWAh5+HD85s3x23/xrT86deDQBwOj/aPD337ld+emZ777wx/dun4dAET17bff/p2vf+3P//1fYi357L/eQiJwnLeaxoSesUpH7sBkXR8UrAyx2LZWpA1IAQm0mDOTGQEqJIapYJ9Sv0tG+wf37drTX6vvHhndM7xjgHyiljIxYF+SpugX5ufff+/9q9euLa+u7Dq4d2hsNDTb5546naNN3rt/5dNP2nmIDrMQ86whaJLF63du7d+5+8SJEwPiaj795NpntyfuL0sWU5aoYXV5cmY6W20kxKT25Rcvps5f+fCjyXv30jRFxBCjAVy6dGlwdOTrr37z6PFjl69+mmcZJd4AVBWojNFplaatVbxrUwl9PLAQlDrp9RUREhETgsGu4bEXvvjc6N7dYjbgkyMju8eGR0wktPO81dYobFj3fv++fQx09MiR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',website:'https://hrone.bg',short:'HR Management System with QES and eDelivery.',desc:'HROne provides an HR Management System. Partners with Evrotrust to integrate qualified electronic signatures and eDelivery into HR workflows for fully digital labor file management.',cat:'HR Management',integration:'QES, eDelivery',usecase:'HR Management System',bizmodel:'Client buys from the platform',benefits:['QES + eDelivery','Digital labor files','HR compliance'],icp:['Enterprises','HR departments','Staffing'],region:'Bulgaria',url:'',material:''},
   {name:'Hopae',logo:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAAAsCAIAAADpdQGyAAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAATc0lEQVR4nO1ae3BV1bn/1trv80pOTkI8MQEJEJBMQRBhHLQYm/ro1TuNr1JwxqnTVrR2SjvUKbZ/MDr22tv+0eKDkTsjFC3PWL04DXAFNCgB5XkCBIgJZBIOJDHJOZzXfq617h8f2QYuCff6x723xe+Pnex91l57rd/6Hr/vW4sIIeBr+UpC/68H8HcsX2P31eVr7L66fI3dV5drY8cYu+qtbdsjb69odj3IWNh5ngcAkiQBgOM4pmn6t6ZpKoqCt5xzAKD0ulPhsSYsyzJqE+dclmXDMADAcRwAkCSJUoqoMcY454SQ/5UB/z+SsbATQiA6QgiE5uLFi11dXYlEQlVVGMZRluXrEDgAIGNzY9d1UfUIIb29vU1NTdu3b49EIm+88YZhGEII31Rd10Urvn5EHuM3xpiiKJIkdXR0NDU1NTU1nTp1qqenp6amBu0UnR0hhBAiy2N19Q8pY02YENLY2Pjqq692d3enUql0Oq1pGgDMnTsXfR8ACCE8z1NV9Xo0WzG6mKbpeV5/f39PT8+LL76IPk6W5bVr1zLGLMvinAshGGP+9e9AuBCcCS64EJ4QfMRz/uWtK4QjhCtGNvgvcvVYgb/puu44Tmlpqed5R44cwbgRCARmzpxJKUUohRCe5zHGCCHYwHVd7OQKJpjNZv3nYoSTtSwLYw4+xMb4xLKsKwaGtOmKWyRPfg/+k5EdAkA+n2eMAXAwTeCcAdgADMBxBXAQHnABXAAAB2GDyIOwhQAGMFpAuIaTMgzDNM2hoaG2tjbP82RZrq2tLS0ttSyLEOI4juu6J06csCxr8uTJEydOtG1b0zTbtgkhqqqaptnd3c05TyaTJSUlwWBQ1/WKigrGmKqqQgjTNIUQvb29lmXZtj116lRVVfv6+pLJpG3bpaWlwWAwFArpuq6qqm3bGJoYY7ZtZ7PZoaGhdDodDAZd1x03bpxhGKWlpQCADoQQguPJ5XJDQ0P5fJ5z7hTyFSUxT0Bs8iTTtlVNUxXCClySKeXAKQBwIAwEA5A5AQYgfQXs8MOSJPX29nZ2dgKAoigLFiyQZVnX9Xw+39LS8tvf/ra1tdU0zR/96Ee/+tWvUEkppYqitLe3v/feey0tLSdOnMhkMrZtT5o0aerUqQ0NDXPmzInH47quK4ry2muvbdiwIZvNxmKxxsbG/fv3r1mzJpFIfPHFF/F4vLa29tFHH/3Od75DCNE0DVW7p6fn448/bmxsbGtr6+/vtywrGo3edtttt9xyS11d3Z133qlpmmmauq5rmtbR0bF169bm5ubW1tZkMmlo+viK+IK6u+968J++ededVCOe7chAgAYJ8SkbBSAA5Brluav7BM45547jCCEsy3rppZdQjwzDWLduXSaTSaVSf/rTn6ZMmRIMBjHTmDZt2scffyyEcF1XCNHc3Pzwww/HYjH8iq7rqAuGYUSj0eXLl3d3d+fzeSHEr3/960gkommapmmbNm2qqKjAkO0H7lgs9vzzz1+8eBGN/fjx40899dSNN94IAOFwmBCiKArGrqqqqu9+97stLS2e5zmO43newYMHFy1aVFlZSSlFnSWEEABKaXXttBX/suLcuVOCZ4VXELmcYOjeXCFyQlwUouAKYY/u8sbSO0VROOfpdHrnzp2SJDHGysvLq6urDcPYuHHjjh077r333tWrVzPGioqKBgcHZVnGDGRwcPCPf/zju+++CwBlZWV1dXVozolEorm52fO8N998U9O0X/7yl7lcTtM0xhiu08svvyzL8kMPPRSPx8+dO/fZZ5+lUqnBwcHVq1dXVVUtWbLkwoULW7du3bVrVzKZDIVCDQ0NNTU1mqZ1d3e//fbbPT09/f39sVisurq6vLw8m82+/vrrf/3rXy3LqqioqK+v/8Y3vpHL5U63d2x+p7G7u+v111ZWFOuLH2oIGEVgFF9SJqAEVAAPjfIaycNoeieEYIy1traWlZVh48cee+zChQtNTU0LFizYvXv3sWPHJk+erOs6AMyZMyeRSGSzWSHEqlWrSktLNU0rLS396U9/2tLS4jhOoVBIJBL33HMPKlRNTc2uXbsuXry4YsWKaDQKAJTS0tLStWvXnj59Op/Pnzp16g9/+ENVVRUGpfnz5/f09HR2dj7++OO4rkuWLPn88889z8vn811dXc8//3xRUREAVFZWnjx5MpfLvfXWW9Fo1DCMG2+8ceXKlSdOnCgUCrbrHDjS+uwvfgEUgML3GuqSpz8V2V7hmoILTwhXCO9SqHW9K2Lx5XINm2WMvf3220jrJEl6+eWXP/nkk/r6+h07dhQKhdbWVt8qH3vssTNnziDiM2fORKOrq6trb28XQti27Xke5zyRSITDYcMwNE1bunRpNpt97rnngsEgtv/JT36Sy+WEEGjO+Xz+mWeekWVZ07R4PP7OO+9kMplDhw4dPny4o6Ojv7/fcRzbthljrutu2rQpEokAgKqqn3/+Oef83nvvBQBN0x555JFUKiWEcBzH48wVoqevb9yNZbpBqsqDf3tnnWAFwTxPCEsISwj7EnzXkLFUUlEU13X37dtn27YkSdFoNBwO/+Uvf1m8ePG8efN0XT948ODg4CAhJBwO33rrrfF43DRNy7ISiQTO4bbbbpswYQKSZ/Q15eXldXV1GFUHBgay2ayqqpZlybKsqurDDz9sGAZjDHXTMIz77rtPVVVVVXO53OnTp8PhcG1t7axZs6qrq4uLixVFUVXVdd18Pk8IiUQiGP0xTDc3NxuGoSjKHXfcIYTAh/l8Ppk8r2nKvDnzbFMMDuWPtXUC1VwueQAMgAHwL60SgPPRSMqo/k4IgdePPvoIlWL8+PFHjx7Vdf3++++XZTmTyezcuRNjCOd87ty5mqZZlnX06FGkKdFoNB6PI2oA4DiOYRihUKiyslKWZdd1e3t7z507Z5pmIBDIZrPhcHjixIkYUrBPy7KmT59u27aqqpIk9ff3A4DrugMDA9u3b9+4cWM6nT5z5kwmk0Gi5yfXnPP29nY0HULIsmXLli5dSinVNM3zPNdzqSQplFAKpgtZW+QdkNQvIfM4SAASAeAegAACV/V7Y8UKx3HOnz9/6tSpYDCI5Igx9sADDxQVFWmaNjg4uG/fPiEEIeTb3/52NBpFWiDLsm3bxcXFAFBUVGRZlqqqnueh4auqesMNNyBtRv1SFAVvbduOxWKYHedyuVAoFAgEdF2PxWKo3bZtO46zbdu2l1566cyZM5Zlua5bVFSEHi2TyZw/f55SKoQIBALIhGVZppRGIhFKqW3bkUgkk8komuo5ri4rHCgXVNZDkkpdDwBApkAIyABUABAAEMA9oFdneGNhp2naBx98wBjzPE+SJNM0a2pqbr/9dgwO+/btO3v2rK7rlmVVV1dXVFQEAoFCoYDrn06nJUlKpVKaprmui9qHXg/ZcigUCgaDgUAAExKsBqZSKUVRdF0PhUIAkEqlurq6EGVclU8//XTVqlWJRIJSOm3atFmzZt18883Yz7Fjx9asWYOpiOd5ZWVlftnxW9/61oMPPphOp1VVZYxpmvZFX/+4khgXks1p7cwZpsXCuiQLB4CAUAAACAAH4BzoqHn6NfKKxsZGTC10XZ8yZco999xjGIbjOKqqIgVxHKeysnLWrFmxWOzo0aOO49TU1IRCIcuyMplMd3c36hrOH225ra0N/RemDTBcSVUUZe/evQsXLmSMIZTRaLS9vT2VSkmSFA6H4/F4d3f3gQMHAGDSpEkvvPBCQ0MDFnssy2pubv7ggw+6uroopYVCYdy4cSUlJciBqqqqvv/971NKHceRZTlvFsLBEHDgrmBAqAYEGHcGQfaAOSACQHUgQQAOFIASGAW9sWJFOp1OJBKmacqyXFRUtHDhwtraWkqpJEm5XK6pqQlrUDU1Ndls9ve///2aNWsGBgZ0XZ89ezbGvr179+7atQsAstkspqh79uw5dOiQ67plZWWTJ08Oh8MAIMuy53me5zU2Nvb29gIAIUSSpM7OzvXr17uui/5x3rx5yWQyl8sZhlFZWTljxgy/9J/P51tbW3t7e23bFkIEg8Hi4uI5c+YgYbhw4cLJkydxFfNmIRAMFUz7rbXrGjdvafrb3063JihkZfO81/EJtO+FnkOQOw8iD8JlRAgyKkRj6d2RI0fy+Tzqxe23337XXXeh+xBCnDx5sq+vD/Xl0KFDpmnecMMNixYtmjt3rqqqy5cvP3r0aDqd7ujoWLduHee8vr4+m81u3rx55cqVSINvuummurq6oqIirAMCgGmaH3744QsvvLBw4cKysrKBgYEtW7bs27dP13XG2Pz582trazs6OtAznDhxorOz86abbkJL37Nnz6ZNm3K5HKUUPYxlWc8+++yBAwcwsITD4cWLF8+ZM0dRlJaDBzat37D7/W1mNjOpZspvli+dXq3xwY7OT5tU5kRKq2NTOegRUIsd4ASoBlfXvLGw27Ztm+M4lFLDMO6+++5YLIaVTtu233//fVxwDMfTp09/+umnb731VkzXZ8yYsXjx4j//+c/pdHrTpk07d+6cMGFCoVBAdy6EqKio+MEPfnDLLbcAAIYgzJlmzJixYcOG5ubmSCTS39/f39/vuq7jOBMmTHjyySfLy8srKiqmTJnS3d3d39//zDPPzJ8/X5KkZDJ55syZZDIJAIFAABkiAMyfP/+RRx7ZsmXL4ODg5s2b9+/fr+u6zbgDcKrtZLGquLncP0+975vzZgJNdxz+0O477tm24toQnwBsKpAwIwBAldGCxWjcmDE2e/ZsAKCU3nzzzY2NjfgTVpxqamoAQFGUioqKV155JZvN5nI5JLRCCNd1+/r6li1bpigKpRRjCxo7AMTj8VdffbWvrw+rT8iNCSFlZWVbt26tra0FAIwVaGWxWGz9+vVIsFOp1O9+97tIJKKqKnaraZqiKJMmTVq6dOnUqVPxrT179uBQz50797Of/SwQCEiShIEeZAWoDKoeCgSf+N6j6QtdPNUhsgdO//tzravuP/Sv80/92+P2oTeFeUaIbF6YpnBH48mXYed5l5oVCoWzZ89iKqaq6h133HHhwgXMGRzHGRwcjEajoVBo9uzZO3fuxFeQ3/vYYW/bt29/8sknY7EY5urxePznP/95W1sb9iOEYIwtW7ZMVVVN00pKSlpbW48fP/7DH/6wqqoKAEpLS5csWXL8+HF/zTDZeO+99xoaGoqKipAPL1q0aPfu3Z999tnTTz9dX19fX1/f0dFRKBRwwENDQ1u3bn3iiSfGjx+vKIokqyWx8gcebPiP7TsEs5g95OV7hHvWG9jf8u6LH238TdtHb7ChI0IMMJ623LQjLC6uXtYll/4QgubjF8iy2WxfXx8GJkmScI8CV1WSpNWrVw8MDDz11FPhcFhV1Xw+jxHTZ9RCCNSyfD4fCARwz0iSJEVRCCGIBXKIFStWrFy5MpPJFBcXHz58eOLEiTBc/kIniLjjK+goPM+zLAtvsRnmIbjfNDQ0VFJSgjVE9Mg4IxQhiK4ZlmUHgxoQjzl5QlyqUDuX1oK6WShIkqbqQQDZ8zhQiRKVEmVUbuxvNfi8XJKkSCQiSRJqBADkcjnMjbDBj3/8YxxiLpeTZTkYDOJskY4iOkhlgsEgQok0GAAwA/PdJSopDFc04fLCMo4N9RqNFFfFN2pcb/TL2CcCd8lC/XnKMpZ5PI9LEsiy4tgulTgBmcoKANcCRQDECOhAKIDsuq4kaZQqfPR9xC9jBWofOjtCCKUUCYSPJgKHeYIQoqSkxHVdJLcjhwjD7h9LWJZlBQIBTdN8OBAC/AoSbwxHWB9ExFFnxfAeJiEENwAwpPj1fRynz70xsS0uLsYh2baNRuO7I0mSVFVmHmgaHVYlmXs2AFBJdy1TVhUiqQBAiUSoDEA8l6nq1WmK7AOH2KH4bstfeX9jDGeO1QFFUfCtQqGAhokrjz1gV4FAwLIsrH1it8h7MdPEGgkiiBsahBBUTNRfXCd8198hwZ79kfvDUBQFc0FFURzHQdXDNRu5d0xlEACuzbnwNE2hckAIDyhVdG2YjFAgTHCJUCop/xN+h0vtjxWGt1SQ3PppDQCYpsk5x5QI54AW5BcIYDidQkXDGWIbfIhajFuUoVAItRXn6bqu761gOPn18fIdtP9FdGe4SYJajI39HWQYPulAJQkAVJUCqMOdy8ITiizbjksplWVKCAUAAUBH58bXOBdwxVhHPrn0PiG4B4TKhdYhy7IYcWQAhvfM0BLxFuOmLMvJZPLs2bOqqjqOs2DBAgQUIw+K77z8UAbDhnLFASIMR/i/aZqapo1sD8M25HFGCCFAhQDOAQAkCQgBIoAJuOJMkusyVbk6vbsszl5aFkp9o/OHi27Ifw0BGhmXJUlyHEeSJBy9/9PISaKaSJLkrwS+iFuU6Ll84/K/iCPBliPd8ciFtG0bjzCMHJ7/dRhhTEIIQoELTog0MlNlHgAAlYAQ4Bxcl6mqhMMcrRjw39K7fyzhAjgA1pguRQw+4ufL1Y4DABkl67/uDs0BAJaDh6989GZ87AbX3QEcGLbBYXNDaK7QIXzIxz5icz1ih9ZKLtu69hHklz+BMUzzOsTuSyzIZWdN+IjrqD5upFyH2AH4u4ME4eNXAHdly69QN/5HFjHietlTAT5Wgo56BAoAAP4TdXvJwYLYzKoAAAAASUVORK5CYII=',website:'https://www.hopae.com',short:'IDV provider — global identity infrastructure and KYC.',desc:'Hopae provides digital identity wallet technology and verifiable credential solutions. Integrates with Evrotrust combining wallet-based identity with qualified trust services for comprehensive KYC.',cat:'eID & Identity',integration:'QES, eID',usecase:'IDV provider, global identity infrastructure, KYC',bizmodel:'Client buys from the platform',benefits:['Wallet-native identity','Verifiable credentials','Global KYC'],icp:['Government','Banking','Healthcare'],region:'South Korea',url:'https://www.hopae.com/blog/hopae-and-incert-strategic-partnership',material:'https://www.hopae.com/blog/hopae-and-incert-strategic-partnership'},
   {name:'Authologic',logo:'data:image/png;base64,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',website:'https://authologic.com',short:'IDV provider — global identity infrastructure and KYC conversion.',desc:'Authologic bridges the gap between traditional KYC and digital identity verification with its global eID Hub, boosting KYC conversion rates through a single API.',cat:'eID & Identity',integration:'QES, eID',usecase:'IDV provider, global identity infrastructure, KYC',bizmodel:'Client buys from the platform',benefits:['Single API access','Global eID coverage','KYC & AML compliance'],icp:['Fintech','Banking','RegTech'],region:'Poland',url:'https://evrotrust.com/partners/authologic/',material:''},
@@ -3107,6 +4065,36 @@ function toggleIntHub(){
   else panel.classList.remove('open');
   if(arrow) arrow.classList.toggle('open', _intOpen);
 }
+function toggleEidLevels(){
+  var body = document.getElementById('eid-levels-body');
+  var chev = document.getElementById('eid-levels-chev');
+  if(!body) return;
+  var open = body.style.display === 'none';
+  body.style.display = open ? 'block' : 'none';
+  if(chev) chev.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+function selectEidTab(level, btn){
+  ['basic','enhanced','full'].forEach(function(l){
+    var p = document.getElementById('eid-tab-'+l);
+    if(p) p.style.display = l===level ? 'block' : 'none';
+  });
+  document.querySelectorAll('.eid-tab-btn').forEach(function(b){ b.classList.remove('eid-tab-active'); });
+  if(btn) btn.classList.add('eid-tab-active');
+}
+function openEidAndLevel(level){
+  // open the integration panel first
+  var panel = document.getElementById('int-panel');
+  if(panel && panel.style.display==='none'){ _intOpen=true; panel.style.display='block'; panel.classList.add('open'); }
+  // open eID levels section
+  var body = document.getElementById('eid-levels-body');
+  var chev = document.getElementById('eid-levels-chev');
+  if(body){ body.style.display='block'; if(chev) chev.style.transform='rotate(180deg)'; }
+  // switch to correct tab
+  var btn = document.querySelector('.eid-tab-btn[onclick*="'+level+'"]');
+  selectEidTab(level, btn);
+  // scroll into view
+  setTimeout(function(){ var s=document.getElementById('eid-levels-section'); if(s) s.scrollIntoView({behavior:'smooth',block:'start'}); },150);
+}
 function toggleIntReq(){
   var dd = document.getElementById('int-req-dropdown');
   var ch = document.getElementById('int-req-chev');
@@ -3193,6 +4181,109 @@ var INT_DATA = {
       {label: 'SDK Documentation', href: 'https://evrotrust.com/bg/business/sdk-integratsiya/', primary: true},
       {label: 'API Documentation', href: 'https://developers.evrotrust.com/#/1.0.257/sp/authorization-header', primary: false},
       {label: 'Supported Countries', href: 'https://evrotrust.com/supported-countries/', primary: false}
+    ]
+  },
+  eauth: {
+    badge: 'Secure login without passwords',
+    title: 'e-Authentication',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+    desc: 'Instead of a password, your users confirm who they are with one tap in the Evrotrust app — a push notification answered with a fingerprint or Face ID. Takes seconds. Every login is legally recorded and meets the highest EU security standard (eIDAS Level of Assurance "High").',
+    usecases: 'Online banking · Customer portals · Corporate intranets · Government services · Healthcare platforms',
+    pros: [
+      'No passwords — users confirm with biometrics only',
+      'Push notification on their phone — done in seconds',
+      'QR code login for desktop — scan with phone and you\'re in',
+      'Every login is legally recorded with a timestamp',
+      'Works for any user — no qualified signature certificate needed',
+      'Meets the highest EU security standard (eIDAS LoA High)'
+    ],
+    cons: [
+      'Users need the Evrotrust app installed on their phone',
+      'One-time enrolment required when a user first signs up',
+      'Phone needs an internet connection at the moment of confirmation'
+    ],
+    steps: [
+      {title: 'Register the user', desc: 'You send their phone number to Evrotrust. They receive an invitation to install the app — a one-time setup that takes 2–3 minutes.'},
+      {title: 'Request a login confirmation', desc: 'When a user wants to log in, your system asks Evrotrust to send them a challenge. A unique one-time code is generated for that session.'},
+      {title: 'User gets a push notification', desc: 'Their phone shows: "Login request from [your system]." They can see who is asking and when — full transparency.'},
+      {title: 'User confirms with biometrics', desc: 'One tap — fingerprint or Face ID. If they reject, access is blocked immediately. The action is legally binding.'},
+      {title: 'Your system gets the result', desc: 'You receive "approved" or "rejected", along with the timestamp and identity details. The user is in.'}
+    ],
+    video: 'https://www.youtube.com/embed/HIOnkZlZaAI',
+    videoLabel: 'Watch how it works',
+    ctas: [
+      {label: 'e-Authentication Documentation', href: 'https://docs.evrotrust.com/docs/e-authentication', primary: true},
+      {label: 'e-Identification Documentation', href: 'https://docs.evrotrust.com/docs/identity-verification-1', primary: false},
+      {label: 'Supported Countries', href: 'https://evrotrust.com/supported-countries/', primary: false}
+    ]
+  },
+  esign: {
+    badge: 'Legally binding signature from a phone',
+    title: 'e-Signatures',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>',
+    desc: 'Your clients sign documents remotely — from their phone, in under a minute. A Qualified Electronic Signature (QES) carries exactly the same legal weight as a handwritten signature across all EU countries. You get back a signed PDF, ready for filing or court.',
+    usecases: 'Client contracts · HR documents · Bank account opening · Insurance policies · Real estate · Healthcare consent',
+    pros: [
+      'Same legal weight as a handwritten signature — valid across the entire EU',
+      'Signed PDF with timestamp — accepted by courts',
+      'Client signs from their phone in under a minute',
+      'Can sign without sharing the actual document (hash signing)',
+      'Sign multiple documents in a single session',
+      'OTP option — for users without the app, just an SMS code',
+      'Corporate Seal — sign on behalf of a company'
+    ],
+    cons: [
+      'Qualified signature requires the user to have completed eID enrolment first',
+      'The simpler OTP option is not a qualified signature — better for lower-risk documents',
+      'For the most sensitive documents, full eID registration is recommended'
+    ],
+    steps: [
+      {title: 'Upload the document', desc: 'You send the PDF to Evrotrust. You get back a document ID. The file is stored encrypted — nobody else can access it.'},
+      {title: 'Send the signing request', desc: 'You tell Evrotrust who needs to sign and which document. The user gets a push notification: "[Your company] is requesting your signature."'},
+      {title: 'User reviews the document', desc: 'The document opens in their app. They read it, and can either reject or proceed. Everything is transparent — no hidden terms.'},
+      {title: 'User signs with biometrics', desc: 'Fingerprint or Face ID. The signature is created on their device — the private key never leaves their phone. Legally binding.'},
+      {title: 'You receive the signed document', desc: 'Done. A signed PDF with an embedded qualified signature and timestamp. Ready for your archive, for sending, or for legal proceedings.'}
+    ],
+    video: 'https://www.youtube.com/embed/_RC6H6I1yrQ',
+    videoLabel: 'Watch how it works',
+    ctas: [
+      {label: 'e-Signatures Documentation', href: 'https://docs.evrotrust.com/docs/esign', primary: true},
+      {label: 'e-Authentication Documentation', href: 'https://docs.evrotrust.com/docs/e-authentication', primary: false},
+      {label: 'Supported Countries', href: 'https://evrotrust.com/supported-countries/', primary: false}
+    ]
+  },
+  eid: {
+    badge: 'Remote identity verification — eIDAS notified',
+    title: 'e-Identification',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    desc: 'Verify customer identities remotely in under 2 minutes — AI-powered liveness detection, ID document scan, optional NFC chip readout, and expert manual review. Returns validated personal data with legal certainty. The created digital identity is reusable — returning users confirm in one tap. As an eIDAS-notified qualified eID scheme, Evrotrust fully satisfies KYC and AML requirements.',
+    usecases: 'Bank account opening · Fintech onboarding · Insurance · Telecom SIM registration · Healthcare · Legal services',
+    pros: [
+      'Onboard any customer remotely in < 2 minutes',
+      'eIDAS-notified qualified eID — satisfies AML5, PSD2, and KYC regulations',
+      'Reusable identity — returning users approve in one tap',
+      'Two levels: Ident Lite (fast) and Full eID (legally binding)',
+      'AI liveness + optional NFC chip readout + expert review',
+      'Evrotrust is legally responsible as the QTSP — up to €2M insured'
+    ],
+    cons: [
+      'Full eID requires the user to install the Evrotrust app',
+      'Ident Lite does not provide an identity attestation document',
+      'Expert manual review adds processing time (typically < 30 min during business hours)'
+    ],
+    steps: [
+      {title: 'User opens the identification flow', desc: 'Via your Web SDK, Mobile SDK, or API-triggered link. The user is guided step-by-step — no technical knowledge required.'},
+      {title: 'Document capture', desc: 'The user photographs both sides of their ID. AI checks the document for tampering, expiry, and reads all fields via OCR. NFC chip readout available for ePassports.'},
+      {title: 'Liveness check', desc: 'A real-time selfie is captured. AI or an expert verifies the live face matches the document photo. 3D liveness for full eID, 2D for Ident Lite.'},
+      {title: 'Optional: Expert manual review', desc: 'A trained Evrotrust agent reviews the submission for additional assurance. Available 24/7. Result typically returned within minutes.'},
+      {title: 'Result delivered', desc: 'You receive a validated set of personal attributes (name, DOB, document number, etc.) plus — for full eID — a signed XML attestation and optionally a signed PDF.'}
+    ],
+    video: 'https://www.youtube.com/embed/HIOnkZlZaAI',
+    videoLabel: 'Watch eID demo',
+    ctas: [
+      {label: 'e-Identification Documentation', href: 'https://docs.evrotrust.com/docs/identity-verification-1', primary: true},
+      {label: 'Identity Verification Types', href: 'https://docs.evrotrust.com/docs/identity-verification-2', primary: false},
+      {label: 'eIDAS Notified eID', href: 'https://docs.evrotrust.com/docs/certifications-and-regulatory-approvals', primary: false}
     ]
   }
 };
@@ -4167,11 +5258,11 @@ function cardMouseLeave(card){
       <div class="nda-modal-actions">
         <a class="nda-print-btn" href="https://github.com/preslavslavovps/Evrotrust-partners/raw/main/Evrotrust%2C%20NDA%2C%20English%2C%20v.1.2.pdf" download target="_blank" style="text-decoration:none;display:flex;align-items:center;gap:6px;">
           <svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Изтегли PDF
+          Download PDF
         </a>
         <button class="nda-print-btn" onclick="printNDA()">
           <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-          Принтирай
+          Print
         </button>
         <button class="nda-close" onclick="closeNDA()">
           <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -4267,7 +5358,7 @@ function cardMouseLeave(card){
         </table>
 
         <div class="footer-note">
-          www.evrotrust.com &nbsp;|&nbsp; ул. Околовръстен път 251Г, ММ Бизнес център, ет. 5, 1766 София, България
+          www.evrotrust.com &nbsp;|&nbsp; 251G Okolovrasten Pat, MM Business Center, Floor 5, 1766 Sofia, Bulgaria
         </div>
       </div>
     </div>
@@ -4310,6 +5401,148 @@ function printNDA() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape' && document.getElementById('ndaOverlay').classList.contains('open')) closeNDA();
 });
+</script>
+
+<!-- ═══════════════════════════════════
+     SALES PITCH JAVASCRIPT
+═══════════════════════════════════ -->
+<script>
+(function(){
+  const TOTAL = 7;
+  let current = 1;
+
+  function buildDots(){
+    const wrap = document.getElementById('pitch-dots');
+    if(!wrap) return;
+    wrap.innerHTML = '';
+    for(let i=1;i<=TOTAL;i++){
+      const b = document.createElement('button');
+      b.className = 'pitch-dot-btn' + (i===1?' active':'');
+      b.setAttribute('aria-label','Slide '+i);
+      b.onclick = ()=>goTo(i);
+      wrap.appendChild(b);
+    }
+  }
+
+  function updateUI(){
+    document.getElementById('pitch-cur').textContent = current;
+    document.getElementById('pitch-total').textContent = TOTAL;
+    document.querySelectorAll('.pitch-dot-btn').forEach((b,i)=>{
+      b.classList.toggle('active', i+1===current);
+    });
+    const prev = document.getElementById('pitch-prev');
+    const next = document.getElementById('pitch-next');
+    if(prev) prev.disabled = current===1;
+    if(next) next.disabled = current===TOTAL;
+  }
+
+  function goTo(n, dir){
+    if(n<1||n>TOTAL||n===current) return;
+    const slides = document.querySelectorAll('.pitch-slide');
+    const from = document.querySelector('.pitch-slide.active');
+    const to = document.querySelector(`.pitch-slide[data-slide="${n}"]`);
+    if(!from||!to) return;
+
+    const goingForward = n > current;
+    to.style.transform = goingForward ? 'translateX(60px)' : 'translateX(-60px)';
+    to.style.opacity = '0';
+    to.classList.add('active');
+
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        to.style.transform = '';
+        to.style.opacity = '';
+        from.style.transform = goingForward ? 'translateX(-60px)' : 'translateX(60px)';
+        from.style.opacity = '0';
+      });
+    });
+
+    setTimeout(()=>{
+      from.classList.remove('active');
+      from.style.transform = '';
+      from.style.opacity = '';
+    }, 460);
+
+    current = n;
+    updateUI();
+    // Update speaker notes if panel open
+    const np = document.getElementById('pitch-notes-panel');
+    if(np && np.classList.contains('open')){
+      setTimeout(()=>{
+        const activeSlide = document.querySelector('.pitch-slide.active');
+        const notesText = document.getElementById('pitch-notes-text');
+        if(activeSlide && notesText) notesText.textContent = activeSlide.dataset.notes || 'No notes.';
+      }, 500);
+    }
+  }
+
+  window.pitchNext = function(){ goTo(current+1); };
+  window.pitchPrev = function(){ goTo(current-1); };
+
+  window.openPitch = function(){
+    const ov = document.getElementById('pitch-overlay');
+    if(!ov) return;
+    current = 1;
+    document.querySelectorAll('.pitch-slide').forEach((s,i)=>{
+      s.classList.toggle('active', i===0);
+      s.style.transform=''; s.style.opacity='';
+    });
+    updateUI();
+    ov.classList.add('open');
+    document.body.style.overflow='hidden';
+  };
+
+  window.closePitch = function(){
+    const ov = document.getElementById('pitch-overlay');
+    if(ov) ov.classList.remove('open');
+    document.body.style.overflow='';
+  };
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e){
+    const ov = document.getElementById('pitch-overlay');
+    if(!ov || !ov.classList.contains('open')) return;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown') pitchNext();
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp') pitchPrev();
+    else if(e.key==='Escape') closePitch();
+  });
+
+  // Touch / swipe support
+  let touchStartX = 0;
+  document.getElementById('pitch-stage').addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;},{passive:true});
+  document.getElementById('pitch-stage').addEventListener('touchend',e=>{
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(dx)>50){ if(dx<0) pitchNext(); else pitchPrev(); }
+  },{passive:true});
+
+  function updateNotes(){
+    const activeSlide = document.querySelector('.pitch-slide.active');
+    const notesText = document.getElementById('pitch-notes-text');
+    if(activeSlide && notesText){
+      notesText.textContent = activeSlide.dataset.notes || 'No speaker notes for this slide.';
+    }
+  }
+
+  window.toggleNotes = function(){
+    const panel = document.getElementById('pitch-notes-panel');
+    const btn = document.getElementById('pitch-notes-toggle');
+    if(!panel) return;
+    const isOpen = panel.classList.toggle('open');
+    if(btn) btn.classList.toggle('on', isOpen);
+    updateNotes();
+  };
+
+  // Patch goTo to also update notes
+  const _origUpdateUI = updateUI;
+  function updateUIWithNotes(){
+    _origUpdateUI();
+    // small delay so active class is set
+    setTimeout(updateNotes, 50);
+  }
+
+  buildDots();
+  updateUI();
+})();
 </script>
 
 </body>
