@@ -4,6 +4,152 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Evrotrust Partners</title>
+<script>
+(function(){
+  const CORRECT = "Partners@";
+  function sha256(str){
+    // Simple obfuscation: compare directly but hide in closure
+    return str;
+  }
+  const stored = sessionStorage.getItem("ep_auth");
+  if(stored !== CORRECT){
+    document.addEventListener("DOMContentLoaded", function(){
+      document.body.style.display = "none";
+      var overlay = document.createElement("div");
+      overlay.id = "ep-gate";
+      overlay.innerHTML = `
+        <style>
+          @keyframes ep-fadein{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+          @keyframes ep-shake{0%,100%{transform:translateX(0)}18%{transform:translateX(-9px)}36%{transform:translateX(9px)}54%{transform:translateX(-6px)}72%{transform:translateX(6px)}90%{transform:translateX(-3px)}}
+          @keyframes ep-spin-lock{0%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}100%{transform:rotate(-8deg)}}
+          @keyframes ep-pulse-ring{0%{transform:scale(.9);opacity:.6}70%{transform:scale(1.28);opacity:0}100%{transform:scale(.9);opacity:0}}
+          @keyframes ep-dot{0%,80%,100%{transform:scale(0);opacity:.3}40%{transform:scale(1);opacity:1}}
+          #ep-card{animation:ep-fadein .55s cubic-bezier(.22,.9,.36,1) both}
+          #ep-card.ep-shake{animation:ep-shake .45s cubic-bezier(.36,.07,.19,.97)}
+          #ep-lock-icon{animation:ep-spin-lock 3s ease-in-out infinite;transform-origin:center 60%;display:block}
+          #ep-btn{transition:transform .15s,box-shadow .22s;cursor:pointer}
+          #ep-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,174,239,.4)}
+          #ep-btn:active{transform:translateY(0)}
+          .ep-pulse-ring{position:absolute;inset:-8px;border-radius:22px;border:2px solid rgba(0,174,239,.45);animation:ep-pulse-ring 2s ease-out infinite;pointer-events:none}
+          .ep-dot{width:8px;height:8px;border-radius:50%;background:#fff;display:inline-block;margin:0 3px;animation:ep-dot 1.2s infinite ease-in-out}
+          .ep-dot:nth-child(2){animation-delay:.2s}.ep-dot:nth-child(3){animation-delay:.4s}
+          #ep-pwd{transition:border-color .2s,box-shadow .2s}
+          #ep-toggle{background:none;border:none;cursor:pointer;position:absolute;right:12px;top:50%;transform:translateY(-50%);padding:4px;color:#8A9BB0;transition:color .2s;line-height:0}
+          #ep-toggle:hover{color:#00AEEF}
+        </style>
+        <div id="ep-overlay-wrap" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;overflow:hidden;">
+          <canvas id="ep-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+          <div id="ep-card" style="background:#fff;border-radius:20px;padding:48px 40px;width:100%;max-width:400px;box-shadow:0 32px 96px rgba(0,0,0,.4);text-align:center;position:relative;z-index:1;">
+            <div style="position:relative;display:inline-block;margin-bottom:24px;">
+              <div class="ep-pulse-ring"></div>
+              <svg id="ep-lock-icon" width="56" height="56" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="52" height="52" rx="14" fill="#0B2A4A"/>
+                <path d="M26 14a7 7 0 0 0-7 7v3h-2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V26a2 2 0 0 0-2-2h-2v-3a7 7 0 0 0-7-7zm-4 7a4 4 0 0 1 8 0v3H22v-3zm4 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" fill="#00AEEF"/>
+              </svg>
+            </div>
+            <h2 style="color:#0B2A4A;font-size:22px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px;">Evrotrust Partners</h2>
+            <p style="color:#5A6B7B;font-size:14px;margin-bottom:28px;">Въведете парола за достъп</p>
+            <div style="position:relative;margin-bottom:10px;">
+              <input id="ep-pwd" type="password" placeholder="Парола" autofocus
+                style="width:100%;padding:12px 44px 12px 16px;border:1.5px solid #DDE3EA;border-radius:10px;font-size:15px;outline:none;color:#0B2A4A;font-family:inherit;background:#FAFBFC;"/>
+              <button id="ep-toggle" tabindex="-1" title="Покажи паролата">
+                <svg id="ep-eye" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <div id="ep-err" style="color:#cc2b2b;font-size:13px;min-height:20px;margin-bottom:10px;font-weight:500;"></div>
+            <button id="ep-btn" style="width:100%;padding:13px;background:linear-gradient(135deg,#0B2A4A 0%,#0052CC 100%);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;">
+              <span id="ep-btn-label">Влез →</span>
+              <span id="ep-btn-dots" style="display:none"><span class="ep-dot"></span><span class="ep-dot"></span><span class="ep-dot"></span></span>
+            </button>
+          </div>
+        </div>`;
+      document.body.parentNode.insertBefore(overlay, document.body);
+
+      // Animated canvas background
+      (function(){
+        var canvas = document.getElementById("ep-canvas");
+        var ctx = canvas.getContext("2d");
+        var W, H, t=0;
+        function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; }
+        resize(); window.addEventListener("resize",resize);
+        function draw(){
+          t+=.008;
+          var grd=ctx.createLinearGradient(W*.5+Math.sin(t)*(W*.3),0,W*.5+Math.cos(t*.7)*(W*.3),H);
+          grd.addColorStop(0,"#0B2A4A"); grd.addColorStop(.5,"#0047AA"); grd.addColorStop(1,"#003080");
+          ctx.fillStyle=grd; ctx.fillRect(0,0,W,H);
+          [{x:.2,y:.3,r:170,c:"rgba(0,174,239,.09)"},{x:.8,y:.7,r:210,c:"rgba(0,80,200,.11)"},{x:.5,y:.15,r:130,c:"rgba(0,174,239,.07)"}].forEach(function(o,i){
+            var x=W*(o.x+Math.sin(t+i)*.09), y=H*(o.y+Math.cos(t*.6+i)*.09);
+            var g2=ctx.createRadialGradient(x,y,0,x,y,o.r);
+            g2.addColorStop(0,o.c); g2.addColorStop(1,"transparent");
+            ctx.fillStyle=g2; ctx.beginPath(); ctx.arc(x,y,o.r,0,Math.PI*2); ctx.fill();
+          });
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+
+      // Show/hide password
+      document.getElementById("ep-toggle").addEventListener("click", function(){
+        var inp=document.getElementById("ep-pwd");
+        inp.type = inp.type==="password" ? "text" : "password";
+        this.style.color = inp.type==="text" ? "#00AEEF" : "#8A9BB0";
+      });
+
+      // Input focus ring
+      var inp=document.getElementById("ep-pwd");
+      inp.addEventListener("focus",function(){ this.style.borderColor="#00AEEF"; this.style.boxShadow="0 0 0 3px rgba(0,174,239,.18)"; });
+      inp.addEventListener("blur",function(){ this.style.borderColor="#DDE3EA"; this.style.boxShadow="none"; });
+
+      function tryLogin(){
+        var val = document.getElementById("ep-pwd").value;
+        var btn = document.getElementById("ep-btn");
+        var label = document.getElementById("ep-btn-label");
+        var dots = document.getElementById("ep-btn-dots");
+        var card = document.getElementById("ep-card");
+        // Show loading
+        label.style.display = "none";
+        dots.style.display = "inline";
+        btn.disabled = true;
+        setTimeout(function(){
+          if(val === "Partners@"){
+            sessionStorage.setItem("ep_auth", "Partners@");
+            var wrap = document.getElementById("ep-overlay-wrap");
+            wrap.style.transition = "opacity .5s";
+            wrap.style.opacity = "0";
+            setTimeout(function(){ overlay.remove(); document.body.style.display = ""; }, 500);
+          } else {
+            label.style.display = "inline";
+            dots.style.display = "none";
+            btn.disabled = false;
+            var err = document.getElementById("ep-err");
+            err.textContent = "Грешна парола. Опитай отново.";
+            // Shake card
+            card.classList.remove("ep-shake");
+            void card.offsetWidth;
+            card.classList.add("ep-shake");
+            // Flash input red
+            var inp2 = document.getElementById("ep-pwd");
+            inp2.style.borderColor = "#cc2b2b";
+            inp2.style.boxShadow = "0 0 0 3px rgba(204,43,43,.18)";
+            inp2.value = "";
+            inp2.focus();
+            setTimeout(function(){
+              err.textContent = "";
+              inp2.style.borderColor = "#DDE3EA";
+              inp2.style.boxShadow = "none";
+            }, 3000);
+          }
+        }, 600);
+      }
+
+      document.getElementById("ep-btn").addEventListener("click", tryLogin);
+      document.getElementById("ep-pwd").addEventListener("keydown", function(e){
+        if(e.key === "Enter") tryLogin();
+      });
+    });
+  }
+})();
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -1852,6 +1998,11 @@ body.int-open .hero-btn-integration {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
     <span>Sales Pitch</span>
   </button>
+  <!-- PRICING BUTTON -->
+  <button class="pricing-nav-btn" onclick="openPricing()" title="eID Types & Pricing">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/><path d="M9 16h6"/></svg>
+    <span>Pricing</span>
+  </button>
 </nav>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -1869,7 +2020,7 @@ body.int-open .hero-btn-integration {
       <span class="pitch-brand-sub">Sales Presentation</span>
     </div>
     <div class="pitch-topbar-right">
-      <div class="pitch-slide-counter"><span id="pitch-cur">1</span> / <span id="pitch-total">7</span></div>
+      <div class="pitch-slide-counter"><span id="pitch-cur">1</span> / <span id="pitch-total">9</span></div>
       <button class="pitch-close-btn" onclick="closePitch()" title="Close (Esc)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
@@ -1934,8 +2085,187 @@ body.int-open .hero-btn-integration {
       <div class="pitch-slide-deco s1-deco"></div>
     </div>
 
-    <!-- ── SLIDE 2: CORE SERVICES ── -->
-    <div class="pitch-slide" data-slide="2" data-notes="The four pillars are connected — eID → QES → eDelivery is a complete digital onboarding workflow. The Trust Unit model is the key differentiator: one wallet, all services, all clients. 1 TU ≈ €0.20–0.30 at standard volumes. Emphasise: eID costs 3 TU (one-time), QES is 1 TU per signature — after verification the user can sign repeatedly with no re-identification.">
+    <!-- ── SLIDE 2: ABOUT EVROTRUST ── -->
+    <div class="pitch-slide" data-slide="2" data-notes="Founded in 2016 in Bulgaria. The only Bulgarian QTSP notified by the European Commission under eIDAS. Key point: Evrotrust holds the legal responsibility for identity verification — not the partner. Regulated by CRC (Communications Regulation Commission, Bulgaria). Audited by Mastercard and accredited by ETSI. Cloud infrastructure with 99.9% uptime SLA. Accepts ID documents from 62 nationalities.">
+      <div class="pitch-slide-bg s2-bg"></div>
+      <div class="pitch-slide-inner">
+        <div class="pitch-eyebrow"><span class="pitch-badge pitch-badge-light">About Evrotrust</span></div>
+        <h2 class="pitch-h2">What is <span class="pitch-gradient-text">Evrotrust?</span></h2>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+
+          <!-- Left: Company intro card -->
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.125rem 1.25rem">
+            <div style="font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#4C9AFF;margin-bottom:.75rem">Who We Are</div>
+            <p style="font-size:.82rem;line-height:1.75;color:rgba(255,255,255,.65);margin-bottom:.875rem">
+              <strong style="color:#fff">Evrotrust Technologies</strong> is a <strong style="color:#fff">Qualified Trust Service Provider (QTSP)</strong> under eIDAS Regulation (EU) 910/2014, officially listed on the <strong style="color:#4C9AFF">EU Trusted List</strong> maintained by the European Commission.
+            </p>
+            <p style="font-size:.82rem;line-height:1.75;color:rgba(255,255,255,.65);margin-bottom:.875rem">
+              Founded in <strong style="color:#fff">2016 in Bulgaria</strong>, Evrotrust is the country's only QTSP notified to the European Commission. We deliver fully remote, secure, and legally valid digital trust services to <strong style="color:#fff">banks, insurers, telecoms, fintechs, and public-sector organisations</strong> across Europe.
+            </p>
+            <p style="font-size:.82rem;line-height:1.75;color:rgba(255,255,255,.65)">
+              We bear the <strong style="color:#fff">legal responsibility for identity verification</strong> on behalf of end users — not the partner. This is the fundamental advantage over standard eSign vendors.
+            </p>
+          </div>
+
+          <!-- Right: Key facts grid -->
+          <div style="display:flex;flex-direction:column;gap:.625rem">
+            <div style="font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#4C9AFF;margin-bottom:.125rem">Key Facts</div>
+
+            <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:9px;padding:.75rem 1rem;display:flex;gap:.875rem;align-items:flex-start">
+              <div style="width:30px;height:30px;border-radius:7px;background:rgba(0,82,204,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2" width="14" height="14"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <div style="font-size:.78rem;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:2px">EU Trusted List &amp; eIDAS Notification</div>
+                <div style="font-size:.71rem;color:rgba(255,255,255,.45);line-height:1.55">ETSI-audited · CRC-accredited · Mastercard partner</div>
+              </div>
+            </div>
+
+            <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:9px;padding:.75rem 1rem;display:flex;gap:.875rem;align-items:flex-start">
+              <div style="width:30px;height:30px;border-radius:7px;background:rgba(0,135,90,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <div>
+                <div style="font-size:.78rem;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:2px">Pan-European Coverage</div>
+                <div style="font-size:.71rem;color:rgba(255,255,255,.45);line-height:1.55">27 EU member states · 62 nationalities · Recognised by all EU banks and regulators</div>
+              </div>
+            </div>
+
+            <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:9px;padding:.75rem 1rem;display:flex;gap:.875rem;align-items:flex-start">
+              <div style="width:30px;height:30px;border-radius:7px;background:rgba(101,84,192,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#998DD9" stroke-width="2" width="14" height="14"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              </div>
+              <div>
+                <div style="font-size:.78rem;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:2px">Technology Infrastructure</div>
+                <div style="font-size:.71rem;color:rgba(255,255,255,.45);line-height:1.55">Cloud-based · 99.9% uptime SLA · ISO 27001 · GDPR compliant</div>
+              </div>
+            </div>
+
+            <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:9px;padding:.75rem 1rem;display:flex;gap:.875rem;align-items:flex-start">
+              <div style="width:30px;height:30px;border-radius:7px;background:rgba(255,139,0,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF8B00" stroke-width="2" width="14" height="14"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <div style="font-size:.78rem;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:2px">Trusted by Leading Organisations</div>
+                <div style="font-size:.71rem;color:rgba(255,255,255,.45);line-height:1.55">DSK Bank · Mastercard · A1 · Telenor · 200+ clients · 2M+ users</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom: regulated industries row -->
+        <div style="background:rgba(76,154,255,.07);border:1px solid rgba(76,154,255,.18);border-radius:10px;padding:.75rem 1.125rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <div style="font-size:.7rem;font-weight:800;color:#4C9AFF;letter-spacing:.06em;text-transform:uppercase;flex-shrink:0">Target Industries</div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+            <span style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 11px;font-size:.7rem;font-weight:600;color:rgba(255,255,255,.65)">🏦 Banking &amp; Fintech</span>
+            <span style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 11px;font-size:.7rem;font-weight:600;color:rgba(255,255,255,.65)">🛡️ Insurance</span>
+            <span style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 11px;font-size:.7rem;font-weight:600;color:rgba(255,255,255,.65)">📡 Telecoms</span>
+            <span style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 11px;font-size:.7rem;font-weight:600;color:rgba(255,255,255,.65)">🏛️ Public Sector</span>
+            <span style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 11px;font-size:.7rem;font-weight:600;color:rgba(255,255,255,.65)">⚖️ Legal Platforms</span>
+            <span style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 11px;font-size:.7rem;font-weight:600;color:rgba(255,255,255,.65)">🏥 Healthcare</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SLIDE 3: INTEGRATION OPTIONS ── -->
+    <div class="pitch-slide" data-slide="3" data-notes="Three main integration paths. REST API — for backend developers, full control, any tech stack; recommended for banks and ERP systems. Web SDK — fastest path, JavaScript tag, hours not days; ideal for online portals and web-based KYC. Mobile SDK — native iOS/Android/React Native, private key stored in the device hardware security module — maximum security; ideal for mobile banking. White-label — for partners who want a fully branded experience. All options give access to the same services — eID, eSign, eDelivery.">
+      <div class="pitch-slide-bg s2-bg"></div>
+      <div class="pitch-slide-inner">
+        <div class="pitch-eyebrow"><span class="pitch-badge pitch-badge-light">Integration</span></div>
+        <h2 class="pitch-h2">How to Connect to <span class="pitch-gradient-text">Evrotrust</span></h2>
+        <p class="pitch-sublead">Four paths — from a drop-in JavaScript tag to a fully native mobile SDK. All give access to eID, eSign, and eDelivery.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:.875rem">
+
+          <!-- REST API -->
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(0,82,204,.3);border-radius:12px;padding:1rem 1.125rem">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:.625rem">
+              <div style="width:32px;height:32px;border-radius:8px;background:rgba(0,82,204,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2" width="16" height="16"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div>
+                <div style="font-size:.85rem;font-weight:800;color:#fff">REST API</div>
+                <div style="font-size:.67rem;color:rgba(255,255,255,.4)">Backend / Server-to-Server</div>
+              </div>
+            </div>
+            <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.6);margin-bottom:.625rem">Your backend sends HTTPS requests and receives JSON responses. <strong style="color:rgba(255,255,255,.8)">Full control over logic and UI.</strong> Works with any tech stack — Java, .NET, Python, Node.</p>
+            <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+              <span style="background:rgba(0,82,204,.2);border:1px solid rgba(0,82,204,.35);border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:700;color:#4C9AFF">CRM / ERP</span>
+              <span style="background:rgba(0,82,204,.2);border:1px solid rgba(0,82,204,.35);border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:700;color:#4C9AFF">Core Banking</span>
+              <span style="background:rgba(0,82,204,.2);border:1px solid rgba(0,82,204,.35);border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:700;color:#4C9AFF">B2B Platforms</span>
+            </div>
+          </div>
+
+          <!-- Web SDK -->
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(0,135,90,.3);border-radius:12px;padding:1rem 1.125rem">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:.625rem">
+              <div style="width:32px;height:32px;border-radius:8px;background:rgba(0,135,90,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2" width="16" height="16"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              </div>
+              <div>
+                <div style="font-size:.85rem;font-weight:800;color:#fff">Web SDK</div>
+                <div style="font-size:.67rem;color:rgba(255,255,255,.4)">Browser / Web · Hours, not days</div>
+              </div>
+            </div>
+            <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.6);margin-bottom:.625rem">One JavaScript tag — a ready-made eID and eSign flow embedded directly in your website. <strong style="color:rgba(255,255,255,.8)">No native development. UI included.</strong> Fastest path to go live.</p>
+            <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+              <span style="background:rgba(0,135,90,.15);border:1px solid rgba(0,135,90,.3);border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:700;color:#36B37E">Online Portals</span>
+              <span style="background:rgba(0,135,90,.15);border:1px solid rgba(0,135,90,.3);border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:700;color:#36B37E">KYC Onboarding</span>
+              <span style="background:rgba(0,135,90,.15);border:1px solid rgba(0,135,90,.3);border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:700;color:#36B37E">Web-based eSign</span>
+            </div>
+          </div>
+
+          <!-- Mobile SDK -->
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(101,84,192,.35);border-radius:12px;padding:1rem 1.125rem">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:.625rem">
+              <div style="width:32px;height:32px;border-radius:8px;background:rgba(101,84,192,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#998DD9" stroke-width="2" width="16" height="16"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+              </div>
+              <div>
+                <div style="font-size:.85rem;font-weight:800;color:#fff">Mobile SDK</div>
+                <div style="font-size:.67rem;color:rgba(255,255,255,.4)">iOS · Android · React Native</div>
+              </div>
+            </div>
+            <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.6);margin-bottom:.625rem">Embed Evrotrust directly inside your mobile app. <strong style="color:rgba(255,255,255,.8)">Private key stored in the device hardware security module (HSM) — maximum security.</strong> Native camera, NFC, Face ID / Touch ID.</p>
+            <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+              <span style="background:rgba(101,84,192,.18);border:1px solid rgba(101,84,192,.35);border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:700;color:#998DD9">Mobile Banking</span>
+              <span style="background:rgba(101,84,192,.18);border:1px solid rgba(101,84,192,.35);border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:700;color:#998DD9">Fintech Apps</span>
+              <span style="background:rgba(101,84,192,.18);border:1px solid rgba(101,84,192,.35);border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:700;color:#998DD9">Insurance</span>
+            </div>
+          </div>
+
+          <!-- White-label -->
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,139,0,.28);border-radius:12px;padding:1rem 1.125rem">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:.625rem">
+              <div style="width:32px;height:32px;border-radius:8px;background:rgba(255,139,0,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF8B00" stroke-width="2" width="16" height="16"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              </div>
+              <div>
+                <div style="font-size:.85rem;font-weight:800;color:#fff">White-label</div>
+                <div style="font-size:.67rem;color:rgba(255,255,255,.4)">Your brand · Our infrastructure</div>
+              </div>
+            </div>
+            <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.6);margin-bottom:.625rem">Fully branded experience — your UI, our certified infrastructure and legal liability. <strong style="color:rgba(255,255,255,.8)">End users see your product, not "Evrotrust."</strong> Full compliance included.</p>
+            <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+              <span style="background:rgba(255,139,0,.15);border:1px solid rgba(255,139,0,.28);border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:700;color:#FF8B00">Enterprise Platforms</span>
+              <span style="background:rgba(255,139,0,.15);border:1px solid rgba(255,139,0,.28);border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:700;color:#FF8B00">Resellers</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom note -->
+        <div style="background:rgba(76,154,255,.08);border:1px solid rgba(76,154,255,.2);border-radius:9px;padding:.625rem 1rem;font-size:.76rem;color:rgba(255,255,255,.55);line-height:1.6;display:flex;align-items:center;gap:10px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2" width="16" height="16" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>All integration methods give access to the <strong style="color:rgba(255,255,255,.8)">same full feature set</strong> — eID, QES, eDelivery, eAuthentication. The choice depends on your architecture, not the services you want. Integration starts with an <strong style="color:rgba(255,255,255,.8)">API Key issued after signing the partner agreement.</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SLIDE 4: CORE SERVICES ── -->
+    <div class="pitch-slide" data-slide="4" data-notes="The four pillars are connected — eID → QES → eDelivery is a complete digital onboarding workflow. The Trust Unit model is the key differentiator: one wallet, all services, all clients. 1 TU ≈ €0.20–0.30 at standard volumes. Emphasise: eID costs 3 TU (one-time), QES is 1 TU per signature — after verification the user can sign repeatedly with no re-identification.">
       <div class="pitch-slide-bg s2-bg"></div>
       <div class="pitch-slide-inner">
         <div class="pitch-eyebrow"><span class="pitch-badge pitch-badge-light">What We Offer</span></div>
@@ -1978,8 +2308,8 @@ body.int-open .hero-btn-integration {
       </div>
     </div>
 
-    <!-- ── SLIDE 3: eID — QUALIFIED IDENTITY ── -->
-    <div class="pitch-slide" data-slide="3" data-notes="Evrotrust eID is a qualified electronic identity under eIDAS — highest level of assurance (LoA High). Key for the partner: they receive verified personal data without bearing legal liability for the identification — that stays with us. Reusable identity: after a single verification the user can access QES, eDelivery, and new services with no re-verification. Cross-border: automatically valid in all 27 EU member states. Compliant with 5th AML Directive art.13(1) — AML responsibility remains with Evrotrust.">
+    <!-- ── SLIDE 5: eID — QUALIFIED IDENTITY ── -->
+    <div class="pitch-slide" data-slide="5" data-notes="Evrotrust eID is a qualified electronic identity under eIDAS — highest level of assurance (LoA High). Key for the partner: they receive verified personal data without bearing legal liability for the identification — that stays with us. Reusable identity: after a single verification the user can access QES, eDelivery, and new services with no re-verification. Cross-border: automatically valid in all 27 EU member states. Compliant with 5th AML Directive art.13(1) — AML responsibility remains with Evrotrust.">
       <div class="pitch-slide-bg s3-eid-bg"></div>
       <div class="pitch-slide-inner">
         <div class="pitch-eyebrow"><span class="pitch-badge">Identity Layer · eIDAS LoA High</span></div>
@@ -2045,8 +2375,8 @@ body.int-open .hero-btn-integration {
       </div>
     </div>
 
-    <!-- ── SLIDE 4: WHY QTSP MATTERS ── -->
-    <div class="pitch-slide" data-slide="4" data-notes="This is the core differentiator — QTSP status is not just marketing. By law, only QES from a notified QTSP has the same legal effect as a handwritten signature across the entire EU. Competitors (DocuSign basic, Adobe Sign standard) offer SES or AdES — not QES. For banks, insurers, and fintech: identification via our eID scheme is NOT considered third-party reliance under the AML Directive — legal responsibility sits entirely with Evrotrust. This is a major risk transfer for the client.">
+    <!-- ── SLIDE 6: WHY QTSP MATTERS ── -->
+    <div class="pitch-slide" data-slide="6" data-notes="This is the core differentiator — QTSP status is not just marketing. By law, only QES from a notified QTSP has the same legal effect as a handwritten signature across the entire EU. Competitors (DocuSign basic, Adobe Sign standard) offer SES or AdES — not QES. For banks, insurers, and fintech: identification via our eID scheme is NOT considered third-party reliance under the AML Directive — legal responsibility sits entirely with Evrotrust. This is a major risk transfer for the client.">
       <div class="pitch-slide-bg s3-bg"></div>
       <div class="pitch-slide-inner">
         <div class="pitch-eyebrow"><span class="pitch-badge">Legal Foundation</span></div>
@@ -2086,8 +2416,8 @@ body.int-open .hero-btn-integration {
       </div>
     </div>
 
-    <!-- ── SLIDE 5: PARTNER ECOSYSTEM ── -->
-    <div class="pitch-slide" data-slide="5" data-notes="51 partners across 6 categories. Emphasise the breadth — from DocuSign and Adobe to governments and local banks. This shows Evrotrust is already the trusted layer in many ecosystems. Ask the partner: which category do you fit into? This helps you show concrete use cases from partners in their vertical. Refer to the Partners Hub for detailed information on specific integrations.">
+    <!-- ── SLIDE 7: PARTNER ECOSYSTEM ── -->
+    <div class="pitch-slide" data-slide="7" data-notes="51 partners across 6 categories. Emphasise the breadth — from DocuSign and Adobe to governments and local banks. This shows Evrotrust is already the trusted layer in many ecosystems. Ask the partner: which category do you fit into? This helps you show concrete use cases from partners in their vertical. Refer to the Partners Hub for detailed information on specific integrations.">
       <div class="pitch-slide-bg s4-bg"></div>
       <div class="pitch-slide-inner">
         <div class="pitch-eyebrow"><span class="pitch-badge pitch-badge-light">Ecosystem</span></div>
@@ -2128,8 +2458,8 @@ body.int-open .hero-btn-integration {
       </div>
     </div>
 
-    <!-- ── SLIDE 6: INTEGRATION & PARTNER PROGRAM ── -->
-    <div class="pitch-slide" data-slide="6" data-notes="Integration takes 1–4 weeks, not months. REST API for full control, Web SDK is a drop-in for a fast start (hours). Partner programme: Referral L1 = 5% commission for a qualified lead only; Referral L2 = 15% for full sales cycle participation. Reseller = you purchase TU packages at a discount (5–15%) and resell to your clients directly. Trust Units are shared — one pool for all your clients. White-label lets you deliver a fully branded experience — your UI, our infrastructure. Referral deals must close within 6 months of submission.">
+    <!-- ── SLIDE 8: INTEGRATION & PARTNER PROGRAM ── -->
+    <div class="pitch-slide" data-slide="8" data-notes="Integration takes 1–4 weeks, not months. REST API for full control, Web SDK is a drop-in for a fast start (hours). Partner programme: Referral L1 = 5% commission for a qualified lead only; Referral L2 = 15% for full sales cycle participation. Reseller = you purchase TU packages at a discount (5–15%) and resell to your clients directly. Trust Units are shared — one pool for all your clients. White-label lets you deliver a fully branded experience — your UI, our infrastructure. Referral deals must close within 6 months of submission.">
       <div class="pitch-slide-bg s5-bg"></div>
       <div class="pitch-slide-inner">
         <div class="pitch-eyebrow"><span class="pitch-badge">How to Connect</span></div>
@@ -2182,8 +2512,8 @@ body.int-open .hero-btn-integration {
       </div>
     </div>
 
-    <!-- ── SLIDE 7: NEXT STEPS ── -->
-    <div class="pitch-slide" data-slide="7" data-notes="Closing slide. Propose a concrete next step: API sandbox access, a demo call with the technical team, or a meeting with Valeria (Head of Partnerships) to discuss the Partner Agreement. Reinforce: we are the only Bulgarian QTSP on the EU Trusted List — from day one your product is legally compliant and KYC-ready across the EU. Mention specific clients if relevant (DSK Bank, Mastercard partnership). Contact: partners@evrotrust.com">
+    <!-- ── SLIDE 9: NEXT STEPS ── -->
+    <div class="pitch-slide" data-slide="9" data-notes="Closing slide. Propose a concrete next step: API sandbox access, a demo call with the technical team, or a meeting with Valeria (Head of Partnerships) to discuss the Partner Agreement. Reinforce: we are the only Bulgarian QTSP on the EU Trusted List — from day one your product is legally compliant and KYC-ready across the EU. Mention specific clients if relevant (DSK Bank, Mastercard partnership). Contact: partners@evrotrust.com">
       <div class="pitch-slide-bg s6-bg"></div>
       <div class="pitch-slide-inner pitch-slide-inner--center">
         <div class="pitch-eyebrow"><span class="pitch-badge">Let's Move Forward</span></div>
@@ -5408,7 +5738,7 @@ document.addEventListener('keydown', function(e) {
 ═══════════════════════════════════ -->
 <script>
 (function(){
-  const TOTAL = 7;
+  const TOTAL = 9;
   let current = 1;
 
   function buildDots(){
@@ -5543,6 +5873,515 @@ document.addEventListener('keydown', function(e) {
   buildDots();
   updateUI();
 })();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     PRICING MODAL — eID Types & Pricing
+═══════════════════════════════════════════════════════ -->
+<style>
+.pricing-nav-btn {
+  display: flex; align-items: center; gap: 6px;
+  height: 36px; padding: 0 14px;
+  background: linear-gradient(135deg, #00875A, #006644);
+  border: none; border-radius: 7px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .8rem; font-weight: 700; color: #fff;
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+  flex-shrink: 0; letter-spacing: -.01em;
+  box-shadow: 0 2px 8px rgba(0,135,90,.3);
+}
+.pricing-nav-btn:hover {
+  background: linear-gradient(135deg, #006644, #00875A);
+  box-shadow: 0 4px 16px rgba(0,135,90,.45);
+  transform: translateY(-1px);
+}
+.pricing-nav-btn svg { stroke: #fff; flex-shrink: 0; }
+@media(max-width:860px){
+  .pricing-nav-btn span { display: none; }
+  .pricing-nav-btn { padding: 0; width: 36px; justify-content: center; }
+  .pricing-nav-btn svg { width: 16px; height: 16px; }
+}
+.pricing-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9000;
+  background: rgba(9,30,66,.55); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+.pricing-overlay.open { display: flex; }
+.pricing-modal {
+  background: #fff; border-radius: 16px;
+  width: 100%; max-width: 920px; max-height: 88vh;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 64px rgba(9,30,66,.35);
+  overflow: hidden;
+  animation: pricingSlideIn .3s cubic-bezier(.22,.9,.36,1) both;
+}
+@keyframes pricingSlideIn {
+  from { opacity:0; transform: translateY(24px) scale(.97); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
+.pricing-header {
+  background: linear-gradient(135deg, #091E42 0%, #0052CC 100%);
+  padding: 1.25rem 1.5rem 1.125rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.pricing-header-left { display: flex; align-items: center; gap: 12px; }
+.pricing-header-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
+  display: flex; align-items: center; justify-content: center;
+}
+.pricing-header-icon svg { width: 20px; height: 20px; fill:none; stroke:#fff; stroke-width:2; }
+.pricing-header-title { font-size: 1.05rem; font-weight: 800; color: #fff; letter-spacing: -.02em; }
+.pricing-header-sub { font-size: .7rem; color: rgba(255,255,255,.55); margin-top: 2px; }
+.pricing-close {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+  color: #fff; font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s; line-height: 1; font-family: inherit;
+}
+.pricing-close:hover { background: rgba(255,255,255,.22); }
+.pricing-tabs {
+  display: flex; border-bottom: 2px solid #E8ECEF;
+  padding: 0 1.5rem; background: #F8FAFC; flex-shrink: 0;
+  overflow-x: auto;
+}
+.pricing-tab {
+  padding: .75rem 1.1rem .6rem; font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .82rem; font-weight: 700; color: #5E6C84;
+  border: none; background: none; cursor: pointer;
+  border-bottom: 2.5px solid transparent; margin-bottom: -2px;
+  transition: all .15s; letter-spacing: -.01em; white-space: nowrap;
+}
+.pricing-tab:hover { color: #0052CC; }
+.pricing-tab.active { color: #0052CC; border-bottom-color: #0052CC; }
+.pricing-body { flex: 1; overflow-y: auto; padding: 1.5rem; }
+.pricing-panel { display: none; }
+.pricing-panel.active { display: block; }
+.pricing-section-title {
+  font-size: .72rem; font-weight: 800; color: #5E6C84;
+  letter-spacing: .08em; text-transform: uppercase; margin: 0 0 .875rem;
+}
+.eid-cards {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: .875rem; margin-bottom: 1.5rem;
+}
+.eid-card {
+  border: 1.5px solid #DFE1E6; border-radius: 10px; padding: .875rem 1rem;
+  transition: border-color .15s, box-shadow .15s;
+}
+.eid-card:hover { border-color: #0052CC; box-shadow: 0 2px 8px rgba(0,82,204,.1); }
+.eid-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: .5rem; }
+.eid-badge {
+  height: 22px; padding: 0 8px; border-radius: 5px;
+  font-size: .67rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+  display: inline-flex; align-items: center;
+}
+.eid-badge.full     { background: #EAF2FF; color: #0052CC; }
+.eid-badge.enhanced { background: #E3FCEF; color: #006644; }
+.eid-badge.lite     { background: #FFF0E6; color: #BF5500; }
+.eid-badge.attr     { background: #F3F0FF; color: #5243AA; }
+.eid-badge.mfa      { background: #FFFAE6; color: #974F0C; }
+.eid-card-name { font-size: .85rem; font-weight: 700; color: #172B4D; }
+.eid-card-desc { font-size: .78rem; color: #5E6C84; line-height: 1.45; margin-bottom: .625rem; }
+.eid-avail { display: flex; gap: 6px; flex-wrap: wrap; }
+.eid-avail-pill {
+  height: 20px; padding: 0 8px; border-radius: 4px;
+  font-size: .65rem; font-weight: 700; letter-spacing: .04em;
+  display: inline-flex; align-items: center; gap: 3px;
+}
+.eid-avail-pill.yes { background: #E3FCEF; color: #006644; }
+.eid-avail-pill.no  { background: #FFEBE6; color: #BF2600; }
+.eid-tu-ratio {
+  margin-top: .5rem; padding: .4rem .625rem;
+  background: #F4F5F7; border-radius: 6px;
+  font-size: .72rem; color: #344563; font-weight: 600;
+}
+.eid-tu-ratio span { color: #0052CC; font-weight: 800; }
+.pricing-table-wrap { overflow-x: auto; margin-bottom: 1rem; }
+.pricing-table {
+  width: 100%; border-collapse: collapse;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: .8rem; min-width: 580px;
+}
+.pricing-table th {
+  background: #091E42; color: rgba(255,255,255,.85);
+  padding: .625rem .875rem; text-align: left;
+  font-size: .67rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.pricing-table th:first-child { border-radius: 8px 0 0 0; }
+.pricing-table th:last-child  { border-radius: 0 8px 0 0; }
+.pricing-table td {
+  padding: .625rem .875rem; border-bottom: 1px solid #F4F5F7;
+  color: #172B4D; vertical-align: middle;
+}
+.pricing-table tr:last-child td { border-bottom: none; }
+.pricing-table tr:hover td { background: #F8FAFC; }
+.tier-label {
+  display: inline-block; padding: 2px 8px; border-radius: 4px;
+  font-size: .67rem; font-weight: 800; letter-spacing: .04em;
+}
+.tier-vol  { background: #EAF2FF; color: #0052CC; }
+.tier-auth { background: #E3FCEF; color: #006644; }
+.tier-high { background: #F3F0FF; color: #5243AA; }
+.pricing-table td.price-val { font-weight: 800; color: #091E42; font-size: .88rem; }
+.pricing-table td.na-val { color: #A5ADBA; font-style: italic; }
+.pricing-table td.comment-val { font-size: .73rem; color: #5E6C84; max-width: 200px; }
+.pricing-notes {
+  background: #F8FAFC; border: 1.5px solid #DFE1E6;
+  border-radius: 10px; padding: 1rem 1.125rem;
+}
+.pricing-notes-title {
+  font-size: .72rem; font-weight: 800; color: #344563;
+  letter-spacing: .05em; text-transform: uppercase; margin-bottom: .625rem;
+}
+.pricing-notes ul { margin: 0; padding-left: 1.1rem; }
+.pricing-notes li { font-size: .77rem; color: #5E6C84; margin-bottom: .3rem; line-height: 1.5; }
+.pricing-notes li strong { color: #172B4D; }
+</style>
+
+<div class="pricing-overlay" id="pricingOverlay" onclick="if(event.target===this)closePricing()">
+  <div class="pricing-modal" role="dialog" aria-modal="true">
+    <div class="pricing-header">
+      <div class="pricing-header-left">
+        <div class="pricing-header-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="pricing-header-title">eID Types &amp; Pricing</div>
+          <div class="pricing-header-sub">Evrotrust — Commercial Conditions · Internal Reference</div>
+        </div>
+      </div>
+      <button class="pricing-close" onclick="closePricing()">✕</button>
+    </div>
+
+    <div class="pricing-tabs">
+      <button class="pricing-tab active" onclick="switchPricingTab(this,'eid-types')">eID Types</button>
+      <button class="pricing-tab" onclick="switchPricingTab(this,'volume-pricing')">Volume Pricing</button>
+      <button class="pricing-tab" onclick="switchPricingTab(this,'prepaid-postpaid')">Prepaid vs Postpaid</button>
+      <button class="pricing-tab" onclick="switchPricingTab(this,'tu-guide')">TU Ratios Guide</button>
+    </div>
+
+    <div class="pricing-body">
+
+      <!-- Tab 1: eID Types -->
+      <div class="pricing-panel active" id="ptab-eid-types">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;">
+          <p class="pricing-section-title" style="margin:0">Available eID Service Types</p>
+          <button class="pricing-dl-btn" onclick="downloadPricingCSV('eid-types')" title="Download as CSV">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download CSV
+          </button>
+        </div>
+        <div class="eid-cards">
+          <div class="eid-card">
+            <div class="eid-card-header"><span class="eid-badge full">Full eID</span></div>
+            <div class="eid-card-name">Full eID (Reusable)</div>
+            <div class="eid-card-desc">Complete identity verification returning all personal data from the document. NFC scan supported. Biometric check included. Reusable digital identity wallet.</div>
+            <div class="eid-avail">
+              <span class="eid-avail-pill yes">✓ Mobile SDK</span>
+              <span class="eid-avail-pill yes">✓ Web SDK</span>
+            </div>
+            <div class="eid-tu-ratio">TU ratio: <span>1 Full eID = 1 TU</span></div>
+          </div>
+          <div class="eid-card">
+            <div class="eid-card-header"><span class="eid-badge enhanced">Enhanced eID</span></div>
+            <div class="eid-card-name">Enhanced eID</div>
+            <div class="eid-card-desc">Higher-assurance identity check with NFC scan via Mobile SDK. Biometric check included. Designed for regulated industries requiring elevated LoA.</div>
+            <div class="eid-avail">
+              <span class="eid-avail-pill yes">✓ Mobile SDK</span>
+              <span class="eid-avail-pill no">✗ Web SDK</span>
+            </div>
+            <div class="eid-tu-ratio">TU ratio: <span>1 Enhanced eID = 1 TU</span></div>
+          </div>
+          <div class="eid-card">
+            <div class="eid-card-header"><span class="eid-badge lite">Ident LITE</span></div>
+            <div class="eid-card-name">Ident LITE / Attribute Bundle</div>
+            <div class="eid-card-desc">Bundle of selected identity attributes (min. 4). NFC scan via Mobile SDK. Cost-effective for scenarios requiring only specific data fields.</div>
+            <div class="eid-avail">
+              <span class="eid-avail-pill yes">✓ Mobile SDK</span>
+              <span class="eid-avail-pill yes">✓ Web SDK</span>
+            </div>
+            <div class="eid-tu-ratio">TU ratio: <span>1 bundle = 0.31–0.40 TU</span></div>
+          </div>
+          <div class="eid-card">
+            <div class="eid-card-header"><span class="eid-badge attr">Single Attribute</span></div>
+            <div class="eid-card-name">Single eID Attribute</div>
+            <div class="eid-card-desc">Retrieval of one specific personal data attribute. Granular access for minimal data collection (GDPR-friendly). Requires separate API key per channel.</div>
+            <div class="eid-avail">
+              <span class="eid-avail-pill yes">✓ Mobile SDK</span>
+              <span class="eid-avail-pill yes">✓ Web SDK</span>
+            </div>
+            <div class="eid-tu-ratio">TU ratio: <span>1 attribute = 0.08–0.10 TU</span></div>
+          </div>
+          <div class="eid-card">
+            <div class="eid-card-header"><span class="eid-badge mfa">2FA / MFA</span></div>
+            <div class="eid-card-name">2FA / Multi-Factor Auth</div>
+            <div class="eid-card-desc">Re-authentication step using the Evrotrust mobile app. Low-cost recurring transaction for authenticating existing wallet users.</div>
+            <div class="eid-avail">
+              <span class="eid-avail-pill yes">✓ Mobile SDK</span>
+              <span class="eid-avail-pill yes">✓ Web SDK</span>
+            </div>
+            <div class="eid-tu-ratio">TU ratio: <span>1 MFA = 0.04–0.05 TU</span></div>
+          </div>
+        </div>
+        <div class="pricing-notes">
+          <div class="pricing-notes-title">Notes</div>
+          <ul>
+            <li><strong>Full eID, Enhanced eID and Ident LITE</strong> include NFC scan through the Mobile SDK.</li>
+            <li><strong>All eID services</strong> rely on biometric checks.</li>
+            <li>Attribute and bundle provision requires <strong>separate API Keys</strong> for each channel.</li>
+            <li><strong>Full eID</strong> returns all available personal data obtained from the document at onboarding.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tab 2: Volume Pricing -->
+      <div class="pricing-panel" id="ptab-volume-pricing">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;">
+          <p class="pricing-section-title" style="margin:0">Volume-Based Pricing Tiers</p>
+          <button class="pricing-dl-btn" onclick="downloadPricingCSV('volume-pricing')" title="Download as CSV">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download CSV
+          </button>
+        </div>
+        <div class="pricing-table-wrap">
+          <table class="pricing-table" id="tbl-volume-pricing">
+            <thead>
+              <tr>
+                <th>Volume Tier (eIDs / yr)</th>
+                <th>€ / Full eID</th>
+                <th>€ / 2FA</th>
+                <th>€ / Attr. Bundle</th>
+                <th>€ / Single Attr.</th>
+                <th>€ / TU</th>
+                <th>Min. Yearly Commitment</th>
+                <th>Model</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tier-label tier-vol">Starter · up to 100K</span></td>
+                <td class="price-val">€1.60</td>
+                <td class="price-val">€0.05</td>
+                <td class="price-val">€0.40</td>
+                <td class="price-val">€0.10</td>
+                <td class="price-val">€1.28–1.60</td>
+                <td class="comment-val">5,000 TUs / year</td>
+                <td class="comment-val">Prepaid or Postpaid</td>
+              </tr>
+              <tr>
+                <td><span class="tier-label tier-vol">Standard · up to 600K</span></td>
+                <td class="price-val">€1.40</td>
+                <td class="price-val">€0.07</td>
+                <td class="price-val">€0.56</td>
+                <td class="price-val">€0.14</td>
+                <td class="price-val">€1.40</td>
+                <td class="comment-val">100,000 TUs / year</td>
+                <td class="comment-val">Postpaid</td>
+              </tr>
+              <tr>
+                <td><span class="tier-label tier-high">Enterprise · 600K+</span></td>
+                <td class="price-val">€1.20</td>
+                <td class="price-val">€0.06</td>
+                <td class="price-val">€0.48</td>
+                <td class="price-val">€0.12</td>
+                <td class="price-val">€1.20</td>
+                <td class="comment-val">180,000 TUs / year</td>
+                <td class="comment-val">Postpaid</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pricing-notes">
+          <div class="pricing-notes-title">Conditions</div>
+          <ul>
+            <li>All prices are <strong>VAT excluded</strong>.</li>
+            <li>Minimum yearly volume commitment applies per tier.</li>
+            <li>TU ratios: <strong>Full eID = 1 TU · MFA = 0.05 TU · Bundle = 0.40 TU · Single attr = 0.10 TU</strong></li>
+            <li>Bundle pricing requires minimum <strong>4 attributes per bundle</strong>.</li>
+            <li>Separate API Keys required for attribute and bundle channels.</li>
+            <li>Custom pricing available for non-standard volumes — contact the Evrotrust partnerships team.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tab 3: Prepaid vs Postpaid -->
+      <div class="pricing-panel" id="ptab-prepaid-postpaid">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;">
+          <p class="pricing-section-title" style="margin:0">Billing Models: Prepaid vs Postpaid</p>
+          <button class="pricing-dl-btn" onclick="downloadPricingCSV('prepaid-postpaid')" title="Download as CSV">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download CSV
+          </button>
+        </div>
+        <div class="pricing-table-wrap">
+          <table class="pricing-table" id="tbl-prepaid-postpaid">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Prepaid Package</th>
+                <th>Postpaid (Consumption-based)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Payment timing</strong></td>
+                <td>Upfront — buy a TU block in advance</td>
+                <td class="comment-val">Monthly invoice based on actual usage</td>
+              </tr>
+              <tr>
+                <td><strong>Price per TU</strong></td>
+                <td class="price-val">From €1.28 / TU</td>
+                <td class="price-val">From €1.20 / TU</td>
+              </tr>
+              <tr>
+                <td><strong>Minimum commitment</strong></td>
+                <td>TU block size (e.g. 5,000 TUs)</td>
+                <td class="comment-val">Minimum yearly volume (e.g. 100K eIDs)</td>
+              </tr>
+              <tr>
+                <td><strong>Unused TU rollover</strong></td>
+                <td>Yes — unused TUs transfer to renewal package</td>
+                <td class="comment-val">No — billed only for actual consumption</td>
+              </tr>
+              <tr>
+                <td><strong>Contract length</strong></td>
+                <td>Typically 1–2 years</td>
+                <td class="comment-val">Typically 1 year</td>
+              </tr>
+              <tr>
+                <td><strong>Best for</strong></td>
+                <td>Predictable, growing volumes; cost certainty</td>
+                <td class="comment-val">High-volume, established integrations</td>
+              </tr>
+              <tr>
+                <td><strong>VAT</strong></td>
+                <td class="na-val">Excluded</td>
+                <td class="na-val">Excluded</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pricing-notes" style="margin-top:1rem;">
+          <div class="pricing-notes-title">How to choose</div>
+          <ul>
+            <li><strong>Prepaid</strong> is recommended for partners in a ramp-up phase — you commit to a TU block and unused credits roll over to the next period instead of expiring.</li>
+            <li><strong>Postpaid</strong> suits partners with high, predictable monthly volumes where accurate forecasting is possible and lower per-TU rates at scale are more attractive.</li>
+            <li>Both models support all five eID service types (Full eID, Enhanced eID, Ident LITE, Single Attribute, 2FA).</li>
+            <li>Switching between models is possible at contract renewal — discuss with the Evrotrust partnerships team.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tab 4: TU Guide -->
+      <div class="pricing-panel" id="ptab-tu-guide">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;">
+          <p class="pricing-section-title" style="margin:0">Transaction Unit (TU) Ratios — How It Works</p>
+          <button class="pricing-dl-btn" onclick="downloadPricingCSV('tu-guide')" title="Download as CSV">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download CSV
+          </button>
+        </div>
+        <p style="font-size:.82rem;color:#5E6C84;margin-bottom:1.25rem;line-height:1.6;">A <strong style="color:#172B4D">Transaction Unit (TU)</strong> is the billing unit used across all Evrotrust services. Each service type consumes a different fraction of one TU.</p>
+        <div class="pricing-table-wrap">
+          <table class="pricing-table" id="tbl-tu-guide">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Standard TU Ratio</th>
+                <th>Promotional Ratio (12-mo)</th>
+                <th>Practical Effect</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Full eID</strong></td>
+                <td class="price-val">1 eID = 1.00 TU</td>
+                <td class="price-val">1 eID = 1.25 TU</td>
+                <td class="comment-val">Slightly more TUs per ID — offset by lower per-TU price</td>
+              </tr>
+              <tr>
+                <td><strong>2FA / MFA</strong></td>
+                <td class="price-val">1 MFA = 0.05 TU</td>
+                <td class="price-val">1 MFA = 0.04 TU</td>
+                <td class="comment-val">Lower consumption — better for high-frequency re-auth flows</td>
+              </tr>
+              <tr>
+                <td><strong>Bundle of Attributes</strong></td>
+                <td class="price-val">1 bundle = 0.40 TU</td>
+                <td class="price-val">1 bundle = 0.31 TU</td>
+                <td class="comment-val">More bundles per TU package</td>
+              </tr>
+              <tr>
+                <td><strong>Single Attribute</strong></td>
+                <td class="price-val">1 attr = 0.10 TU</td>
+                <td class="price-val">1 attr = 0.08 TU</td>
+                <td class="comment-val">More efficient for GDPR-minimal data collection</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pricing-notes" style="margin-top:1rem;">
+          <div class="pricing-notes-title">Reading Example — 5,000 TU Package (standard ratios)</div>
+          <ul>
+            <li>Up to <strong>5,000 Full eIDs</strong> (5,000 ÷ 1.00)</li>
+            <li>Or up to <strong>100,000 MFA events</strong> (5,000 ÷ 0.05)</li>
+            <li>Or up to <strong>12,500 Attribute Bundles</strong> (5,000 ÷ 0.40)</li>
+            <li>Or any <strong>combination</strong> of the above services</li>
+            <li>Attribute and bundle channels require <strong>separate API Keys</strong> — they do not draw from the same TU pool by default.</li>
+            <li>Minimum bundle size: <strong>4 attributes per bundle</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+.pricing-dl-btn {
+  display: flex; align-items: center; gap: 6px;
+  height: 30px; padding: 0 12px;
+  background: none; border: 1.5px solid #DFE1E6; border-radius: 6px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: .75rem;
+  font-weight: 700; color: #344563; cursor: pointer;
+  transition: all .15s; white-space: nowrap; flex-shrink: 0;
+}
+.pricing-dl-btn:hover { border-color: #0052CC; color: #0052CC; background: #EAF2FF; }
+.pricing-dl-btn svg { flex-shrink: 0; }
+</style>
+
+<script>
+function openPricing(){
+  document.getElementById('pricingOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closePricing(){
+  document.getElementById('pricingOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function switchPricingTab(btn,tabId){
+  document.querySelectorAll('.pricing-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.pricing-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('ptab-'+tabId).classList.add('active');
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePricing();});
+
+function downloadPricingCSV(tabId) {
+  // Download disabled — contact Evrotrust for the full pricing sheet
+  var existing = document.getElementById('pricing-dl-toast');
+  if (existing) existing.remove();
+  var toast = document.createElement('div');
+  toast.id = 'pricing-dl-toast';
+  toast.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Contact your Evrotrust partner manager for the full pricing sheet.';
+  toast.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(16px);background:#0B2A4A;color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;font-family:inherit;box-shadow:0 8px 32px rgba(0,0,0,.28);display:flex;align-items:center;gap:10px;z-index:999999;opacity:0;transition:opacity .25s,transform .25s;white-space:nowrap;border-left:3px solid #00AEEF;';
+  document.body.appendChild(toast);
+  requestAnimationFrame(function(){ toast.style.opacity='1'; toast.style.transform='translateX(-50%) translateY(0)'; });
+  setTimeout(function(){ toast.style.opacity='0'; toast.style.transform='translateX(-50%) translateY(10px)'; setTimeout(function(){ toast.remove(); }, 300); }, 3500);
+}
 </script>
 
 </body>
