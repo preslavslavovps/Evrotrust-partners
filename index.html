@@ -1005,23 +1005,27 @@ body { background: #F4F5F7; font-family:'Space Grotesk','Plus Jakarta Sans','Int
   gap: 12px; flex-wrap: wrap; margin-bottom: 2.5rem;
 }
 .hero-btn-primary {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 24px; background: #00B8D4; color: #fff;
-  border: none; border-radius: 8px; font-family: inherit;
-  font-size: .9rem; font-weight: 600; cursor: pointer;
-  transition: all .2s; box-shadow: 0 4px 12px rgba(0,184,212,.35);
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 28px; background: linear-gradient(135deg,#00B8D4 0%,#0099B5 100%); color: #fff;
+  border: none; border-radius: 10px; font-family: inherit;
+  font-size: .9rem; font-weight: 700; cursor: pointer;
+  transition: all .22s; box-shadow: 0 4px 16px rgba(0,184,212,.4), 0 1px 0 rgba(255,255,255,.15) inset;
+  letter-spacing: .01em;
 }
-.hero-btn-primary:hover { background: #00A3BB; transform: translateY(-1px); }
-.hero-btn-primary svg { width: 16px; height: 16px; }
+.hero-btn-primary:hover { background: linear-gradient(135deg,#00CBE8 0%,#00B8D4 100%); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,184,212,.5); }
+.hero-btn-primary:active { transform: translateY(0); }
+.hero-btn-primary svg { width: 16px; height: 16px; flex-shrink: 0; }
 .hero-btn-secondary {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 24px; background: rgba(255,255,255,.1); color: #fff;
-  border: 1px solid rgba(255,255,255,.25); border-radius: 8px;
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 12px 26px; background: rgba(255,255,255,.08); color: #fff;
+  border: 1.5px solid rgba(255,255,255,.28); border-radius: 10px;
   font-family: inherit; font-size: .9rem; font-weight: 600;
-  cursor: pointer; transition: all .2s;
+  cursor: pointer; transition: all .22s; letter-spacing: .01em;
+  backdrop-filter: blur(4px);
 }
-.hero-btn-secondary:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.4); }
-.hero-btn-secondary svg { width: 16px; height: 16px; }
+.hero-btn-secondary:hover { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.5); transform: translateY(-2px); }
+.hero-btn-secondary:active { transform: translateY(0); }
+.hero-btn-secondary svg { width: 16px; height: 16px; flex-shrink: 0; }
 .hero-stats {
   display: inline-flex; background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.12); border-radius: 12px;
@@ -1425,9 +1429,9 @@ mark { background: #FFF3CD; color: #172B4D; border-radius: 2px; padding: 0 1px; 
 
 .hero-btn-integration {
   position: relative;
-  border: 1.5px solid #00B8D4 !important;
-  background: transparent !important;
-  animation: neonPulse 2.5s ease-in-out infinite;
+  border: 1.5px solid rgba(0,184,212,.55) !important;
+  background: rgba(0,184,212,.08) !important;
+  animation: neonPulse 3s ease-in-out infinite;
 }
 
 .hero-btn-integration::before,
@@ -1443,12 +1447,13 @@ mark { background: #FFF3CD; color: #172B4D; border-radius: 2px; padding: 0 1px; 
 }
 
 @keyframes neonPulse {
-  0%, 100% { box-shadow: 0 0 4px rgba(0,184,212,0.4), 0 0 8px rgba(0,184,212,0.2); border-color: rgba(0,184,212,0.5) !important; background: transparent !important; }
-  50%       { box-shadow: 0 0 10px rgba(0,238,255,0.8), 0 0 20px rgba(0,184,212,0.4); border-color: #00eeff !important; background: transparent !important; }
+  0%, 100% { box-shadow: 0 0 6px rgba(0,184,212,0.3), 0 4px 14px rgba(0,0,0,.2); border-color: rgba(0,184,212,0.55) !important; }
+  50%       { box-shadow: 0 0 14px rgba(0,238,255,0.55), 0 4px 20px rgba(0,184,212,.25); border-color: rgba(0,238,255,.85) !important; }
 }
 
 body.int-open .hero-btn-integration {
-  background: rgba(0,184,212,0.15);
+  background: rgba(0,184,212,0.18) !important;
+  border-color: #00B8D4 !important;
 }
 
 .int-trigger-section { display: none !important; }
@@ -2068,11 +2073,7 @@ body.int-open .hero-btn-integration {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
     <span>Sales Pitch</span>
   </button>
-  <!-- PRICING BUTTON -->
-  <button class="pricing-nav-btn" onclick="openPricing()" title="eID Types & Pricing">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/><path d="M9 16h6"/></svg>
-    <span>Pricing</span>
-  </button>
+
 </nav>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -3273,23 +3274,15 @@ body.int-open .hero-btn-integration {
   .hero-pill.active{border-color:#00AEEF;background:rgba(0,174,239,0.18);color:#fff;box-shadow:0 0 12px rgba(0,174,239,0.25)}
   </style>
 
-  <!-- HERO SEARCH BAR -->
-  <div class="hero-search-bar" style="position:relative;z-index:2;max-width:580px;margin:0 auto 1.5rem;display:flex;align-items:center;gap:0">
-    <div style="position:relative;flex:1">
-      <svg style="position:absolute;left:16px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:rgba(255,255,255,0.45);fill:none;stroke-width:2;pointer-events:none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="hero-search-input" type="text"
-        placeholder="Search partners by name, category or country…"
-        onkeydown="if(event.key==='Enter')heroSearch()"
-        style="width:100%;height:52px;background:rgba(255,255,255,0.09);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1.5px solid rgba(255,255,255,0.18);border-right:none;border-radius:14px 0 0 14px;padding:0 16px 0 46px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;color:#fff;outline:none;transition:border-color .2s,background .2s"
-        onfocus="this.style.borderColor='rgba(0,174,239,0.7)';this.style.background='rgba(255,255,255,0.13)'"
-        onblur="this.style.borderColor='rgba(255,255,255,0.18)';this.style.background='rgba(255,255,255,0.09)'">
-    </div>
-    <button onclick="heroSearch()"
-      style="height:52px;padding:0 24px;background:linear-gradient(135deg,#0052CC,#00AEEF);border:none;border-radius:0 14px 14px 0;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;gap:7px;white-space:nowrap;transition:opacity .2s;flex-shrink:0"
-      onmouseover="this.style.opacity='.88'"
-      onmouseout="this.style.opacity='1'">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      Search
+  <!-- HERO KNOWLEDGE BUTTON -->
+  <div style="position:relative;z-index:2;max-width:580px;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center">
+    <button onclick="openZedeuPanel()" id="ka-hero-btn"
+      style="height:50px;padding:0 26px;background:linear-gradient(135deg,#0B2A4A 0%,#0052CC 60%,#0066DD 100%);border:1.5px solid rgba(0,174,239,0.4);border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;gap:10px;white-space:nowrap;transition:all .25s;box-shadow:0 4px 18px rgba(0,82,204,0.45),0 1px 0 rgba(255,255,255,0.1) inset;letter-spacing:.015em"
+      onmouseover="this.style.boxShadow='0 6px 26px rgba(0,174,239,0.55),0 1px 0 rgba(255,255,255,0.15) inset';this.style.transform='translateY(-2px)';this.style.borderColor='rgba(0,174,239,0.7)'"
+      onmouseout="this.style.boxShadow='0 4px 18px rgba(0,82,204,0.45),0 1px 0 rgba(255,255,255,0.1) inset';this.style.transform='translateY(0)';this.style.borderColor='rgba(0,174,239,0.4)'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17" style="flex-shrink:0;opacity:.9"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      Ask AI — Partners &amp; Trust Services
+      <span style="font-size:.62rem;font-weight:700;letter-spacing:.06em;background:rgba(0,174,239,0.22);border:1px solid rgba(0,174,239,0.35);border-radius:5px;padding:2px 7px;margin-left:1px;opacity:.9">EN</span>
     </button>
   </div>
 
@@ -3508,6 +3501,9 @@ function heroSearch(){
           </button>
           <button class="eid-tab-btn" onclick="selectEidTab('full',this)">
             <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#4C9AFF;margin-right:5px"></span>Full eID
+          </button>
+          <button class="eid-tab-btn" onclick="openPricing()" style="border-color:rgba(0,135,90,.35);background:rgba(0,135,90,.1);color:#36B37E;gap:6px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="13" height="13"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>eID Per Attribute
           </button>
         </div>
 
@@ -7185,6 +7181,262 @@ function showFsTab(tab, e) {
     t.classList.toggle('fs-tab-active', t.dataset.tab===tab);
   });
 }
+</script>
+
+<!-- ══════════════════════════════════════════════
+     ЗЕДЕУУ ПРАВЕН АСИСТЕНТ – PANEL + OVERLAY
+══════════════════════════════════════════════ -->
+<style>
+.zedeu-btn{background:linear-gradient(135deg,#0B2A4A,#0052CC) !important;border:none !important;border-left:2px solid rgba(255,255,255,.2) !important;border-radius:0 8px 8px 0 !important;margin-left:0 !important;gap:5px !important;font-size:.78rem !important;}
+.zedeu-btn:hover{background:linear-gradient(135deg,#0052CC,#0747A6) !important;}
+.zedeu-btn svg{fill:rgba(255,255,255,.85);}
+
+.zedeu-overlay{position:fixed;inset:0;background:rgba(9,30,66,.45);z-index:600;display:none;align-items:flex-start;justify-content:flex-end;padding:72px 12px 12px}
+.zedeu-overlay.open{display:flex;animation:fadeIn .2s ease}
+
+.zedeu-panel{width:460px;max-width:calc(100vw - 24px);max-height:calc(100vh - 84px);background:#fff;border-radius:16px;border:1px solid #DFE1E6;box-shadow:0 20px 60px rgba(9,30,66,.22),0 4px 16px rgba(9,30,66,.1);display:flex;flex-direction:column;overflow:hidden;animation:panelIn .25s cubic-bezier(.4,0,.2,1)}
+
+.zedeu-head{background:linear-gradient(135deg,#091E42 0%,#0052CC 100%);padding:1.125rem 1.25rem 1rem;flex-shrink:0}
+.zedeu-head-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem}
+.zedeu-head-left{display:flex;align-items:center;gap:10px}
+.zedeu-head-icon{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center}
+.zedeu-head-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2}
+.zedeu-head-title{font-size:1rem;font-weight:700;color:#fff}
+.zedeu-head-sub{font-size:.68rem;color:rgba(255,255,255,.5);margin-top:1px}
+.zedeu-close{width:30px;height:30px;border-radius:7px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:.9rem;transition:background .15s;flex-shrink:0}
+.zedeu-close:hover{background:rgba(255,255,255,.22)}
+
+.zedeu-quick{display:flex;gap:5px;flex-wrap:wrap}
+.zedeu-q-btn{height:24px;padding:0 9px;border:1px solid rgba(255,255,255,.2);border-radius:20px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);font-family:'Plus Jakarta Sans',sans-serif;font-size:.65rem;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
+.zedeu-q-btn:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.4)}
+
+.zedeu-body{flex:1;overflow-y:auto;padding:.875rem}
+.zedeu-body::-webkit-scrollbar{width:4px}
+.zedeu-body::-webkit-scrollbar-track{background:transparent}
+.zedeu-body::-webkit-scrollbar-thumb{background:#DDE3EA;border-radius:4px}
+
+.zedeu-chat{display:flex;flex-direction:column;gap:10px;margin-bottom:.875rem;min-height:60px}
+
+.zedeu-msg{border-radius:10px;padding:10px 12px;font-size:.82rem;line-height:1.65}
+.zedeu-msg.user{background:#EAF2FF;color:#042C53;align-self:flex-end;max-width:88%;border-radius:10px 10px 3px 10px;font-weight:500}
+.zedeu-msg.bot{background:#F8FAFC;color:#172B4D;border:1px solid #EEF0F3}
+.zedeu-msg.thinking{color:#8993A4;font-style:italic;font-size:.78rem;background:#F8FAFC;border:1px solid #EEF0F3}
+.zedeu-msg.error{background:#FFF5F5;color:#7A0000;border:1px solid #FFCDD2}
+.zedeu-msg strong{font-weight:700;color:#091E42}
+
+.zedeu-welcome{text-align:center;padding:1.5rem 1rem;color:#8993A4;font-size:.82rem}
+.zedeu-welcome svg{display:block;margin:0 auto .625rem;stroke:#DDE3EA;fill:none;width:32px;height:32px}
+
+.zedeu-footer{padding:.75rem .875rem;border-top:1px solid #F0F2F5;background:#FAFBFC;flex-shrink:0}
+.zedeu-input-row{display:flex;gap:6px}
+.zedeu-input-row input{flex:1;height:36px;border:1.5px solid #DDE3EA;border-radius:8px;padding:0 10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;color:#172B4D;outline:none;background:#fff;transition:border-color .15s}
+.zedeu-input-row input:focus{border-color:#0052CC;box-shadow:0 0 0 2px rgba(0,82,204,.1)}
+.zedeu-input-row input::placeholder{color:#B0BAC7}
+.zedeu-send-btn{height:36px;padding:0 14px;background:#0052CC;border:none;border-radius:8px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;flex-shrink:0;transition:background .15s}
+.zedeu-send-btn:hover{background:#0747A6}
+.zedeu-send-btn:disabled{opacity:.5;cursor:default}
+.zedeu-send-btn svg{width:12px;height:12px;stroke:#fff;fill:none}
+.zedeu-disclaimer{font-size:.6rem;color:#B0BAC7;margin-top:5px;text-align:center}
+</style>
+
+<!-- Panel HTML -->
+<div class="zedeu-overlay" id="zedeu-overlay" onclick="closeZedeuIfOutside(event)">
+  <div class="zedeu-panel" id="zedeu-panel">
+    <div class="zedeu-head">
+      <div class="zedeu-head-top">
+        <div class="zedeu-head-left">
+          <div class="zedeu-head-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          </div>
+          <div>
+            <div class="zedeu-head-title">Evrotrust AI Assistant</div>
+            <div class="zedeu-head-sub">Partners · Trust Services · eIDAS · ZEDEUU</div>
+          </div>
+        </div>
+        <button class="zedeu-close" onclick="closeZedeuPanel()">✕</button>
+      </div>
+      <div class="zedeu-quick">
+        <button class="zedeu-q-btn" onclick="zedeuAsk('What is a Qualified Electronic Signature (QES)?')">QES</button>
+        <button class="zedeu-q-btn" onclick="zedeuAsk('What is a QTSP?')">QTSP</button>
+        <button class="zedeu-q-btn" onclick="zedeuAsk('What partners offer HR management solutions?')">HR Partners</button>
+        <button class="zedeu-q-btn" onclick="zedeuAsk('What integration options does Evrotrust offer?')">Integration</button>
+        <button class="zedeu-q-btn" onclick="zedeuAsk('How does eDelivery work?')">eDelivery</button>
+        <button class="zedeu-q-btn" onclick="zedeuAsk('Which partners support Salesforce or CRM?')">CRM</button>
+        <button class="zedeu-q-btn" onclick="zedeuAsk('What is KYC/AML compliance with Evrotrust?')">KYC/AML</button>
+        <button class="zedeu-q-btn" onclick="zedeuAsk('List partners by region or country')">By Region</button>
+      </div>
+    </div>
+
+    <div class="zedeu-body">
+      <div class="zedeu-chat" id="zedeu-chat">
+        <div class="zedeu-welcome">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
+          Ask anything about Evrotrust partners, services, integrations, or eIDAS/ZEDEUU law
+        </div>
+      </div>
+    </div>
+
+    <div class="zedeu-footer">
+      <div class="zedeu-input-row">
+        <input id="zedeu-q" type="text" placeholder="Ask anything about Evrotrust, partners, eIDAS, ZEDEUU…" onkeydown="if(event.key==='Enter')zedeuSubmit()"/>
+        <button class="zedeu-send-btn" id="zedeu-send" onclick="zedeuSubmit()">
+          <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+          Ask
+        </button>
+      </div>
+      <div class="zedeu-disclaimer">Answers are based on Evrotrust data and ZEDEUU/eIDAS law · Not legal advice</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+var _zh = [];
+
+var _lawText = "=== ЗАКОН ЗА ЕЛЕКТРОННИЯ ДОКУМЕНТ И ЕЛЕКТРОННИТЕ УДОСТОВЕРИТЕЛНИ УСЛУГИ (ЗЕДЕУУ) — РЕЗЮМЕ ===\n\nЧл. 1. Законът урежда: правната стойност на електронните документи; условията за предоставяне на електронни удостоверителни услуги; задълженията на QTSP; надзора върху TSP; правилата относно електронните подписи, печати, времеви печати и удостоверена електронна доставка.\n\nЧл. 2. (1) Електронно изявление е словесно изявление, представено в цифрова форма. (2) Автор на електронното изявление е физическото лице, което в изявлението се сочи като негов извършител. Титуляр е лицето, от чието име е извършено.\n\nЧл. 3. (1) Електронен документ е електронен документ по смисъла на Регламент (ЕС) № 910/2014. (2) Писмената форма се смята за спазена, ако е съставен електронен документ, съдържащ електронно изявление.\n\nЧл. 13. (1) Електронен подпис е електронен подпис по смисъла на чл. 3, т. 10 от Регламент (ЕС) № 910/2014. (2) Усъвършенстван електронен подпис (УЕП) — по смисъла на чл. 3, т. 11. (3) Квалифициран електронен подпис (КЕП) — по смисъла на чл. 3, т. 12. (4) Правната сила на КЕП е равностойна на тази на саморъчния подпис. Стойността на другите видове подписи се договаря между страните.\n\nЗадължения на QTSP: спазват eIDAS и ЗЕДЕУУ; преминават одит на всеки 24 месеца; уведомяват надзорния орган при инциденти в 24 ч.; съхраняват данни мин. 20 г.; поддържат финансови гаранции.\n\nКвалифицирани услуги: КЕП, квалифициран ел. печат, квалифициран времеви печат (QTS), квалифицирана удостоверена ел. доставка (QEDS), удостоверения за уебсайтове (QWACs).\n\nНадзорен орган в България е Комисията за регулиране на съобщенията (КРС). Тя: издава/спира/отнема квалифициран статус; поддържа TSL; провежда проверки; сътрудничи с ENISA.\n\nСанкции по ЗЕДЕУУ: имуществена санкция до 100 000 лв., спиране или отнемане на квалифициран статус.\n\n=== РЕГЛАМЕНТ (ЕС) № 910/2014 (eIDAS) — ПЪЛЕН ТЕКСТ ===\n\nГЛАВА I — ОБЩИ РАЗПОРЕДБИ\n\nЧл. 1 — Предмет: Регламентът (а) определя условията, при които държавите членки признават средствата за електронна идентификация; (б) определя правилата за удостоверителните услуги; (в) установява правна рамка за електронните подписи, печати, времеви печати, електронни документи, услуги за електронна препоръчана поща и услуги по удостоверяване автентичността на уебсайтове.\n\nЧл. 2 — Обхват: Прилага се за схеми за електронна идентификация, за които е извършено уведомяване от държава членка, и за установени в Съюза доставчици на удостоверителни услуги. Не се прилага за затворени системи.\n\nЧл. 3 — Определения:\n1. 'електронна идентификация' — процес на използване на данни в електронна форма за идентификация на лица.\n2. 'средство за електронна идентификация' — материална/нематериална единица с данни за идентификация за удостоверяване на автентичност за онлайн услуга.\n3. 'данни за идентификация на лица' — набор от данни, позволяващи установяване на самоличност.\n4. 'схема за електронна идентификация' — система, при която средства за електронна идентификация се издават на физически или юридически лица.\n5. 'удостоверяване на автентичност' — електронен процес за потвърждаване на самоличност или произхода на данни.\n6. 'доверяваща се страна' — физическо или юридическо лице, което разчита на електронна идентификация или удостоверителна услуга.\n7. 'орган от публичния сектор' — държавен, регионален или местен орган, публичноправна организация.\n9. 'титуляр на електронен подпис' — физическо лице, което създава електронен подпис.\n10. 'електронен подпис' — данни в електронна форма, добавени към или логически свързани с други данни, използвани за подписване.\n11. 'усъвършенстван електронен подпис (УЕП)' — отговаря на изискванията на чл. 26.\n12. 'квалифициран електронен подпис (КЕП)' — УЕП, създаден от QSCD, основан на квалифицирано удостоверение.\n13. 'данни за създаване на електронен подпис' — уникални данни, използвани от титуляря за създаването на подпис.\n14. 'удостоверение за електронен подпис' — електронен атестат, свързващ данните за валидиране с физическо лице.\n15. 'квалифицирано удостоверение за електронен подпис' — отговаря на изискванията от Приложение I.\n16. 'удостоверителна услуга' — електронна услуга за създаване, проверка и валидиране на подписи, печати, времеви печати, QEDS, удостоверения.\n17. 'квалифицирана удостоверителна услуга' — отговаря на приложимите изисквания на регламента.\n18. 'орган за оценяване на съответствието' — акредитиран орган за оценяване на QTSP.\n19. 'доставчик на удостоверителни услуги (TSP)' — физическо или юридическо лице, предоставящо удостоверителни услуги.\n20. 'доставчик на квалифицирани удостоверителни услуги (QTSP)' — TSP, получил квалифициран статут от надзорен орган.\n22. 'устройство за създаване на електронен подпис' — конфигуриран софтуер или хардуер за създаване на подпис.\n23. 'устройство за създаване на квалифициран електронен подпис (QSCD)' — отговаря на изискванията от Приложение II.\n24. 'създател на печат' — юридическо лице, което създава електронен печат.\n25. 'електронен печат' — данни в електронна форма, добавени за гарантиране произхода и целостта на данни.\n26. 'усъвършенстван електронен печат' — отговаря на изискванията на чл. 36.\n27. 'квалифициран електронен печат' — усъвършенстван електронен печат, основан на квалифицирано удостоверение.\n33. 'електронен времеви печат' — данни, свързващи дата и час с данни в електронна форма.\n34. 'квалифициран електронен времеви печат' — отговаря на изискванията на чл. 42.\n35. 'електронен документ' — всяко съдържание, съхранявано в електронна форма.\n36. 'услуга за електронна препоръчана поща (QEDS)' — услуга за предаване на данни с доказателство за изпращане и получаване.\n37. 'квалифицирана услуга за електронна препоръчана поща' — отговаря на изискванията на чл. 44.\n38. 'удостоверение за автентичност на уебсайт' — удостоверение, свързващо уебсайт с физическо или юридическо лице.\n39. 'квалифицирано удостоверение за автентичност на уебсайт (QWAC)' — отговаря на изискванията от Приложение IV.\n\nЧл. 4 — Принцип на вътрешния пазар: Предоставянето на удостоверителни услуги от TSP в друга държава членка не подлежи на ограничения. Продукти и услуги, отговарящи на регламента, са разрешени за свободно движение на вътрешния пазар.\n\nЧл. 5 — Обработка и защита на данни: Съгласно Директива 95/46/ЕО. Псевдонимите са допустими при електронни трансакции.\n\nГЛАВА II — ЕЛЕКТРОННА ИДЕНТИФИКАЦИЯ\n\nЧл. 6 — Взаимно признаване: Средствата за електронна идентификация, издадени в друга държава членка, се признават за трансгранично удостоверяване при условие, че: (а) се издават от нотифицирана схема; (б) нивото на осигуреност е 'значително' или 'високо'; (в) съответният орган от публичния сектор прилага ниво 'значително' или 'високо'.\n\nЧл. 8 — Нива на осигуреност: 'ниско', 'значително', 'високо'. Нивото зависи от процедурата за доказване на самоличност, механизма за удостоверяване и техническите характеристики.\n\nЧл. 9 — Уведомяване: Уведомяващата държава членка уведомява Комисията за схемата за електронна идентификация. Комисията публикува списък на нотифицираните схеми.\n\nЧл. 10 — Пробив в сигурността: При нарушаване на схемата — незабавно спиране на трансграничното удостоверяване и уведомяване на другите държави.\n\nЧл. 11 — Отговорност: Уведомяващата държава носи отговорност за умишлено или небрежно неизпълнение на задълженията при трансгранична трансакция.\n\nЧл. 12 — Сътрудничество и оперативна съвместимост: Националните схеми са оперативно съвместими. Рамката е технологично неутрална, зачита GDPR, улеснява защита на личния живот при разработването.\n\nГЛАВА III — УДОСТОВЕРИТЕЛНИ УСЛУГИ\n\nЧл. 13 — Отговорност и тежест на доказване: TSP носи отговорност за щети поради умисъл или небрежност. При QTSP умисълът се презюмира освен ако QTSP докаже обратното. TSP може да ограничи отговорността, ако е уведомил клиентите.\n\nЧл. 14 — Международни аспекти: Удостоверителни услуги от трети държави се признават въз основа на международни споразумения.\n\nЧл. 15 — Достъпност за хора с увреждания: Когато е практически осъществимо, услугите трябва да бъдат достъпни.\n\nЧл. 16 — Санкции: Определят се от държавите членки — ефективни, пропорционални и възпиращи.\n\nЧл. 17 — Надзорен орган: Всяка държава членка определя надзорен орган. Функции: надзор над QTSP; одити; поддръжка на TSL; сътрудничество с органите по защита на данните.\n\nЧл. 18 — Взаимопомощ: Надзорните органи си сътрудничат и обменят добри практики. Могат да провеждат съвместни разследвания.\n\nЧл. 19 — Изисквания за сигурност: TSP предприема подходящи технически и организационни мерки. При пробив в сигурността — уведомяване на надзорния орган в 24 часа; при засягане на лица — и тях.\n\nЧл. 20 — Надзор над QTSP: Одит от орган за оценяване на съответствието на всеки 24 месеца за сметка на QTSP. Надзорният орган може по всяко време да поиска допълнителен одит.\n\nЧл. 21 — Начало на квалифицирана услуга: QTSP уведомява надзорния орган с доклад за оценяване. Квалифицираният статут се получава след проверка и вписване в TSL — в срок от 3 месеца.\n\nЧл. 22 — Доверителни списъци (TSL): Всяка държава поддържа публичен доверителен списък на QTSP и техните услуги — подписан електронно.\n\nЧл. 23 — Марка за доверие на ЕС: QTSP могат да използват EU Trust Mark за обозначаване на квалифицирани услуги.\n\nЧл. 24 — Изисквания към QTSP: QTSP проверява самоличността при издаване на квалифицирано удостоверение — лично присъствие, дистанционно чрез eID, чрез КЕП или национални методи. QTSP е длъжен да: уведомява надзорния орган за промени; наема квалифициран персонал; поддържа финансови ресурси; ползва надеждни системи; съхранява данни; поддържа план за непрекъснатост; спазва GDPR.\n\nРАЗДЕЛ 4 — ЕЛЕКТРОННИ ПОДПИСИ\n\nЧл. 25 — Правна сила на електронните подписи:\n1. Правната сила на електронния подпис не може да бъде оспорена само защото е в електронна форма или не е КЕП.\n2. КЕП има правна сила, равностойна на саморъчния подпис.\n3. КЕП, основан на квалифицирано удостоверение от една държава членка, се признава във всички останали.\n\nЧл. 26 — Изисквания към УЕП: Свързан по уникален начин с титуляря; може да идентифицира титуляря; създаден с данни под изключителен контрол на титуляря; свързан с подписаните данни по начин, позволяващ да се открие промяна.\n\nЧл. 27 — Електронни подписи в публичните услуги: Ако публичен сектор изисква УЕП, признава УЕП и КЕП. За трансгранично използване не се изисква ниво по-високо от КЕП.\n\nЧл. 28 — Квалифицирани удостоверения за електронни подписи: Отговарят на Приложение I. Не подлежат на допълнителни задължителни изисквания. Ако бъдат отменени след активирането — губят валидност от момента на отмяната.\n\nЧл. 29 — Изисквания към QSCD: Отговарят на Приложение II.\n\nЧл. 30 — Сертифициране на QSCD: Сертифицира се от публичноправна или частна организация, определена от държавите членки.\n\nЧл. 31 — Публикуване на списък на сертифицираните QSCD: Комисията публикува и поддържа актуален списък.\n\nЧл. 32 — Изисквания към валидирането на КЕП: Потвърждава се, когато: удостоверението е валидно КЕП от QTSP; данните за валидиране съответстват; КЕП е създаден от QSCD; целостта на данните не е застрашена.\n\nЧл. 33 — Услуга по квалифицирано валидиране на КЕП: Може да се предоставя само от QTSP, извършващ валидиране по чл. 32.\n\nЧл. 34 — Услуга по квалифицирано съхраняване на КЕП: Само QTSP, ползващ технологии за надеждност извън срока на технологична валидност.\n\nРАЗДЕЛ 5 — ЕЛЕКТРОННИ ПЕЧАТИ\n\nЧл. 35 — Правна сила на електронните печати:\n1. Правната сила не може да се оспорва само защото е в електронна форма.\n2. Квалифицираният електронен печат се ползва от презумпция за цялост и точност на произхода.\n3. Квалифицираният печат от една държава членка се признава навсякъде в ЕС.\n\nЧл. 36 — Изисквания към квалифицирания електронен печат: Свързан с юридическото лице; може да идентифицира създателя; под изключителен контрол; свързан с данните по начин, позволяващ да се открие промяна.\n\nЧл. 37 — Електронни печати в публичните услуги: Публичният сектор, изискващ УЕП печат, признава и КЕП печат. За трансгранично използване — не по-высоко от квалифициран.\n\nЧл. 38 — Квалифицирани удостоверения за електронни печати: Отговарят на Приложение III.\n\nЧл. 39-40 — Устройства и валидиране на квалифицирани електронни печати: Прилагат се mutatis mutandis чл. 29-34.\n\nРАЗДЕЛ 6 — ЕЛЕКТРОННИ ВРЕМЕВИ ПЕЧАТИ\n\nЧл. 41 — Правна сила: Не може да се оспорва само защото е в електронна форма. Квалифицираният времеви печат се ползва от презумпция за точност на дата и час.\n\nЧл. 42 — Изисквания към квалифицирания електронен времеви печат: Обвързва дата и час с данни; основан на UTC; подписан с УЕП или усъвършенстван електронен печат на QTSP.\n\nРАЗДЕЛ 7 — УСЛУГИ ЗА ЕЛЕКТРОННА ПРЕПОРЪЧАНА ПОЩА\n\nЧл. 43 — Правна сила: Данните не могат да бъдат оспорени само защото са в електронна форма. Ползват се от презумпция за цялост, идентичност на изпращач и получател, точност на дата и час.\n\nЧл. 44 — Изисквания към QEDS: (а) предоставят се от QTSP; (б) гарантират идентификацията на изпращача с висока степен; (в) идентификация на получателя преди доставяне; (г) изпращането е обезпечено с УЕП; (д) промените са обозначени; (е) дата и час се указват с квалифициран времеви печат.\n\nРАЗДЕЛ 8 — УДОСТОВЕРЯВАНЕ АВТЕНТИЧНОСТТА НА УЕБСАЙТОВЕ\n\nЧл. 45 — QWAC: Отговарят на изискванията от Приложение IV.\n\nГЛАВА IV — ЕЛЕКТРОННИ ДОКУМЕНТИ\n\nЧл. 46 — Правна сила на електронните документи: Не може да бъде оспорена само защото е в електронна форма.\n\nГЛАВА VI — ЗАКЛЮЧИТЕЛНИ РАЗПОРЕДБИ\n\nЧл. 49 — Преглед: Комисията преглежда прилагането и докладва до 1 юли 2020 г.\n\nЧл. 50 — Отмяна: Директива 1999/93/ЕО е отменена от 1 юли 2016 г.\n\nЧл. 52 — Влизане в сила: Регламентът се прилага от 1 юли 2016 г.\n\n--- ПРИЛОЖЕНИЯ ---\n\nПриложение I — Изисквания към квалифицираните удостоверения за електронни подписи: Съдържат: указание за квалифициран статут; данни за QTSP; поне името на титуляря или псевдоним; данни за валидиране; срок на валидност; идентификационен код; УЕП или усъвършенстван електронен печат на QTSP; указание дали ключовете са в QSCD.\n\nПриложение II — Изисквания към QSCD: Гарантират поверителността на ключовете; ключовете се срещат само веднъж; ключовете са защитени и не могат да бъдат извлечени; само QTSP може да управлява ключове от името на титуляря.\n\nПриложение III — Изисквания към квалифицираните удостоверения за електронни печати: Аналогични на Приложение I, но за юридически лица.\n\nПриложение IV — Изисквания към QWAC: Съдържат: указание за квалифициран статут; данни за QTSP; данни за притежателя (физическо или юридическо лице); адрес; наименование на домейна; срок на валидност; идентификационен код; УЕП или усъвършенстван електронен печат на QTSP.";
+
+var _sysPrompt = `You are an expert AI assistant for the Evrotrust Partners Hub — a directory of 51+ partners of Evrotrust, a Bulgarian eIDAS Qualified Trust Service Provider (QTSP).
+
+You know everything about this page:
+
+=== EVROTRUST OVERVIEW ===
+Evrotrust is a Bulgarian QTSP offering:
+- eIDAS-compliant Remote Identity Verification (eID): Onboard customers in under 2 minutes — AI-powered liveness check, ID document scan, expert manual review. Reusable digital identity means returning users approve in one tap.
+- Qualified Electronic Signatures (QES): Highest EU assurance level. Legally equivalent to handwritten signature in all EU member states. Partners include BoldSign, DocuWare, Salesforce, Adobe, Adobe, inSign, SigniFlow, eID Easy, TrustLynx, Advania, MobyPDF, TRESORIT, Nemetschek/DocuWare.
+- Qualified Electronic Delivery (eDelivery / QEDS): Certified delivery with proof of sending and receipt.
+- KYC/AML compliance: Up to $2M insurance. QTSP is legally responsible for identity verification.
+- Integration options: REST API, Mobile SDK, Web SDK, White-label, Digital Services Portal (zero-code).
+- Stats: 51 partners, 7 categories, 30+ countries, <2min KYC onboarding.
+
+=== PARTNER CATEGORIES ===
+1. Digital Signature — partners embedding QES/AES signing in their platforms
+2. Document Management — partners for document workflows with QES
+3. HR Management — labor files, digital HR with QES and eDelivery
+4. Software & Integration — CRM/ERP/business tools with QES integration
+5. eID & Identity — identity verification and KYC providers
+6. Banking & Finance — financial institutions using Evrotrust services
+
+=== KEY PARTNERS (HIGHLIGHTS) ===
+- Salesforce: World's leading CRM. AppExchange add-on for QES signing. €200/company/year. Multi-signer, group send, free signing for recipients.
+- DocuWare (Nemetschek): Global document management. QES + eID + eDelivery integration.
+- Adobe Acrobat Sign: QES within the world's most used document workflow platform.
+- inSign GmbH: No. 1 German signature provider, 17 languages, German servers, 10+ years.
+- SigniFlow: Digital signature & approval workflow, South Africa, eIDAS QES.
+- eID Easy: Single API for 160+ countries, 80+ eID methods.
+- TRESORIT: End-to-end encrypted cloud + QES signing.
+- sHRedy: Full employment lifecycle digitization — hiring to termination. QES, AES, eDelivery, eID.
+- SB Accounting & Consulting: Payroll, HR outsourcing, labor files. QES + eDelivery + eID.
+- Microcomplex (Aladin): 35+ years HR software, QES + eDelivery.
+- HROne: HR Management System, QES + eDelivery.
+- Konica Minolta/M-Files: Digital office for HR & CFO, QES + eID.
+- Open Business Solutions (OBS): ERP & HR, QES + eDelivery.
+- ZOHO: Cloud business suite, QES hash integration.
+- Creatio: No-code workflow platform, available via Marketplace.
+- MobyPDF: PDF-native signing, QES hash, Bulgaria.
+- Nula.bg: Digital accounting/business, QES, Bulgaria.
+- VIKTA: Document management B2C, QES, France.
+- Hopae: Digital identity wallet, KYC, South Korea.
+- Authologic: Global eID Hub, KYC conversion, Poland.
+- Trinsic: Verifiable credentials + eID, USA.
+- DigiTech Consult/DRUID: AI chatbot + Evrotrust integration.
+- DSK Bank, Telenor, A1, Mastercard: Listed as trusted clients.
+
+=== INTEGRATION OPTIONS ===
+- API (REST): Developer-ready, full control, any tech stack.
+- Web SDK: Embed directly in web applications.
+- Mobile SDK: Native iOS/Android or React Native.
+- White-label: Full UX customization under partner brand.
+- Digital Services Portal: Zero-code, no dev work required.
+Pricing model varies: some partners resell Evrotrust directly, others are platform-based (client buys from them).
+
+=== BULGARIAN LAW (ZEDEUU) AND eIDAS ===
+` + _lawText + `
+
+=== RULES ===
+1. Answer ONLY in English.
+2. Answer questions about ANY aspect of this page: partners, categories, services, integrations, business models, regions, law.
+3. When answering law questions, cite the specific article (e.g. "Per Art. 25(2) of eIDAS..." or "Under Art. 13 of ZEDEUU...").
+4. Be concise, accurate, and helpful. Format with bold for key terms where useful.
+5. If asked about a specific partner, give their category, integration type, use case, business model, and region.
+6. Do NOT give legal advice — only explain what the text says.
+7. If a question is completely outside the scope of Evrotrust/eIDAS/partners, say so politely.`;
+
+window.openZedeuPanel = function(){
+  document.getElementById('zedeu-overlay').classList.add('open');
+  setTimeout(function(){ document.getElementById('zedeu-q').focus(); }, 200);
+};
+window.closeZedeuPanel = function(){
+  document.getElementById('zedeu-overlay').classList.remove('open');
+};
+window.closeZedeuIfOutside = function(e){
+  if(e.target === document.getElementById('zedeu-overlay')) closeZedeuPanel();
+};
+window.zedeuAsk = function(q){
+  document.getElementById('zedeu-q').value = q;
+  zedeuSubmit();
+};
+
+window.zedeuSubmit = async function(){
+  var input = document.getElementById('zedeu-q');
+  var q = (input.value || '').trim();
+  if(!q) return;
+  input.value = '';
+
+  var chat = document.getElementById('zedeu-chat');
+  var welcome = chat.querySelector('.zedeu-welcome');
+  if(welcome) welcome.remove();
+
+  var uDiv = document.createElement('div');
+  uDiv.className = 'zedeu-msg user';
+  uDiv.textContent = q;
+  chat.appendChild(uDiv);
+
+  var tDiv = document.createElement('div');
+  tDiv.className = 'zedeu-msg thinking';
+  tDiv.textContent = 'Searching…';
+  chat.appendChild(tDiv);
+  chat.scrollTop = chat.scrollHeight;
+
+  document.getElementById('zedeu-send').disabled = true;
+  _zh.push({role:'user', content: q});
+
+  try {
+    var res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:800,
+        system: _sysPrompt,
+        messages: _zh
+      })
+    });
+    var data = await res.json();
+    var answer = (data.content && data.content.find(function(b){return b.type==='text';}));
+    var text = answer ? answer.text : 'Няма отговор.';
+    _zh.push({role:'assistant', content: text});
+
+    tDiv.remove();
+    var aDiv = document.createElement('div');
+    aDiv.className = 'zedeu-msg bot';
+    aDiv.innerHTML = text
+      .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+      .replace(/(чл\. \d+[а-яa-z]*)/gi,'<strong>$1</strong>')
+      .replace(/\n\n/g,'</p><p style="margin-top:7px">')
+      .replace(/\n/g,'<br>');
+    chat.appendChild(aDiv);
+  } catch(e) {
+    tDiv.remove();
+    var eDiv = document.createElement('div');
+    eDiv.className = 'zedeu-msg error';
+    eDiv.textContent = 'Connection error. Please try again.';
+    chat.appendChild(eDiv);
+  }
+
+  document.getElementById('zedeu-send').disabled = false;
+  chat.scrollTop = chat.scrollHeight;
+};
+})();
 </script>
 
 </body>
