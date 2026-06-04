@@ -1070,7 +1070,9 @@ body { background: #F4F5F7; font-family:'Space Grotesk','Plus Jakarta Sans','Int
 /* INT PANEL */
 .int-panel.open { animation: slideDown .35s ease both; }
 @keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
-.int-hub-wrap { background: #132742; padding: 3rem 2rem; border-top: 1px solid rgba(255,255,255,.12); }
+.int-hub-wrap { background: #020d1a; padding: 3rem 2rem; border-top: 1px solid rgba(0,184,212,.18); position: relative; overflow: hidden; }
+#int-matrix-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.18; z-index: 0; }
+.int-hub-wrap > * { position: relative; z-index: 1; }
 .int-hub-header { max-width: 860px; margin: 0 auto 2rem; text-align: center; }
 .int-hub-eyebrow { font-size: .6rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #00B8D4; margin-bottom: .5rem; }
 .int-hub-title { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
@@ -3288,6 +3290,11 @@ body.int-open .hero-btn-integration {
       eIDAS Regulation
       <span style="font-size:.65rem;opacity:.7;margin-left:2px">EU 910/2014</span>
     </button>
+    <button class="hero-btn-secondary" id="cert-issue-btn" onclick="document.getElementById('cert-overlay').classList.add('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4M15 15h2"/></svg>
+      Issue Certificate
+      <span style="font-size:.65rem;opacity:.7;margin-left:2px">QES · QSCD</span>
+    </button>
   </div>
 
 <!-- eIDAS INFO PANEL -->
@@ -3296,29 +3303,30 @@ body.int-open .hero-btn-integration {
 #eidas-overlay.open{display:flex!important}
 #eidas-panel{width:100%;max-width:760px;background:#fff;border-radius:18px;box-shadow:0 24px 72px rgba(9,30,66,.28);overflow:hidden;margin:auto;display:flex;flex-direction:column;max-height:calc(100vh - 96px)}
 #eidas-panel h2{margin:0;font-size:1.1rem;font-weight:800;color:#fff}
-#eidas-panel-body{flex:1;overflow-y:auto;padding:1.25rem 1.5rem 1.5rem}
+#eidas-panel-body{flex:1;overflow-y:auto;padding:.9rem 1.5rem 1.2rem;text-align:left}
+#eidas-panel ul,#eidas-panel ol,#eidas-panel p,#eidas-panel li{text-align:left}
 #eidas-panel-body::-webkit-scrollbar{width:4px}
 #eidas-panel-body::-webkit-scrollbar-thumb{background:#DDE3EA;border-radius:4px}
-.ep-section{border-bottom:1px solid #EBECF0;padding-bottom:.9rem;margin-bottom:.9rem}
+.ep-section{border-bottom:1px solid #EBECF0;padding-bottom:.6rem;margin-bottom:.6rem}
 .ep-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.ep-section-title{font-size:.75rem;font-weight:800;color:#0052CC;text-transform:uppercase;letter-spacing:.07em;margin:0 0 .6rem;display:flex;align-items:center;gap:6px}
+.ep-section-title{font-size:.75rem;font-weight:800;color:#0052CC;text-transform:uppercase;letter-spacing:.07em;margin:0 0 .4rem;display:flex;align-items:center;gap:6px}
 .ep-section-title .ep-icon{font-size:1rem}
-.ep-section p,.ep-section li{font-size:.81rem;color:#344563;line-height:1.7;margin:0 0 .35rem}
-.ep-section ul{padding-left:1.15rem;margin:.25rem 0 .5rem}
+.ep-section p,.ep-section li{font-size:.81rem;color:#344563;line-height:1.5;margin:0 0 .2rem}
+.ep-section ul{padding-left:1.15rem;margin:.15rem 0 .3rem}
 .ep-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.66rem;font-weight:700;background:#EAF2FF;color:#0052CC;margin-right:4px;margin-bottom:4px}
-.ep-card-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.5rem;margin:.5rem 0}
-.ep-card{background:#F8F9FF;border:1px solid #E0E8FF;border-radius:9px;padding:.7rem .85rem}
+.ep-card-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.4rem;margin:.35rem 0}
+.ep-card{background:#F8F9FF;border:1px solid #E0E8FF;border-radius:9px;padding:.55rem .75rem}
 .ep-card.highlight{background:#EAF2FF;border-color:#B3D4FF}
-.ep-card-title{font-size:.71rem;font-weight:700;color:#0052CC;margin-bottom:.3rem}
-.ep-card p{font-size:.7rem;color:#344563;margin:0;line-height:1.55}
-.ep-steps{display:flex;flex-direction:column;gap:.4rem}
+.ep-card-title{font-size:.71rem;font-weight:700;color:#0052CC;margin-bottom:.2rem}
+.ep-card p{font-size:.7rem;color:#344563;margin:0;line-height:1.45}
+.ep-steps{display:flex;flex-direction:column;gap:.3rem}
 .ep-step{display:flex;align-items:flex-start;gap:.6rem}
 .ep-step-num{background:#0052CC;color:#fff;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:800;flex-shrink:0;margin-top:1px}
-.ep-step p{font-size:.72rem;color:#344563;margin:0;line-height:1.55}
+.ep-step p{font-size:.72rem;color:#344563;margin:0;line-height:1.45}
 .ep-grid2{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
-.ep-mini-card{background:#fff;border:1px solid #DDE3EA;border-radius:7px;padding:.6rem .8rem;display:flex;gap:.5rem;align-items:flex-start}
+.ep-mini-card{background:#fff;border:1px solid #DDE3EA;border-radius:7px;padding:.45rem .65rem;display:flex;gap:.5rem;align-items:flex-start}
 .ep-mini-card-title{font-size:.7rem;font-weight:700;color:#344563}
-.ep-mini-card p{font-size:.68rem;color:#6B778C;margin:.2rem 0 0;line-height:1.5}
+.ep-mini-card p{font-size:.68rem;color:#6B778C;margin:.1rem 0 0;line-height:1.4}
 .ep-search-wrap{padding:.75rem 1.5rem;border-bottom:1px solid #EBECF0;background:#FAFBFC}
 .ep-search-inner{position:relative}
 .ep-search-inner svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:#8993A4;fill:none;pointer-events:none}
@@ -3336,16 +3344,34 @@ mark.ep-hl{background:#FFF3CD;color:inherit;border-radius:2px;padding:0 1px}
       <h2>eIDAS Regulation — EU 910/2014</h2>
       <div style="font-size:.7rem;color:rgba(255,255,255,.6);margin-top:2px">Electronic Identification and Trust Services for Electronic Transactions in the Internal Market</div>
     </div>
-    <button onclick="document.getElementById('eidas-overlay').classList.remove('open');document.getElementById('eidas-search').value='';eidasSearch('')" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">✕</button>
+    <button onclick="document.getElementById('eidas-overlay').classList.remove('open');document.getElementById('eidas-search').value='';eidasSearch('');document.querySelectorAll('.ep-chip').forEach(function(c){c.classList.remove('ep-chip-active')});" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">✕</button>
   </div>
   <!-- Search -->
   <div class="ep-search-wrap">
     <div class="ep-search-inner">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="eidas-search" type="text" placeholder="Search articles, terms, concepts…" oninput="eidasSearch(this.value)">
+      <input id="eidas-search" type="text" placeholder="Try: QES, Art. 25, handwritten…" oninput="eidasSearch(this.value)">
     </div>
   </div>
   <!-- Body -->
+  <!-- Chips -->
+  <div id="eidas-chips" style="padding:.4rem 1.5rem .5rem;border-bottom:1px solid #EBECF0;background:#FAFBFC;display:flex;flex-wrap:wrap;gap:5px;align-items:center">
+    <span style="font-size:.62rem;font-weight:700;color:#8993A4;text-transform:uppercase;letter-spacing:.06em;flex-shrink:0;margin-right:2px">Try:</span>
+    <button class="ep-chip" onclick="eidasChip(this,'QES')">QES</button>
+    <button class="ep-chip" onclick="eidasChip(this,'handwritten')">=&nbsp;handwritten</button>
+    <button class="ep-chip" onclick="eidasChip(this,'Art. 25')">Art.&nbsp;25</button>
+    <button class="ep-chip" onclick="eidasChip(this,'QTSP')">QTSP</button>
+    <button class="ep-chip" onclick="eidasChip(this,'QSCD')">QSCD</button>
+    <button class="ep-chip" onclick="eidasChip(this,'liability')">liability</button>
+    <button class="ep-chip" onclick="eidasChip(this,'LoA High')">LoA High</button>
+    <button class="ep-chip" onclick="eidasChip(this,'timestamp')">timestamp</button>
+    <button class="ep-chip" onclick="eidasChip(this,'cross-border')">cross-border</button>
+    <button class="ep-chip" onclick="eidasChip(this,'eDelivery')">eDelivery</button>
+    <button class="ep-chip" onclick="eidasChip(this,'audit')">audit</button>
+    <button class="ep-chip" onclick="eidasChip(this,'revocation')">revocation</button>
+    <button class="ep-chip" onclick="eidasChip(this,'EUDIW')">EUDIW</button>
+    <button class="ep-chip" onclick="eidasChip(this,'AML')">AML</button>
+  </div>
   <div id="eidas-panel-body">
 
     <div id="ep-no-results" class="ep-no-results" style="display:none">No results found.</div>
@@ -3532,6 +3558,246 @@ mark.ep-hl{background:#FFF3CD;color:inherit;border-radius:2px;padding:0 1px}
   </div>
 </div>
 </div>
+<!-- ═══════════════════════════════════════════════════════════
+     CERTIFICATE ISSUANCE OVERLAY
+══════════════════════════════════════════════════════════ -->
+<div id="cert-overlay" style="position:fixed;inset:0;background:rgba(9,30,66,.55);z-index:700;display:none;align-items:flex-start;justify-content:center;padding:48px 16px 16px;overflow-y:auto" onclick="if(event.target===this)this.classList.remove('open')">
+<style>
+#cert-overlay.open{display:flex!important}
+#cert-panel{width:100%;max-width:800px;background:#fff;border-radius:20px;box-shadow:0 28px 80px rgba(9,30,66,.32);overflow:hidden;margin:auto;display:flex;flex-direction:column;max-height:calc(100vh - 96px)}
+#cert-panel-body{flex:1;overflow-y:auto;padding:0}
+#cert-panel-body::-webkit-scrollbar{width:4px}
+#cert-panel-body::-webkit-scrollbar-thumb{background:#DDE3EA;border-radius:4px}
+/* VIDEO SECTION */
+.cert-video-wrap{background:#000;position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
+.cert-video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+/* INTRO */
+.cert-intro{padding:1rem 1.5rem .875rem;border-bottom:1px solid #EBECF0}
+.cert-intro-title{font-size:.95rem;font-weight:800;color:#0B2A4A !important;letter-spacing:-.02em;margin:0 0 .3rem}
+.cert-intro-sub{font-size:.78rem;color:#5A6B7B !important;line-height:1.6;margin:0}
+/* STEP JOURNEY */
+.cert-steps-wrap{padding:1rem 1.5rem}
+.cert-steps-title{font-size:.68rem;font-weight:800;color:#0052CC;text-transform:uppercase;letter-spacing:.1em;margin:0 0 .875rem;display:flex;align-items:center;gap:6px}
+.cert-steps-title::after{content:'';flex:1;height:1px;background:#EAF2FF}
+/* Vertical step timeline */
+.cert-timeline{display:flex;flex-direction:column;gap:0}
+.cert-step{display:flex;gap:.75rem;position:relative}
+.cert-step:not(:last-child)::before{content:'';position:absolute;left:17px;top:36px;bottom:0;width:2px;background:linear-gradient(180deg,#0052CC 0%,#E0E8FF 100%);z-index:0}
+.cert-step-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;position:relative;z-index:1}
+.cert-step-num{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#0052CC,#0B2A4A);color:#fff !important;font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,82,204,.3);flex-shrink:0}
+.cert-step-body{flex:1;padding-bottom:1rem}
+.cert-step:last-child .cert-step-body{padding-bottom:0}
+.cert-step-heading{font-size:.82rem;font-weight:800;color:#0B2A4A !important;margin:4px 0 .2rem;letter-spacing:-.01em;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.cert-step-heading .cert-step-badge{font-size:.58rem;font-weight:700;padding:2px 6px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase}
+.cert-step-badge.art{background:#EAF2FF;color:#0052CC !important}
+.cert-step-badge.tech{background:#E3FCEF;color:#006644 !important}
+.cert-step-badge.crypto{background:#FFF3CD;color:#8B4700 !important}
+.cert-step-text{font-size:.77rem;color:#344563 !important;line-height:1.6;margin:0 0 .3rem}
+/* Sub-steps inside a cert step */
+.cert-substeps{display:flex;flex-direction:column;gap:.2rem;margin:.2rem 0 .3rem}
+.cert-substep{display:flex;align-items:flex-start;gap:.4rem;font-size:.75rem;color:#344563 !important;line-height:1.5}
+.cert-substep-dot{width:5px;height:5px;border-radius:50%;background:#0052CC;flex-shrink:0;margin-top:5px}
+/* Highlight box */
+.cert-highlight{background:#F4F9FF;border:1.5px solid #C5DCFF;border-radius:8px;padding:.5rem .75rem;font-size:.73rem;color:#0B2A4A !important;line-height:1.6;margin:.3rem 0 0;display:flex;gap:.5rem;align-items:flex-start}
+.cert-highlight-icon{font-size:.9rem;flex-shrink:0;margin-top:1px}
+/* Technical chip row */
+.cert-chips{display:flex;flex-wrap:wrap;gap:.25rem;margin:.35rem 0 0}
+.cert-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:20px;font-size:.61rem;font-weight:700;letter-spacing:.03em}
+.cert-chip.blue{background:#EAF2FF;color:#0052CC !important}
+.cert-chip.green{background:#E3FCEF;color:#006644 !important}
+.cert-chip.gold{background:#FFF8E1;color:#6B4F00 !important}
+/* CTA footer */
+.cert-footer{padding:.875rem 1.5rem 1rem;border-top:1px solid #EBECF0;background:#FAFBFC;display:flex;align-items:center;justify-content:space-between;gap:.875rem;flex-wrap:wrap}
+.cert-footer-note{font-size:.7rem;color:#7A8B9A;line-height:1.5;flex:1;min-width:180px}
+.cert-cta-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;background:linear-gradient(135deg,#00875A 0%,#006644 100%);color:#fff;border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;box-shadow:0 3px 12px rgba(0,135,90,.3);white-space:nowrap}
+.cert-cta-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,135,90,.4)}
+.cert-cta-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;flex-shrink:0}
+/* Animated entrance for steps */
+@keyframes certStepIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+#cert-panel.open .cert-step{animation:certStepIn .35s ease both}
+#cert-panel.open .cert-step:nth-child(1){animation-delay:.05s}
+#cert-panel.open .cert-step:nth-child(2){animation-delay:.12s}
+#cert-panel.open .cert-step:nth-child(3){animation-delay:.19s}
+#cert-panel.open .cert-step:nth-child(4){animation-delay:.26s}
+#cert-panel.open .cert-step:nth-child(5){animation-delay:.33s}
+</style>
+<div id="cert-panel">
+  <!-- Header -->
+  <div style="background:linear-gradient(135deg,#0B2A4A 0%,#00875A 100%);padding:1.1rem 1.75rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+    <div>
+      <div style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:3px">Evrotrust QTSP · eIDAS Art. 24</div>
+      <h2 style="margin:0;font-size:1.1rem;font-weight:800;color:#fff;letter-spacing:-.02em">Qualified Certificate Issuance Process</h2>
+    </div>
+    <button onclick="document.getElementById('cert-overlay').classList.remove('open')" style="width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.12)'">✕</button>
+  </div>
+
+  <div id="cert-panel-body">
+
+    <!-- VIDEO LINK CARD (no iframe — blocked by CSP on GitHub Pages) -->
+    <div style="background:linear-gradient(135deg,#061828 0%,#0B2A4A 100%);padding:1.25rem 1.75rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      <div style="width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="24" height="24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="#fff" stroke="none"/></svg>
+      </div>
+      <div style="flex:1;min-width:180px">
+        <div style="font-size:.73rem;font-weight:800;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">Recommended Video</div>
+        <div style="font-size:.92rem;font-weight:700;color:#fff;margin-bottom:2px">What are Digital Signatures?</div>
+        <div style="font-size:.73rem;color:rgba(255,255,255,.5)">Computerphile · YouTube · 8 min.</div>
+      </div>
+      <a href="https://www.youtube.com/watch?v=s22eJ1eVLTU" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:8px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:700;text-decoration:none;transition:background .15s;white-space:nowrap" onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.12)'">
+        Watch →
+      </a>
+    </div>
+
+    <!-- INTRO -->
+    <div class="cert-intro">
+      <p class="cert-intro-title">How does Evrotrust issue a Qualified Electronic Signature?</p>
+      <p class="cert-intro-sub">The entire process takes place in the mobile app — no physical office, no paperwork. The qualified certificate is stored in a cloud-based QSCD (Hardware Security Module) and is valid across the EU under eIDAS Regulation (EU 910/2014). The private key <strong>never leaves</strong> the secure hardware environment.</p>
+    </div>
+
+    <!-- STEP-BY-STEP TIMELINE -->
+    <div class="cert-steps-wrap">
+      <div class="cert-steps-title">Issuance Steps</div>
+      <div class="cert-timeline">
+
+        <!-- STEP 1 -->
+        <div class="cert-step">
+          <div class="cert-step-left">
+            <div class="cert-step-num">1</div>
+          </div>
+          <div class="cert-step-body">
+            <div class="cert-step-heading">
+              📲 Download the App
+              <span class="cert-step-badge tech">Mobile</span>
+            </div>
+            <p class="cert-step-text">The user downloads Evrotrust from the <strong>App Store</strong> or <strong>Google Play</strong>. The app is free and available for iOS and Android. It acts as both a digital identity wallet and a signing instrument.</p>
+            <div class="cert-chips">
+              <span class="cert-chip blue">iOS · Android</span>
+              <span class="cert-chip green">Free</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="cert-step">
+          <div class="cert-step-left">
+            <div class="cert-step-num">2</div>
+          </div>
+          <div class="cert-step-body">
+            <div class="cert-step-heading">
+              🪪 Registration &amp; Identity Verification
+              <span class="cert-step-badge art">Art. 24 eIDAS</span>
+            </div>
+            <p class="cert-step-text">Evrotrust verifies the user's identity in real time through three parallel mechanisms:</p>
+            <div class="cert-substeps">
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div><strong>Document photo</strong> — national ID or passport (both sides). OCR and authenticity algorithm applied.</div></div>
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div><strong>NFC chip reading</strong> — the app reads the RFID chip in the biometric document and extracts data directly from it (MRZ, photo, date of birth).</div></div>
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div><strong>Selfie + liveness check</strong> — biometric face is compared against the chip photograph via an AI model resistant to deepfake and replay attacks.</div></div>
+            </div>
+            <div class="cert-highlight">
+              <span class="cert-highlight-icon">⚖️</span>
+              <span>This is the <strong>Art. 24 eIDAS</strong> "face-to-face equivalent" verification process required before issuing a qualified certificate. Confirmed by the supervisory body.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="cert-step">
+          <div class="cert-step-left">
+            <div class="cert-step-num">3</div>
+          </div>
+          <div class="cert-step-body">
+            <div class="cert-step-heading">
+              🔑 Key Pair Generation
+              <span class="cert-step-badge crypto">Cryptography</span>
+            </div>
+            <p class="cert-step-text">Upon successful verification the system generates an <strong>asymmetric key pair</strong> (RSA 2048 or ECDSA P-256) directly inside the cloud QSCD:</p>
+            <div class="cert-substeps">
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div><strong>Private key</strong> — generated and locked inside Evrotrust's remote <strong>HSM</strong> (Hardware Security Module). The user never sees or touches it.</div></div>
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div><strong>Public key</strong> — sent to Evrotrust's Certification Authority (CA) for inclusion in the certificate.</div></div>
+            </div>
+            <div class="cert-highlight">
+              <span class="cert-highlight-icon">🛡️</span>
+              <span>The cloud QSCD is certified to <strong>EN 419 241-2</strong> and <strong>Common Criteria EAL 4+</strong>, meeting the requirements of <strong>Annex II of eIDAS</strong>.</span>
+            </div>
+            <div class="cert-chips">
+              <span class="cert-chip gold">RSA-2048 / ECDSA P-256</span>
+              <span class="cert-chip blue">Remote HSM · QSCD</span>
+              <span class="cert-chip green">EN 419 241-2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="cert-step">
+          <div class="cert-step-left">
+            <div class="cert-step-num">4</div>
+          </div>
+          <div class="cert-step-body">
+            <div class="cert-step-heading">
+              📜 Certificate Issuance
+              <span class="cert-step-badge art">ETSI EN 319 412</span>
+            </div>
+            <p class="cert-step-text">Evrotrust's CA binds the verified identity to the public key and issues an <strong>X.509 Qualified Certificate</strong> containing:</p>
+            <div class="cert-substeps">
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div>Full name of the holder (Latin + Cyrillic)</div></div>
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div>Personal ID number or date of birth</div></div>
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div>Unique identifier (serialNumber)</div></div>
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div>Validity period (typically 1–3 years)</div></div>
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div>Policy OID with QSCD indication (id-etsi-qcs-QcSSCD)</div></div>
+            </div>
+            <div class="cert-chips">
+              <span class="cert-chip blue">X.509 v3</span>
+              <span class="cert-chip blue">ETSI EN 319 412</span>
+              <span class="cert-chip gold">Annex I eIDAS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="cert-step">
+          <div class="cert-step-left">
+            <div class="cert-step-num">5</div>
+          </div>
+          <div class="cert-step-body">
+            <div class="cert-step-heading">
+              ✅ Activation &amp; Signing
+              <span class="cert-step-badge tech">Runtime</span>
+            </div>
+            <p class="cert-step-text">The user receives a push notification. The certificate is ready to use:</p>
+            <div class="cert-substeps">
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div>For every signing operation the user <strong>approves via biometrics or PIN</strong> in the app.</div></div>
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div>Approval <strong>unlocks the private key in the HSM for that single operation only</strong> — using Signature Activation Data (SAD).</div></div>
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div>The signature is generated entirely within the HSM — <strong>the key never leaves the secure environment</strong>.</div></div>
+              <div class="cert-substep"><div class="cert-substep-dot"></div><div>The result is a <strong>CAdES, XAdES or PAdES signature</strong> with an embedded RFC 3161 timestamp — legally equivalent to a handwritten signature across the EU.</div></div>
+            </div>
+            <div class="cert-highlight">
+              <span class="cert-highlight-icon">💡</span>
+              <span>Once verified, the user can sign <strong>unlimited documents</strong> with no re-identification. Just 1 Trust Unit per signature (~€0.20–0.30).</span>
+            </div>
+            <div class="cert-chips">
+              <span class="cert-chip green">CAdES · XAdES · PAdES</span>
+              <span class="cert-chip blue">RFC 3161 Timestamp</span>
+              <span class="cert-chip gold">Valid in all 27 EU Member States</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end cert-timeline -->
+    </div><!-- end cert-steps-wrap -->
+
+    <!-- FOOTER CTA -->
+    <div class="cert-footer">
+      <p class="cert-footer-note">Certificate issued by Evrotrust Technologies AD — Bulgaria's only notified QTSP, registered on the EU Trusted List (EUTL). Supervised by the Communications Regulation Commission (CRC).</p>
+      <a href="https://evrotrust.com" target="_blank" rel="noopener" class="cert-cta-btn">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Get Your Certificate →
+      </a>
+    </div>
+
+  </div><!-- end cert-panel-body -->
+</div><!-- end cert-panel -->
+</div><!-- end cert-overlay -->
+
 <script>
 function eidasSearch(q){
   q = q.trim().toLowerCase();
@@ -3547,7 +3813,30 @@ function eidasSearch(q){
     }
   });
   document.getElementById('ep-no-results').style.display = (!q||any) ? 'none' : 'block';
+  // sync chip active state
+  document.querySelectorAll('.ep-chip').forEach(function(c){
+    c.classList.remove('ep-chip-active');
+  });
 }
+function eidasChip(el,term){
+  var inp = document.getElementById('eidas-search');
+  // toggle off if already active
+  if(el.classList.contains('ep-chip-active')){
+    inp.value=''; eidasSearch('');
+    el.classList.remove('ep-chip-active');
+    return;
+  }
+  document.querySelectorAll('.ep-chip').forEach(function(c){c.classList.remove('ep-chip-active');});
+  el.classList.add('ep-chip-active');
+  inp.value = term;
+  eidasSearch(term);
+}
+// Add chip CSS
+(function(){
+  var s=document.createElement('style');
+  s.textContent='.ep-chip{background:#EAF2FF;border:1px solid #B3D4FF;border-radius:20px;padding:2px 9px;font-size:.67rem;font-weight:600;color:#0052CC;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:"Plus Jakarta Sans",sans-serif;line-height:1.6}.ep-chip:hover{background:#0052CC;color:#fff;border-color:#0052CC}.ep-chip.ep-chip-active{background:#0052CC;color:#fff;border-color:#0052CC}';
+  document.head.appendChild(s);
+})();
 </script>
 
   <div class="hero-stats">
@@ -3645,6 +3934,7 @@ function heroSearch(){
 <!-- INTEGRATION PANEL -->
 <div class="int-panel" id="int-panel" style="display:none">
   <div class="int-hub-wrap">
+    <canvas id="int-matrix-canvas"></canvas>
     <div class="int-hub-header">
       <div class="int-hub-eyebrow">Developer Tools</div>
       <h2 class="int-hub-title">Choose Your Integration Path</h2>
@@ -3902,6 +4192,7 @@ function heroSearch(){
       </div>
     </div>
   </div>
+  </div><!-- /int-hub-wrap -->
 </div>
 
 <!-- CONTROLS -->
@@ -5401,14 +5692,67 @@ function deleteMNote(id){
   try{localStorage.setItem('et-meeting-notes',JSON.stringify(_meetingNotes));}catch(e){}
   updateMSavedCount();renderMSaved();
 }
+/* ── Matrix canvas background for integration panel ── */
+(function(){
+  var _matrixRAF = null;
+  function startMatrix(){
+    var c = document.getElementById('int-matrix-canvas');
+    if(!c) return;
+    var ctx = c.getContext('2d');
+    var wrap = c.parentElement;
+    function resize(){
+      c.width = wrap.offsetWidth;
+      c.height = wrap.offsetHeight;
+    }
+    resize();
+    var resizeObs = new ResizeObserver(resize);
+    resizeObs.observe(wrap);
+    var fontSize = 13;
+    var chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ'.split('');
+    var cols, drops;
+    function initDrops(){
+      cols = Math.floor(c.width / fontSize);
+      drops = [];
+      for(var i=0;i<cols;i++) drops[i] = Math.random() * -50;
+    }
+    initDrops();
+    function draw(){
+      ctx.fillStyle = 'rgba(2,13,26,0.18)';
+      ctx.fillRect(0,0,c.width,c.height);
+      for(var i=0;i<drops.length;i++){
+        var ch = chars[Math.floor(Math.random()*chars.length)];
+        var y = drops[i]*fontSize;
+        /* leading char brighter */
+        ctx.fillStyle = 'rgba(0,184,212,0.9)';
+        ctx.font = fontSize+'px monospace';
+        ctx.fillText(ch, i*fontSize, y);
+        /* trail chars */
+        ctx.fillStyle = 'rgba(0,82,204,0.55)';
+        ctx.fillText(chars[Math.floor(Math.random()*chars.length)], i*fontSize, y - fontSize);
+        ctx.fillStyle = 'rgba(0,52,130,0.3)';
+        ctx.fillText(chars[Math.floor(Math.random()*chars.length)], i*fontSize, y - fontSize*2);
+        if(y > c.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i] += 0.45;
+      }
+      _matrixRAF = requestAnimationFrame(draw);
+    }
+    if(_matrixRAF) cancelAnimationFrame(_matrixRAF);
+    draw();
+  }
+  window._startMatrix = startMatrix;
+})();
+
 function toggleIntHub(){
   _intOpen = !_intOpen;
   var panel = document.getElementById('int-panel');
   var arrow = document.getElementById('int-trigger-arrow');
   if(!panel) return;
   panel.style.display = _intOpen ? 'block' : 'none';
-  if(_intOpen){ panel.classList.add('open'); setTimeout(function(){ panel.scrollIntoView({behavior:'smooth',block:'start'}); }, 80); }
-  else panel.classList.remove('open');
+  if(_intOpen){
+    panel.classList.add('open');
+    setTimeout(function(){ panel.scrollIntoView({behavior:'smooth',block:'start'}); }, 80);
+    setTimeout(function(){ if(window._startMatrix) window._startMatrix(); }, 100);
+  } else panel.classList.remove('open');
   if(arrow) arrow.classList.toggle('open', _intOpen);
 }
 function toggleEidLevels(){
