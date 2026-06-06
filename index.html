@@ -1070,9 +1070,9 @@ body { background: #F4F5F7; font-family:'Space Grotesk','Plus Jakarta Sans','Int
 /* INT PANEL */
 .int-panel.open { animation: slideDown .35s ease both; }
 @keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
-.int-hub-wrap { background: #020d1a; padding: 3rem 2rem; border-top: 1px solid rgba(0,184,212,.18); position: relative; overflow: hidden; }
-#int-matrix-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.18; z-index: 0; }
-.int-hub-wrap > * { position: relative; z-index: 1; }
+.int-hub-wrap { background: #050a0f; padding: 3rem 2rem; border-top: 1px solid rgba(255,255,255,.12); position: relative; overflow: hidden; }
+#int-matrix-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.22; pointer-events: none; z-index: 0; }
+.int-hub-header, .int-hub-cards, .int-hub-wrap > *:not(#int-matrix-canvas) { position: relative; z-index: 1; }
 .int-hub-header { max-width: 860px; margin: 0 auto 2rem; text-align: center; }
 .int-hub-eyebrow { font-size: .6rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #00B8D4; margin-bottom: .5rem; }
 .int-hub-title { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
@@ -3335,6 +3335,12 @@ body.int-open .hero-btn-integration {
 #eidas-search::placeholder{color:#A5ADBA}
 .ep-no-results{text-align:center;padding:2rem;color:#8993A4;font-size:.85rem}
 .ep-section.hidden{display:none}
+.faq-item details summary:hover{color:#0052CC}
+.faq-item details[open] summary{color:#0052CC}
+.faq-item details summary::marker{content:''}
+.faq-item details summary{list-style:none;display:flex;align-items:flex-start;gap:6px}
+.faq-item details summary::before{content:'▸';color:#0052CC;flex-shrink:0;margin-top:1px;transition:transform .15s}
+.faq-item details[open] summary::before{transform:rotate(90deg)}
 mark.ep-hl{background:#FFF3CD;color:inherit;border-radius:2px;padding:0 1px}
 </style>
 <div id="eidas-panel">
@@ -3344,13 +3350,18 @@ mark.ep-hl{background:#FFF3CD;color:inherit;border-radius:2px;padding:0 1px}
       <h2>eIDAS Regulation — EU 910/2014</h2>
       <div style="font-size:.7rem;color:rgba(255,255,255,.6);margin-top:2px">Electronic Identification and Trust Services for Electronic Transactions in the Internal Market</div>
     </div>
-    <button onclick="document.getElementById('eidas-overlay').classList.remove('open');document.getElementById('eidas-search').value='';eidasSearch('');document.querySelectorAll('.ep-chip').forEach(function(c){c.classList.remove('ep-chip-active')});" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">✕</button>
+    <button onclick="document.getElementById('eidas-overlay').classList.remove('open');document.getElementById('eidas-search').value='';eidasSearch('');eidasSwitchTab('regulation');document.querySelectorAll('.ep-chip').forEach(function(c){c.classList.remove('ep-chip-active')});" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">✕</button>
+  </div>
+  <!-- Tab Nav -->
+  <div id="eidas-tabs" style="display:flex;background:#0A2463;flex-shrink:0;border-bottom:2px solid #0052CC">
+    <button id="tab-regulation" onclick="eidasSwitchTab('regulation')" style="flex:1;padding:.55rem 1rem;font-size:.78rem;font-weight:700;color:#fff;background:#0052CC;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;border-bottom:2px solid #4C9AFF;transition:all .15s">📋 Regulation</button>
+    <button id="tab-faq" onclick="eidasSwitchTab('faq')" style="flex:1;padding:.55rem 1rem;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.6);background:transparent;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;border-bottom:2px solid transparent;transition:all .15s">❓ FAQ</button>
   </div>
   <!-- Search -->
   <div class="ep-search-wrap">
     <div class="ep-search-inner">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="eidas-search" type="text" placeholder="Try: QES, Art. 25, handwritten…" oninput="eidasSearch(this.value)">
+      <input id="eidas-search" type="text" placeholder="Try: QES, Art. 25, handwritten…" oninput="document.getElementById('eidas-faq-body').style.display==='none'?eidasSearch(this.value):faqSearch(this.value)">
     </div>
   </div>
   <!-- Body -->
@@ -3556,6 +3567,245 @@ mark.ep-hl{background:#FFF3CD;color:inherit;border-radius:2px;padding:0 1px}
     </div>
 
   </div>
+
+  <!-- FAQ TAB PANEL -->
+  <div id="eidas-faq-body" style="display:none;flex:1;overflow-y:auto;padding:.9rem 1.5rem 1.2rem;text-align:left">
+    <div id="faq-no-results" style="display:none;padding:2rem;text-align:center;color:#6B778C;font-size:.84rem">No FAQ results found.</div>
+
+    <!-- Category: Comparisons -->
+    <div class="ep-section faq-item" data-faq-keywords="advanced qualified esignature aes qes providers difference trusted list qtsp cross-border eu member states evrotrust certificate handwritten">
+      <div class="ep-section-title"><span class="ep-icon">🔍</span> Trusted Providers for Advanced and Qualified eSignatures</div>
+      <div class="faq-badge" style="font-size:.62rem;font-weight:700;color:#0052CC;background:#EAF2FF;border:1px solid #B3D4FF;border-radius:12px;padding:1px 8px;display:inline-block;margin-bottom:.5rem">Comparisons</div>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What is the difference between an advanced and a qualified electronic signature?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">An advanced electronic signature (AES) is uniquely linked to the signer and created using data under their sole control. A qualified electronic signature (QES) goes further — it uses a qualified certificate from a QTSP and a qualified signature creation device. Under eIDAS, only a QES has the legal equivalence of a handwritten signature across all EU member states.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What makes a provider "qualified" for issuing electronic signatures?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">A qualified trust service provider must be officially recognized and listed on a national Trusted List within the EU, as required by eIDAS. These providers undergo rigorous conformity assessments by accredited auditing bodies before receiving qualified status. Being on a national Trusted List is the key indicator that a provider meets the legal and technical standards.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">How can I verify that a provider is an officially recognized QTSP?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Check the EU Trusted Lists portal maintained by the European Commission. Each EU member state publishes its own Trusted List, and these are aggregated into a single searchable database. If a provider does not appear on this list, they cannot legally issue qualified electronic signatures under eIDAS.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Is Evrotrust a qualified trust service provider?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes. Evrotrust is a QTSP listed on the Bulgarian national Trusted List and recognized across the EU under eIDAS. Evrotrust offers both advanced and qualified electronic signatures, enabling users to sign documents securely with full legal validity. The entire signing process can be completed remotely via mobile.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Can I use an eSignature from one EU country for documents in another?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes. One of the core principles of eIDAS is cross-border recognition: a QES issued by a QTSP in any EU member state must be legally accepted in all others. This makes it important to choose a provider that holds qualified status under eIDAS if you operate across multiple EU jurisdictions.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What do I need to obtain a QES through Evrotrust?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Download the Evrotrust app, complete a remote identity verification, and receive your qualified certificate. The identity verification step is mandatory under eIDAS rules — a qualified certificate must be tied to a verified individual. Once confirmed, you can sign documents directly through the app.</p>
+      </details>
+    </div>
+
+    <!-- Free vs Paid -->
+    <div class="ep-section faq-item" data-faq-keywords="free paid cost pricing subscription digital signature ses aes qes evrotrust individual plan hidden fees">
+      <div class="ep-section-title"><span class="ep-icon">💰</span> Free vs. Paid Digital Signature Options Explained</div>
+      <div class="faq-badge" style="font-size:.62rem;font-weight:700;color:#0052CC;background:#EAF2FF;border:1px solid #B3D4FF;border-radius:12px;padding:1px 8px;display:inline-block;margin-bottom:.5rem">Comparisons</div>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Are there genuinely free options for electronic signatures?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Some providers offer free tiers for basic signatures, typically limited to a small number of documents per month. However, truly free options almost always cover only simple electronic signatures (SES), which carry the lowest legal weight. If your use case requires AES or QES, you will generally need a paid service.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Why do qualified electronic signatures always involve a cost?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Issuing a QES requires QTSP status under eIDAS, which involves ongoing audits, infrastructure maintenance, and identity verification. These operational requirements have real costs. There is no compliant pathway to offer a legally valid QES entirely for free.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Can individuals access qualified eSignatures without a business subscription?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes. Evrotrust provides services accessible to individual users through the app, allowing personal use of AES and QES. Users also start with 3 free qualified electronic signatures that don't expire unless used. Pricing for individual plans is generally lower than enterprise tiers, though fees still apply due to the regulated nature of qualified certificates.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Is a free eSignature legally valid?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">A free electronic signature can be legally valid in certain contexts, but its enforceability depends on jurisdiction, document type, and applicable law. Under eIDAS, a simple electronic signature is not automatically granted legal equivalence to a handwritten signature — that status is reserved for the QES. For regulated or high-value documents, a paid QES or AES is typically required.</p>
+      </details>
+    </div>
+
+    <!-- How QTSPs Stay Compliant -->
+    <div class="ep-section faq-item" data-faq-keywords="qtsp compliance eu regulations audit etsi identity verification supervisory body security incidents gdpr data protection crc bulgaria">
+      <div class="ep-section-title"><span class="ep-icon">🏛️</span> How QTSPs Stay Compliant with EU Regulations</div>
+      <div class="faq-badge" style="font-size:.62rem;font-weight:700;color:#057A55;background:#E3FCEF;border:1px solid #ABF5D1;border-radius:12px;padding:1px 8px;display:inline-block;margin-bottom:.5rem">Security &amp; Compliance</div>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What does it mean for a provider to be "qualified" under EU law?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">A QTSP is an organization officially recognized under eIDAS to deliver trust services with the highest legal assurance. Qualification means the provider meets strict legal, technical, and organizational requirements verified by national supervisory authorities. Only providers that pass this process can issue qualified trust services.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Which EU regulation governs QTSPs?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">QTSPs operate primarily under Regulation (EU) No 910/2014 (eIDAS), which defines how electronic signatures, seals, timestamps, eDelivery, and eID must be issued and managed. eIDAS ensures that trust services are legally valid and mutually recognized across all EU member states. Compliance is mandatory.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25sum 0">What technical standards must QTSPs follow?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">QTSPs must implement specific European technical standards, mainly developed by ETSI. These cover cryptographic algorithms and key management, secure signature creation devices, identity verification processes, and system availability and incident handling.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Who supervises QTSPs in Bulgaria?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Each EU member state appoints a national supervisory authority. In Bulgaria, where Evrotrust is based, the local regulator is the CRC (Communications Regulation Commission). This body monitors compliance, reviews audit reports, and has the power to investigate incidents or revoke qualified status.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Why does compliance matter for users of trust services?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Compliance ensures that trust services have full legal effect across the EU. Users can rely on qualified electronic signatures, eID, and eDelivery without legal uncertainty. It also guarantees a high level of security against fraud. For end users and organizations, compliance translates into trust and legal certainty.</p>
+      </details>
+    </div>
+
+    <!-- Legal Validity -->
+    <div class="ep-section faq-item" data-faq-keywords="legal validity evrotrust esignature eu recognized cross-border handwritten equivalent qes court challenge legal effect all member states">
+      <div class="ep-section-title"><span class="ep-icon">⚖️</span> Legal Validity of Evrotrust eSignatures in the EU</div>
+      <div class="faq-badge" style="font-size:.62rem;font-weight:700;color:#057A55;background:#E3FCEF;border:1px solid #ABF5D1;border-radius:12px;padding:1px 8px;display:inline-block;margin-bottom:.5rem">Security &amp; Compliance</div>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Is an Evrotrust eSignature legally recognized in the EU?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes. Evrotrust provides electronic signatures legally recognized across the EU when issued and used in line with eIDAS. Evrotrust issues QES which have the same legal effect as handwritten signatures. This legal recognition applies in all EU member states without the need for additional validation.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Does an Evrotrust QES have the same legal value as a handwritten signature?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes. A QES issued by Evrotrust has the same legal value as a handwritten signature under EU law. A signed electronic document cannot be rejected solely because it is in electronic form. Courts and authorities across the EU must treat it as legally binding.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Do all documents require a QES?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Not all documents legally require a QES, but some do. Simpler agreements may be signed with other forms of electronic signature if national law allows it. However, documents requiring the highest level of legal certainty — such as formal contracts, powers of attorney, or regulated filings — often require a QES.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Can Evrotrust eSignatures be challenged in court?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Like any signature, an electronic signature can be examined in court, but a QES carries strong evidentiary value. Because it is legally equivalent to a handwritten signature, the burden of proof lies with the party challenging it. The cryptographic and regulatory safeguards behind a QES make successful challenges difficult.</p>
+      </details>
+    </div>
+
+    <!-- Legally Binding Options -->
+    <div class="ep-section faq-item" data-faq-keywords="legally binding electronic signature options ses aes qes cloud based legal effect eu countries non-repudiation integrity identity">
+      <div class="ep-section-title"><span class="ep-icon">📝</span> Legally Binding Electronic Signature Options Explained</div>
+      <div class="faq-badge" style="font-size:.62rem;font-weight:700;color:#0052CC;background:#EAF2FF;border:1px solid #B3D4FF;border-radius:12px;padding:1px 8px;display:inline-block;margin-bottom:.5rem">Comparisons</div>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What makes an electronic signature legally binding?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">An electronic signature is legally binding when it meets the requirements set by applicable law, such as the EU eIDAS Regulation. The signature must reliably identify the signer and ensure the integrity of the signed document. Higher-assurance signatures also provide proof that the signer cannot later deny having signed.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What types of electronic signatures exist under EU law?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">EU law distinguishes three main types: simple electronic signatures (SES), advanced electronic signatures (AES), and qualified electronic signatures (QES). Each offers a different level of security and legal assurance. While all can be legally valid, QES provides the highest level of legal certainty.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">When should I choose a QES over other electronic signatures?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Choose a QES when maximum legal certainty is required or when legislation explicitly demands it. Typical cases: contracts with significant legal or financial impact, documents submitted to public authorities, powers of attorney and formal declarations, and cross-border agreements within the EU.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Are cloud-based electronic signature solutions legally reliable?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes, cloud-based solutions can be legally reliable if they meet regulatory requirements. For legally binding use cases, the solution must support AES or QES. Cloud-based QES solutions allow users to sign remotely without physical devices, while maintaining legal equivalence to handwritten signatures. Compliance, not deployment model, determines legal validity.</p>
+      </details>
+    </div>
+
+    <!-- Age Rules -->
+    <div class="ep-section faq-item" data-faq-keywords="age rules qes certificate minor adult legal capacity underage regulation 910/2014 guardian representative">
+      <div class="ep-section-title"><span class="ep-icon">🪪</span> Age Rules for Qualified eSignature Certificates</div>
+      <div class="faq-badge" style="font-size:.62rem;font-weight:700;color:#057A55;background:#E3FCEF;border:1px solid #ABF5D1;border-radius:12px;padding:1px 8px;display:inline-block;margin-bottom:.5rem">Security &amp; Compliance</div>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Are QES certificates issued only to adults?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes. A QES certificate is a legally binding tool that requires the holder to have full legal capacity. It cannot be issued to underage persons. This is in line with Regulation 910/2014 EC, which determines the conditions for issuing and using qualified electronic signatures.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Can a minor ever use a QES in legal transactions?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">A minor cannot be the holder of a QES certificate, but they can be represented in legal transactions. In such cases, a parent, legal guardian, or other authorized representative signs using their own QES certificate. The legal effect attaches to the adult representative acting on behalf of the minor.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What happens if someone loses legal capacity after receiving a QES?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">If a person loses legal capacity after a QES certificate has been issued, the situation must be handled according to national law and the provider's policies. Typically, a court decision or official notice will trigger suspension or revocation. A legal representative would then need to act on behalf of the person.</p>
+      </details>
+    </div>
+
+    <!-- File Types -->
+    <div class="ep-section faq-item" data-faq-keywords="file types pdf xml attached detached signature evrotrust signing formats document integrity multiple signers">
+      <div class="ep-section-title"><span class="ep-icon">📄</span> File Types Supported for Signing with Evrotrust</div>
+      <div class="faq-badge" style="font-size:.62rem;font-weight:700;color:#BF2600;background:#FFEBE6;border:1px solid #FFBDAD;border-radius:12px;padding:1px 8px;display:inline-block;margin-bottom:.5rem">Product Features</div>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What types of files can I sign using the Evrotrust application?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Evrotrust supports both attached and detached electronic signatures. With an attached signature, users can sign PDF and XML files (signature embedded within document). With a detached signature, users can sign any file type because the signature is stored separately. This flexibility allows a wide range of documents to be securely signed.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">When should I choose a detached signature?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Choose a detached signature when the file format does not support embedded signatures or when you need maximum flexibility. Detached signing works well for: ZIP/RAR archives, JPEG/PNG images, DOCX/XLSX/PPTX office files, and proprietary or custom-format files.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Are signatures on all file types legally valid?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes. The legal validity of a QES does not depend on the file format. Under eIDAS, a QES has the same legal effect as a handwritten signature regardless of whether it is attached or detached. What matters is that the signature is created using a valid QES certificate from a QTSP.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Can multiple people sign the same document in Evrotrust?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes. Multiple signers can sign the same document using the Evrotrust application. For PDF files with attached signatures, each signature can be added sequentially. For other file types, multiple detached signatures can be generated and shared. Each signer uses their own identity and certificate, preserving legal integrity.</p>
+      </details>
+    </div>
+
+    <!-- Common Use Cases -->
+    <div class="ep-section faq-item" data-faq-keywords="use cases qualified trust services eid electronic signature qerd edelivery bank insurance telecom government remote digital process cross-border">
+      <div class="ep-section-title"><span class="ep-icon">🚀</span> Common Ways Qualified Trust Services Are Used</div>
+      <div class="faq-badge" style="font-size:.62rem;font-weight:700;color:#403294;background:#EAE6FF;border:1px solid #C0B6F2;border-radius:12px;padding:1px 8px;display:inline-block;margin-bottom:.5rem">Use Cases</div>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What are qualified trust services used for in everyday digital interactions?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Qualified trust services are used to ensure secure, legally valid actions in the digital world. They help verify identity, sign documents, and exchange sensitive information with full legal certainty. These services allow individuals and organizations to complete important tasks remotely, without visiting physical offices. Their use is recognized under eIDAS, ensuring cross-border legal validity within the EU.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What can a QES be used for?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">A QES is used to sign electronic documents with the same legal value as a handwritten signature. Common use cases: contracts and agreements, applications and declarations, powers of attorney, official forms and business documents. Because QES is legally binding across the EU, it supports fully digital workflows and cross-border transactions.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What is qualified electronic registered delivery used for?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Qualified eDelivery enables users to send and receive electronic documents with the same legal effect as registered physical mail. It ensures proof of sending, receiving, and the content transmitted. Institutions use QERD when secure communication and formal traceability are required — for delivering official decisions, certificates, or contractual documents.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">How do qualified trust services support fully digital processes?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">These services provide the essential building blocks for legally compliant digital transactions. Electronic identification verifies who the user is, QES allows them to sign with legal force, and QERD securely delivers documents. Together, they replace traditional in-person and paper-based steps, enabling end-to-end remote services across many industries.</p>
+      </details>
+    </div>
+
+    <!-- Costs & Subscriptions -->
+    <div class="ep-section faq-item" data-faq-keywords="costs subscription evrotrust free plan 3 esignatures pricing partner integration hidden fees individual business">
+      <div class="ep-section-title"><span class="ep-icon">💳</span> Costs and Subscription Options for Evrotrust Users</div>
+      <div class="faq-badge" style="font-size:.62rem;font-weight:700;color:#BF2600;background:#FFEBE6;border:1px solid #FFBDAD;border-radius:12px;padding:1px 8px;display:inline-block;margin-bottom:.5rem">Product Features</div>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Is the Evrotrust application free to download and use?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes. Downloading and installing the Evrotrust application is free for all users. Creating a user profile and receiving a QES certificate is also free. The default plan includes <strong>3 free eSignatures</strong>. Additional paid plans are available if users need more signatures.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Are eSignatures free when Evrotrust is integrated with a service provider?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes, in most cases. When Evrotrust is integrated with a service provider (bank, insurer, telecom, public administration), eSignatures and e-Identification checks performed for that partner's services are typically free for the end user. The service provider covers the cost. The exact free operations depend on the specific integration.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">How do I know whether a signature will be free or charged?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Before completing a signing request, the Evrotrust app displays whether the action is free. When it is, the signing button will say "Sign for free." This means the transaction won't consume the user's app credits. This transparency helps users understand their costs upfront.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Are there any hidden fees for using Evrotrust?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">No. Evrotrust does not impose hidden fees. All applicable costs are clearly shown within the mobile application. Signatures and identification flows covered by service providers remain free for end users, and subscription options are transparently listed under "Subscriptions" in the app.</p>
+      </details>
+    </div>
+
+    <!-- Supported Devices -->
+    <div class="ep-section faq-item" data-faq-keywords="supported devices evrotrust app ios android harmony nfc camera biometric fingerprint tablet storage internet">
+      <div class="ep-section-title"><span class="ep-icon">📱</span> Supported Devices for the Evrotrust App</div>
+      <div class="faq-badge" style="font-size:.62rem;font-weight:700;color:#BF2600;background:#FFEBE6;border:1px solid #FFBDAD;border-radius:12px;padding:1px 8px;display:inline-block;margin-bottom:.5rem">Product Features</div>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What operating systems does the Evrotrust application support?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Evrotrust is supported on: <strong>iOS 12.0+</strong>, <strong>Android 7.0+</strong>, and <strong>Harmony OS</strong> (all versions). Older versions may install the app but are not guaranteed to perform reliably.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">What hardware capabilities are required?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">The device must have a functioning camera with sufficient resolution for capturing identity documents during e-Identification. Biometric authentication (fingerprint sensors or Face ID/Touch ID) is recommended for secure access. Most modern devices include these features, but very old or low-end models may experience limitations.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Do I need NFC support to complete identity verification?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">NFC is not required for using the Evrotrust application, but it can speed up document reading when supported by both the device and the national ID. Users without NFC can complete all verification steps using the camera-based flow. Both methods meet the necessary standards for secure identity verification.</p>
+      </details>
+      <details style="margin:.1rem 0">
+        <summary style="font-size:.81rem;font-weight:600;color:#091E42;cursor:pointer;padding:.25rem 0">Do I need an active internet connection to use the Evrotrust app?</summary>
+        <p style="font-size:.8rem;color:#344563;margin:.3rem 0 0;line-height:1.55">Yes, an active internet connection is essential for identification, authentication, and communication with Evrotrust services. Wi-Fi is recommended for initial onboarding because uploading document images may require higher bandwidth. Mobile data also works well as long as the connection is stable. Offline use is not possible.</p>
+      </details>
+    </div>
+
+    <div style="background:#F4F5F7;border-radius:10px;padding:.85rem 1rem;margin-top:.25rem">
+      <p style="font-size:.73rem;color:#6B778C;margin:0">FAQ content sourced from <a href="https://evrotrust.com/faq/" target="_blank" style="color:#0052CC">evrotrust.com/faq</a>. For the most current information, visit the official website.</p>
+    </div>
+  </div>
+
+</div>
 </div>
 </div>
 <!-- ═══════════════════════════════════════════════════════════
@@ -3799,6 +4049,38 @@ mark.ep-hl{background:#FFF3CD;color:inherit;border-radius:2px;padding:0 1px}
 </div><!-- end cert-overlay -->
 
 <script>
+function eidasSwitchTab(tab){
+  var isReg = tab === 'regulation';
+  document.getElementById('eidas-panel-body').style.display = isReg ? '' : 'none';
+  document.getElementById('eidas-faq-body').style.display = isReg ? 'none' : '';
+  document.getElementById('eidas-chips').style.display = isReg ? '' : 'none';
+  document.querySelector('.ep-search-wrap').style.display = '';
+  var tabReg = document.getElementById('tab-regulation');
+  var tabFaq = document.getElementById('tab-faq');
+  tabReg.style.background = isReg ? '#0052CC' : 'transparent';
+  tabReg.style.color = isReg ? '#fff' : 'rgba(255,255,255,.6)';
+  tabReg.style.borderBottom = isReg ? '2px solid #4C9AFF' : '2px solid transparent';
+  tabFaq.style.background = isReg ? 'transparent' : '#0052CC';
+  tabFaq.style.color = isReg ? 'rgba(255,255,255,.6)' : '#fff';
+  tabFaq.style.borderBottom = isReg ? '2px solid transparent' : '2px solid #4C9AFF';
+  // update search placeholder
+  document.getElementById('eidas-search').placeholder = isReg ? 'Try: QES, Art. 25, handwritten…' : 'Search FAQ…';
+  document.getElementById('eidas-search').value = '';
+  if(isReg) eidasSearch(''); else faqSearch('');
+}
+function faqSearch(q){
+  var term = q.trim().toLowerCase();
+  var items = document.querySelectorAll('#eidas-faq-body .faq-item');
+  var any = false;
+  items.forEach(function(item){
+    var kw = (item.getAttribute('data-faq-keywords')||'').toLowerCase();
+    var txt = item.innerText.toLowerCase();
+    var show = !term || kw.indexOf(term)>=0 || txt.indexOf(term)>=0;
+    item.classList.toggle('hidden', !show);
+    if(show) any = true;
+  });
+  document.getElementById('faq-no-results').style.display = any ? 'none' : '';
+}
 function eidasSearch(q){
   q = q.trim().toLowerCase();
   var sections = document.querySelectorAll('#eidas-panel-body .ep-section');
@@ -3934,7 +4216,7 @@ function heroSearch(){
 <!-- INTEGRATION PANEL -->
 <div class="int-panel" id="int-panel" style="display:none">
   <div class="int-hub-wrap">
-    <canvas id="int-matrix-canvas"></canvas>
+  <canvas id="int-matrix-canvas"></canvas>
     <div class="int-hub-header">
       <div class="int-hub-eyebrow">Developer Tools</div>
       <h2 class="int-hub-title">Choose Your Integration Path</h2>
@@ -4192,7 +4474,6 @@ function heroSearch(){
       </div>
     </div>
   </div>
-  </div><!-- /int-hub-wrap -->
 </div>
 
 <!-- CONTROLS -->
@@ -5692,68 +5973,50 @@ function deleteMNote(id){
   try{localStorage.setItem('et-meeting-notes',JSON.stringify(_meetingNotes));}catch(e){}
   updateMSavedCount();renderMSaved();
 }
-/* ── Matrix canvas background for integration panel ── */
-(function(){
-  var _matrixRAF = null;
-  function startMatrix(){
-    var c = document.getElementById('int-matrix-canvas');
-    if(!c) return;
-    var ctx = c.getContext('2d');
-    var wrap = c.parentElement;
-    function resize(){
-      c.width = wrap.offsetWidth;
-      c.height = wrap.offsetHeight;
-    }
-    resize();
-    var resizeObs = new ResizeObserver(resize);
-    resizeObs.observe(wrap);
-    var fontSize = 13;
-    var chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ'.split('');
-    var cols, drops;
-    function initDrops(){
-      cols = Math.floor(c.width / fontSize);
-      drops = [];
-      for(var i=0;i<cols;i++) drops[i] = Math.random() * -50;
-    }
-    initDrops();
-    function draw(){
-      ctx.fillStyle = 'rgba(2,13,26,0.18)';
-      ctx.fillRect(0,0,c.width,c.height);
-      for(var i=0;i<drops.length;i++){
-        var ch = chars[Math.floor(Math.random()*chars.length)];
-        var y = drops[i]*fontSize;
-        /* leading char brighter */
-        ctx.fillStyle = 'rgba(0,184,212,0.9)';
-        ctx.font = fontSize+'px monospace';
-        ctx.fillText(ch, i*fontSize, y);
-        /* trail chars */
-        ctx.fillStyle = 'rgba(0,82,204,0.55)';
-        ctx.fillText(chars[Math.floor(Math.random()*chars.length)], i*fontSize, y - fontSize);
-        ctx.fillStyle = 'rgba(0,52,130,0.3)';
-        ctx.fillText(chars[Math.floor(Math.random()*chars.length)], i*fontSize, y - fontSize*2);
-        if(y > c.height && Math.random() > 0.975) drops[i] = 0;
-        drops[i] += 0.45;
-      }
-      _matrixRAF = requestAnimationFrame(draw);
-    }
-    if(_matrixRAF) cancelAnimationFrame(_matrixRAF);
-    draw();
-  }
-  window._startMatrix = startMatrix;
-})();
-
 function toggleIntHub(){
   _intOpen = !_intOpen;
   var panel = document.getElementById('int-panel');
   var arrow = document.getElementById('int-trigger-arrow');
   if(!panel) return;
   panel.style.display = _intOpen ? 'block' : 'none';
-  if(_intOpen){
-    panel.classList.add('open');
-    setTimeout(function(){ panel.scrollIntoView({behavior:'smooth',block:'start'}); }, 80);
-    setTimeout(function(){ if(window._startMatrix) window._startMatrix(); }, 100);
-  } else panel.classList.remove('open');
+  if(_intOpen){ panel.classList.add('open'); setTimeout(function(){ panel.scrollIntoView({behavior:'smooth',block:'start'}); }, 80); initIntMatrix(); }
+  else panel.classList.remove('open');
   if(arrow) arrow.classList.toggle('open', _intOpen);
+}
+var _intMatrixRAF = null;
+function initIntMatrix(){
+  var canvas = document.getElementById('int-matrix-canvas');
+  if(!canvas) return;
+  var wrap = canvas.parentElement;
+  canvas.width = wrap.offsetWidth;
+  canvas.height = wrap.offsetHeight;
+  var ctx = canvas.getContext('2d');
+  var colW = 18;
+  var cols = Math.floor(canvas.width / colW);
+  var drops = [];
+  for(var i=0;i<cols;i++) drops[i] = Math.random()*-(canvas.height/14)|0;
+  var chars = '01アカサタナABCDEF';
+  if(_intMatrixRAF) cancelAnimationFrame(_intMatrixRAF);
+  var frame = 0;
+  function draw(){
+    frame++;
+    if(frame % 2 !== 0){ _intMatrixRAF = requestAnimationFrame(draw); return; }
+    ctx.fillStyle='rgba(5,10,15,0.08)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.font='13px monospace';
+    for(var i=0;i<drops.length;i++){
+      var c = chars[Math.random()*chars.length|0];
+      var bright = Math.random()>.95;
+      ctx.fillStyle = bright ? '#7DF9FF' : '#00B8D4';
+      ctx.globalAlpha = bright ? 0.7 : 0.35;
+      ctx.fillText(c, i*colW, drops[i]*14);
+      ctx.globalAlpha = 1;
+      if(drops[i]*14 > canvas.height && Math.random()>.97) drops[i]=0;
+      drops[i]++;
+    }
+    _intMatrixRAF = requestAnimationFrame(draw);
+  }
+  draw();
 }
 function toggleEidLevels(){
   var body = document.getElementById('eid-levels-body');
