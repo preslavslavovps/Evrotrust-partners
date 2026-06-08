@@ -3237,23 +3237,23 @@ body.int-open .hero-btn-integration {
 
   <!-- INTERACTIVE USE-CASE PILLS -->
   <div id="hero-pills" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:1.75rem;position:relative;z-index:2">
-    <button class="hero-pill active" data-idx="0" onclick="selectPill(0)">
+    <button class="hero-pill active" data-idx="0" onclick="selectPill(0, true)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       Remote Onboarding
     </button>
-    <button class="hero-pill" data-idx="1" onclick="selectPill(1)">
+    <button class="hero-pill" data-idx="1" onclick="selectPill(1, true)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
       Qualified eSignatures
     </button>
-    <button class="hero-pill" data-idx="2" onclick="selectPill(2)">
+    <button class="hero-pill" data-idx="2" onclick="selectPill(2, true)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       KYC / AML Compliance
     </button>
-    <button class="hero-pill" data-idx="3" onclick="selectPill(3)">
+    <button class="hero-pill" data-idx="3" onclick="selectPill(3, true)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
       API & SDK Integration
     </button>
-    <button class="hero-pill" data-idx="4" onclick="selectPill(4)">
+    <button class="hero-pill" data-idx="4" onclick="selectPill(4, true)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       Pan-European Reach
     </button>
@@ -4167,7 +4167,8 @@ const pillData = [
   }
 ];
 
-function selectPill(idx) {
+function selectPill(idx, manual) {
+  pillIdx = idx;
   document.querySelectorAll('.hero-pill').forEach((p,i)=>p.classList.toggle('active',i===idx));
   const d = pillData[idx];
   const card = document.getElementById('hero-context-card');
@@ -4179,11 +4180,16 @@ function selectPill(idx) {
     document.getElementById('hero-rotating-word').textContent = d.word;
     card.style.opacity='1';
   },150);
+  if (manual) {
+    _pillPaused = true;
+    clearTimeout(_pillResumeTimer);
+    _pillResumeTimer = setTimeout(()=>{ _pillPaused = false; }, 12000);
+  }
 }
 
-// Auto-rotate pills every 5s
-let pillIdx=0;
-setInterval(()=>{ pillIdx=(pillIdx+1)%pillData.length; selectPill(pillIdx); }, 5000);
+// Auto-rotate pills every 5s, pauses after manual click for 12s
+let pillIdx=0, _pillPaused=false, _pillResumeTimer=null;
+setInterval(()=>{ if(!_pillPaused){ pillIdx=(pillIdx+1)%pillData.length; selectPill(pillIdx, false); } }, 5000);
 
 // Hero search — copies query to main search input and scrolls to partners grid
 function heroSearch(){
