@@ -6310,6 +6310,86 @@ var INT_DATA = {
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>',
     desc: 'Your clients sign documents remotely — from their phone, in under a minute. A Qualified Electronic Signature (QES) carries exactly the same legal weight as a handwritten signature across all EU countries. You get back a signed PDF, ready for filing or court.',
     usecases: 'Client contracts · HR documents · Bank account opening · Insurance policies · Real estate · Healthcare consent',
+    sigTypes: [
+      {
+        id: 'qes',
+        label: 'QES',
+        fullName: 'Qualified Electronic Signature',
+        level: 3,
+        levelLabel: 'Highest — eIDAS Level',
+        color: '#0052CC',
+        colorLight: 'rgba(0,82,204,.10)',
+        colorBorder: 'rgba(0,82,204,.25)',
+        badge: 'Provided by Evrotrust',
+        badgeColor: '#0052CC',
+        tagline: 'Legally equivalent to a handwritten signature across the entire EU.',
+        features: [
+          'Complies with eIDAS Article 24 — highest legal grade',
+          'Based on a Qualified Certificate (QSCD)',
+          'Identity verified by Evrotrust (eID required)',
+          'Evrotrust bears legal liability',
+          'AML · KYC · EBA compliant',
+          'Available via App, OTP (SMS), Web SDK, Mobile SDK'
+        ],
+        signing: ['Click-to-sign in Evrotrust App', 'OTP eSign via SMS'],
+        bestFor: 'Contracts, loan approvals, legal agreements, gov docs, bank onboarding',
+        notFor: 'Low-risk or unsigned documents',
+        verification: 'Evrotrust eID (full remote identification)',
+        liability: 'Evrotrust (insured per transaction value)'
+      },
+      {
+        id: 'aes',
+        label: 'AES',
+        fullName: 'Advanced Electronic Signature',
+        level: 2,
+        levelLabel: 'High — Legally Valid',
+        color: '#00875A',
+        colorLight: 'rgba(0,135,90,.10)',
+        colorBorder: 'rgba(0,135,90,.25)',
+        badge: 'Provided by Evrotrust',
+        badgeColor: '#00875A',
+        tagline: 'Strong digital signature — flexible onboarding, high legal value.',
+        features: [
+          'Uniquely linked to the signer — detects any post-signing change',
+          'Based on an Advanced Certificate issued by Evrotrust',
+          'Identity verified by the relying party (you)',
+          'Relying party bears identification liability',
+          'Suitable for most business use cases',
+          'Available via API and OTP (SMS only)'
+        ],
+        signing: ['OTP eSign via SMS only'],
+        bestFor: 'Recurring agreements, HR documents, commercial contracts (non-AML)',
+        notFor: 'AML/KYC-regulated transactions — use QES instead',
+        verification: 'Performed by relying party (e.g. video call, agent)',
+        liability: 'Relying party assumes identification responsibility'
+      },
+      {
+        id: 'ses',
+        label: 'SES',
+        fullName: 'Simple Electronic Signature',
+        level: 1,
+        levelLabel: 'Basic — Minimal Security',
+        color: '#8993A4',
+        colorLight: 'rgba(137,147,164,.08)',
+        colorBorder: 'rgba(137,147,164,.2)',
+        badge: 'Not provided by Evrotrust',
+        badgeColor: '#8993A4',
+        tagline: 'A scanned image, email sign-off, or "I accept" click.',
+        features: [
+          'No technical requirements — any digital mark qualifies',
+          'Parties must mutually agree to accept it',
+          'No cryptographic protection or tamper evidence',
+          'No verified identity behind the signature',
+          'Minimal legal standing — disputed in court',
+          'Not offered by Evrotrust'
+        ],
+        signing: ['Scanned image', '"I accept" button', 'Email sign-off'],
+        bestFor: 'Very low-risk internal communications or informal agreements',
+        notFor: 'Anything that may need legal enforcement',
+        verification: 'None',
+        liability: 'None defined'
+      }
+    ],
     pros: [
       'Same legal weight as a handwritten signature — valid across the entire EU',
       'Signed PDF with timestamp — accepted by courts',
@@ -6396,6 +6476,71 @@ function openIntModal(type) {
   if (el('int-steps-wrap')) {
     var pc = '';
     if (d.usecases) pc += '<div class="int-usecases"><strong>Use cases:</strong> ' + d.usecases + '</div>';
+    // Signature types explorer
+    if (d.sigTypes) {
+      pc += '<div class="sig-types-explorer">';
+      pc += '<div style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8993A4;margin-bottom:.75rem">Signature Types & Levels</div>';
+      pc += '<div class="sig-tabs" style="display:flex;gap:6px;margin-bottom:1rem">';
+      d.sigTypes.forEach(function(st, idx) {
+        pc += '<button class="sig-tab-btn' + (idx===0?' sig-tab-active':'') + '" data-sig="' + st.id + '" onclick="showSigType(\'' + st.id + '\')" style="flex:1;padding:8px 6px;border-radius:8px;border:1.5px solid ' + (idx===0?st.color:st.colorBorder) + ';background:' + (idx===0?st.colorLight:'transparent') + ';cursor:pointer;transition:all .2s">';
+        pc += '<div style="font-size:.82rem;font-weight:800;color:' + st.color + '">' + st.label + '</div>';
+        pc += '<div style="font-size:.6rem;color:#6B778C;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + st.fullName.split(' ').slice(-2).join(' ') + '</div>';
+        pc += '</button>';
+      });
+      pc += '</div>';
+      // Level bar
+      pc += '<div class="sig-level-bar" style="display:flex;align-items:center;gap:6px;margin-bottom:1rem;background:#F4F5F7;border-radius:8px;padding:8px 12px">';
+      d.sigTypes.forEach(function(st, idx) {
+        pc += '<div class="sig-level-seg" data-sig="' + st.id + '" style="flex:1;height:6px;border-radius:3px;background:' + (idx===0?st.color:st.colorBorder) + ';transition:all .3s"></div>';
+        if (idx < d.sigTypes.length-1) pc += '<div style="color:#DFE1E6;font-size:.65rem">›</div>';
+      });
+      pc += '<div id="sig-level-label" style="margin-left:8px;font-size:.65rem;font-weight:700;color:' + d.sigTypes[0].color + ';white-space:nowrap">' + d.sigTypes[0].levelLabel + '</div>';
+      pc += '</div>';
+      // Detail panel
+      d.sigTypes.forEach(function(st, idx) {
+        pc += '<div class="sig-detail-panel" id="sig-panel-' + st.id + '" style="display:' + (idx===0?'block':'none') + ';animation:fadeIn .2s ease">';
+        // Header row
+        pc += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:.75rem">';
+        pc += '<div style="width:40px;height:40px;border-radius:10px;background:' + st.colorLight + ';border:1.5px solid ' + st.colorBorder + ';display:flex;align-items:center;justify-content:center">';
+        pc += '<span style="font-size:.88rem;font-weight:900;color:' + st.color + '">' + st.label + '</span></div>';
+        pc += '<div><div style="font-size:.88rem;font-weight:700;color:#172B4D">' + st.fullName + '</div>';
+        pc += '<div style="font-size:.65rem;background:' + st.colorLight + ';color:' + st.color + ';border:1px solid ' + st.colorBorder + ';border-radius:20px;padding:1px 8px;display:inline-block;font-weight:700;margin-top:2px">' + st.badge + '</div></div>';
+        pc += '</div>';
+        pc += '<p style="font-size:.81rem;color:#344563;line-height:1.65;margin:0 0 .75rem">' + st.tagline + '</p>';
+        // Two-col features + meta
+        pc += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.75rem">';
+        pc += '<div style="background:#F4F5F7;border-radius:8px;padding:10px">';
+        pc += '<div style="font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8993A4;margin-bottom:6px">Key Properties</div>';
+        st.features.forEach(function(f) {
+          pc += '<div style="font-size:.72rem;color:#344563;padding:3px 0;border-bottom:1px solid #EBECF0;display:flex;gap:6px;line-height:1.45"><span style="color:' + st.color + ';flex-shrink:0">·</span>' + f + '</div>';
+        });
+        pc += '</div>';
+        pc += '<div style="display:flex;flex-direction:column;gap:6px">';
+        // Meta cards
+        var metas = [
+          {icon:'✍', label:'Signing method', val: st.signing.join(' / ')},
+          {icon:'🎯', label:'Best for', val: st.bestFor},
+          {icon:'🪪', label:'ID verification by', val: st.verification},
+          {icon:'⚖️', label:'Liability', val: st.liability}
+        ];
+        metas.forEach(function(m) {
+          pc += '<div style="background:#F4F5F7;border-radius:8px;padding:8px 10px">';
+          pc += '<div style="font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8993A4;margin-bottom:2px">' + m.icon + ' ' + m.label + '</div>';
+          pc += '<div style="font-size:.71rem;color:#344563;line-height:1.45">' + m.val + '</div>';
+          pc += '</div>';
+        });
+        if (st.id !== 'ses') {
+          pc += '<div style="background:' + st.colorLight + ';border:1px solid ' + st.colorBorder + ';border-radius:8px;padding:8px 10px">';
+          pc += '<div style="font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:' + st.color + ';margin-bottom:2px">⚠ Not for</div>';
+          pc += '<div style="font-size:.71rem;color:#344563;line-height:1.45">' + st.notFor + '</div>';
+          pc += '</div>';
+        }
+        pc += '</div>';
+        pc += '</div>';
+        pc += '</div>';
+      });
+      pc += '</div>'; // sig-types-explorer
+    }
     if (d.pros || d.cons) {
       pc += '<div class="int-pc-row">';
       if (d.pros) pc += '<div class="int-pros"><div class="int-pc-label">Advantages</div>' + d.pros.map(function(p){ return '<div class="int-pc-item">&#10003; ' + p + '</div>'; }).join('') + '</div>';
@@ -6404,6 +6549,8 @@ function openIntModal(type) {
     }
     el('int-steps-wrap').innerHTML = pc;
   }
+  // Store sigTypes ref for tab switching
+  window._currentSigTypes = d.sigTypes || null;
   if (el('int-steps')) {
     el('int-steps').innerHTML = d.steps.map(function(s, i){
       return '<div class="int-step"><div class="int-step-num">'+(i+1)+'</div><div><div class="int-step-title">'+s.title+'</div><div class="int-step-desc">'+s.desc+'</div></div></div>';
@@ -6416,6 +6563,29 @@ function openIntModal(type) {
   }
   var ov = el('int-ov');
   if (ov) { ov.classList.add('open'); document.body.style.overflow = 'hidden'; }
+}
+
+function showSigType(id) {
+  if (!window._currentSigTypes) return;
+  var sigTypes = window._currentSigTypes;
+  // Update panels
+  sigTypes.forEach(function(st) {
+    var panel = document.getElementById('sig-panel-' + st.id);
+    if (panel) panel.style.display = st.id === id ? 'block' : 'none';
+    // Update level bar segments
+    var seg = document.querySelector('.sig-level-seg[data-sig="'+st.id+'"]');
+    if (seg) seg.style.background = st.id === id ? st.color : st.colorBorder;
+    // Update tab buttons
+    var btn = document.querySelector('.sig-tab-btn[data-sig="'+st.id+'"]');
+    if (btn) {
+      btn.style.borderColor = st.id === id ? st.color : st.colorBorder;
+      btn.style.background = st.id === id ? st.colorLight : 'transparent';
+    }
+  });
+  // Update level label
+  var active = sigTypes.find(function(st){ return st.id === id; });
+  var lbl = document.getElementById('sig-level-label');
+  if (lbl && active) { lbl.textContent = active.levelLabel; lbl.style.color = active.color; }
 }
 
 document.addEventListener('DOMContentLoaded',function(){buildPills();buildLegal();render();});
