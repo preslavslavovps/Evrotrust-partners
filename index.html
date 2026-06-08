@@ -4336,82 +4336,198 @@ function heroSearch(){
         <!-- Tab panels -->
         <div id="eid-tab-basic" class="eid-tab-panel" style="display:block">
           <div class="eid-level-detail">
+            <!-- Header row -->
             <div class="eid-level-top">
-              <div>
-                <div class="int-eid-badge" style="background:rgba(0,135,90,.15);color:#36B37E;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:5px;display:inline-block;margin-bottom:.5rem">Basic / Ident Lite</div>
-                <div class="int-eid-tagline" style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.35rem">"Fast registration"</div>
-                <div class="int-eid-desc" style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:480px">Quick identity check with minimal user friction. Returns 9 validated personal attributes from the ID document and a 2D liveness selfie. Ideal for low-risk onboarding where speed matters more than full legal attestation.</div>
+              <div style="flex:1">
+                <div class="int-eid-badge" style="background:rgba(0,135,90,.15);color:#36B37E;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:5px;display:inline-block;margin-bottom:.5rem">Basic Identification</div>
+                <div class="int-eid-tagline" style="font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:.35rem">Fast, automated identity check — speed &amp; UX first</div>
+                <div class="int-eid-desc" style="font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:500px">Secure automated verification flow designed for situations where speed and user experience are the priority. Same identification accuracy as Evrotrust eID, lighter user journey. <strong style="color:rgba(255,255,255,.7)">Available via Mobile SDK only.</strong></div>
               </div>
-              <div class="eid-level-use-badge" style="background:rgba(54,179,126,.08);border:1px solid rgba(54,179,126,.2);border-radius:8px;padding:.75rem 1rem;text-align:center;min-width:140px;flex-shrink:0">
-                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#36B37E;margin-bottom:4px">Use for</div>
-                <div style="font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.65">Registration<br>Low-risk flows<br>Lead capture</div>
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:148px;flex-shrink:0">
+                <div style="background:rgba(54,179,126,.08);border:1px solid rgba(54,179,126,.2);border-radius:8px;padding:.65rem .9rem;text-align:center">
+                  <div style="font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#36B37E;margin-bottom:4px">Best for</div>
+                  <div style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.6">Low-risk onboarding<br>Existing customers<br>Speed-critical flows</div>
+                </div>
+                <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.5rem .9rem;text-align:center">
+                  <div style="font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3px">Risk level</div>
+                  <div style="font-size:.78rem;color:#36B37E;font-weight:700">Low</div>
+                </div>
               </div>
             </div>
-            <div class="eid-level-features-grid">
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>2D liveness detection</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>ID document capture &amp; OCR</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>9 personal attributes returned</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Web &amp; Mobile SDK support</div>
-              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No identity attestation</div>
-              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No expert manual review</div>
-              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No qualified signing (QES)</div>
-              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No eIDAS LoA High</div>
+
+            <!-- Two-column layout: features + flow -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:.75rem">
+              <!-- Key benefits -->
+              <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.75rem 1rem">
+                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#36B37E;margin-bottom:.6rem">Key benefits</div>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Fast, fully remote verification</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Two-step user flow</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Fully embedded mobile experience</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>No need to leave the partner app</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Customizable look and feel</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>9 screen languages supported</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Same accuracy as Evrotrust eID</div>
+                </div>
+              </div>
+              <!-- Typical flow -->
+              <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.75rem 1rem">
+                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#36B37E;margin-bottom:.6rem">Typical flow</div>
+                <div style="display:flex;flex-direction:column;gap:5px">
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#36B37E;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">1</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">User starts verification flow in partner's mobile app</span></div>
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#36B37E;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">2</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">User scans their ID document</span></div>
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#36B37E;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">3</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">Data read via OCR/NFC and validated against authoritative source</span></div>
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#36B37E;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">4</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">User completes liveness detection check</span></div>
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#36B37E;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">5</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">Selfie matched against ID document photo</span></div>
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#36B37E;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">6</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">Verification result returned — successful or unsuccessful</span></div>
+                </div>
+              </div>
             </div>
-            <a href="https://docs.evrotrust.com/docs/evrotrust-ident-lite" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:1rem;font-size:.78rem;font-weight:700;color:#36B37E;text-decoration:none;transition:gap .15s" onmouseover="this.style.gap='8px'" onmouseout="this.style.gap='5px'">Ident Lite Docs <svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="11" height="11"><path d="m9 18 6-6-6-6"/></svg></a>
+
+            <!-- Important considerations -->
+            <div style="background:rgba(255,165,0,.04);border:1px solid rgba(255,165,0,.15);border-radius:8px;padding:.65rem 1rem;margin-top:10px">
+              <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFB84C;margin-bottom:.5rem">Important considerations</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px 12px">
+                <div style="font-size:.7rem;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:5px;line-height:1.5"><span style="color:#FFB84C;flex-shrink:0">⚠</span>Mobile SDK only — not available via Web SDK or Evrotrust app</div>
+                <div style="font-size:.7rem;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:5px;line-height:1.5"><span style="color:#FFB84C;flex-shrink:0">⚠</span>Evrotrust does not assume legal liability for identification</div>
+                <div style="font-size:.7rem;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:5px;line-height:1.5"><span style="color:#FFB84C;flex-shrink:0">⚠</span>Not all ID document data points returned</div>
+                <div style="font-size:.7rem;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:5px;line-height:1.5"><span style="color:#FFB84C;flex-shrink:0">⚠</span>No Evrotrust profile, free QES certificate, or EBA fulfilment</div>
+              </div>
+            </div>
+
+            <a href="https://docs.evrotrust.com/docs/evrotrust-ident-lite" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:.9rem;font-size:.78rem;font-weight:700;color:#36B37E;text-decoration:none;transition:gap .15s" onmouseover="this.style.gap='8px'" onmouseout="this.style.gap='5px'">Ident Lite Docs <svg viewBox="0 0 24 24" fill="none" stroke="#36B37E" stroke-width="2.5" width="11" height="11"><path d="m9 18 6-6-6-6"/></svg></a>
           </div>
         </div>
 
         <div id="eid-tab-enhanced" class="eid-tab-panel" style="display:none">
           <div class="eid-level-detail">
             <div class="eid-level-top">
-              <div>
-                <div class="int-eid-badge" style="background:rgba(0,184,212,.15);color:#00B8D4;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:5px;display:inline-block;margin-bottom:.5rem">Enhanced eID</div>
-                <div class="int-eid-tagline" style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.35rem">"Secure identification"</div>
-                <div class="int-eid-desc" style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:480px">Full KYC-grade identification with 3D liveness, NFC chip readout, XML identity attestation, and optional expert manual review. Meets AML5, PSD2 SCA, and eIDAS Substantial requirements. All personal attributes included.</div>
+              <div style="flex:1">
+                <div class="int-eid-badge" style="background:rgba(0,184,212,.15);color:#00B8D4;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:5px;display:inline-block;margin-bottom:.5rem">Enhanced Identification</div>
+                <div class="int-eid-tagline" style="font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:.35rem">Stronger assurance — identification + legally valid signing</div>
+                <div class="int-eid-desc" style="font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:500px">Designed for journeys where the business needs stronger assurance than basic verification. Enables customers to sign a document using an OTP-based electronic signature (QES or AES). <strong style="color:rgba(255,255,255,.7)">Evrotrust provides the secure signing mechanism.</strong> Available via Mobile SDK and Web SDK.</div>
               </div>
-              <div class="eid-level-use-badge" style="background:rgba(0,184,212,.08);border:1px solid rgba(0,184,212,.2);border-radius:8px;padding:.75rem 1rem;text-align:center;min-width:140px;flex-shrink:0">
-                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00B8D4;margin-bottom:4px">Use for</div>
-                <div style="font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.65">Banks · Fintech<br>AML / KYC<br>Medium-risk</div>
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:148px;flex-shrink:0">
+                <div style="background:rgba(0,184,212,.08);border:1px solid rgba(0,184,212,.2);border-radius:8px;padding:.65rem .9rem;text-align:center">
+                  <div style="font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00B8D4;margin-bottom:4px">Best for</div>
+                  <div style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.6">Contract renewals<br>One-time KYC sign<br>Service changes</div>
+                </div>
+                <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.5rem .9rem;text-align:center">
+                  <div style="font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3px">Risk level</div>
+                  <div style="font-size:.78rem;color:#FFB84C;font-weight:700">High</div>
+                </div>
               </div>
             </div>
-            <div class="eid-level-features-grid">
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>3D liveness (anti-spoofing)</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Document NFC chip readout</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>XML identity attestation</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Optional expert manual review</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>All personal attributes returned</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Public register integration</div>
-              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No qualified signing (QES)</div>
-              <div class="eid-lf-row no"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2.5" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No 2FA biometric PIN</div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:.75rem">
+              <!-- Key benefits -->
+              <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.75rem 1rem">
+                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00B8D4;margin-bottom:.6rem">Key benefits</div>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Fully mobile or web experience</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Fast signing experience</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Suitable for remote interactions</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Works for both existing and new customers</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Legally valid electronic signing with minimal friction</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Free live expert supervision included</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Mobile SDK or Web SDK integration</div>
+                </div>
+              </div>
+              <!-- Typical flow -->
+              <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.75rem 1rem">
+                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00B8D4;margin-bottom:.6rem">Typical flow</div>
+                <div style="display:flex;flex-direction:column;gap:5px">
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#00B8D4;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">1</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">Customer is identified by Evrotrust</span></div>
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#00B8D4;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">2</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">The document is prepared</span></div>
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#00B8D4;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">3</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">Customer reviews the document</span></div>
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#00B8D4;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">4</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">Customer receives an OTP code by SMS</span></div>
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#00B8D4;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">5</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">Customer enters the code and confirms signing</span></div>
+                  <div style="display:flex;gap:7px;align-items:flex-start"><span style="background:#00B8D4;color:#fff;border-radius:50%;width:16px;height:16px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">6</span><span style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5">Signed document returned and stored</span></div>
+                </div>
+              </div>
             </div>
-            <a href="https://docs.evrotrust.com/docs/identity-verification-2" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:1rem;font-size:.78rem;font-weight:700;color:#00B8D4;text-decoration:none;transition:gap .15s" onmouseover="this.style.gap='8px'" onmouseout="this.style.gap='5px'">eID Types Docs <svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="11" height="11"><path d="m9 18 6-6-6-6"/></svg></a>
+
+            <!-- Considerations -->
+            <div style="background:rgba(255,165,0,.04);border:1px solid rgba(255,165,0,.15);border-radius:8px;padding:.65rem 1rem;margin-top:10px">
+              <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFB84C;margin-bottom:.5rem">Important considerations</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px 12px">
+                <div style="font-size:.7rem;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:5px;line-height:1.5"><span style="color:#FFB84C;flex-shrink:0">⚠</span>Customer is identified by Evrotrust through a full eID process</div>
+                <div style="font-size:.7rem;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:5px;line-height:1.5"><span style="color:#FFB84C;flex-shrink:0">⚠</span>No reusable Evrotrust digital identity is created</div>
+                <div style="font-size:.7rem;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:5px;line-height:1.5"><span style="color:#FFB84C;flex-shrink:0">⚠</span>No long-term QES certificate issued</div>
+              </div>
+            </div>
+
+            <a href="https://docs.evrotrust.com/docs/identity-verification-2" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:.9rem;font-size:.78rem;font-weight:700;color:#00B8D4;text-decoration:none;transition:gap .15s" onmouseover="this.style.gap='8px'" onmouseout="this.style.gap='5px'">eID Types Docs <svg viewBox="0 0 24 24" fill="none" stroke="#00B8D4" stroke-width="2.5" width="11" height="11"><path d="m9 18 6-6-6-6"/></svg></a>
           </div>
         </div>
 
         <div id="eid-tab-full" class="eid-tab-panel" style="display:none">
           <div class="eid-level-detail">
             <div class="eid-level-top">
-              <div>
-                <div class="int-eid-badge" style="background:rgba(0,82,204,.2);color:#4C9AFF;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:5px;display:inline-block;margin-bottom:.5rem">Full eID — eIDAS Notified</div>
-                <div class="int-eid-tagline" style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.35rem">"Legally valid signature"</div>
-                <div class="int-eid-desc" style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:480px">Maximum assurance — eIDAS LoA High. QES qualified electronic signature + 2FA + biometric PIN + XML attestation. Legally binding across all EU member states. Evrotrust is notified under eIDAS and listed on the EU Trusted List.</div>
+              <div style="flex:1">
+                <div class="int-eid-badge" style="background:rgba(0,82,204,.2);color:#4C9AFF;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:5px;display:inline-block;margin-bottom:.5rem">Full KYC Identification</div>
+                <div class="int-eid-tagline" style="font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:.35rem">Highest assurance — regulated eID + reusable identity + QES</div>
+                <div class="int-eid-desc" style="font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:500px">Evrotrust's regulated electronic identification for processes requiring <strong style="color:rgba(255,255,255,.7)">the highest level of identity assurance, compliance, and legal certainty.</strong> User verified once — reusable identity for all subsequent services on demand. Evrotrust assumes full legal liability.</div>
               </div>
-              <div class="eid-level-use-badge" style="background:rgba(76,154,255,.08);border:1px solid rgba(76,154,255,.25);border-radius:8px;padding:.75rem 1rem;text-align:center;min-width:140px;flex-shrink:0">
-                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4C9AFF;margin-bottom:4px">Use for</div>
-                <div style="font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.65">Contracts · Legal<br>Banking<br>High-risk KYC</div>
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:148px;flex-shrink:0">
+                <div style="background:rgba(76,154,255,.08);border:1px solid rgba(76,154,255,.25);border-radius:8px;padding:.65rem .9rem;text-align:center">
+                  <div style="font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4C9AFF;margin-bottom:4px">Best for</div>
+                  <div style="font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.6">New KYC/AML<br>onboarding<br>QES &amp; legal signing</div>
+                </div>
+                <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.5rem .9rem;text-align:center">
+                  <div style="font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3px">Risk level</div>
+                  <div style="font-size:.78rem;color:#FFB84C;font-weight:700">High</div>
+                </div>
               </div>
             </div>
-            <div class="eid-level-features-grid">
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>3D liveness + XML attestation</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>2FA authentication (SMS / app)</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Biometric PIN (Face ID / fingerprint)</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Qualified signing (QES)</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Signed PDF + XML output</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>eIDAS LoA High — EU Trusted List</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Expert manual review available</div>
-              <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>Reusable digital identity</div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:.75rem">
+              <!-- Key benefits -->
+              <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.75rem 1rem">
+                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4C9AFF;margin-bottom:.6rem">Key benefits</div>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Secure eIDAS-compliant electronic identification</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>AML/KYC-ready onboarding (AML5 Art.13)</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Reusable digital identity</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Remote identity attestation on demand</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Machine-readable ID statement signed with QES</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Qualified electronic signature capability</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>Legal liability for identification shifted to Evrotrust</div>
+                  <div class="eid-lf-row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>EBA-compliant by default</div>
+                </div>
+              </div>
+
+              <!-- Two-phase flow -->
+              <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.75rem 1rem">
+                <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4C9AFF;margin-bottom:.5rem">Typical flow — two phases</div>
+                <div style="font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(76,154,255,.6);margin-bottom:.35rem">① Identity proofing — once</div>
+                <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:.6rem">
+                  <div style="display:flex;gap:6px;align-items:flex-start"><span style="background:#4C9AFF;color:#fff;border-radius:50%;width:15px;height:15px;font-size:.55rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">1</span><span style="font-size:.7rem;color:rgba(255,255,255,.5);line-height:1.5">User starts eID enrolment flow</span></div>
+                  <div style="display:flex;gap:6px;align-items:flex-start"><span style="background:#4C9AFF;color:#fff;border-radius:50%;width:15px;height:15px;font-size:.55rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">2</span><span style="font-size:.7rem;color:rgba(255,255,255,.5);line-height:1.5">Scans ID document + liveness check</span></div>
+                  <div style="display:flex;gap:6px;align-items:flex-start"><span style="background:#4C9AFF;color:#fff;border-radius:50%;width:15px;height:15px;font-size:.55rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">3</span><span style="font-size:.7rem;color:rgba(255,255,255,.5);line-height:1.5">Evrotrust creates reusable digital identity</span></div>
+                  <div style="display:flex;gap:6px;align-items:flex-start"><span style="background:#4C9AFF;color:#fff;border-radius:50%;width:15px;height:15px;font-size:.55rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">4</span><span style="font-size:.7rem;color:rgba(255,255,255,.5);line-height:1.5">QES certificate issued — valid 2 years</span></div>
+                </div>
+                <div style="font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(76,154,255,.6);margin-bottom:.35rem">② Remote attestation — on demand</div>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;gap:6px;align-items:flex-start"><span style="background:rgba(76,154,255,.3);color:#fff;border-radius:50%;width:15px;height:15px;font-size:.55rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">1</span><span style="font-size:.7rem;color:rgba(255,255,255,.5);line-height:1.5">Organisation sends identification request</span></div>
+                  <div style="display:flex;gap:6px;align-items:flex-start"><span style="background:rgba(76,154,255,.3);color:#fff;border-radius:50%;width:15px;height:15px;font-size:.55rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">2</span><span style="font-size:.7rem;color:rgba(255,255,255,.5);line-height:1.5">User reviews and consents to data sharing</span></div>
+                  <div style="display:flex;gap:6px;align-items:flex-start"><span style="background:rgba(76,154,255,.3);color:#fff;border-radius:50%;width:15px;height:15px;font-size:.55rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">3</span><span style="font-size:.7rem;color:rgba(255,255,255,.5);line-height:1.5">Organisation receives machine-readable statement signed with QES</span></div>
+                </div>
+              </div>
             </div>
-            <a href="https://docs.evrotrust.com/docs/evrotrust-eid" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:1rem;font-size:.78rem;font-weight:700;color:#4C9AFF;text-decoration:none;transition:gap .15s" onmouseover="this.style.gap='8px'" onmouseout="this.style.gap='5px'">Full eID Docs <svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="11" height="11"><path d="m9 18 6-6-6-6"/></svg></a>
+
+            <!-- Considerations -->
+            <div style="background:rgba(255,165,0,.04);border:1px solid rgba(255,165,0,.15);border-radius:8px;padding:.65rem 1rem;margin-top:10px">
+              <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFB84C;margin-bottom:.5rem">Important considerations</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px 12px">
+                <div style="font-size:.7rem;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:5px;line-height:1.5"><span style="color:#FFB84C;flex-shrink:0">⚠</span>Requires user to complete full identity proofing and verification</div>
+                <div style="font-size:.7rem;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:5px;line-height:1.5"><span style="color:#FFB84C;flex-shrink:0">⚠</span>Best suited for compliance and legal certainty use cases</div>
+                <div style="font-size:.7rem;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:5px;line-height:1.5"><span style="color:#FFB84C;flex-shrink:0">⚠</span>Includes more steps than lightweight verification flows</div>
+                <div style="font-size:.7rem;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:5px;line-height:1.5"><span style="color:#FFB84C;flex-shrink:0">⚠</span>Designed for AML/KYC, not simple low-risk checks</div>
+              </div>
+            </div>
+
+            <a href="https://docs.evrotrust.com/docs/evrotrust-eid" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:.9rem;font-size:.78rem;font-weight:700;color:#4C9AFF;text-decoration:none;transition:gap .15s" onmouseover="this.style.gap='8px'" onmouseout="this.style.gap='5px'">Full eID Docs <svg viewBox="0 0 24 24" fill="none" stroke="#4C9AFF" stroke-width="2.5" width="11" height="11"><path d="m9 18 6-6-6-6"/></svg></a>
           </div>
         </div>
       </div>
@@ -4462,6 +4578,7 @@ function heroSearch(){
         <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/edelivery-factsheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eDelivery</a>
         <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/etimestamp-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eTimestamp</a>
         <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/identity-suite-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Identity Suite</a>
+        <a class="factsheet-chip" onclick="event.preventDefault();openEidLevelsSection()" href="#" style="border-color:rgba(0,184,212,.4);color:#00B8D4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Basic vs Enhanced vs Full KYC</a>
         <!-- duplicate for seamless infinite loop -->
         <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/eid-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eID</a>
         <a class="factsheet-chip" href="https://evrotrust.com/wp-content/uploads/2025/07/evrotrust-esign-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>QES</a>
@@ -4472,6 +4589,7 @@ function heroSearch(){
         <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/edelivery-factsheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eDelivery</a>
         <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/etimestamp-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>eTimestamp</a>
         <a class="factsheet-chip" href="https://evrotrust.com/bg/wp-content/uploads/sites/2/2026/04/identity-suite-fact-sheet.pdf" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Identity Suite</a>
+        <a class="factsheet-chip" onclick="event.preventDefault();openEidLevelsSection()" href="#" style="border-color:rgba(0,184,212,.4);color:#00B8D4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Basic vs Enhanced vs Full KYC</a>
       </div>
     </div>
   </div>
@@ -6026,6 +6144,21 @@ function toggleEidLevels(){
   var open = body.style.display === 'none';
   body.style.display = open ? 'block' : 'none';
   if(chev) chev.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+function openEidLevelsSection(){
+  // Open integration panel if not already open
+  var panel = document.getElementById('int-panel');
+  if(panel && panel.style.display==='none'){ _intOpen=true; panel.style.display='block'; panel.classList.add('open'); }
+  // Ensure eID levels body is visible
+  var body = document.getElementById('eid-levels-body');
+  var chev = document.getElementById('eid-levels-chev');
+  if(body){ body.style.display='block'; }
+  if(chev){ chev.style.transform='rotate(180deg)'; }
+  // Scroll to section
+  setTimeout(function(){
+    var sec = document.getElementById('eid-levels-section');
+    if(sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 150);
 }
 function selectEidTab(level, btn){
   ['basic','enhanced','full'].forEach(function(l){
